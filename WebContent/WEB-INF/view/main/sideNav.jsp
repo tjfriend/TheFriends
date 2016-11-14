@@ -94,7 +94,7 @@
 		} else if(val=="join"){
 			location.href="/join";
 		} else if(val=="friends"){
-			location.href="/friends";
+			location.href="/friends/${id}";
 		}
 	}
 </script>

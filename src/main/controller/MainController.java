@@ -82,10 +82,4 @@ public class MainController {
 		return mav;
 	}
 
-	@RequestMapping("/friends")
-	public ModelAndView friends() {
-		ModelAndView mav = new ModelAndView("t:menu/friends");
-		return mav;
-	}
-
 }

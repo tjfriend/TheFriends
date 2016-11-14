@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-    <select id="login" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-    	select * from member where id=#{id} and password=#{password}
-    </select>
-    <insert id="join" parameterType="java.util.HashMap">
-    	insert into member values(#{id}, #{password}, #{name}, #{birth}, #{phone}, #{email}, #{address}, #{recommender}, 0)
-    </insert>
-    <select id="idcheck" resultType="java.util.HashMap">
-    	select * from member where id=#{id}
-    </select>
-    <update id="pointup">
-    	update member set point=point+500 where id=#{id}
-    </update>
+	<select id="login" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from member where id=#{id} and password=#{password}
+	</select>
+	<insert id="join" parameterType="java.util.HashMap">
+		insert into member values(#{id}, #{password}, #{name}, #{birth}, #{phone},
+		#{email}, #{address}, #{recommender}, 0)
+	</insert>
+	<select id="idcheck" resultType="java.util.HashMap">
+		select * from member where id=#{id}
+	</select>
+	<update id="pointup">
+		update member set point=point+500 where id=#{id}
+	</update>
+	<select id="friends" resultType="java.util.HashMap">
+		select mmm.*, fff.nickname from member mmm, (select mm.name, ff.nickname from member mm, (select m.*,
+		f.friend, f.nickname from member m, friends f where f.id=#{id} and
+		f.id=m.id) ff where mm.id=ff.friend) fff where mmm.name=fff.name
+	</select>
 </mapper>

@@ -23,24 +23,24 @@
 						<th>NickName</th>
 						<th>Distance(m)</th>
 						<th>Visitors</th>
-						<th width="10%">
-							<select>
+						<th width="10%"><select>
 								<option>이름순</option>
 								<option>방문자순</option>
 								<option>거리순</option>
-							</select>
-						</th>
+						</select></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Anna</td>
-						<td>Pitt</td>
-						<td>35</td>
-						<td>New York</td>
-						<td colspan="2">USA</td>
-					</tr>
+					<c:forEach var="t" begin="0" end="${list.size()-1 }" step="1">
+						<tr>
+							<td>${t+1 }</td>
+							<td><a href="">${list.get(t).NAME }</a></td>
+							<td>${list.get(t).BIRTH }</td>
+							<td>${list.get(t).NICKNAME }</td>
+							<td>1000</td>
+							<td colspan="2">100</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
