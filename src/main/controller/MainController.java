@@ -65,8 +65,8 @@ public class MainController {
 	}
 
 	@RequestMapping("/board")
-	public ModelAndView board() {
-		ModelAndView mav = new ModelAndView("t:menu/board");
+	public ModelAndView board(){
+		ModelAndView mav = new ModelAndView("t:menu/freeboard/board");
 		return mav;
 	}
 

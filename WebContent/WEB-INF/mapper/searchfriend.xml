@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="searchfriend">
+	<select id="searchId" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from member where id=#{id}
+	</select>
+	<select id="searchName" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from member where name=#{name}
+	</select>
+	<select id="searchEmail" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from member where email=#{email}
+	</select>
+	<select id="searchAdd" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from member where address=#{address}
+	</select>
+	<select id="searchPhone" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from member where phone=#{phone}
+	</select>
+</mapper>

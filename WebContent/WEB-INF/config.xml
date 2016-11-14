@@ -12,7 +12,8 @@
 	<mvc:default-servlet-handler/>
 	<context:component-scan base-package="main"/>
 	<context:component-scan base-package="member"/>
-	<context:component-scan base-package="QnA"/>
+	<context:component-scan base-package="searchfriend"/>
+	<context:component-scan base-package="charge"/>
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		id="beanNameViewResolver" p:order="2" />
