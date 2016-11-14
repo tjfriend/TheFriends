@@ -79,4 +79,10 @@ public class MemberController {
 		List list = js.idcheck(id);
 		return list.size();
 	}
+	
+	@RequestMapping("/emailAuth")
+	public ModelAndView emailAuth(){
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
 }

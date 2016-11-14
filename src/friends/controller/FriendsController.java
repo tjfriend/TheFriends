@@ -15,9 +15,8 @@ public class FriendsController {
 	
 	@RequestMapping("/{id}")
 	public ModelAndView friends(@PathVariable(name="id")String id){
-		ModelAndView mav = new ModelAndView("t:menu/friends");
+		ModelAndView mav = new ModelAndView("t:friends/friends");
 		mav.addObject("list", fs.friends(id));
-		System.out.println("정상완료");
 		return mav;
 	}
 }
