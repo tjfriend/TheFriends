@@ -62,6 +62,8 @@
 			<button type="button" class="btn btn-default" onclick="loginMenu(this)" value="myhome">My Home</button>
 			<br />
 			<br />
+			<button type="button" class="btn btn-default" onclick="loginMenu(this)" value="friends">Friends</button>
+			&nbsp;
 			<button type="button" class="btn btn-default" onclick="loginMenu(this)" value="charge">Charge</button>
 			&nbsp;
 			<button type="submit" class="btn btn-default">Logout</button>
@@ -91,6 +93,8 @@
 			location.href="/charge";
 		} else if(val=="join"){
 			location.href="/join";
+		} else if(val=="friends"){
+			location.href="/friends";
 		}
 	}
 </script>

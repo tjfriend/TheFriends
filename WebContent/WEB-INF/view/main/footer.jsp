@@ -32,7 +32,7 @@
 </div>
 
 <div class="w3-half">
-	<div id="map" style="height: 450px; border-radius: 40px"></div>
+	<div id="map" style="height: 450px; border-radius: 25px"></div>
 </div>
 
 <script>

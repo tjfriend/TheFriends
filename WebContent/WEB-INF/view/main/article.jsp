@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 	img {
-	    border-radius: 40px;
+	    border-radius: 25px;
 	}
 </style>
 
