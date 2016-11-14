@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="charge">
+	<select id="chargeAll" resultType="java.lang.Integer">
+		select * from member where point=#{point} 
+	</select>
+	
+	<update id="chargeUp" parameterType="java.util.HashMap">
+		update member set point=point+#{point} where id=#{id} 
+	</update>	
+</mapper>
