@@ -78,7 +78,7 @@
 <a href="/event" onclick="w3_close()" class="w3-padding">Event</a>
 <a href="/search" onclick="w3_close()" class="w3-padding">Search</a>
 <a href="/navigation" onclick="w3_close()" class="w3-padding">Navigation</a>
-<a href="/board" onclick="w3_close()" class="w3-padding">Free	Board</a>
+<a href="/board/list" onclick="w3_close()" class="w3-padding">Free Board</a>
 <a href="/shop" onclick="w3_close()" class="w3-padding">Shop</a>
 <a href="/qna" onclick="w3_close()" class="w3-padding">QnA</a>
 

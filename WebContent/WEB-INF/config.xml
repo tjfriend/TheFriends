@@ -14,6 +14,8 @@
 	<context:component-scan base-package="member"/>
 	<context:component-scan base-package="searchfriend"/>
 	<context:component-scan base-package="charge"/>
+	<context:component-scan base-package="QnA"/>
+	<context:component-scan base-package="board"/>
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		id="beanNameViewResolver" p:order="2" />
