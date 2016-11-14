@@ -170,12 +170,17 @@
 			"url" : "/member/idcheck/"+$("#join_id").val(),
 			"async" : true
 		}).done(function(txt){
-			if(txt==0){
-				$("#idcheck").prop("color", "green");
-				$("#idcheck").text("사용할 수 있는 아이디입니다.");
-			} else {
+			if($("#join_id").val().length<6 || $("#join_id").val()==""){
 				$("#idcheck").prop("color", "red");
-				$("#idcheck").text("이미 사용중인 아이디입니다.");
+				$("#idcheck").text("사용할 수 없는 아이디입니다.");
+			} else {
+				if(txt==0){
+					$("#idcheck").prop("color", "green");
+					$("#idcheck").text("사용할 수 있는 아이디입니다.");
+				} else {
+					$("#idcheck").prop("color", "red");
+					$("#idcheck").text("이미 사용중인 아이디입니다.");
+				}
 			}
 		});
 	});
@@ -186,12 +191,17 @@
 			"url" : "/member/idcheck/"+$("#join_id_s").val(),
 			"async" : true
 		}).done(function(txt){
-			if(txt==0){
-				$("#idcheck_s").prop("color", "green");
-				$("#idcheck_s").text("사용할 수 있는 아이디입니다.");
-			} else {
+			if($("#join_id").val().length<6 || $("#join_id_s").val()==""){
 				$("#idcheck_s").prop("color", "red");
-				$("#idcheck_s").text("이미 사용중인 아이디입니다.");
+				$("#idcheck_s").text("사용할 수 없는 아이디입니다.");
+			} else {
+				if(txt==0){
+					$("#idcheck_s").prop("color", "green");
+					$("#idcheck_s").text("사용할 수 있는 아이디입니다.");
+				} else {
+					$("#idcheck_s").prop("color", "red");
+					$("#idcheck_s").text("이미 사용중인 아이디입니다.");
+				}
 			}
 		});
 	});
