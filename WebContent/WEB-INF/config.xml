@@ -47,7 +47,6 @@
 		<property name="mapperLocations">
 			<list>
 				<value>/WEB-INF/mapper/*</value>
-				<value>/WEB-INF/mapper/QnA.xml</value>
 			</list>
 		</property>
 	</bean>
