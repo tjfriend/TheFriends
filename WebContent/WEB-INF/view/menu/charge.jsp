@@ -8,12 +8,15 @@
 	충전 금액 <input type="text" name="point"/>
 	<input type="submit" value="충전하기">
 	</form>
+	<br/><br/>
 	
+	<form action="/charge/view">
+		<input type="submit" name="charge" value="선물하기"/><br/>
+	</form>
+	
+	<form action="/charge/chargeAll">
+	<input type="submit" value="충전내역"/>
+	</form>
 
-	<br/>
-	<br/>
-	
-	<input type="button" name="charge" value="선물하기"/><br/>
-	<input type="button" name="charge" value="충전내역"/>
 	<input type="button" name="charge" value="사용내역"/>
 </div>

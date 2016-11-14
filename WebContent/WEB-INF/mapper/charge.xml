@@ -2,11 +2,37 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="charge">
-	<select id="chargeAll" resultType="java.lang.Integer">
-		select * from member where point=#{point} 
-	</select>
-	
+	<!-- 충전하기 + -->
 	<update id="chargeUp" parameterType="java.util.HashMap">
 		update member set point=point+#{point} where id=#{id} 
 	</update>	
+	<insert id="charge" parameterType="java.util.HashMap">
+		insert into charge values(charge_seq.nextval, #{id}, null, #{point}, sysdate)
+	</insert>
+	
+	<!-- 선물하기 -/+ -->
+	<update id="gift1" parameterType="java.util.HashMap">
+		update member set point=point-#{point} where id=#{id}
+	</update>
+	<update id="gift2" parameterType="java.util.HashMap">
+		update member set point=point+#{point} where id=#{id}
+	</update>
+	<insert id="gift3" parameterType="java.util.HashMap">
+		insert into charge values(charge_seq.nextval, #{id}, #{takeid}, #{point}, sysdate)
+	</insert>
+	<insert id="gift4" parameterType="java.util.HashMap">
+		insert into chargeuse values(chargeuse_seq.nextval, #{id}, #{takeid}, #{point}, sysdate)
+	</insert>
+
+	<!-- 사용내역 -->
+	<select id="chargeuse" resultType="java.util.HashMap">
+		select * from chargeuse where id=#{id}
+	</select>
+	
+	<!-- 충전내역 -->
+	<select id="chargeAll" resultType="java.util.HashMap">
+		select * from charge where id=#{id} 
+	</select>
+
+		
 </mapper>

@@ -1,6 +1,7 @@
 package charge.model;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,8 +21,25 @@ public class ChargeService {
 		map.put("point", point);
 		int a = ss.update("charge.chargeUp",map);
 		if(a==1){
+			int b = ss.insert("charge.charge", map);
+			if(b==0){
+				return 0;
+			}
 			return 1;
 		}
+		ss.close();
 		return 0;
 	}
+	
+	// 충전내역
+	public List chargeAll(String id){
+		SqlSession ss = fac.openSession();
+		List li = ss.selectList("charge.chargeAll",id);
+		ss.close();
+		if(li!=null){
+			return li;
+		}
+		return null;
+	}
+
 }

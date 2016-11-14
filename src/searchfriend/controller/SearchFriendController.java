@@ -19,7 +19,7 @@ public class SearchFriendController {
 	
 	@RequestMapping("/friend/{find}/{con}")
 	public ModelAndView search(@PathVariable(name="find")String find, @PathVariable(name="con") String con){
-		ModelAndView mav = new ModelAndView("/menu/searchview.jsp");
+		ModelAndView mav = new ModelAndView("/menu/search/searchview.jsp");
 		List map = search.search(find,con);
 		mav.addObject("map",map);
 		return mav;
@@ -27,7 +27,7 @@ public class SearchFriendController {
 	
 	@RequestMapping("/friend")
 	public ModelAndView search(){
-		ModelAndView ma = new ModelAndView("t:menu/search");
+		ModelAndView ma = new ModelAndView("t:menu/search/search");
 		return ma;
 	}
 }

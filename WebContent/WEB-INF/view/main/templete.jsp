@@ -32,7 +32,7 @@ body, h1, h2, h3, h4, h5 {
 
 	<!-- Sidenav/menu -->
 	<nav
-		class="w3-sidenav w3-white w3-animate-left w3-center w3-text-grey w3-collapse w3-top"
+		class="w3-sidenav w3-white w3-center w3-text-grey w3-collapse w3-top"
 		style="z-index: 3; width: 300px; font-weight: bold" id="mySidenav">
 		<tile:insertAttribute name="sideNav" />
 	</nav>

@@ -64,19 +64,11 @@ public class MainController {
 		return mav;
 	}
 
-	@RequestMapping("/board")
-	public ModelAndView board(){
-		ModelAndView mav = new ModelAndView("t:menu/freeboard/board");
-		return mav;
-	}
-
 	@RequestMapping("/shop")
 	public ModelAndView shop() {
 		ModelAndView mav = new ModelAndView("t:menu/shop");
 		return mav;
 	}
-
-	
 
 	@RequestMapping("/friends")
 	public ModelAndView friends() {
