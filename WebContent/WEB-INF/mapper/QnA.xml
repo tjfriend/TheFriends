@@ -20,7 +20,8 @@
 
 	<insert id="question" parameterType="java.util.HashMap">
 		insert into qna	values
-		(QNA_NUMBER.nextval, #{title }, #{content }, ,sysdate,0)
+		(QNA_NUMBER.nextval, #{title }, #{content },#{id } ,sysdate,0)
+		
 
 	</insert>
 

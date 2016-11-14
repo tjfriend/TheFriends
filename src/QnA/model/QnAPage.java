@@ -8,9 +8,13 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 @Component
 public class QnAPage {
 
+	
+	
 	@Autowired
 	SqlSessionFactory fac;
 	
@@ -34,4 +38,27 @@ public class QnAPage {
 	
 		return psize;
 	}
+	
+	// qna±Û¾²±â
+	public boolean makeqna(String title,String content, String id){
+		System.out.println(title+"/"+content+"/"+id);
+		SqlSession sql = fac.openSession();
+		HashMap<String, String> map = new HashMap<> ();
+			map.put("title", title);
+			map.put("content", content);
+			map.put("id", id);
+		try{
+			 sql.insert("qna.question",map);
+			 sql.commit();
+			 sql.close();
+			 return true;
+		}catch(Exception e){
+			sql.rollback();
+			sql.close();
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+		
 }

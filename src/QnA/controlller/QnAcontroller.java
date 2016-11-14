@@ -30,8 +30,13 @@ public class QnAcontroller {
 	public ModelAndView QnAquestion(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t:qna/question");
-		return mav;
+		return mav;	
 	
+	}
+	@RequestMapping("/makeqna")
+	public boolean makeqna(String title, String content, String id){
+			System.out.println(title+"/"+content+"/"+id);
+		return qp.makeqna(title, content, id);
 	}
 	
 }
