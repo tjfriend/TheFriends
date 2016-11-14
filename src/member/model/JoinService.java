@@ -26,6 +26,12 @@ public class JoinService {
 		try{
 			ss.insert("member.join", map);
 			ss.commit();
+			if(recommender!=null){
+				ss.update("member.pointup", id);
+				id = recommender;
+				ss.update("member.pointup", id);
+				ss.commit();
+			}
 			ss.close();
 			return true;
 		} catch(Exception e){

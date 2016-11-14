@@ -12,6 +12,7 @@
 	<mvc:default-servlet-handler/>
 	<context:component-scan base-package="main"/>
 	<context:component-scan base-package="member"/>
+	<context:component-scan base-package="QnA"/>
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		id="beanNameViewResolver" p:order="2" />
@@ -46,6 +47,7 @@
 		<property name="mapperLocations">
 			<list>
 				<value>/WEB-INF/mapper/*</value>
+				<value>/WEB-INF/mapper/QnA.xml</value>
 			</list>
 		</property>
 	</bean>

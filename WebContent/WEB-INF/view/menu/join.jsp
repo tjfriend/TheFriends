@@ -12,14 +12,14 @@
 <div class="w3-text-grey" style="padding: 20px; border-radius: 5px" align="center">
 	<h2 class="w3-padding-64">Join</h2>
 	<form>
-		<div class="form-group">
+		<!-- <div class="form-group">
 			<div class="w3-hide-large">
 				<label><input type="checkbox" checked="checked" readonly="readonly"/>&nbsp;비공개</label>
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label><input type="checkbox" checked="checked" readonly="readonly"/>&nbsp;비공개</label>
 			</div>
-		</div>
+		</div> -->
 		<div class="form-group">
 			<div class="w3-hide-large">
 				<label for="join_id_s" style="width: 30%"><font size="4">ID</font></label>
@@ -55,45 +55,45 @@
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="birth_s" style="width: 30%"><font size="4">Birth Day</font></label>
-				<label><input type="checkbox" id="bdCheck_s"/></label><br/>
+<!-- 				<label><input type="checkbox" id="bdCheck_s"/></label><br/> -->
 				<input type="date" id="birth_s" name="birth_s" class="form-control" style="width: 45%" placeholder="yyyymmdd"/>
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label for="birth" style="width: 15%"><font size="4">Birth Day</font></label>
-				<label><input type="checkbox" id="bdCheck"/></label><br/>
+<!-- 				<label><input type="checkbox" id="bdCheck"/></label><br/> -->
 				<input type="date" id="birth" name="birth" class="form-control" style="width: 20%" placeholder="yyyymmdd"/>
 			</div>
 		</div>
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="phone_s" style="width: 30%"><font size="4">Phone</font></label>
-				<label><input type="checkbox" id="phoneCheck_s"/></label><br/>
+<!-- 				<label><input type="checkbox" id="phoneCheck_s"/></label><br/> -->
 				<input type="text" id="phone_s" name="phone_s" class="form-control" style="width: 45%" placeholder="01012345678"/>
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label for="phone" style="width: 15%"><font size="4">Phone</font></label>
-				<label><input type="checkbox" id="phoneCheck"/></label><br/>
+<!-- 				<label><input type="checkbox" id="phoneCheck"/></label><br/> -->
 				<input type="text" id="phone" name="phone" class="form-control" style="width: 20%" placeholder="01012345678"/>
 			</div>
 		</div>
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
-				<label for="address_s" style="width: 30%"><font size="4">Address</font></label>
-				<label><input type="checkbox" id="addrCheck_s"/></label><br/>
+				<label for="address_s" style="width: 30%"><font size="4">Address</font></label><br/>
+<!-- 				<label><input type="checkbox" id="addrCheck_s"/></label><br/> -->
 				<input type="text" id="post_s" name="post_s" style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 							readonly="readonly" placeholder="Post Number"/>
-				<input type="button" class="btn btn-default" style="width: 40%" onclick="searchPost(this)" value="우편번호 찾기"/><br/>
+				<input type="button" class="btn btn-default" style="width: 40%" onclick="searchPost()" value="우편번호 찾기"/><br/>
 				<input type="text" id="add01_s" name="add01_s" style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 							readonly="readonly" placeholder="Address"/>
 				<input type="text" id="add02_s" name="add02_s" style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 							placeholder="Detailed Address"/>
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
-				<label for="address" style="width: 15%"><font size="4">Address</font></label>
-				<label><input type="checkbox" id="addrCheck"/></label><br/>
+				<label for="address" style="width: 15%"><font size="4">Address</font></label><br/>
+<!-- 				<label><input type="checkbox" id="addrCheck"/></label><br/> -->
 				<input type="text" id="post" name="post" style="width: 10%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 							readonly="readonly" placeholder="Post Number"/>
-				<input type="button" class="btn btn-default" style="width: 10%" onclick="searchPost(this)" value="우편번호 찾기"/><br/>
+				<input type="button" class="btn btn-default" style="width: 10%" onclick="searchPost()" value="우편번호 찾기"/><br/>
 				<input type="text" id="add01" name="add01" style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 							readonly="readonly" placeholder="Address"/>
 				<input type="text" id="add02" name="add02" style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
@@ -102,8 +102,8 @@
 		</div>
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
-				<label for="email_s" style="width: 30%"><font size="4">Email</font></label>
-				<label><input type="checkbox" id="mailCheck_s"/></label><br/>
+				<label for="email_s" style="width: 30%"><font size="4">Email</font></label><br/>
+<!-- 				<label><input type="checkbox" id="mailCheck_s"/></label><br/> -->
 				<input type="text" id="email_s" name="email_s" style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 							placeholder="Email"/>
 				<label>@</label>
@@ -118,8 +118,8 @@
 				</select>
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
-				<label for="name" style="width: 15%"><font size="4">Email</font></label>
-				<label><input type="checkbox" id="mailCheck"/></label><br/>
+				<label for="name" style="width: 15%"><font size="4">Email</font></label><br/>
+<!-- 				<label><input type="checkbox" id="mailCheck"/></label><br/> -->
 				<input type="text" id="email" name="email" style="width: 10%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 							placeholder="Email"/>
 				<label>@</label>
@@ -170,12 +170,17 @@
 			"url" : "/member/idcheck/"+$("#join_id").val(),
 			"async" : true
 		}).done(function(txt){
-			if(txt==0){
-				$("#idcheck").prop("color", "green");
-				$("#idcheck").text("사용할 수 있는 아이디입니다.");
-			} else {
+			if($("#join_id").val().length<6 || $("#join_id").val()==""){
 				$("#idcheck").prop("color", "red");
-				$("#idcheck").text("이미 사용중인 아이디입니다.");
+				$("#idcheck").text("사용할 수 없는 아이디입니다.");
+			} else {
+				if(txt==0){
+					$("#idcheck").prop("color", "green");
+					$("#idcheck").text("사용할 수 있는 아이디입니다.");
+				} else {
+					$("#idcheck").prop("color", "red");
+					$("#idcheck").text("이미 사용중인 아이디입니다.");
+				}
 			}
 		});
 	});
@@ -186,12 +191,17 @@
 			"url" : "/member/idcheck/"+$("#join_id_s").val(),
 			"async" : true
 		}).done(function(txt){
-			if(txt==0){
-				$("#idcheck_s").prop("color", "green");
-				$("#idcheck_s").text("사용할 수 있는 아이디입니다.");
-			} else {
+			if($("#join_id").val().length<6 || $("#join_id_s").val()==""){
 				$("#idcheck_s").prop("color", "red");
-				$("#idcheck_s").text("이미 사용중인 아이디입니다.");
+				$("#idcheck_s").text("사용할 수 없는 아이디입니다.");
+			} else {
+				if(txt==0){
+					$("#idcheck_s").prop("color", "green");
+					$("#idcheck_s").text("사용할 수 있는 아이디입니다.");
+				} else {
+					$("#idcheck_s").prop("color", "red");
+					$("#idcheck_s").text("이미 사용중인 아이디입니다.");
+				}
 			}
 		});
 	});
@@ -221,6 +231,7 @@
 				$("#result").html(
 					"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
 				);
+				window.setInterval(geIndex, 1000);
 			} else {
 				$("#result").prop("class", "alert alert-danger");
 				$("#result").html(
@@ -255,6 +266,7 @@
 				$("#result_s").html(
 					"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
 				);
+				window.setInterval(geIndex, 1000);
 			} else {
 				$("#result_s").prop("class", "alert alert-danger");
 				$("#result_s").html(
@@ -312,7 +324,7 @@
 		}
 	});
 
-	function searchPost(element) {
+	function searchPost() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
 	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -355,5 +367,9 @@
 	            document.getElementById('add02_s').focus();
 	        }
 	    }).open();
+	}
+	
+	function geIndex(){
+		location.href="/";
 	}
 </script>
