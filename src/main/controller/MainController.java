@@ -76,9 +76,5 @@ public class MainController {
 		return mav;
 	}
 	
-	@RequestMapping("/qna")
-	public ModelAndView qna(){
-		ModelAndView mav = new ModelAndView("t:menu/qna");
-		return mav;
-	}
+	
 }
