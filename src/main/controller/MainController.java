@@ -45,7 +45,7 @@ public class MainController {
 
 	@RequestMapping("/myhome")
 	public ModelAndView myHome() {
-		ModelAndView mav = new ModelAndView("t:menu/myHome");
+		ModelAndView mav = new ModelAndView("t:homepage/myHome");
 		return mav;
 	}
 
