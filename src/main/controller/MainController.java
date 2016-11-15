@@ -21,6 +21,21 @@ public class MainController {
 		ModelAndView mav = new ModelAndView("t:member/join");
 		return mav;
 	}
+	
+	@RequestMapping("/joinAuth/{id}/{email}/{email2}/{name}/{birth}/{phone}/{key}")
+	public ModelAndView joinAuth(@PathVariable(name="id")String id, @PathVariable(name="email")String email, @PathVariable(name="email2")String email2,
+													@PathVariable(name="name")String name, @PathVariable(name="birth")String birth, @PathVariable(name="phone")String phone,
+													@PathVariable(name="key")String key) {
+		ModelAndView mav = new ModelAndView("t:member/joinAuth");
+		mav.addObject("id", id);
+		mav.addObject("email", email);
+		mav.addObject("email2", email2);
+		mav.addObject("name", name);
+		mav.addObject("birth", birth);
+		mav.addObject("phone", phone);
+		mav.addObject("key", key);
+		return mav;
+	}
 
 	@RequestMapping("/myinfo")
 	public ModelAndView myInfo() {

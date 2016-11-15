@@ -15,13 +15,13 @@
 		update member set point=point-#{point} where id=#{id}
 	</update>
 	<update id="gift2" parameterType="java.util.HashMap">
-		update member set point=point+#{point} where id=#{id}
+		update member set point=point+#{point} where id=#{takeid}
 	</update>
 	<insert id="gift3" parameterType="java.util.HashMap">
-		insert into charge values(charge_seq.nextval, #{id}, #{takeid}, #{point}, sysdate)
+		insert into charge values(charge_seq.nextval, #{takeid}, #{id}, #{point}, sysdate)
 	</insert>
 	<insert id="gift4" parameterType="java.util.HashMap">
-		insert into chargeuse values(chargeuse_seq.nextval, #{id}, #{takeid}, #{point}, sysdate)
+		insert into chargeuse values(#{id}, #{takeid}, #{point}, sysdate)
 	</insert>
 
 	<!-- 사용내역 -->

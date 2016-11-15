@@ -2,6 +2,8 @@ package member.model;
 
 import java.util.*;
 
+import javax.servlet.http.*;
+
 import org.apache.ibatis.session.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -12,7 +14,8 @@ public class JoinService {
 	@Autowired
 	SqlSessionFactory fac;
 	
-	public boolean join(String id, String password, String name, String birth, String phone, String add01, String add02, String email, String email2, @RequestParam(required=false) String recommender){
+	public boolean join(String id, String password, String name, String birth, String phone, String add01, String add02, String email, String email2, @RequestParam(required=false) String recommender,
+									HttpSession session){
 		SqlSession ss = fac.openSession();
 		HashMap<String, String> map = new HashMap<>();
 		map.put("id", id);
@@ -23,7 +26,14 @@ public class JoinService {
 		map.put("address", add01+add02);
 		map.put("email", email+"@"+email2);
 		map.put("recommender", recommender);
+		
+		HashMap<String, String> map2 = new HashMap<>();
+		map.put("id", id);
+		map.put("uuid", (String)session.getAttribute("ranKey"));
+		map.put("email", email+"@"+email2);
+
 		try{
+			ss.insert("member.emailAuth", map2);
 			ss.insert("member.join", map);
 			ss.commit();
 			if(recommender!=null){

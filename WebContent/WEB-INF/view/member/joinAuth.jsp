@@ -25,13 +25,14 @@
 			<div class="w3-hide-large">
 				<label for="join_id_s" style="width: 30%"><font size="4">ID</font></label>
 				<input type="text" id="join_id_s" name="join_id_s"
-					class="form-control" style="width: 35%" placeholder="6자리 이상" /> <font
-					id="idcheck_s"></font>
+					class="form-control" style="width: 35%" placeholder="6자리 이상"
+					value="${id }" /> <font id="idcheck_s"></font>
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label for="join_id" style="width: 15%"><font size="4">ID</font></label><br />
 				<input type="text" id="join_id" name="join_id" class="form-control"
-					style="width: 20%" placeholder="6자리 이상" /> <font id="idcheck"></font>
+					style="width: 20%" placeholder="6자리 이상" value="${id }" /> <font
+					id="idcheck"></font>
 			</div>
 		</div>
 		<div class="form-group" align="center">
@@ -52,12 +53,12 @@
 			<div class="w3-hide-large">
 				<label for="name_s" style="width: 30%"><font size="4">Name</font></label>
 				<input type="text" id="name_s" name="name_s" class="form-control"
-					style="width: 35%" placeholder="Name" />
+					style="width: 35%" placeholder="Name" value="${name }" />
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label for="name" style="width: 15%"><font size="4">Name</font></label>
 				<input type="text" id="name" name="name" class="form-control"
-					style="width: 20%" placeholder="Name" />
+					style="width: 20%" placeholder="Name" value="${name }" />
 			</div>
 		</div>
 		<div class="form-group" align="center">
@@ -66,14 +67,14 @@
 						Day</font></label>
 				<!-- 				<label><input type="checkbox" id="bdCheck_s"/></label><br/> -->
 				<input type="date" id="birth_s" name="birth_s" class="form-control"
-					style="width: 45%" placeholder="yyyymmdd" />
+					style="width: 45%" placeholder="yyyymmdd" value="${birth }" />
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label for="birth" style="width: 15%"><font size="4">Birth
 						Day</font></label>
 				<!-- 				<label><input type="checkbox" id="bdCheck"/></label><br/> -->
 				<input type="date" id="birth" name="birth" class="form-control"
-					style="width: 20%" placeholder="yyyymmdd" />
+					style="width: 20%" placeholder="yyyymmdd" value="${birth }" />
 			</div>
 		</div>
 		<div class="form-group" align="center">
@@ -81,13 +82,13 @@
 				<label for="phone_s" style="width: 30%"><font size="4">Phone</font></label>
 				<!-- 				<label><input type="checkbox" id="phoneCheck_s"/></label><br/> -->
 				<input type="text" id="phone_s" name="phone_s" class="form-control"
-					style="width: 45%" placeholder="01012345678" />
+					style="width: 45%" placeholder="01012345678" value=${phone } />
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label for="phone" style="width: 15%"><font size="4">Phone</font></label>
 				<!-- 				<label><input type="checkbox" id="phoneCheck"/></label><br/> -->
 				<input type="text" id="phone" name="phone" class="form-control"
-					style="width: 20%" placeholder="01012345678" />
+					style="width: 20%" placeholder="01012345678" value="${phone }" />
 			</div>
 		</div>
 		<div class="form-group" align="center">
@@ -96,24 +97,25 @@
 				<!-- 				<label><input type="checkbox" id="mailCheck_s"/></label><br/> -->
 				<input type="text" id="email_s" name="email_s"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					placeholder="Email" /> <label>@</label> <input type="text"
+					placeholder="Email" value="${email }" readonly="readonly" /> <label>@</label>
+				<input type="text"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					id="email2_s" name="email2_S" placeholder="직접입력" /> <select
-					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
-					id="selMail_s">
-					<option>직접입력</option>
-					<option>네이버</option>
-					<option>다음</option>
-					<option>구글</option>
-					<option>네이트</option>
-					<option>야후</option>
-				</select><br /> <br />
+					id="email2_s" name="email2_S" placeholder="직접입력" value="${email2 }"
+					readonly="readonly" /><br />
+				<!-- 				<select style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px" id="selMail_s"> -->
+				<!-- 					<option>직접입력</option> -->
+				<!-- 					<option>네이버</option> -->
+				<!-- 					<option>다음</option> -->
+				<!-- 					<option>구글</option> -->
+				<!-- 					<option>네이트</option> -->
+				<!-- 					<option>야후</option> -->
+				<!-- 				</select><br/><br/> -->
 				<div>
-					<input type="text" id="authPass_s" hidden="hidden"
-						placeholder="인증번호"
+					<input type="text" id="authPass_s" placeholder="인증번호"
+						value="${key }"
 						style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px" />
-					<input type="button" class="btn btn-default" id="emailAuth_s"
-						value="인증" style="height: 33px" /> <font id="emailSend_s"></font>
+					<input type="button" class="btn btn-default" id="authCheck_s"
+						value="인증완료" style="height: 33px" /> <font id="checkRst_s"></font>
 				</div>
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
@@ -121,23 +123,24 @@
 				<!-- 				<label><input type="checkbox" id="mailCheck"/></label><br/> -->
 				<input type="text" id="email" name="email"
 					style="width: 10%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					placeholder="Email" /> <label>@</label> <input type="text"
+					placeholder="Email" value="${email }" readonly="readonly" /> <label>@</label>
+				<input type="text"
 					style="width: 10%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					id="email2" name="email2" placeholder="직접입력" /> <select
-					style="width: 7%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
-					id="selMail">
-					<option>직접입력</option>
-					<option>네이버</option>
-					<option>다음</option>
-					<option>구글</option>
-					<option>네이트</option>
-					<option>야후</option>
-				</select><br /> <br />
+					id="email2" name="email2" placeholder="직접입력" value="${email2 }"
+					readonly="readonly" /><br />
+				<!-- 				<select style="width: 7%; height: 33px; border: 1px solid #ccc; border-radius: 5px" id="selMail" > -->
+				<!-- 					<option>직접입력</option> -->
+				<!-- 					<option>네이버</option> -->
+				<!-- 					<option>다음</option> -->
+				<!-- 					<option>구글</option> -->
+				<!-- 					<option>네이트</option> -->
+				<!-- 					<option>야후</option> -->
+				<!-- 				</select><br/><br/> -->
 				<div>
-					<input type="text" id="authPass" hidden="hidden" placeholder="인증번호"
+					<input type="text" id="authPass" placeholder="인증번호" value="${key }"
 						style="width: 10%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px" />
-					<input type="button" class="btn btn-default" id="emailAuth"
-						value="인증" style="height: 33px" /><br /> <font id="emailSend"></font>
+					<input type="button" class="btn btn-default" id="authCheck"
+						value="인증완료" style="height: 33px" /><br /> <font id="checkRst"></font>
 				</div>
 			</div>
 		</div>
@@ -149,8 +152,8 @@
 					style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Post Number" /> <input
 					type="button" class="btn btn-default" style="width: 40%"
-					onclick="searchPost()" value="우편번호 찾기" /><br /> <input
-					type="text" id="add01_s" name="add01_s"
+					onclick="searchPost()" value="우편번호 찾기" /><br /> <input type="text"
+					id="add01_s" name="add01_s"
 					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Address" /> <input type="text"
 					id="add02_s" name="add02_s"
@@ -164,8 +167,8 @@
 					style="width: 10%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Post Number" /> <input
 					type="button" class="btn btn-default" style="width: 10%"
-					onclick="searchPost()" value="우편번호 찾기" /><br /> <input
-					type="text" id="add01" name="add01"
+					onclick="searchPost()" value="우편번호 찾기" /><br /> <input type="text"
+					id="add01" name="add01"
 					style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Address" /> <input type="text"
 					id="add02" name="add02"
@@ -214,61 +217,58 @@
 </div>
 
 <script>
-	$("#emailAuth").click(function(){
-		$("#hidden").prop("value", "1");
+	$("#authCheck").click(function(){
 		var id = $("#join_id");
-		var name = $("#name");
-		var birth = $("#birth");
-		var phone = $("#phone");
-		var email = $("#email");
-		var email2 = $("#email2");
-		if(id.val()!="" && name.val()!="" && birth.val()!="" && phone.val()!=""  && email.val()!="" && email2.val()!=""){
-			$("#authPass").prop("hidden", null);
-			$.ajax({
-				"method" : "get",
-				"url" : "/member/emailAuth/"+id.val()+"/"+email.val()+"/"+email2.val()+"/"+name.val()+"/"+birth.val()+"/"+phone.val(),
-				"async" : false
-			}).done(function(txt){
-				if(txt==true){
-					$("#emailSend").prop("color", "green");
-					$("#emailSend").text("메일전송 완료");
-				} else {
-					$("#emailSend").prop("color", "red");
-					$("#emailSend").text("메일주소를 확인해주세요.");
-				}
-			});
+		var authPass = $("#authPass");
+		if(authPass.val()=="${ranKey}"){
+			$("#checkRst").prop("color", "green");
+			$("#checkRst").text("인증되었습니다.");
+			$("#emailSend").prop("hidden", "hidden");
 		} else {
-			$("#emailSend").prop("color", "red");
-			$("#emailSend").text("입력되지 않은 항목이 있습니다.");
+			$("#checkRst").prop("color", "red");
+			$("#checkRst").text("인증번호를 확인해주세요.");
 		}
+// 		$.ajax({
+// 			"method" : "get",
+// 			"url" : "/member/authCheck/"+id.val()+"/"+authPass.val(),
+// 			"async" : false
+// 		}).done(function(txt){
+// 			if(txt==true){
+// 				$("#checkRst").prop("color", "green");
+// 				$("#checkRst").text("인증되었습니다.");
+// 				$("#emailSend").prop("hidden", "hidden");
+// 			} else {
+// 				$("#checkRst").prop("color", "red");
+// 				$("#checkRst").text("인증번호를 확인해주세요.");
+// 			}
+// 		});
 	});
 	
-	$("#emailAuth_s").click(function(){
+	$("#authCheck_s").click(function(){
 		var id = $("#join_id_s");
-		var name = $("#name_s");
-		var birth = $("#birth_s");
-		var phone = $("#phone_s");
-		var email = $("#email_s");
-		var email2 = $("#email2_s");
-		if(id.val()!="" && name.val()!="" && birth.val()!="" && phone.val()!=""  && email.val()!="" && email2.val()!=""){
-			$("#authPass_s").prop("hidden", null);
-			$.ajax({
-				"method" : "get",
-				"url" : "/member/emailAuth/"+id.val()+"/"+email.val()+"/"+email2.val()+"/"+name.val()+"/"+birth.val()+"/"+phone.val(),
-				"async" : false
-			}).done(function(txt){
-				if(txt==true){
-					$("#emailSend_s").prop("color", "green");
-					$("#emailSend_s").text("메일전송 완료");
-				} else {
-					$("#emailSend_s").prop("color", "red");
-					$("#emailSend_s").text("메일주소를 확인해주세요.");
-				}
-			});
+		var authPass = $("#authPass");
+		if(authPass.val()=="${ranKey}"){
+			$("#checkRst_s").prop("color", "green");
+			$("#checkRst_s").text("인증되었습니다.");
+			$("#emailSend_s").prop("hidden", "hidden");
 		} else {
-			$("#emailSend_s").prop("color", "red");
-			$("#emailSend_s").text("입력되지 않은 항목이 있습니다.");
+			$("#checkRst_s").prop("color", "red");
+			$("#checkRst_s").text("인증번호를 확인해주세요.");
 		}
+// 		$.ajax({
+// 			"method" : "get",
+// 			"url" : "/member/authCheck/"+id.val()+"/"+authPass.val(),
+// 			"async" : false
+// 		}).done(function(txt){
+// 			if(txt==true){
+// 				$("#checkRst_s").prop("color", "green");
+// 				$("#checkRst_s").text("인증되었습니다.");
+// 				$("#emailSend_s").prop("hidden", "hidden");
+// 			} else {
+// 				$("#checkRst_s").prop("color", "red");
+// 				$("#checkRst_s").text("인증번호를 확인해주세요.");
+// 			}
+// 		});
 	});
 	
 	$("#join_id").keyup(function(){
@@ -350,7 +350,7 @@
 				});
 			} else {
 				$("#emailSend").prop("color", "red");
-				$("#emailSend").text("이메일 인증을 해주세요.");
+				$("#emailSend").text("인증 확인을 해주세요.");
 			}
 		} else {
 			$("#joinrst").prop("color", "red");
@@ -395,7 +395,7 @@
 				});
 			} else {
 				$("#emailSend_s").prop("color", "red");
-				$("#emailSend_s").text("이메일 인증을 해주세요.");
+				$("#emailSend_s").text("인증 확인을 해주세요.");
 			}
 		} else {
 			$("#joinrst_s").prop("color", "red");
