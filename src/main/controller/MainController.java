@@ -18,13 +18,13 @@ public class MainController {
 
 	@RequestMapping("/join")
 	public ModelAndView join() {
-		ModelAndView mav = new ModelAndView("t:menu/join");
+		ModelAndView mav = new ModelAndView("t:member/join");
 		return mav;
 	}
 
 	@RequestMapping("/myinfo")
 	public ModelAndView myInfo() {
-		ModelAndView mav = new ModelAndView("t:menu/myInfo");
+		ModelAndView mav = new ModelAndView("t:member/myInfo");
 		return mav;
 	}
 
@@ -67,12 +67,6 @@ public class MainController {
 	@RequestMapping("/shop")
 	public ModelAndView shop() {
 		ModelAndView mav = new ModelAndView("t:menu/shop");
-		return mav;
-	}
-
-	@RequestMapping("/friends")
-	public ModelAndView friends() {
-		ModelAndView mav = new ModelAndView("t:menu/friends");
 		return mav;
 	}
 

@@ -132,6 +132,7 @@
 					<option>네이트</option>
 					<option>야후</option>
 				</select>
+				<input type="button" class="btn btn-default" id="emailAuth" value="인증" style="height: 33px"/>
 			</div>
 		</div>
 		<div class="form-group" align="center">
@@ -164,6 +165,10 @@
 </div>
 
 <script>
+	$("#emailAuth").click(function(){
+		
+	});
+	
 	$("#join_id").keyup(function(){
 		$.ajax({
 			"method" : "get",
