@@ -14,8 +14,8 @@
 		<option>1,000 원</option>
 		<option>10,000 원</option>
 		<option>100,000 원</option>
-	</select> <input type="text" id="point" style="display: none" placeholder="원" name="point"/>
-	<br />
+	</select> <input type="text" id="point" style="display: none" placeholder="원"
+		name="point" /> <br />
 
 	<script>
 		$("#p").click(function() {
@@ -156,27 +156,38 @@
 		};
 	</script>
 	<input type="button" name="charge" value="선물하기"
-		onclick="javascript:location.href='/charge/cash?point=" /> <br />
+		onclick="gift()" /> <br />
+	<font id="aaaa"></font>
 
 	<h3>내포인트 선물하기</h3>
 
 	<form action="/charge/gift">
-		내 보유 포인트 <input type="text" name="mypoint" value="${point }" /> <br />
-		선물할 친구 <input type="text" name="take" /> <br />
+		내 보유 포인트 <input type="text" name="mypoint" value="${point }" readonly="readonly"/> <br />
+		선물할 친구 
+		<select>
+			<c:forEach var="t" items="${list }">
+				<option>${t.NAME }</option>
+			</c:forEach>	
+		</select> <br />
 		선물할 포인트 <input type="text" name="gpoint" /> <br />
 		<input type="submit" value="선물하기" />
 	</form>
-
-
-
-
-
-
-
-
 
 	<input type="submit" value="충전내역"
 		onclick="javascript:location.href='/charge/chargeAll'" /> <input
 		type="submit" name="charge" value="사용내역"
 		onclick="javascript:location.href='charge/use'" />
 </div>
+
+<script>
+	function gift(){
+		var point = $("#point");
+		$.ajax({
+			"method" : "get",
+			"url" : "/charge/cash?point="+point.val(),
+			"async" : false
+		}).done(function(txt){
+			alert(txt);
+		});
+	}
+</script>

@@ -1,11 +1,23 @@
 package main.controller;
 
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import charge.model.ChargeFriendsService;
 
 @Controller
 public class MainController {
+	@Autowired
+	ChargeFriendsService cfs;
 
 	@RequestMapping("/")
 	public ModelAndView index(@CookieValue(name = "remember", required = false) String cooId) {
@@ -50,8 +62,11 @@ public class MainController {
 	}
 
 	@RequestMapping("/charge")
-	public ModelAndView charge() {
+	public ModelAndView charge(HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		List<HashMap> list = cfs.chargeFriend(id);
 		ModelAndView mav = new ModelAndView("t:charge/charge");
+		mav.addObject("list", list);
 		return mav;
 	}
 
