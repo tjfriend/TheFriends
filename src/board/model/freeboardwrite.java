@@ -14,13 +14,13 @@ public class freeboardwrite {
 	@Autowired
 	SqlSessionFactory fac;
 
-	public int write(String title, String content, String id) {
+	public int write(String title, String content, String id, String category) {
 		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("title", title);
 		map.put("content", content);
 		map.put("id", id);
-		System.out.println(title+"//"+id+"//"+content);
+		map.put("category", category);
 		
 		try {
 			SqlSession sql = fac.openSession();

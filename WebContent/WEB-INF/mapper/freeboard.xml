@@ -20,10 +20,19 @@
 
 	<insert id="write" parameterType="java.util.HashMap">
 		insert into freeboard values
-		(FREEBOARD_SEQ.nextval, #{title }, #{content },#{id } ,sysdate,0)
-
+		(FREEBOARD_SEQ.nextval, #{title }, #{content },#{id } ,sysdate,0,#{category})
 	</insert>
+	
+	<select id="freeboarddetails" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
 
-
+		select * from freeboard where num = #{num }
+	</select>
+	
+	<select id="freeboardcategory" parameterType="java.util.HashMap"
+	resultType="java.util.HashMap">
+	
+	select * from freeboard where category = #{category}
+	</select>
 
 </mapper>
