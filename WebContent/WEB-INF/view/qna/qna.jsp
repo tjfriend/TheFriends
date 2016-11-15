@@ -4,19 +4,30 @@
 
 <div class="w3-row" style="margin-top: 50px">
 	<h2>Search</h2>
+	<script>
+		// 벨류값 가져오기
+		function getSelectValue(frm) {
+			frm.textValue.value = frm.selectBox.options[frm.selectBox.selectedIndex].text;
+			frm.optionValue.value = frm.selectBox.options[frm.selectBox.selectedIndex].value;
+		}
+	</script>
 
-	<select onchange="location.href ='www.naver.com" name="category" id="ctg1">
-		<option id="ctg1-1" selected="selected" value="all">분류</option>
-		<option id="ctg1-2" value="data">개인정보</option>
-		<option id="ctg1-3" value="event">이벤트</option>
-		<option id="ctg1-4" value="homepage">홈페이지</option>
-		<option id="ctg1-5" value="charge">유료</option>
-		<option id="ctg1-6" value="etc">기타</option>
-	</select>
+	<form action="/qna/list" id="ctg">
+		<select name="mode" id="sel">
+			<option value="all">분류</option>
+			<option value="개인정보">개인정보</option>
+			<option value="이벤트">이벤트</option>
+			<option value="홈페이지">홈페이지</option>
+			<option value="유료">유료</option>
+			<option value="기타">기타</option>
+		</select>
+	</form>
+		<script>
+			document.getElementById("sel").addEventListener("change",function(){
+				document.getElementById("ctg").submit();
+			});
+		</script>
 
-<script>
-
-</script>
 	<table class="table">
 		<tr>
 			<th align="center">#</th>
