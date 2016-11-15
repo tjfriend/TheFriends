@@ -19,11 +19,25 @@
 	</select>
 
 	<insert id="question" parameterType="java.util.HashMap">
-		insert into qna	values
-		(QNA_NUMBER.nextval, #{title }, #{content },#{id } ,sysdate,0)
-		
-
+		insert into qna values
+		(QNA_NUMBER.nextval, #{title }, #{content },#{id } ,sysdate,0,#{category})
 	</insert>
+
+	<select id="qnadetails" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+
+		select * from qna where num = #{num }
+	</select>
+	
+	<select id="qnacategory" parameterType="java.util.HashMap"
+	resultType="java.util.HashMap">
+	
+	select * from qna where category = #{category}
+		
+		
+	
+	
+	</select>
 
 
 

@@ -1,5 +1,7 @@
 package QnA.controlller;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class QnAcontroller {
 
 	@Autowired
 	qnawrite qw;
+	
+	@Autowired
+	SqlSessionFactory fac;
 
 	@RequestMapping("/qna")
 	public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p) {
@@ -39,7 +44,7 @@ public class QnAcontroller {
 		return mav;
 	}
 
-	@RequestMapping("/question")
+	@RequestMapping("/qna/write")
 	public ModelAndView QnAquestion() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t:qna/question");
@@ -48,10 +53,10 @@ public class QnAcontroller {
 	}
 
 	@RequestMapping("/qna/make")
-	public ModelAndView makqna(String title, String content, HttpSession session) {
+	public ModelAndView makqna(String title, String content, HttpSession session, String category) {
 		String id = (String) session.getAttribute("id");
-		int r = qw.write(title, content, id);
-		System.out.println(session+"/////"+id+".....");
+		int r = qw.write(title, content, id,category);
+		System.out.println(session+"/////"+id+"....."+category);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("qnasessionid",r); // 추가
 		mav.setViewName("redirect:/qna");
@@ -60,18 +65,15 @@ public class QnAcontroller {
 
 	}
 
-	/*
-	 * id 입력
-	 * 
-	 * @RequestMapping("/qna/make") public ModelAndView makqna(String title,
-	 * String content, String id) {
-	 * 
-	 * 
-	 * int r = qw.write(title, content, id); System.out.println(id);
-	 * ModelAndView mav = new ModelAndView(); mav.setViewName("redirect:/qna");
-	 * 
-	 * return mav;
-	 * 
-	 * }
-	 */
+	@RequestMapping("/qna/qnadetails")
+	public ModelAndView detailsqna(@RequestParam(defaultValue="-1") int num){
+		HashMap map = new HashMap();
+			map.put("num", num);
+		SqlSession sql = fac.openSession();
+		List li = sql.selectList("qna.qnadetails",map);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("qnadetailsdata",li);
+		mav.setViewName("t:qna/qnadetails");
+		return mav;	
+	}
 }
