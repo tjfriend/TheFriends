@@ -18,6 +18,10 @@ public class MemberController {
 	LoginService ls;
 	@Autowired
 	JoinService js;
+	@Autowired
+	EmailAuthService eas;
+	@Autowired
+	AuthCheckService acs;
 	
 	@RequestMapping("/login")
 	public ModelAndView login(String id, String password, String remember, HttpSession session, HttpServletResponse resp){
@@ -61,16 +65,17 @@ public class MemberController {
 	public boolean join(@PathVariable(name="id")String id, @PathVariable(name="password")String password, @PathVariable(name="name")String name, 
 											@PathVariable(name="birth")String birth, @PathVariable(name="phone")String phone, @PathVariable(name="add01")String add01,
 											@PathVariable(name="add02")String add02, @PathVariable(name="email")String email, @PathVariable(name="email2")String email2,
-											@PathVariable(name="recommender", required=false)String recommender){
-		return js.join(id, password, name, birth, phone, add01, add02, email, email2, recommender);
+											@PathVariable(name="recommender", required=false)String recommender, HttpSession session){
+		return js.join(id, password, name, birth, phone, add01, add02, email, email2, recommender, session);
 	}
 	
 	@RequestMapping("/join/{id}/{password}/{name}/{birth}/{phone}/{add01}/{add02}/{email}/{email2}")
 	@ResponseBody
 	public boolean join2(@PathVariable(name="id")String id, @PathVariable(name="password")String password, @PathVariable(name="name")String name, 
 											@PathVariable(name="birth")String birth, @PathVariable(name="phone")String phone, @PathVariable(name="add01")String add01,
-											@PathVariable(name="add02")String add02, @PathVariable(name="email")String email, @PathVariable(name="email2")String email2){
-		return js.join(id, password, name, birth, phone, add01, add02, email, email2, "admin");
+											@PathVariable(name="add02")String add02, @PathVariable(name="email")String email, @PathVariable(name="email2")String email2,
+											HttpSession session){
+		return js.join(id, password, name, birth, phone, add01, add02, email, email2, "admin", session);
 	}
 	
 	@RequestMapping("/idcheck/{id}")
@@ -80,9 +85,17 @@ public class MemberController {
 		return list.size();
 	}
 	
-	@RequestMapping("/emailAuth")
-	public ModelAndView emailAuth(){
-		ModelAndView mav = new ModelAndView();
-		return mav;
+	@RequestMapping("/emailAuth/{id}/{email}/{email2}/{name}/{birth}/{phone}")
+	@ResponseBody
+	public boolean emailAuth(@PathVariable(name="id")String id, @PathVariable(name="email")String email, @PathVariable(name="email2")String email2,
+											@PathVariable(name="name")String name, @PathVariable(name="birth")String birth, @PathVariable(name="phone")String phone,
+											HttpSession session){
+		return eas.sendEmail(id, email, email2, name, birth, phone, session);
+	}
+	
+	@RequestMapping("/authCheck/{id}/{key}")
+	@ResponseBody
+	public boolean authCheck(@PathVariable(name="id")String id, @PathVariable(name="key")String key){
+		return acs.authCheck(id, key);
 	}
 }
