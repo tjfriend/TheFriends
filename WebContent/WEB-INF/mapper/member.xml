@@ -19,4 +19,10 @@
 		f.friend, f.nickname from member m, friends f where f.id=#{id} and
 		f.id=m.id) ff where mm.id=ff.friend) fff where mmm.name=fff.name
 	</select>
+	<insert id="emailAuth" parameterType="java.util.HashMap">
+		insert into emailAuth values(#{id}, #{uuid}, #{email})
+	</insert>
+	<select id="authCheck" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from emailAuth where id=#{id} and uuid=#{key}
+	</select>
 </mapper>
