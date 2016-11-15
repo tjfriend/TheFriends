@@ -29,7 +29,7 @@ public class noticeController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticedata",list);
 		mav.addObject("noticesize",size);
-		mav.setViewName("t:menu/notice");
+		mav.setViewName("t:notice/notice");
 		return mav;
 	}
 	

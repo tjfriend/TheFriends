@@ -29,7 +29,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("freeboarddata",list);
 		mav.addObject("freeboardsize",size);
-		mav.setViewName("t:menu/board");
+		mav.setViewName("t:freeboard/board");
 		return mav;
 	}
 	

@@ -51,31 +51,31 @@ public class MainController {
 
 	@RequestMapping("/charge")
 	public ModelAndView charge() {
-		ModelAndView mav = new ModelAndView("t:menu/charge");
+		ModelAndView mav = new ModelAndView("t:charge/charge");
 		return mav;
 	}
 
 	@RequestMapping("/event")
 	public ModelAndView event() {
-		ModelAndView mav = new ModelAndView("t:menu/event");
+		ModelAndView mav = new ModelAndView("t:event/event");
 		return mav;
 	}
 
 	@RequestMapping("/search")
 	public ModelAndView search() {
-		ModelAndView mav = new ModelAndView("t:menu/search");
+		ModelAndView mav = new ModelAndView("t:search/search");
 		return mav;
 	}
 
 	@RequestMapping("/navigation")
 	public ModelAndView navigation() {
-		ModelAndView mav = new ModelAndView("t:menu/navigation");
+		ModelAndView mav = new ModelAndView("t:navigation/navigation");
 		return mav;
 	}
 
 	@RequestMapping("/shop")
 	public ModelAndView shop() {
-		ModelAndView mav = new ModelAndView("t:menu/shop");
+		ModelAndView mav = new ModelAndView("t:shop/shop");
 		return mav;
 	}
 

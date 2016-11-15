@@ -21,7 +21,6 @@ import QnA.model.qnawrite;
 
 @Controller
 
-@RequestMapping("/")
 public class QnAcontroller {
 
 	@Autowired
@@ -40,7 +39,7 @@ public class QnAcontroller {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("qnadata", lis);
 		mav.addObject("qnasize", size);
-		mav.setViewName("t:menu/qna");
+		mav.setViewName("t:qna/qna");
 		return mav;
 	}
 
