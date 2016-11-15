@@ -21,7 +21,7 @@ public class ChargeController {
 	// 충전하기
 	@RequestMapping("/cash")
 	public ModelAndView charge(HttpSession id, int point){
-		ModelAndView ma = new ModelAndView("/menu/charge/chargerst.jsp");
+		ModelAndView ma = new ModelAndView("t:menu/charge/chargerst");
 		int a = charge.charge((String)id.getAttribute("id"), point);
 		if(a==1){
 			ma.addObject("y","charge");
@@ -32,7 +32,7 @@ public class ChargeController {
 	// 충전내역
 	@RequestMapping("/chargeAll")
 	public ModelAndView chargeAll(HttpSession id){
-		ModelAndView ma = new ModelAndView("/menu/charge/chargeAll.jsp");
+		ModelAndView ma = new ModelAndView("t:menu/charge/chargeAll");
 		List li = charge.chargeAll((String)id.getAttribute("id"));
 		if(li!=null){
 			ma.addObject("li",li);
