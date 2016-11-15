@@ -1,5 +1,9 @@
 package charge.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +22,28 @@ public class ChargeUseController {
 		return "/menu/charge/giftcharge.jsp";
 	}
 	
+	// 선물하기
 	@RequestMapping("/gift")
-	public ModelAndView gift(String id, String take, int point){
-		int a = use.gift(id, take, point);
+	public ModelAndView gift(HttpSession id, String take, int point){
+		int a = use.gift((String)id.getAttribute("id"), take, point);
 		ModelAndView ma = new ModelAndView("/menu/charge/chargerst.jsp");
 		if(a==1){
 			ma.addObject("y","use");
 		}else{
 			ma.addObject("y","fail");
+		}
+		return ma;
+	}
+	
+	// 사용내역
+	@RequestMapping("/use")
+	public ModelAndView use(HttpSession id){
+		List li = use.chargeuse((String)id.getAttribute("id"));
+		ModelAndView ma = new ModelAndView("/menu/charge/chargeuse.jsp");
+		if(li != null){
+			ma.addObject("li",li);
+		}else{
+			ma.addObject("li",null);
 		}
 		return ma;
 	}

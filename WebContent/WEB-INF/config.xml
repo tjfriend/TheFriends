@@ -55,5 +55,20 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		id="javaMailSender">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="trsaan0417" />	<!-- 구글 계정 -->
+		<property name="password" value="~1q2w3e4r" />	<!-- 구글 비번 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.timeout">5000</prop>
+			</props>
+		</property>
+	</bean>
 
 </beans>
