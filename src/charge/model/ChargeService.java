@@ -14,21 +14,28 @@ public class ChargeService {
 	SqlSessionFactory fac;
 	
 	// 충전하기
-	public int charge(String id, int point){
+	public boolean charge(String id, int point){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
 		map.put("id",id);
 		map.put("point", point);
 		int a = ss.update("charge.chargeUp",map);
 		if(a==1){
-			int b = ss.insert("charge.charge", map);
-			if(b==0){
-				return 0;
+			try{
+				int b = ss.insert("charge.charge", map);
+				if(b==0){
+					return false;
+				}
+				ss.commit();
+				ss.close();
+				return true;
+			} catch(Exception e){
+				ss.rollback();
+				ss.close();
+				return false;
 			}
-			return 1;
 		}
-		ss.close();
-		return 0;
+		return false;
 	}
 	
 	// 충전내역
