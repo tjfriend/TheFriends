@@ -88,7 +88,7 @@
 		if(val=="myinfo"){
 			location.href="/myinfo";
 		} else if(val=="myhome"){
-			location.href="/myhome";
+			onClickHome("${id}");
 		} else if(val=="charge"){
 			location.href="/charge";
 		} else if(val=="join"){
