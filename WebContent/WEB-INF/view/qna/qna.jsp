@@ -15,7 +15,6 @@
 	</select>
 
 <script>
-	${}
 
 </script>
 	<table class="table">

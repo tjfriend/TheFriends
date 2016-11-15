@@ -80,7 +80,7 @@
 <a href="/navigation" onclick="w3_close()" class="w3-padding">Navigation</a>
 <a href="/board/list" onclick="w3_close()" class="w3-padding">Free Board</a>
 <a href="/shop" onclick="w3_close()" class="w3-padding">Shop</a>
-<a href="/qna" onclick="w3_close()" class="w3-padding">QnA</a>
+<a href="/qna/list" onclick="w3_close()" class="w3-padding">QnA</a>
 
 <script>
 	function loginMenu(element){

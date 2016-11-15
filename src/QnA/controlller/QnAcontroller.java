@@ -20,7 +20,7 @@ import QnA.model.QnAPage;
 import QnA.model.qnawrite;
 
 @Controller
-
+@RequestMapping("/qna")
 public class QnAcontroller {
 
 	@Autowired
@@ -32,7 +32,7 @@ public class QnAcontroller {
 	@Autowired
 	SqlSessionFactory fac;
 
-	@RequestMapping("/qna")
+	@RequestMapping("/list")
 	public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p) {
 		List lis = qp.GetRnage(p);
 		int size = qp.size();
@@ -43,7 +43,7 @@ public class QnAcontroller {
 		return mav;
 	}
 
-	@RequestMapping("/qna/write")
+	@RequestMapping("/write")
 	public ModelAndView QnAquestion() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t:qna/question");
@@ -51,7 +51,7 @@ public class QnAcontroller {
 
 	}
 
-	@RequestMapping("/qna/make")
+	@RequestMapping("/make")
 	public ModelAndView makqna(String title, String content, HttpSession session, String category) {
 		String id = (String) session.getAttribute("id");
 		int r = qw.write(title, content, id,category);
@@ -64,7 +64,7 @@ public class QnAcontroller {
 
 	}
 
-	@RequestMapping("/qna/qnadetails")
+	@RequestMapping("/qnadetails")
 	public ModelAndView detailsqna(@RequestParam(defaultValue="-1") int num){
 		HashMap map = new HashMap();
 			map.put("num", num);
