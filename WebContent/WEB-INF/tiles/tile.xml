@@ -18,5 +18,5 @@
 	</definition>
 	<definition name="t:*/*/*" extends="t:index">
 		<put-attribute name="article" value="/WEB-INF/view/{1}/{2}/{3}.jsp"/>
-	</definition>
+	</definition>	
 </tiles-definitions>

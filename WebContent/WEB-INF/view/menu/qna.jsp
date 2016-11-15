@@ -21,11 +21,28 @@
 		</c:forEach>
 	</table>
 	
-	<form action="question">
-		<div align="right">
-		<input type="submit" value="질문하기"  />
+	
+<c:choose>
+			<c:when test="${qnasessionid }">
+		
+			</c:when>
+			<c:otherwise>
+			<form action="question">
+		<div align="right">	
+		
+				<input type="submit" value="질문하기"  />
 		</div>
-	</form>
+		</form>				
+				
+
+			</c:otherwise>
+		</c:choose>
+		
+		
+	
+	
+	
+	
 	<c:forEach var="i" begin="1" end="${qnasize }">
 		<c:choose>
 			<c:when test="${current == i }">

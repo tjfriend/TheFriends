@@ -10,6 +10,7 @@ import java.util.*;
 
 @Component
 public class freeboardPage {
+	
 
 	@Autowired
 	SqlSessionFactory fac;
