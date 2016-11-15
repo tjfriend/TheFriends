@@ -1,4 +1,4 @@
-package board.controller;
+package notice.controller;
 
 import java.util.*;
 
@@ -10,33 +10,33 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
 import board.model.*;
-
+import notice.model.*;
 
 @Controller
-@RequestMapping("/board")
-public class BoardController {
+@RequestMapping("/notice")
+public class noticeController {
 
 	@Autowired
-	freeboardPage fb;
+	noticepage nb;
 	
 	@Autowired
-	freeboardwrite fw;
+	noticewrite nw;
 	
 	@RequestMapping("/list")
-	public ModelAndView boardList(@RequestParam(defaultValue="1") int p){
-		List list = fb.GetRnage(p);
-		int size = fb.size();
+	public ModelAndView noticeList(@RequestParam(defaultValue="1") int p){
+		List list = nb.GetRnage(p);
+		int size = nb.size();
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("freeboarddata",list);
-		mav.addObject("freeboardsize",size);
-		mav.setViewName("t:menu/board");
+		mav.addObject("noticedata",list);
+		mav.addObject("noticesize",size);
+		mav.setViewName("t:menu/notice");
 		return mav;
 	}
 	
 	@RequestMapping("/write")
-	public ModelAndView writequestion(){
+	public ModelAndView writenotice(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t:freeboard/write");
+		mav.setViewName("t:notice/write");
 		return mav;
 	
 	}
@@ -44,14 +44,13 @@ public class BoardController {
 	@RequestMapping("/make")
 	public ModelAndView makqna(String title, String content, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		int r = fw.write(title, content, id);
+		int r = nw.write(title, content, id);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("freeboardsessionid",r); // 추가
-		mav.setViewName("redirect:/board/list");
+		mav.addObject("noticesessionid",r); // 추가
+		mav.setViewName("redirect:/notice/list");
 
 		return mav;
 
 	}
-	
 	
 }

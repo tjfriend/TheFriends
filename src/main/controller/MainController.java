@@ -55,12 +55,6 @@ public class MainController {
 		return mav;
 	}
 
-	@RequestMapping("/notice")
-	public ModelAndView notice() {
-		ModelAndView mav = new ModelAndView("t:menu/notice");
-		return mav;
-	}
-
 	@RequestMapping("/event")
 	public ModelAndView event() {
 		ModelAndView mav = new ModelAndView("t:menu/event");

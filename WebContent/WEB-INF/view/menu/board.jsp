@@ -7,7 +7,7 @@
 
 	<table class="table">
 		<tr>
-			<th align="center">#</th>
+			<th align="center">번호</th>
 			<th width="50%">제목</th>
 			<th width="100">ID</th>
 			<th>day</th>
@@ -32,7 +32,7 @@
 				<b>${u }</b>
 			</c:when>
 			<c:otherwise>
-				<a href="/board?p=${i }">${i }</a>
+				<a href="/board/list?p=${i }">${i }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
