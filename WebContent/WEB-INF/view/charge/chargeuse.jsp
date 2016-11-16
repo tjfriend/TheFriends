@@ -6,12 +6,20 @@
 
 <c:choose>
 	<c:when test="${li != null }">
+	<table class="table">
+		<tr>
+			<td>충전일</td>
+			<td>선물한 친구</td>
+			<td>선물한 포인트</td>
+		</tr>
 		<c:forEach items="${li }" var="i">
-		충전일 : ${i.USEDATE } <br/>
-		선물한 친구 : ${i.TAKEID } <br/>
-		선물한 포인트 : ${i.POINT }  point <br/>
-		<hr/>
+		<tr>
+			<td>${i.USEDATE }</td>
+			<td>${i.TAKEID }</td>
+			<td>${i.POINT }  point </td>
+		</tr>
 		</c:forEach>
+	</table>
 	</c:when>
 	<c:otherwise>
 		사용 내역이 없습니다

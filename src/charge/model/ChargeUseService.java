@@ -51,4 +51,23 @@ public class ChargeUseService {
 		return li;
 	}
 	
+	// 사용내역 페이지 처리
+	public List page(int p){
+		SqlSession ss = fac.openSession();
+		HashMap map = new HashMap<>();
+		map.put("start", (p-1)*5+1);
+		map.put("end", p*5);
+		List li = ss.selectList("charge.page2",map);
+		ss.close();
+		return li;
+	}
+
+	// 사용내역 전체 페이지
+	public int total(){
+		SqlSession ss = fac.openSession();
+		int a = ss.selectOne("charge.total2");
+		ss.close();
+		return a%5==0? a/5 : a/5+1;
+	}
+	
 }

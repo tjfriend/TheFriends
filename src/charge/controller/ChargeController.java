@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,10 +42,14 @@ public class ChargeController {
 	
 	// 충전내역
 	@RequestMapping("/chargeAll")
-	public ModelAndView chargeAll(HttpSession id){
+	public ModelAndView chargeAll(@RequestParam(defaultValue="1") int p, HttpSession id){
 		ModelAndView ma = new ModelAndView("t:charge/chargeAll");
 		List li = charge.chargeAll((String)id.getAttribute("id"));
+		List li2 = charge.page(p);
+		int size = charge.total();
 		if(li!=null){
+			ma.addObject("li2",li2);
+			ma.addObject("size",size);
 			ma.addObject("li",li);
 		}else{
 			ma.addObject("null","null");

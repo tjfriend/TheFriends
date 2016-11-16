@@ -3,23 +3,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h2>충전내역</h2>
+<c:forEach var="i" begin="1" end="${size }">
+
+	<a href="/charge/chargeAll?p=${i }">${i }</a>
+</c:forEach>
+
 <c:choose>
-	<table class="table">
-	<tr>
-		<td>충전일</td>
-		<td>충전 포인트</td>
-	</tr>
 	<c:when test="${li!=null }">
-		<c:forEach items="${li }" var="i">
-		<tr>
-			<td>${i.CHARGDATE }</td>
-			<td>${i.POINT } point </td>
-		</tr>
-		<hr/>
-		</c:forEach>
+		<table class="table">
+			<tr>
+				<td align="center">충전일</td>
+				<td align="center">충전 포인트</td>
+			</tr>
+			<c:forEach items="${li }" var="i">
+				<tr>
+					<td align="center">${i.CHARGEDATE }</td>
+					<td align="center">${i.POINT }point</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</c:when>
 	<c:otherwise>
 		충전 내역이 없습니다
 	</c:otherwise>
-	</table>
 </c:choose>
