@@ -4,6 +4,7 @@
 <h1>Talk & Talk</h1>
 
 <form action="/board/crystal" method="post">
+<input type="hidden"  name="num" value="${list.get(0).NUM }"/>
 	${list.get(0).CATEGORY }
 	분류 :&nbsp; <select name="category" style="width: 150px">
 			<option>10대 이야기</option>

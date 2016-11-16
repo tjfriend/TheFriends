@@ -24,11 +24,10 @@
 		,sysdate,0,#{category})
 	</insert>
 	
-		<insert id="crystal" parameterType="java.util.HashMap">
-		insert into freeboard values
-		(FREEBOARD_SEQ.nextval, #{title }, #{content },#{id }
-		,sysdate,0,#{category})
-	</insert>
+	<update id="crystal" parameterType="java.util.HashMap">
+		update freeboard set title = #{title} , content =#{content}, category=#{category} where num=#{num }
+	</update>
+
 
 	<select id="freeboarddetails" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
