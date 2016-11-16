@@ -47,7 +47,7 @@ public class ChargeController {
 		List li = charge.chargeAll((String)id.getAttribute("id"));
 		List li2 = charge.page(p);
 		int size = charge.total();
-		if(li!=null){
+		if(li.size()!=0){
 			ma.addObject("li2",li2);
 			ma.addObject("size",size);
 			ma.addObject("li",li);

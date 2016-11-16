@@ -43,7 +43,7 @@ public class ChargeService {
 		SqlSession ss = fac.openSession();
 		List li = ss.selectList("charge.chargeAll",id);
 		ss.close();
-		if(li!=null){
+		if(li.size()!=0){
 			return li;
 		}
 		return null;
@@ -53,8 +53,8 @@ public class ChargeService {
 	public List page(int p){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
-		map.put("start", (p-1)*5+1);
-		map.put("end", p*5);
+		map.put("start", (p*10)-9);
+		map.put("end", p*10);
 		List li = ss.selectList("charge.page",map);
 		ss.close();
 		return li;
@@ -65,7 +65,7 @@ public class ChargeService {
 		SqlSession ss = fac.openSession();
 		int a = ss.selectOne("charge.total");
 		ss.close();
-		return a%5==0? a/5 : a/5+1;
+		return a%10==0? a/10 : a/10+1;
 	}
 	
 }
