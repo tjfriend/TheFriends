@@ -38,7 +38,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/write")
-	public ModelAndView writequestion(){
+	public ModelAndView writeboard(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t:freeboard/write");
 		return mav;
@@ -68,6 +68,14 @@ public class BoardController {
 		mav.addObject("freeboarddetailsdata",li);
 		mav.setViewName("t:freeboard/freeboarddetails");
 		return mav;	
+	}
+	
+	@RequestMapping("/freeboardupdate")
+	public ModelAndView writecrystal(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t:freeboard/crystal");
+		return mav;
+	
 	}
 	
 }
