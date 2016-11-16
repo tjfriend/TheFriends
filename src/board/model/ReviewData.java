@@ -2,6 +2,9 @@ package board.model;
 
 import java.util.Date;
 
+import org.springframework.stereotype.*;
+
+@Component
 public class ReviewData {
 	int num;
 	String title;
