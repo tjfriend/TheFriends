@@ -26,6 +26,9 @@ public class BoardController {
 	@Autowired
 	SqlSessionFactory fac;
 	
+	@Autowired
+	ContentService cs;
+	
 	@RequestMapping("/list")
 	public ModelAndView boardList(@RequestParam(defaultValue="1") int p){
 		List list = fb.GetRnage(p);
@@ -60,22 +63,33 @@ public class BoardController {
 
 	@RequestMapping("/freeboarddetails")
 	public ModelAndView detailsboard(@RequestParam(defaultValue="-1") int num){
-		HashMap map = new HashMap();
-			map.put("num", num);
-		SqlSession sql = fac.openSession();
-		List li = sql.selectList("freeboard.freeboarddetails",map);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("freeboarddetailsdata",li);
+		List list = cs.Content(num);
+		mav.addObject("freeboarddetailsdata",list);
 		mav.setViewName("t:freeboard/freeboarddetails");
 		return mav;	
 	}
 	
 	@RequestMapping("/freeboardupdate")
-	public ModelAndView writecrystal(){
+	public ModelAndView writecrystal(@RequestParam(name="num")int num){
 		ModelAndView mav = new ModelAndView();
+		List<HashMap> list = cs.Content(num);
 		mav.setViewName("t:freeboard/crystal");
+		mav.addObject("list", list);
 		return mav;
+	}
 	
+	@RequestMapping("/crystal")
+	public ModelAndView make2board(String title, String content, HttpSession session, String category) {
+		String id = (String) session.getAttribute("id");
+		int r = fw.write(title, content, id,category);
+		System.out.println(session+"/////"+id+"....."+category);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("make2sessionid",r); // Ãß°¡
+		mav.setViewName("redirect:/board/list");
+
+		return mav;
+
 	}
 	
 }

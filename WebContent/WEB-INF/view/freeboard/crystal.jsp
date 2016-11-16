@@ -1,12 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
-<h2>�����ϴ°�</h2>
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<h1>Talk & Talk</h1>
+
+<form action="/board/crystal" method="post">
+	${list.get(0).CATEGORY }
+	분류 :&nbsp; <select name="category" style="width: 150px">
+			<option>10대 이야기</option>
+			<option>20대 이야기</option>
+			<option>30대 이야기</option>
+			<option>40대 이야기</option>
+			<option>50대 이야기</option>	
+			<option>훈훈한 이야기</option>
+			<option>나 억울해요</option>
+			<option>세상에 이런일이</option>
+			<option>이슈</option>
+			<option>유머</option>	
+			<option>사랑과이별</option>
+			<option>남자들끼리만</option>
+			<option>여자들끼리만</option>
+			</select>
+			<br /> <br /> 
+
+	제목 :&nbsp; <input type="text" name="title" value="${list.get(0).TITLE }"> <br /><br/>
+	내용 :&nbsp; <textarea rows="15" cols="60" name="content">${list.get(0).CONTENT }</textarea>
+	<br /> 
+
+	<input
+		type="submit" value="수정하기" /><br />
+</form>

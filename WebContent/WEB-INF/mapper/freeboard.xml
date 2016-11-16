@@ -23,6 +23,12 @@
 		(FREEBOARD_SEQ.nextval, #{title }, #{content },#{id }
 		,sysdate,0,#{category})
 	</insert>
+	
+		<insert id="crystal" parameterType="java.util.HashMap">
+		insert into freeboard values
+		(FREEBOARD_SEQ.nextval, #{title }, #{content },#{id }
+		,sysdate,0,#{category})
+	</insert>
 
 	<select id="freeboarddetails" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">

@@ -5,7 +5,7 @@
 
 <form action="/board/make" method="post">
 
-	분류 :&nbsp;<select name="category" style="width: 150px">
+	분류 :&nbsp; <select name="category" style="width: 150px">
 			<option>10대 이야기</option>
 			<option>20대 이야기</option>
 			<option>30대 이야기</option>
@@ -18,7 +18,7 @@
 			<option>유머</option>	
 			<option>사랑과이별</option>
 			<option>남자들끼리만</option>
-			<option">여자들끼리만</option>
+			<option>여자들끼리만</option>
 			</select>
 			<br /> <br /> 
 
