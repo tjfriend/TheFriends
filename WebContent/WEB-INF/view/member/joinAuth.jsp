@@ -221,6 +221,7 @@
 		var id = $("#join_id");
 		var authPass = $("#authPass");
 		if(authPass.val()=="${ranKey}"){
+			$("#hidden").prop("value", "1");
 			$("#checkRst").prop("color", "green");
 			$("#checkRst").text("인증되었습니다.");
 			$("#emailSend").prop("hidden", "hidden");
@@ -324,7 +325,9 @@
 		var email = $("#email");
 		var email2 = $("#email2");
 		var reco = $("#recommender");
-		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val();
+		var authPass = $("#authPass");
+		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+
+							add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+authPass.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}
@@ -369,7 +372,9 @@
 		var email = $("#email_s");
 		var email2 = $("#email2_s");
 		var reco = $("#recommender_s");
-		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val();
+		var authPass = $("#authPass_s");
+		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+
+							add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+authPass.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}

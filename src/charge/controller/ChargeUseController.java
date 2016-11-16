@@ -19,14 +19,14 @@ public class ChargeUseController {
 	
 	@RequestMapping("/view")
 	public String view(){
-		return "/menu/charge/giftcharge.jsp";
+		return "t:menu/charge/giftcharge";
 	}
 	
 	// 선물하기
 	@RequestMapping("/gift")      
 	public ModelAndView gift(HttpSession id, String take, int point){
 		int a = use.gift((String)id.getAttribute("id"), take, point);
-		ModelAndView ma = new ModelAndView("/menu/charge/chargerst.jsp");
+		ModelAndView ma = new ModelAndView("t:menu/charge/chargerst");
 		if(a==1){
 			ma.addObject("y","use");
 		}else{
@@ -39,7 +39,7 @@ public class ChargeUseController {
 	@RequestMapping("/use")
 	public ModelAndView use(HttpSession id){
 		List li = use.chargeuse((String)id.getAttribute("id"));
-		ModelAndView ma = new ModelAndView("/menu/charge/chargeuse.jsp");
+		ModelAndView ma = new ModelAndView("t:menu/charge/chargeuse");
 		if(li != null){
 			ma.addObject("li",li);
 		}else{

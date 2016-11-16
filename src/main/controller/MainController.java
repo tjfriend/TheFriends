@@ -1,11 +1,23 @@
 package main.controller;
 
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import charge.model.ChargeFriendsService;
 
 @Controller
 public class MainController {
+	@Autowired
+	ChargeFriendsService cfs;
 
 	@RequestMapping("/")
 	public ModelAndView index(@CookieValue(name = "remember", required = false) String cooId) {
@@ -45,43 +57,40 @@ public class MainController {
 
 	@RequestMapping("/myhome")
 	public ModelAndView myHome() {
-		ModelAndView mav = new ModelAndView("t:menu/myHome");
+		ModelAndView mav = new ModelAndView("t:homepage/myHome");
 		return mav;
 	}
 
 	@RequestMapping("/charge")
-	public ModelAndView charge() {
-		ModelAndView mav = new ModelAndView("t:menu/charge");
-		return mav;
-	}
-
-	@RequestMapping("/notice")
-	public ModelAndView notice() {
-		ModelAndView mav = new ModelAndView("t:menu/notice");
+	public ModelAndView charge(HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		List<HashMap> list = cfs.chargeFriend(id);
+		ModelAndView mav = new ModelAndView("t:charge/charge");
+		mav.addObject("list", list);
 		return mav;
 	}
 
 	@RequestMapping("/event")
 	public ModelAndView event() {
-		ModelAndView mav = new ModelAndView("t:menu/event");
+		ModelAndView mav = new ModelAndView("t:event/event");
 		return mav;
 	}
 
 	@RequestMapping("/search")
 	public ModelAndView search() {
-		ModelAndView mav = new ModelAndView("t:menu/search");
+		ModelAndView mav = new ModelAndView("t:search/search");
 		return mav;
 	}
 
 	@RequestMapping("/navigation")
 	public ModelAndView navigation() {
-		ModelAndView mav = new ModelAndView("t:menu/navigation");
+		ModelAndView mav = new ModelAndView("t:navigation/navigation");
 		return mav;
 	}
 
 	@RequestMapping("/shop")
 	public ModelAndView shop() {
-		ModelAndView mav = new ModelAndView("t:menu/shop");
+		ModelAndView mav = new ModelAndView("t:shop/shop");
 		return mav;
 	}
 
