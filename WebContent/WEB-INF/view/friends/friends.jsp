@@ -35,6 +35,7 @@
 						<tr>
 							<td>${t+1 }</td>
 							<td><label id="friends">${list.get(t).NAME }</label></td>
+							<td><label onclick="friends(this)">${list.get(t).NAME }</label></td>
 							<td>${list.get(t).BIRTH }</td>
 							<td>${list.get(t).NICKNAME }</td>
 							<td>1000</td>
@@ -46,3 +47,16 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	function friends(element){
+		var name = element.innerHTML;
+		$.ajax({
+			"method" : "get",
+			"url" : "/homepage/myhome/"+name,
+			"async" : false
+		}).done(function(txt){
+			window.open("/homepage/"+txt, "myHome", "width=1200, height=800, left=300, top=100, resizable=no");
+		});
+	}
+</script>
