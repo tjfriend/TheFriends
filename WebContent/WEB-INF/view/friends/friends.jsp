@@ -34,7 +34,7 @@
 					<c:forEach var="t" begin="0" end="${list.size()-1 }" step="1">
 						<tr>
 							<td>${t+1 }</td>
-							<td><a href="">${list.get(t).NAME }</a></td>
+							<td><label onclick="friends(this)">${list.get(t).NAME }</label></td>
 							<td>${list.get(t).BIRTH }</td>
 							<td>${list.get(t).NICKNAME }</td>
 							<td>1000</td>
@@ -46,3 +46,16 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	function friends(element){
+		var name = element.innerHTML;
+		$.ajax({
+			"method" : "get",
+			"url" : "/homepage/myhome/"+name,
+			"async" : false
+		}).done(function(txt){
+			window.open("/homepage/"+txt, "myHome", "width=1200, height=800, left=300, top=100, resizable=no");
+		});
+	}
+</script>
