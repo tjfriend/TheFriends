@@ -125,7 +125,7 @@
 	<hr/>
 	
 	<input type="button" value="충전내역" onclick="javascript:location.href='/charge/chargeAll'" />
-	<input type="button" name="charge" value="사용내역" onclick="javascript:location.href='charge/use'" />
+	<input type="button" value="사용내역" onclick="javascript:location.href='charge/use'" />
 </div>
 
 <script>
