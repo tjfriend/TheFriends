@@ -4,4 +4,7 @@
 	<select id="myhome" resultType="java.util.HashMap">
 		select * from homepage where id=#{id}
 	</select>
+	<update id="visit">
+		update homepage set visit=visit+1 where id=#{id}
+	</update>
 </mapper>

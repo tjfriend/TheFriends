@@ -102,11 +102,11 @@
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
 					id="selMail_s">
 					<option>직접입력</option>
-					<option>네이버</option>
-					<option>다음</option>
-					<option>구글</option>
-					<option>네이트</option>
-					<option>야후</option>
+					<option>naver.com</option>
+					<option>daum.net</option>
+					<option>gmail.com</option>
+					<option>nate.com</option>
+					<option>yahoo.com</option>
 				</select><br /> <br />
 				<div>
 					<input type="text" id="authPass_s" hidden="hidden"
@@ -127,11 +127,11 @@
 					style="width: 7%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
 					id="selMail">
 					<option>직접입력</option>
-					<option>네이버</option>
-					<option>다음</option>
-					<option>구글</option>
-					<option>네이트</option>
-					<option>야후</option>
+					<option>naver.com</option>
+					<option>daum.net</option>
+					<option>gmail.com</option>
+					<option>nate.com</option>
+					<option>yahoo.com</option>
 				</select><br /> <br />
 				<div>
 					<input type="text" id="authPass" hidden="hidden" placeholder="인증번호"
@@ -409,20 +409,8 @@
 		if(sel=="직접입력"){
 			email.val("");
 			email.prop("readonly", null);
-		} else if(sel=="네이버"){
-			email.val("naver.com");
-			email.prop("readonly", "readonly");
-		} else if(sel=="다음"){
-			email.val("daum.net");
-			email.prop("readonly", "readonly");
-		} else if(sel=="구글"){
-			email.val("gmail.com");
-			email.prop("readonly", "readonly");
-		} else if(sel=="네이트"){
-			email.val("nate.com");
-			email.prop("readonly", "readonly");
-		} else if(sel=="야후"){
-			email.val("yahoo.com");
+		} else {
+			email.val(sel);
 			email.prop("readonly", "readonly");
 		}
 	});
@@ -433,20 +421,8 @@
 		if(sel=="직접입력"){
 			email.val("");
 			email.prop("readonly", null);
-		} else if(sel=="네이버"){
-			email.val("naver.com");
-			email.prop("readonly", "readonly");
-		} else if(sel=="다음"){
-			email.val("daum.net");
-			email.prop("readonly", "readonly");
-		} else if(sel=="구글"){
-			email.val("gmail.com");
-			email.prop("readonly", "readonly");
-		} else if(sel=="네이트"){
-			email.val("nate.com");
-			email.prop("readonly", "readonly");
-		} else if(sel=="야후"){
-			email.val("yahoo.com");
+		} else {
+			email.val(sel);
 			email.prop("readonly", "readonly");
 		}
 	});

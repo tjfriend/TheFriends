@@ -1,5 +1,7 @@
 package friends.model;
 
+import java.util.*;
+
 import org.apache.ibatis.session.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -9,12 +11,16 @@ public class DistanceService {
 	@Autowired
 	SqlSessionFactory fac;
 	
-	public double distance(){
-		double x1 = 126.970595;
-		double y1 = 37.554627;
-		double x2 = 127.027675;
-		double y2 = 37.498027;
-
+	public double distance(String id, String friend){
+		SqlSession ss = fac.openSession();
+		List<HashMap> list1 = ss.selectList("member.latlng", id);
+		List<HashMap> list2 = ss.selectList("member.latlng", friend);
+		
+		double x1 = Double.parseDouble((String)list1.get(0).get("X")); 
+		double y1 = Double.parseDouble((String)list1.get(0).get("Y"));
+		double x2 = Double.parseDouble((String)list2.get(0).get("X"));
+		double y2 = Double.parseDouble((String)list2.get(0).get("Y"));
+		
 		double theta = x1 - x2;
 		double dist = Math.sin(deg2rad(y1)) * Math.sin(deg2rad(y2))
 				+ Math.cos(deg2rad(y1)) * Math.cos(deg2rad(y2)) * Math.cos(deg2rad(theta));
@@ -25,7 +31,7 @@ public class DistanceService {
 
 		dist = dist * 1609.344;
 
-		return 0.0;
+		return dist;
 	}
 	static double deg2rad(double deg) {
 		return (deg * Math.PI / 180.0);
