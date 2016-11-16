@@ -33,7 +33,7 @@
 				<c:forEach var="t" begin="0" end="${list.size()-1 }" step="1">
 					<tr>
 						<td>${t+1 }</td>
-						<td><label onclick="friends(this)">${list.get(t).NAME }</label></td>
+						<td><label onclick="friends(this)">${list.get(t).FRIEND }</label></td>
 						<td>${list.get(t).BIRTH }</td>
 						<td>${list.get(t).NICKNAME }</td>
 						<td>${list.get(t).DISTANCE }</td>

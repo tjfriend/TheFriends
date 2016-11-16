@@ -14,9 +14,9 @@ public class FriendsController {
 	FriendsService fs;
 	
 	@RequestMapping("/{id}")
-	public ModelAndView friends(@PathVariable(name="id")String id){
+	public ModelAndView friends(@PathVariable(name="id")String id, @RequestParam(defaultValue="1")int p){
 		ModelAndView mav = new ModelAndView("t:friends/friends");
-		mav.addObject("list", fs.friends(id));
+		mav.addObject("list", fs.friends(id, p));
 		return mav;
 	}
 }
