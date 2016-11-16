@@ -23,7 +23,7 @@ public class ChargeUseController {
 	}
 	
 	// 선물하기
-	@RequestMapping("/gift")
+	@RequestMapping("/gift")      
 	public ModelAndView gift(HttpSession id, String take, int point){
 		int a = use.gift((String)id.getAttribute("id"), take, point);
 		ModelAndView ma = new ModelAndView("t:menu/charge/chargerst");

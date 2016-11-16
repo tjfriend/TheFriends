@@ -14,7 +14,7 @@ public class ChargeService {
 	SqlSessionFactory fac;
 	
 	// 충전하기
-	public boolean charge(String id, int point){
+	public int charge(String id, int point){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
 		map.put("id",id);
@@ -24,18 +24,18 @@ public class ChargeService {
 			try{
 				int b = ss.insert("charge.charge", map);
 				if(b==0){
-					return false;
+					return 0;
 				}
 				ss.commit();
 				ss.close();
-				return true;
+				return 1;
 			} catch(Exception e){
 				ss.rollback();
 				ss.close();
-				return false;
+				return 0;
 			}
 		}
-		return false;
+		return 0;
 	}
 	
 	// 충전내역
