@@ -22,30 +22,47 @@
 					<th>NickName</th>
 					<th>Distance(m)</th>
 					<th>Visitors</th>
-					<th width="10%"><select>
+					<th width="10%">
+						<select id="range">
 							<option>이름순</option>
 							<option>방문자순</option>
 							<option>거리순</option>
-					</select></th>
+						</select>
+					</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach var="t" begin="0" end="${list.size()-1 }" step="1">
-					<tr>
-						<td>${t+1 }</td>
-						<td><label onclick="friends(this)">${list.get(t).FRIEND }</label></td>
-						<td>${list.get(t).BIRTH }</td>
-						<td>${list.get(t).NICKNAME }</td>
-						<td>${list.get(t).DISTANCE }</td>
-						<td colspan="2">${list.get(t).VISIT }</td>
-					</tr>
-				</c:forEach>
+			<tbody id="tbody">
+<%-- 						<c:forEach var="t" begin="0" end="${list.size()-1 }" step="1"> --%>
+<!-- 							<tr> -->
+<%-- 								<td>${t+1 }</td> --%>
+<%-- 								<td><label onclick="friends(this)">${list.get(t).FRIEND }</label></td> --%>
+<%-- 								<td>${list.get(t).BIRTH }</td> --%>
+<%-- 								<td>${list.get(t).NICKNAME }</td> --%>
+<%-- 								<td>${list.get(t).DISTANCE }</td> --%>
+<%-- 								<td colspan="2">${list.get(t).VISIT }</td> --%>
+<!-- 							</tr> -->
+<%-- 						</c:forEach> --%>
 			</tbody>
 		</table>
 	</div>
 </div>
 
 <script>
+	window.onload = function(){
+		$.ajax({
+			"method" : "get",
+			"url" : "/friends/${id}/이름순",
+			"async" : false
+		}).done(function(txt){
+			var html = "";
+			for(var i=0; i<txt.length; i++){
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
+			}
+			$("#tbody").html(html);
+		});
+	};
+
 	function friends(element) {
 		var name = element.innerHTML;
 		$.ajax({
@@ -55,5 +72,21 @@
 		}).done(function(txt) {
 			window.open("/homepage/" + txt, "myHome", "width=1200, height=800, left=300, top=100, resizable=no");
 		});
-	}
+	};
+	
+	$("#range").change(function(){
+		var val = $("#range").prop("value");
+		$.ajax({
+			"method" : "get",
+			"url" : "/friends/${id}/"+val,
+			"async" : false
+		}).done(function(txt){
+			var html = "";
+			for(var i=0; i<txt.length; i++){
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
+			}
+			$("#tbody").html(html);
+		});
+	});
 </script>
