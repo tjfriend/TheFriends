@@ -9,7 +9,6 @@
 	<select id="find">
 		<option value="id">아이디</option>
 		<option value="name">이름</option>
-		<option value="address">주소</option>
 		<option value="email">이메일</option>
 		<option value="phone">휴대폰</option>
 	</select>

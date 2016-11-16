@@ -19,16 +19,16 @@ public class SearchFriendService {
 		List map = new Vector<>();
 		switch (find) {
 		case "id":
-			map = ss.selectList("searchfriend.searchId", con);
+			map = ss.selectList("searchfriend.searchId", "%"+con+"%");
 			break;
 		case "name":
-			map = ss.selectList("searchfriend.searchName", con);
+			map = ss.selectList("searchfriend.searchName", "%"+con+"%");
 			break;
 		case "address":
-			map = ss.selectList("searchfriend.searchAdd", con);
+			map = ss.selectList("searchfriend.searchAdd", "%"+con+"%");
 			break;
 		default:
-			map = ss.selectList("searchfriend.searchPhone",con);
+			map = ss.selectList("searchfriend.searchPhone","%"+con+"%");
 		}
 		ss.close();
 		return map;
