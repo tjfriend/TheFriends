@@ -10,8 +10,7 @@
 
 <br>
 <h3 class="w3-padding-64">
-	<b>The<br>Friends
-	</b>
+	<label onclick="goMain()"><b>The<br>Friends</b></label>
 </h3>
 <c:choose>
 	<c:when test="${login == null }">
@@ -96,5 +95,9 @@
 		} else if(val=="friends"){
 			location.href="/friends/${id}";
 		}
+	}
+	
+	function goMain(){
+		location.href = "/";
 	}
 </script>
