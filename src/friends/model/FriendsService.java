@@ -1,5 +1,6 @@
 package friends.model;
 
+import java.text.*;
 import java.util.*;
 
 import org.apache.ibatis.session.*;
@@ -22,16 +23,23 @@ public class FriendsService {
 		map1.put("start", startpage);
 		map1.put("end", endpage);
 		List<HashMap> list = ss.selectList("member.friends", map1);
-		for(HashMap map : list){
-			double distance = ds.distance(id, (String)map.get("FRIEND"));
-			HashMap map2 = new HashMap();
-			map2.put("friend", (String)map.get("FRIEND"));
-			map2.put("distance", distance);
-			ss.update("member.distance", map2);
-		}
+//		for(HashMap map : list){			//테스트 끝나면 주석 풀어야함!!!!
+//			double distance = ds.distance(id, (String)map.get("FRIEND"));
+//			HashMap map2 = new HashMap();
+//			map2.put("friend", (String)map.get("FRIEND"));
+//			map2.put("distance", distance);
+//			ss.update("member.distance", map2);
+//		}		//여기까지 주석 풀어야함!!!!
 		ss.commit();
 		list = ss.selectList("member.friends", map1);
 		ss.close();
+		for(int i=0; i<list.size(); i++){
+			Date date = (Date)list.get(i).get("BIRTH");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			list.get(i).put("BIRTH", day);
+			list.set(i, list.get(i));
+		}
 		return list;
 	}
 	
@@ -53,14 +61,20 @@ public class FriendsService {
 		}
 		ss.commit();
 		ss.close();
-		
-		List<Object[]> list2 = new Vector<>();
 		for(int i=0; i<list.size(); i++){
-			HashMap map = list.get(i);
-			Object[] ar = new Object[]{map.get("RNUM")+","+map.get("NICKNAME")+","+map.get("DISTANCE")+","+map.get("VISIT")
-															+","+map.get("FRIEND")+","+map.get("ID")+","+map.get("BIRTH")};
-			list2.add(ar);
+			Date date = (Date)list.get(i).get("BIRTH");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			list.get(i).put("BIRTH", day);
+			list.set(i, list.get(i));
 		}
 		return list;
+	}
+	
+	public int size(){ 	// 페이지 숫자
+		SqlSession sql = fac.openSession();
+		int size = sql.selectOne("member.friendsSize");
+		int psize = size % 10 == 0? size/10 : size/10+1;
+		return psize;
 	}
 }

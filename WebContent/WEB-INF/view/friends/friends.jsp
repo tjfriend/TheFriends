@@ -31,19 +31,22 @@
 					</th>
 				</tr>
 			</thead>
-			<tbody id="tbody">
-<%-- 						<c:forEach var="t" begin="0" end="${list.size()-1 }" step="1"> --%>
-<!-- 							<tr> -->
-<%-- 								<td>${t+1 }</td> --%>
-<%-- 								<td><label onclick="friends(this)">${list.get(t).FRIEND }</label></td> --%>
-<%-- 								<td>${list.get(t).BIRTH }</td> --%>
-<%-- 								<td>${list.get(t).NICKNAME }</td> --%>
-<%-- 								<td>${list.get(t).DISTANCE }</td> --%>
-<%-- 								<td colspan="2">${list.get(t).VISIT }</td> --%>
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
-			</tbody>
+			<tbody id="tbody"></tbody>
 		</table>
+		<div align="center">
+			<label id="page">
+<%-- 				<c:forEach var="i" begin="1" end="${size }"> --%>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${current == i }"> --%>
+<%-- 							<b>${u }</b> --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<%-- 							<a href="/friends/${id }/">${i }</a> --%>
+	<%-- 					</c:otherwise> --%>
+	<%-- 				</c:choose> --%>
+<%-- 				</c:forEach> --%>
+			</label>
+		</div>
 	</div>
 </div>
 
@@ -60,8 +63,29 @@
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
+			html = "";
+			for(var i=0; i<${size}; i++){
+				html += "<a onclick='page(this)'>"+(i+1)+"</a>";
+			}
+			$("#page").html(html);
 		});
 	};
+	
+	function page(element){
+		var page = element.innerHTML;
+		$.ajax({
+			"method" : "post",
+			"url" : "/friends/${id}/"+$("#range").prop("value")+"/?page="+page,
+			"async" : false
+		}).done(function(txt){
+			var html = "";
+			for(var i=0; i<txt.length; i++){
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
+			}
+			$("#tbody").html(html);
+		});
+	}
 
 	function friends(element) {
 		var name = element.innerHTML;

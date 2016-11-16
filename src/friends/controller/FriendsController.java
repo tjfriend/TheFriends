@@ -15,15 +15,16 @@ public class FriendsController {
 	FriendsService fs;
 	
 	@RequestMapping("/{id}")
-	public ModelAndView friends(@PathVariable(name="id")String id, @RequestParam(defaultValue="1")int p){
+	public ModelAndView friends(@PathVariable(name="id")String id, @RequestParam(defaultValue="1", name="page")int p){
 		ModelAndView mav = new ModelAndView("t:friends/friends");
 		mav.addObject("list", fs.friends(id, p));
+		mav.addObject("size", fs.size());
 		return mav;
 	}
 	
 	@RequestMapping("/{id}/{range}")
 	@ResponseBody
-	public List range(@PathVariable(name="id")String id, @PathVariable(name="range")String range, @RequestParam(defaultValue="1")int p){
+	public List range(@PathVariable(name="id")String id, @PathVariable(name="range")String range, @RequestParam(defaultValue="1", name="page")int p){
 		return fs.friends2(id, p, range);
 	}
 }

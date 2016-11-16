@@ -51,4 +51,7 @@
 		select * from memaddress where
 		id=#{id}
 	</select>
+	<select id="friendsSize" resultType="java.lang.Integer">
+		select count(*) from friends
+	</select>
 </mapper>
