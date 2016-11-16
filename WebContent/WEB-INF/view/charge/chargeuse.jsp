@@ -7,8 +7,10 @@
 <c:choose>
 	<c:when test="${li != null }">
 		<c:forEach items="${li }" var="i">
-		${i.TAKEID } → ${i.POINT }  point <br/>
-		${i.USEDATE }
+		충전일 : ${i.USEDATE } <br/>
+		선물한 친구 : ${i.TAKEID } <br/>
+		선물한 포인트 : ${i.POINT }  point <br/>
+		<hr/>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>

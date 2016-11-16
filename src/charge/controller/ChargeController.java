@@ -25,8 +25,8 @@ public class ChargeController {
 	// 충전하기
 	@RequestMapping("/cash")
 	@ResponseBody
-	public boolean charge(HttpSession id, String take, String point){
-		int p = Integer.parseInt(point.substring(0, point.lastIndexOf("원")));
+	public String charge(HttpSession id, String take, String point){
+		int p = Integer.parseInt(point.substring(0, point.length()-1));
 		int a = 0;
 		if(take.equals("나에게")){
 			a = charge.charge((String)id.getAttribute("id"), p);
@@ -34,15 +34,15 @@ public class ChargeController {
 			a = use.gift((String)id.getAttribute("id"), take, p);
 		}
 		if(a==1){
-			return true;
+			return "true";
 		}
-		return false;
+		return "false";
 	}
 	
 	// 충전내역
 	@RequestMapping("/chargeAll")
 	public ModelAndView chargeAll(HttpSession id){
-		ModelAndView ma = new ModelAndView("t:menu/charge/chargeAll");
+		ModelAndView ma = new ModelAndView("t:charge/chargeAll");
 		List li = charge.chargeAll((String)id.getAttribute("id"));
 		if(li!=null){
 			ma.addObject("li",li);

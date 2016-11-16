@@ -6,7 +6,9 @@
 <c:choose>
 	<c:when test="${li!=null }">
 		<c:forEach items="${li }" var="i">
-		${i.CHARGEDATE } → ${i.POINT }  point <br/>
+		충전일 : ${i.CHARGEDATE } <br/>
+		충전 포인트 : ${i.POINT }  point <br/>
+		<hr/>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import charge.model.ChargeUseService;
@@ -23,23 +24,21 @@ public class ChargeUseController {
 	}
 	
 	// 선물하기
-	@RequestMapping("/gift")      
-	public ModelAndView gift(HttpSession id, String take, int point){
+	@RequestMapping("/gift")
+	@ResponseBody
+	public String gift(HttpSession id, String take, int point){
 		int a = use.gift((String)id.getAttribute("id"), take, point);
-		ModelAndView ma = new ModelAndView("t:menu/charge/chargerst");
 		if(a==1){
-			ma.addObject("y","use");
-		}else{
-			ma.addObject("y","fail");
+			return "true";
 		}
-		return ma;
+		return "false";
 	}
 	
 	// 사용내역
 	@RequestMapping("/use")
 	public ModelAndView use(HttpSession id){
 		List li = use.chargeuse((String)id.getAttribute("id"));
-		ModelAndView ma = new ModelAndView("t:menu/charge/chargeuse");
+		ModelAndView ma = new ModelAndView("t:charge/chargeuse");
 		if(li != null){
 			ma.addObject("li",li);
 		}else{

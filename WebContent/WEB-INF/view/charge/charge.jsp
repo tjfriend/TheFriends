@@ -11,18 +11,18 @@
 	<input type="text" id="point" name="point" />
 	<select id="p">
 		<option>직접입력</option>
-		<option>100 원</option>
-		<option>1,000 원</option>
-		<option>10,000 원</option>
-		<option>100,000 원</option>
+		<option>100원</option>
+		<option>1000원</option>
+		<option>10000원</option>
+		<option>100000원</option>
 	</select>  
 	<br />
 	
 	→ 받는사람
-	<select name="take">
+	<select id="take">
 		<option>나에게</option>
 		<c:forEach var="t" items="${list }">
-			<option>${t.NAME }</option>
+			<option>${t.FRIEND }</option>
 		</c:forEach>
 	</select> 
 	<br />
@@ -105,32 +105,27 @@
 	</span>
 
 	<br />
-	<form action="/charge/cash" method="post">
-	 <input type="submit" value="충전하기" id="cc" />
-	</form>
-
-	<span id="rst"></span>
+	 <input type="button" value="충전하기" id="cc" />
+	<font id="rst"></font>
 
 
 	<br/>
 	<h3>내포인트 선물하기</h3>
 
-	<form action="/charge/gift">
 		내 보유 포인트 <input type="text" name="mypoint" value="${point }" readonly="readonly"/> <br />
 		선물할 친구 
-		<select>
+		<select id="gtake">
 			<c:forEach var="t" items="${list }">
-				<option>${t.NAME }</option>
+				<option>${t.FRIEND }</option>
 			</c:forEach>	
 		</select> <br />
-		선물할 포인트 <input type="text" name="gpoint" /> <br />
-		<input type="submit" value="선물하기" />
-	</form>
-
+		선물할 포인트 <input type="text" id="gpoint" /> <br />
+		<input type="button" value="선물하기"  id="gb"/>
+		<font id="gt"></font>
 	<hr/>
 	
-	<input type="submit" value="충전내역" onclick="javascript:location.href='/charge/chargeAll'" />
-	<input type="submit" name="charge" value="사용내역" onclick="javascript:location.href='charge/use'" />
+	<input type="button" value="충전내역" onclick="javascript:location.href='/charge/chargeAll'" />
+	<input type="button" name="charge" value="사용내역" onclick="javascript:location.href='charge/use'" />
 </div>
 
 <script>
@@ -200,18 +195,43 @@
 	});
 	
 	// 충전하기 결과
-	$("#cc").onsubmit(function(){
-		$ajax({
-			"method" : "get"
-		}).done(function(txt)){
-			if(txt == true){
+	$("#cc").click(function(){
+		var take = $("#take").val();
+		var point = $("#point").val();
+		$.ajax({
+			"method" : "get",
+			"url" : "/charge/cash?take="+take+"&point="+point
+		}).done(function(txt){
+			if(txt == "true"){
 				$("#rst").prop("color", "green");
 				$("#rst").text("충전 성공");
+				$("#point").val("");
 			}else{
 				$("#rst").prop("color", "red");
 				$("#rst").text("충전 실패");
+				$("#point").val("");
 			}
-		}
+		})
+	});
+	
+	// 선물하기 결과
+	$("#gb").click(function(){
+		var take = $("#gtake").val();
+		var point = $("#gpoint").val();
+		$.ajax({
+			"method" : "get",
+			"url" : "/charge/gift?take="+take+"&point="+point
+		}).done(function(txt){
+			if(txt == "true"){
+				$("#gt").prop("color", "green");
+				$("#gt").text("선물 성공");
+				$("#gpoint").val("");
+			}else{
+				$("#gt").prop("color", "red");
+				$("#gt").text("선물 실패");
+				$("#gpoint").val("");
+			}
+		})
 	});
 
 

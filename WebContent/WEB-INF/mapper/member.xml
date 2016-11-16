@@ -18,7 +18,7 @@
 		update member set point=point+500 where id=#{id}
 	</update>
 	<select id="chargeFriends" resultType="java.util.HashMap">
-		select m.*, f.friend from member m, friends f where m.id=#{id} and m.id=f.id;
+		select m.*, f.friend from member m, friends f where m.id=#{id} and m.id=f.id
 	</select>
 	<select id="friends" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		select * from	(select rownum rnum, temp.* from (select * from
