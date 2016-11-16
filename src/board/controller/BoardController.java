@@ -80,16 +80,15 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/crystal")
-	public ModelAndView make2board(String title, String content, HttpSession session, String category) {
-		String id = (String) session.getAttribute("id");
-		int r = fw.write(title, content, id,category);
-		System.out.println(session+"/////"+id+"....."+category);
+	public ModelAndView make2board(int num, String title, String content, HttpSession session, String category) {
+		int r = cs.crystal(num, content, category, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("make2sessionid",r); // Ãß°¡
 		mav.setViewName("redirect:/board/list");
-
 		return mav;
 
 	}
 	
 }
+
+
