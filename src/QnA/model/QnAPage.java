@@ -39,6 +39,41 @@ public class QnAPage {
 		return psize;
 	}
 	
-
+	public List GetMode(int p,String mode){
+		int endpage = 10*p;
+		int startpage = endpage-9;
+		HashMap map = new HashMap();
+			map.put("start", startpage);
+			map.put("end", endpage);
+			map.put("mode", mode);
+		SqlSession sql = fac.openSession();
+		List li = sql.selectList("qna.modeNum",map);
+		sql.close();
+		return li;
+	}
 		
+//	댓글보기
+	
+	public List Getcommentpage(int p,int num){
+		int endpage = 10*p;
+		int startpage = endpage-9;
+		HashMap map = new HashMap();
+			map.put("start",startpage);
+			map.put("end", endpage);
+			map.put("qnanum", num);
+		SqlSession sql = fac.openSession();
+		List list = sql.selectList("qna.qnacommentlist",map);
+		sql.close();
+		return list;
+	
+	}
+	
+	public int commentsize(){ 	// 페이지 숫자
+		SqlSession sql = fac.openSession();
+		int size = sql.selectOne("qna.commentpagesize");
+		int psize = size % 10 == 0? size/10 : size/10+1;
+	
+		return psize;
+	}
+	
 }

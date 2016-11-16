@@ -1,3 +1,4 @@
+<%@page import="org.springframework.beans.factory.annotation.Value"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,21 +13,25 @@
 		}
 	</script>
 
+	
+	
+	
 	<form action="/qna/list" id="ctg">
 		<select name="mode" id="sel">
-			<option value="all">분류</option>
-			<option value="개인정보">개인정보</option>
-			<option value="이벤트">이벤트</option>
-			<option value="홈페이지">홈페이지</option>
-			<option value="유료">유료</option>
-			<option value="기타">기타</option>
+			<option value="" ${qnamode eq ''?'selected':'' }>분류</option>
+			<option value="개인정보" ${qnamode eq '개인정보'?'selected':'' }>개인정보</option>
+			<option value="이벤트" ${qnamode eq '이벤트'?'selected':'' }>이벤트</option>
+			<option value="홈페이지" ${qnamode eq '홈페이지'?'selected':'' }>홈페이지</option>
+			<option value="유료" ${qnamode eq '유료'?'selected':'' }>유료</option>
+			<option value="기타" ${qnamode eq '기타'?'selected':'' }>기타</option>
 		</select>
 	</form>
-		<script>
-			document.getElementById("sel").addEventListener("change",function(){
-				document.getElementById("ctg").submit();
-			});
-		</script>
+
+	<script>
+		document.getElementById("sel").addEventListener("change", function() {
+			document.getElementById("ctg").submit();
+		});
+	</script>
 
 	<table class="table">
 		<tr>
@@ -40,15 +45,15 @@
 			<tr>
 				<td align="center">${qna.num }</td>
 				<td align="center">${qna.category }</td>
-				<th><a href="/qna/qnadetails?num=${qna.num }">${qna.title }</a></th>
+				<th><a href="/qna/details/${qna.num }">${qna.title }</a></th>
 				<th>${qna.id }</th>
 				<th>${qna.time }</th>
+			</tr>
 		</c:forEach>
 	</table>
 
 	<div align="right">
 		<c:choose>
-
 			<c:when test="${login == null }">
 				<input type="button" value="질문하기" onclick="javascript:openLogin()">
 				<script>
@@ -79,7 +84,7 @@
 				<b>${u }</b>
 			</c:when>
 			<c:otherwise>
-				<a href="/qna?p=${i }">${i }</a>
+				<a href="/qna/list?mode=${qnamode }&p=${i }">${i }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
