@@ -34,18 +34,7 @@
 			<tbody id="tbody"></tbody>
 		</table>
 		<div align="center">
-			<label id="page">
-<%-- 				<c:forEach var="i" begin="1" end="${size }"> --%>
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${current == i }"> --%>
-<%-- 							<b>${u }</b> --%>
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-<%-- 							<a href="/friends/${id }/">${i }</a> --%>
-	<%-- 					</c:otherwise> --%>
-	<%-- 				</c:choose> --%>
-<%-- 				</c:forEach> --%>
-			</label>
+			<label id="page"></label>
 		</div>
 	</div>
 </div>
