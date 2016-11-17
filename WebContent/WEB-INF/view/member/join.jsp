@@ -54,6 +54,18 @@
 		</div>
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
+				<label for="nickname_s" style="width: 30%"><font size="4">NickName</font></label>
+				<input type="text" id="nickname_s" name="nickname_s" class="form-control"
+					style="width: 35%" placeholder="NickName" />
+			</div>
+			<div class="w3-hide-small w3-hide-medium">
+				<label for="nickname" style="width: 15%"><font size="4">NickName</font></label>
+				<input type="text" id="nickname" name="nickname" class="form-control"
+					style="width: 20%" placeholder="NickName" />
+			</div>
+		</div>
+		<div class="form-group" align="center">
+			<div class="w3-hide-large">
 				<label for="birth_s" style="width: 30%"><font size="4">Birth
 						Day</font></label>
 				<input type="date" id="birth_s" name="birth_s" class="form-control"
@@ -207,11 +219,12 @@
 		var phone = $("#phone");
 		var email = $("#email");
 		var email2 = $("#email2");
-		if(id.val()!="" && name.val()!="" && birth.val()!="" && phone.val()!=""  && email.val()!="" && email2.val()!=""){
+		var nickname = $("#nickname");
+		if(id.val()!="" && name.val()!="" && birth.val()!="" && phone.val()!=""  && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			$("#authPass").prop("hidden", null);
 			$.ajax({
 				"method" : "get",
-				"url" : "/member/emailAuth/"+id.val()+"/"+email.val()+"/"+email2.val()+"/"+name.val()+"/"+birth.val()+"/"+phone.val(),
+				"url" : "/member/emailAuth/"+id.val()+"/"+email.val()+"/"+email2.val()+"/"+name.val()+"/"+birth.val()+"/"+phone.val()+"/"+nickname.val(),
 				"async" : false
 			}).done(function(txt){
 				if(txt==true){
@@ -235,11 +248,12 @@
 		var phone = $("#phone_s");
 		var email = $("#email_s");
 		var email2 = $("#email2_s");
-		if(id.val()!="" && name.val()!="" && birth.val()!="" && phone.val()!=""  && email.val()!="" && email2.val()!=""){
+		var nickname = $("#nickname_s");
+		if(id.val()!="" && name.val()!="" && birth.val()!="" && phone.val()!=""  && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			$("#authPass_s").prop("hidden", null);
 			$.ajax({
 				"method" : "get",
-				"url" : "/member/emailAuth/"+id.val()+"/"+email.val()+"/"+email2.val()+"/"+name.val()+"/"+birth.val()+"/"+phone.val(),
+				"url" : "/member/emailAuth/"+id.val()+"/"+email.val()+"/"+email2.val()+"/"+name.val()+"/"+birth.val()+"/"+phone.val()+"/"+nickname.val(),
 				"async" : false
 			}).done(function(txt){
 				if(txt==true){
@@ -308,12 +322,15 @@
 		var add02 = $("#add02");
 		var email = $("#email");
 		var email2 = $("#email2");
+		var nickname = $("#nickname");
 		var reco = $("#recommender");
-		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val();
+		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+
+						"/"+add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+nickname.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}
-		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" && add02.val()!="" && email.val()!="" && email2.val()!=""){
+		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" &&
+				add02.val()!="" && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			if($("#hidden").val()=="1"){
 				$.ajax({
 					"method" : "get",
@@ -353,12 +370,15 @@
 		var add02 = $("#add02_s");
 		var email = $("#email_s");
 		var email2 = $("#email2_s");
+		var nickname = $("#nickname");
 		var reco = $("#recommender_s");
-		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val();
+		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+
+						"/"+add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+nickname.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}
-		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" && add02.val()!="" && email.val()!="" && email2.val()!=""){
+		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" &&
+				add02.val()!="" && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			if($("#hidden").val()=="1"){
 				$.ajax({
 					"method" : "get",

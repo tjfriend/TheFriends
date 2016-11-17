@@ -13,14 +13,6 @@
 	align="center">
 	<h2 class="w3-padding-64">Join</h2>
 	<form>
-		<!-- <div class="form-group">
-			<div class="w3-hide-large">
-				<label><input type="checkbox" checked="checked" readonly="readonly"/>&nbsp;비공개</label>
-			</div>
-			<div class="w3-hide-small w3-hide-medium">
-				<label><input type="checkbox" checked="checked" readonly="readonly"/>&nbsp;비공개</label>
-			</div>
-		</div> -->
 		<div class="form-group">
 			<div class="w3-hide-large">
 				<label for="join_id_s" style="width: 30%"><font size="4">ID</font></label>
@@ -59,6 +51,18 @@
 				<label for="name" style="width: 15%"><font size="4">Name</font></label>
 				<input type="text" id="name" name="name" class="form-control"
 					style="width: 20%" placeholder="Name" value="${name }" />
+			</div>
+		</div>
+		<div class="form-group" align="center">
+			<div class="w3-hide-large">
+				<label for="nickname_s" style="width: 30%"><font size="4">NickName</font></label>
+				<input type="text" id="nickname_s" name="nickname_s" class="form-control"
+					style="width: 35%" placeholder="NickName" value="${nickname }" />
+			</div>
+			<div class="w3-hide-small w3-hide-medium">
+				<label for="nickname" style="width: 15%"><font size="4">NickName</font></label>
+				<input type="text" id="nickname" name="nickname" class="form-control"
+					style="width: 20%" placeholder="NickName" value="${nickname }" />
 			</div>
 		</div>
 		<div class="form-group" align="center">
@@ -324,14 +328,16 @@
 		var add02 = $("#add02");
 		var email = $("#email");
 		var email2 = $("#email2");
+		var nickname = $("#nickname");
 		var reco = $("#recommender");
 		var authPass = $("#authPass");
 		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+
-							add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+authPass.val();
+							add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+nickname.val()+"/"+authPass.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}
-		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" && add02.val()!="" && email.val()!="" && email2.val()!=""){
+		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" &&
+				add02.val()!="" && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			if($("#hidden").val()=="1"){
 				$.ajax({
 					"method" : "get",
@@ -371,14 +377,16 @@
 		var add02 = $("#add02_s");
 		var email = $("#email_s");
 		var email2 = $("#email2_s");
+		var nickname = $("#nickname");
 		var reco = $("#recommender_s");
 		var authPass = $("#authPass_s");
 		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+
-							add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+authPass.val();
+							add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+nickname.val()+"/"+authPass.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}
-		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" && add02.val()!="" && email.val()!="" && email2.val()!=""){
+		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" &&
+				add02.val()!="" && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			if($("#hidden").val()=="1"){
 				$.ajax({
 					"method" : "get",
