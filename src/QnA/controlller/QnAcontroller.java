@@ -59,7 +59,6 @@ public class QnAcontroller {
 			mav.addObject("qnadata", lis);
 			mav.addObject("qnasize", size);
 			mav.addObject("qnamode", mode);
-
 			mav.setViewName("t:qna/qna");
 			return mav;
 		}

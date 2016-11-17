@@ -15,7 +15,7 @@ public class EmailAuthService {
 	@Autowired
 	JavaMailSender jms;
 	
-	public boolean sendEmail(String id, String email, String email2, String name, String birth, String phone, HttpSession session){
+	public boolean sendEmail(String id, String email, String email2, String name, String birth, String phone, String nickname, HttpSession session){
 		try{
 			MimeMessage message = jms.createMimeMessage();
 			String ranKey = UUID.randomUUID().toString().substring(0, 8);
@@ -24,7 +24,7 @@ public class EmailAuthService {
 			String text = "<h3>이메일 인증 메일</h3>";
 			text += "이메일 인증을 하려면 아래 링크를 연결해주세요.<br/>";
 			text += "<input type='text' value="+ranKey+" readonly='readonly'/><br/>";
-			text += "<i><a href='http://127.0.0.1/joinAuth/"+id+"/"+email+"/"+email2+"/"+name+"/"+birth+"/"+phone+"/"+ranKey+"'>인증하러가기</a></i>";
+			text += "<i><a href='http://127.0.0.1/joinAuth/"+id+"/"+email+"/"+email2+"/"+name+"/"+birth+"/"+phone+"/"+nickname+"/"+ranKey+"'>인증하러가기</a></i>";
 			message.setText(text, "utf-8", "html");
 			jms.send(message);
 			

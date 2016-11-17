@@ -85,20 +85,9 @@ body, h1, h2, h3, h4, h5 {
 			var captionText = document.getElementById("caption");
 			captionText.innerHTML = element.alt;
 		}
-
-		function onClickHome(id) {
-			$
-					.ajax({
-						"method" : "get",
-						"url" : "/homepage/myhome/" + id,
-						"async" : false
-					})
-					.done(
-							function(txt) {
-								window
-										.open("/homepage/" + txt, "myHome",
-												"width=1200, height=800, left=300, top=100, resizable=no");
-							});
+		
+		function onClickHome(id){
+			window.open("/homepage/"+id, "myHome", "width=1200, height=800, left=300, top=100, resizable=no");
 		}
 	</script>
 </body>
