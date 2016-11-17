@@ -4,7 +4,6 @@
 
 <h2>충전내역</h2>
 <c:forEach var="i" begin="1" end="${size }">
-
 	<a href="/charge/chargeAll?p=${i }">${i }</a>
 </c:forEach>
 

@@ -14,7 +14,8 @@
 	</select>
 	
 	<input type="text" name="con" id="con" > 
-	<input type="button" value="검색하기" id="search"/>
+	<input type="button" value="검색하기" id="search"/> 
+	<input type="button" value="친구추가하기" id="addfriend"/>
 	<br/>
 	<span id="span"></span> 
 </div>

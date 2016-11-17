@@ -61,17 +61,17 @@
 		우리 1111-1111-1111-1111 <br/>
 		신한 1111-1111-1111-1111 <br/>
 		농협 1111-1111-1111-1111 <br/>
-		은행선택 
-		<select id="scash">
-			<option>선택해주세요</option>
-			<option>국민</option>
-			<option>우리</option>
-			<option>신한</option>
-			<option>농협</option>
-		</select>
-		<br/> 
 		입금자명 <input type="text" id="name" size="7" maxlength="5"/>
 		<br />
+		휴대폰 
+		<select>
+			<option>010</option>
+			<option>011</option>
+			<option>016</option>
+			<option>017</option>
+			<option>019</option>
+		</select> 
+		- <input type="text" size="4" id="ph1"/> - <input type="text" size="4" id="ph2"/>
 	</div>
 
  	<input type="button" value="충전하기" id="cc" />
@@ -96,7 +96,7 @@
 	<hr/>
 	
 	<input type="button" value="충전내역" onclick="javascript:location.href='/charge/chargeAll'" />
-	<input type="button" value="사용내역" onclick="javascript:location.href='charge/use'" />
+	<input type="button" value="사용내역" onclick="javascript:location.href='/charge/use'" />
 </div>
 
 <script>
@@ -132,7 +132,8 @@
 				$("#cc").disabled();				
 			}
 		}else if($("#cash").prop("checked")){
-			if($("#point").val() == "" || $("#name").val() == "" || $("#scash").prop("value") == "선택해주세요"){
+			if($("#point").val() == "" || $("#name").val() == "" || $("#scash").prop("value") == "선택해주세요"
+					|| $("#ph1").val() == "" || $("#ph2").val() == ""){
 				$("#cc").disabled();
 			}
 		}else if(!$("#card").prop("checked") || !$("#cash").prop("checked")){
