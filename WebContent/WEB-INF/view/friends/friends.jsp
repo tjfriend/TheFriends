@@ -11,7 +11,7 @@
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">Friends</h2>
-<div class="w3-row" style="margin-top: 50px; padding: 50px">
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 20px">
 	<div class="table-responsive">
 		<div align="right">
 			<select id="range">

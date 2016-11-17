@@ -15,7 +15,7 @@ public class JoinService {
 	SqlSessionFactory fac;
 	
 	public boolean join(String id, String password, String name, String birth, String phone, String add01, String add02, String email, String email2, @RequestParam(required=false) String recommender,
-									String key, HttpSession session){
+									String nickname, String key, HttpSession session){
 		SqlSession ss = fac.openSession();
 		HashMap<String, String> memberMap = new HashMap<>();
 		memberMap.put("id", id);
@@ -25,6 +25,7 @@ public class JoinService {
 		memberMap.put("phone", phone);
 		memberMap.put("address", add01+add02);
 		memberMap.put("email", email+"@"+email2);
+		memberMap.put("nickname", nickname);
 		memberMap.put("recommender", recommender);
 		
 		HashMap<String, String> emailMap = new HashMap<>();
