@@ -28,11 +28,11 @@
 	<br />
 	 
 	→ 결제수단  &nbsp;
-	<label><input type="radio" name="card" value="card" id="card" /> 카드</label> 
+	<label><input type="radio" name="card" value="card" id="card"  /> 카드</label> 
 	<label><input type="radio" name="card" value="cash" id="cash" /> 무통장 입금 </label> 
 	<br />
 
-	<div id="cardctg" style="display: none">
+	<div id="cardctg" >
 		카드선택
 		<select>
 			<option>선택해주세요</option> 
@@ -43,14 +43,14 @@
 			<option>삼성</option>
 		</select>
 		<br />
-		카드번호 <input type="text" name="card" size="4" maxlength="4" />
-		- <input type="text" name="card" size="4" maxlength="4" /> - <input
-			type="text" name="card" size="4" maxlength="4" /> - <input
-			type="text" name="card" size="4" maxlength="4" /><br /> 유효기간 <input
-			type="text" size="2" placeholder="년" maxlength="2" /> / <input
-			type="text" size="2" placeholder="월" maxlength="2" /> <br /> 카드
-		비밀번호 <input type="password" size="4" maxlength="4" /> <br /> cvc <input
-			type="password" size="4" maxlength="3" /> <br />
+		카드번호 <input type="text" name="card" size="4" maxlength="4" id="c1" />
+		- <input type="text" name="card" size="4" maxlength="4" id="c2"/> - <input
+			type="text" name="card" size="4" maxlength="4" id="c3"/> - <input
+			type="text" name="card" size="4" maxlength="4" id="c4"/><br /> 유효기간 <input
+			type="text" size="2" placeholder="년" maxlength="2" id="c5" /> / <input
+			type="text" size="2" placeholder="월" maxlength="2" id="c6"/> <br /> 카드
+		비밀번호 <input type="password" size="4" maxlength="4" id="c7"/> <br /> cvc <input
+			type="password" size="4" maxlength="3" id="c8"/> <br />
 	</div>
 
 	<div id="cashctg" style="display: none">
@@ -91,17 +91,18 @@
 	</span>
 
 	<div id="d1">
-		<span id="s4" style="display: none"> <input type="text"
-			size="6" /> - <input type="text" size="6" />
-		</span> <span id="s5" style="display: none"> <input type="text"
-			size="4" /> - <input type="text" size="4" /> - <input type="text"
-			size="4" /> - <input type="text" size="6" />
+		<span id="s4" style="display: none">
+		 <input type="text"	size="6" /> - <input type="text" size="6" />
+		</span>
+		<span id="s5" style="display: none"> 
+		<input type="text" size="4" /> - <input type="text" size="4" /> 
+		- <input type="text" size="4" /> - <input type="text" size="6" />
 		</span>
 	</div>
 
-	<span id="s6" style="display: none"> 사업자 등록번호 <input type="text"
-		size="3" /> - <input type="text" size="2" /> - <input type="text"
-		size="4" />
+	<span id="s6" style="display: none"> 
+	사업자 등록번호 <input type="text" size="3" /> 
+	- <input type="text" size="2" /> - <input type="text" size="4" />
 	</span>
 
 	<br />
@@ -143,7 +144,7 @@
 	});
 	
 	// 결제수단 선택
-	$("#card").click(function() {
+	$("#card").checked(function() {
 		$("#cardctg").show();
 		$("#cashctg").hide();
 		$("#s6").hide();
@@ -167,9 +168,10 @@
 	
 	$("#p2").click(function() {
 		$("#s2").show();
+		$("#s6").hide();
 	});
 	
-	$("#se").click(function() {
+	$("#se").change(function() {
 		if ($("#se").val() == "휴대폰번호") {
 			$("#s3").show();
 			$("#s4").hide();
@@ -192,12 +194,22 @@
 		$("#s6").show();
 		$("#s2").hide();
 		$("#d1").hide();
+		$("#s3").hide();
 	});
 	
 	// 충전하기 결과
 	$("#cc").click(function(){
+		if($("#card").prop("checked")) {
+			if($("#c1").val() == "" || $("#c2").val() == "" || $("#c3").val() == "" || $("#c4").val() == "" ||
+					$("#c5").val() == "" || $("#c6").val() == "" || $("#c7").val() == "" || $("#c8").val() == ""){
+				$("#cc").disabled();				
+			} 
+		}else{
+			
+		}
 		var take = $("#take").val();
 		var point = $("#point").val();
+		
 		$.ajax({
 			"method" : "get",
 			"url" : "/charge/cash?take="+take+"&point="+point
@@ -233,6 +245,5 @@
 			}
 		})
 	});
-
 
 </script>

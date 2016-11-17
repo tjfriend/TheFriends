@@ -37,7 +37,7 @@ public class ChargeController {
 		if(take.equals("³ª¿¡°Ô")){
 			a = charge.charge((String)id.getAttribute("id"), p);
 		}else{
-			a = use.gift((String)id.getAttribute("id"), take, p);
+			a = use.cash((String)id.getAttribute("id"), take, p);
 		}
 		if(a==1){
 			return "true";
