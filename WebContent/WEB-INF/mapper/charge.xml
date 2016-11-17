@@ -10,6 +10,11 @@
 		insert into charge values(charge_seq.nextval, #{id}, null, #{point}, sysdate)
 	</insert>
 	
+	<!-- 결제로 선물 -->
+	<insert id="chgift" parameterType="java.util.HashMap">
+		insert into charge values(charge_seq.nextval, #{id}, #{take}, #{point}, sysdate)
+	</insert>
+	
 	<!-- 선물하기 -/+ -->
 	<update id="gift1" parameterType="java.util.HashMap">
 		update member set point=point-#{point} where id=#{id}

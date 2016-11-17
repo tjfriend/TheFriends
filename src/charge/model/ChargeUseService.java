@@ -13,7 +13,35 @@ public class ChargeUseService {
 	@Autowired
 	SqlSessionFactory fac;
 
-	// 선물하기
+	
+	// 결제해서 선물하기
+	public int cash(String id, String take, int point){
+		SqlSession ss = fac.openSession();
+		HashMap map = new HashMap<>();
+		map.put("id", take);
+		map.put("point", point);
+		map.put("take",id);
+		int a = ss.update("charge.chargeUp",map);
+		if(a==1){
+			try{
+				ss.insert("charge.chgift",map);
+				ss.commit();
+				ss.close();
+				return 1;
+			}catch(Exception e){
+				e.printStackTrace();
+				ss.rollback();
+				ss.close();
+				return 0;
+			}
+		}else{
+			return 0;
+		}
+	}
+	
+	
+	
+	// 내포인트 선물하기
 	public int gift(String id, String take, int point) {
 		SqlSession ss = fac.openSession();
 
