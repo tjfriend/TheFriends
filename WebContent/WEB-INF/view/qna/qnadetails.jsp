@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h1>QnA 상세 보기</h1>
 
-<div>
+<div style="overflow: auto;">
 	<table class="table">
 		<tr>
 			<th align="center" width="10%">${details.NUM }</th>
@@ -22,17 +22,8 @@
 		</table>
 		<hr />
 	</div>
-
-
-
-
 	<div>
 		<table class="table">
-			<tr>
-				<td>ㄴㅇㅁㄴㅇ</td>
-				<th>${qnacommentdata }</th>
-				<th>123123</th>
-			</tr>
 			<c:forEach var="qcm" items="${qnacommentdata }">
 				<tr>
 					<th>${qcm.ID }</th>
@@ -44,13 +35,33 @@
 			</c:forEach>
 		</table>
 	</div>
+	<!--  	댓글 -->
+	<div>
+		<table class="table">
+			<c:forEach var="qnac" items="${qnacommentda }">
+				<tr>
+					<th>${qnac.id }</th>
+					<td>${qnac.day }</td>
+				</tr>
+				<tr>
+					<td>${qnac.memo }</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<c:forEach var="p" begin="1" end="${qnacommentsi }">
+			<c:choose>
+				<c:when test="${current == p }">
+					<b>${u }</b>
+				</c:when>
+				<c:otherwise>
+					<a href="/qna/details/${details.NUM }?p=${p }">${p }</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+	</div>
 	
-	<form action="/qna/commenetlist">
-		<input type="hidden" name="num" value="${details.NUM }">
-		<input type="submit" value="보기">
-	</form>
-
-
+	
 	<!-- 로그인시 댓글등록창이 보이게 한다 -->
 	<div>
 		<c:choose>
@@ -59,25 +70,15 @@
 			<c:otherwise>
 				<form action="/qna/qnacomment">
 					<input type="hidden" name="num" value="${details.NUM }">
+					<input type="hidden" name="endpa" value="${qnacommentsi }">
 					<div style="float: left; margin-right: 10">
 						<textarea rows="5" cols="80" style="resize: vertical;" name="memo"> </textarea>
 					</div>
 					<div style="float: left; left:">
-						<input style="width: 80; height: 100;" type="submit" value="등록">
+						<input style="width: 80px; height: 106px;" type="submit" value="등록">
 					</div>
 				</form>
 			</c:otherwise>
 		</c:choose>
 	</div>
-	
-	<c:forEach var="i" begin="1" end="${qnacommentsize }">
-		<c:choose>
-			<c:when test="${current == i }">
-				<b>${u }</b>
-			</c:when>
-			<c:otherwise>
-				<a href="/qna/list?mode=${qnamode }&p=${i }">${i }</a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
 </div>
