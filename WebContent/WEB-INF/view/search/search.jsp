@@ -28,6 +28,6 @@
 	
 	function addFriend(element){
 		var friend = element.id;
-		window.open("/search/addfriend?friend="+friend, "addfriend", "width=400, height=400, left=600, top=200, resizable=no");
+		window.open("/search/addfriend?friend="+friend, "addfriend", "width=300, height=200, left=600, top=200, resizable=no");
 	}
 </script>

@@ -16,20 +16,11 @@ public class SearchFriendService {
 
 	public List search(String find,String con) {
 		SqlSession ss = fac.openSession();
+		HashMap m = new HashMap<>();
 		List map = new Vector<>();
-		switch (find) {
-		case "id":
-			map = ss.selectList("searchfriend.searchId", "%"+con+"%");
-			break;
-		case "name":
-			map = ss.selectList("searchfriend.searchName", "%"+con+"%");
-			break;
-		case "address":
-			map = ss.selectList("searchfriend.searchAdd", "%"+con+"%");
-			break;
-		default:
-			map = ss.selectList("searchfriend.searchPhone","%"+con+"%");
-		}
+		m.put("ctg", find);
+		m.put("ctg2", "%"+con+"%");
+		map = ss.selectList("searchfriend.search",m);
 		ss.close();
 		return map;
 	}

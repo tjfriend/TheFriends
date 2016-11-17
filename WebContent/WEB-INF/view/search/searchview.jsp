@@ -3,8 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+<c:forEach var="i" begin="1" end="${size }">
+	<a href="/search/${find }/${con }?p=${i }">${i }</a>
+</c:forEach>
+
 <c:choose>
-	<c:when test="${map != null }">
+	<c:when test="${li != null }">
 		<table class="table">
 			<tr></tr>
 			<tr>
@@ -15,7 +19,7 @@
 				<td>주소</td>
 				<td>친구추가</td>
 			</tr>
-			<c:forEach items="${map }" var="i">
+			<c:forEach items="${li }" var="i">
 				<tr>
 					<td id="friendId">${i.ID }</td>
 					<td>${i.NAME }</td>
