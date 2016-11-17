@@ -14,7 +14,7 @@
 <div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 20px">
 	<div class="table-responsive">
 		<div align="right">
-			<select id="range">
+			<select id="range" style="width: 8%; height: 33px; border: 1px solid #ccc; border-radius: 5px">
 					<option>이름순</option>
 					<option>방문자순</option>
 					<option>거리순</option>
@@ -35,6 +35,16 @@
 		</table>
 		<div align="center">
 			<label id="page"></label>
+		</div>
+		<div align="center" style="border-radius: 5px">
+			<select style="width: 8%; height: 33px; border: 1px solid #ccc; border-radius: 5px" id="selSearch">
+				<option>이름</option>
+				<option>닉네임</option>
+			</select>&nbsp;&nbsp;
+			<input type="text" id="search" name="search"
+					style="width: 10%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
+					placeholder="Search" />&nbsp;&nbsp;
+			<input type="button" class="btn btn-default" value="검색" style="width: 8%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
 		</div>
 	</div>
 </div>
