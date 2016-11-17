@@ -19,8 +19,8 @@
 					<td><label>#</label></td>
 					<td><label>Title</label></td>
 					<td><label>Writer</label></td>
-					<td><label>Count</label></td>
 					<td><label>Date</label></td>
+					<td><label>Count</label></td>
 				</tr>
 			</thead>
 			<tbody id="tbody" align="center">
@@ -29,8 +29,8 @@
 						<td align="center">${notice.num }</td>
 						<td>${notice.title }</td>
 						<td>${notice.id }</td>
-						<td>0</td>
 						<td>${notice.time }</td>
+						<td>0</td>
 					</tr>
 				</c:forEach>
 			</tbody>
