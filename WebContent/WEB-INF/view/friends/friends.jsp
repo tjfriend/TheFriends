@@ -34,18 +34,7 @@
 			<tbody id="tbody"></tbody>
 		</table>
 		<div align="center">
-			<label id="page">
-<%-- 				<c:forEach var="i" begin="1" end="${size }"> --%>
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${current == i }"> --%>
-<%-- 							<b>${u }</b> --%>
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-<%-- 							<a href="/friends/${id }/">${i }</a> --%>
-	<%-- 					</c:otherwise> --%>
-	<%-- 				</c:choose> --%>
-<%-- 				</c:forEach> --%>
-			</label>
+			<label id="page"></label>
 		</div>
 	</div>
 </div>
@@ -59,7 +48,7 @@
 		}).done(function(txt){
 			var html = "";
 			for(var i=0; i<txt.length; i++){
-				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><font color='blue'><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></font></td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
@@ -80,7 +69,7 @@
 		}).done(function(txt){
 			var html = "";
 			for(var i=0; i<txt.length; i++){
-				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><font color='blue'><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></font></td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
@@ -107,7 +96,7 @@
 		}).done(function(txt){
 			var html = "";
 			for(var i=0; i<txt.length; i++){
-				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><font color='blue'><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></font></td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
