@@ -13,7 +13,35 @@ public class ChargeUseService {
 	@Autowired
 	SqlSessionFactory fac;
 
-	// 선물하기
+	
+	// 결제해서 선물하기
+	public int cash(String id, String take, int point){
+		SqlSession ss = fac.openSession();
+		HashMap map = new HashMap<>();
+		map.put("id", take);
+		map.put("point", point);
+		map.put("take",id);
+		int a = ss.update("charge.chargeUp",map);
+		if(a==1){
+			try{
+				ss.insert("charge.chgift",map);
+				ss.commit();
+				ss.close();
+				return 1;
+			}catch(Exception e){
+				e.printStackTrace();
+				ss.rollback();
+				ss.close();
+				return 0;
+			}
+		}else{
+			return 0;
+		}
+	}
+	
+	
+	
+	// 내포인트 선물하기
 	public int gift(String id, String take, int point) {
 		SqlSession ss = fac.openSession();
 
@@ -55,8 +83,8 @@ public class ChargeUseService {
 	public List page(int p){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
-		map.put("start", (p-1)*5+1);
-		map.put("end", p*5);
+		map.put("start", (p*10)-9);
+		map.put("end", p*10);
 		List li = ss.selectList("charge.page2",map);
 		ss.close();
 		return li;
@@ -67,7 +95,7 @@ public class ChargeUseService {
 		SqlSession ss = fac.openSession();
 		int a = ss.selectOne("charge.total2");
 		ss.close();
-		return a%5==0? a/5 : a/5+1;
+		return a%10==0? a/10 : a/10+1;
 	}
 	
 }

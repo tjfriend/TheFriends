@@ -34,10 +34,10 @@ public class MainController {
 		return mav;
 	}
 	
-	@RequestMapping("/joinAuth/{id}/{email}/{email2}/{name}/{birth}/{phone}/{key}")
+	@RequestMapping("/joinAuth/{id}/{email}/{email2}/{name}/{birth}/{phone}/{nickname}/{key}")
 	public ModelAndView joinAuth(@PathVariable(name="id")String id, @PathVariable(name="email")String email, @PathVariable(name="email2")String email2,
 													@PathVariable(name="name")String name, @PathVariable(name="birth")String birth, @PathVariable(name="phone")String phone,
-													@PathVariable(name="key")String key) {
+													@PathVariable(name="nickname")String nickname, @PathVariable(name="key")String key) {
 		ModelAndView mav = new ModelAndView("t:member/joinAuth");
 		mav.addObject("id", id);
 		mav.addObject("email", email);
@@ -45,6 +45,7 @@ public class MainController {
 		mav.addObject("name", name);
 		mav.addObject("birth", birth);
 		mav.addObject("phone", phone);
+		mav.addObject("nickname", nickname);
 		mav.addObject("key", key);
 		return mav;
 	}

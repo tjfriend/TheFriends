@@ -59,7 +59,6 @@ public class QnAcontroller {
 			mav.addObject("qnadata", lis);
 			mav.addObject("qnasize", size);
 			mav.addObject("qnamode", mode);
-
 			mav.setViewName("t:qna/qna");
 			return mav;
 		}
@@ -86,42 +85,32 @@ public class QnAcontroller {
 	}
 
 	@RequestMapping("/details/{num}")
-	public ModelAndView detailsqna(@PathVariable(name = "num") int num) {
+	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p) {
 		HashMap map = new HashMap();
 		map.put("num", num);
+		List list = qp.Getcommentpage(p, num);
+		int sizecom = qp.commentsize(num);
 		SqlSession sql = fac.openSession();
 		HashMap data = sql.selectOne("qna.qnadetails", map);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("details", data);
+		mav.addObject("qnacommentda",list);
+		mav.addObject("qnacommentsi",sizecom);
 		mav.setViewName("t:qna/qnadetails");
 		return mav;
 	}
 
 	
-	@RequestMapping("/commenetlist")
-	public ModelAndView commentlist(@RequestParam (defaultValue = "1") int p,@RequestParam(defaultValue = "61")int num){
-		ModelAndView mav = new ModelAndView();
-		List list = qp.Getcommentpage(p, num);
-		int sizecom = qp.commentsize();
-		System.out.println("123123"+sizecom+"2");	
-		mav.addObject("qnacommentdata", list);
-		mav.addObject("qnacommentsize", sizecom);
-		mav.setViewName("t:qna/commenttest");
-		System.out.println(mav+"list");
-		return mav;
-		
-	}
+	
 
 	
 	@RequestMapping("/qnacomment")
-	public ModelAndView qnacomment(int num, HttpSession session, String memo) {
+	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int endpa) {
 		String id = (String) session.getAttribute("id");
-		System.out.println(num+"//"+id+"//"+memo);
 		int r = qw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/qna/details/"+num);
+		mav.setViewName("redirect:/qna/details/"+num+"?p="+endpa);
 		return mav;
-
 	}
 	
 	

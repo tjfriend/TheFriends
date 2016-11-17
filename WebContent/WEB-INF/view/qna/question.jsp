@@ -14,8 +14,8 @@
 			<option value="기타">기타</option>	
 			</select>
 	
-	제목 :&nbsp; <input type="text" name="title"> <br /> 내용 :&nbsp;
-	<textarea rows="5" cols="5" name="content"></textarea>
+	제목 :&nbsp; <input type="text" name="title" required="required"> <br /> 내용 :&nbsp;
+	<textarea rows="5" cols="5" name="content" required="required"></textarea>
 	<br /> 
 
 	<input
