@@ -63,13 +63,13 @@
 			<option>농협</option>
 		</select>
 		<br />
-		현금영수증 <input type="radio" name="receipt" id="receipt" />
-		신청하기 <input type="radio" name="receipt" id="receipt2" /> 
-		신청안함 
+		현금영수증 <label><input type="radio" name="receipt" id="receipt" />신청하기</label>
+		<label><input type="radio" name="receipt" id="receipt2" />신청안함</label>
+		 
 		<br />
-		<span id="span" style="display: none"> <input type="radio"
-			name="c" value="p" id="p2" /> 개인소득공제용 <input type="radio" name="c"
-			value="c" id="c2" /> 사업자증빙용
+		<span id="span" style="display: none"> 
+		<label></label><input type="radio" name="c" value="p" id="p2" /> 개인소득공제용
+		<input type="radio" name="c" value="c" id="c2" /> 사업자증빙용
 		</span>
 	</div>
 
