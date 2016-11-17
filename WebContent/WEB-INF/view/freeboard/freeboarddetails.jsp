@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h1>Talk & Talk</h1> <br/> <br/> <br/>
+<div align="right">
+	<input type="button" value="목록보기" onclick="location.href='/board/list'"/>
+	<input type="button" value="수정" onclick="location.href='/board/freeboardupdate?num=${freeboarddetailsdata[0].NUM}'"/>
+</div>
 <div style="margin: 0px;">
 	<table class="table" style="margin: 0px;">
 		<tr align="center">
@@ -22,7 +26,7 @@
 		</c:forEach>
 	</table>
 </div>
-<div align="center">
+<div align="center" >
 	<table class="table">
 		<c:forEach var="fbd" items="${freeboarddetailsdata }">
 			<tr>
@@ -30,8 +34,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<input type="button" value="수정" onclick="location.href='/board/freeboardupdate?num=${freeboarddetailsdata[0].NUM}'"/>
+	
 </div>
-
-
-

@@ -11,7 +11,7 @@
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">Notice</h2>
-<div class="w3-row" style="margin-top: 50px; padding: 50px">
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive">
 		<table class="table">
 			<thead align="center">
@@ -48,7 +48,9 @@
 					</c:choose>
 				</c:forEach>
 			</label>
-			<input type="button" value="글작성" onclick="noticeWrite()"/>
+			<div align="right">
+				<input type="button" value="글작성" class="btn btn-default" onclick="noticeWrite()"/>
+			</div>
 		</div>
 	</div>
 </div>
