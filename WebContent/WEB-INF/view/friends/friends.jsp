@@ -11,27 +11,27 @@
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">Friends</h2>
-<div class="w3-row" style="margin-top: 50px">
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive">
 		<table class="table">
-			<thead>
+			<thead align="center">
 				<tr>
-					<th>#</th>
-					<th>Name</th>
-					<th>Birth Day</th>
-					<th>NickName</th>
-					<th>Distance(m)</th>
-					<th>Visitors</th>
-					<th width="10%">
+					<td><label>#</label></td>
+					<td><label>Name</label></td>
+					<td><label>Birth Day</label></td>
+					<td><label>NickName</label></td>
+					<td><label>Distance(m)</label></td>
+					<td><label>Visitors</label></td>
+					<td width="10%">
 						<select id="range">
 							<option>이름순</option>
 							<option>방문자순</option>
 							<option>거리순</option>
 						</select>
-					</th>
+					</td>
 				</tr>
 			</thead>
-			<tbody id="tbody"></tbody>
+			<tbody id="tbody" align="center"></tbody>
 		</table>
 		<div align="center">
 			<label id="page"></label>
