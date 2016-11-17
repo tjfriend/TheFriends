@@ -11,17 +11,19 @@
 		<tr align="center">
 			<th style="text-align: center;" width="5%">번호</th>
 			<th style="text-align: center;" width="20%">카테고리</th>
-			<th style="text-align: center;" width="35%">제목</th>
+			<th style="text-align: center;" width="25%">제목</th>
 			<th style="text-align: center;" width="20%">아이디</th>
 			<th style="text-align: center;" width="20%">작성일자</th>
+			<th style="text-align: center;" width="10%">조회수</th>
 		</tr>
 		<c:forEach var="fbd" items="${freeboarddetailsdata }">
 			<tr align="center">
 				<td align="center" width="5%">${fbd.NUM }</td>
 				<td width="20%">${fbd.CATEGORY }</td>
-				<td width="35%">${fbd.TITLE }</td>
+				<td width="25%">${fbd.TITLE }</td>
 				<td width="20%">${fbd.ID }</td>
 				<td width="20%">${fbd.TIME }</td>
+				<td width="10%">${fbd.INQUIRY }</td>
 			</tr>
 		</c:forEach>
 	</table>
