@@ -18,7 +18,7 @@ public class FriendsController {
 	public ModelAndView friends(@PathVariable(name="id")String id, @RequestParam(defaultValue="1", name="page")int p){
 		ModelAndView mav = new ModelAndView("t:friends/friends");
 		mav.addObject("list", fs.friends(id, p));
-		mav.addObject("size", fs.size());
+		mav.addObject("size", fs.size(id));
 		return mav;
 	}
 	

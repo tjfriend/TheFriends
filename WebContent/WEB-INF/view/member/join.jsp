@@ -13,14 +13,6 @@
 	align="center">
 	<h2 class="w3-padding-64">Join</h2>
 	<form>
-		<!-- <div class="form-group">
-			<div class="w3-hide-large">
-				<label><input type="checkbox" checked="checked" readonly="readonly"/>&nbsp;비공개</label>
-			</div>
-			<div class="w3-hide-small w3-hide-medium">
-				<label><input type="checkbox" checked="checked" readonly="readonly"/>&nbsp;비공개</label>
-			</div>
-		</div> -->
 		<div class="form-group">
 			<div class="w3-hide-large">
 				<label for="join_id_s" style="width: 30%"><font size="4">ID</font></label>
@@ -64,14 +56,12 @@
 			<div class="w3-hide-large">
 				<label for="birth_s" style="width: 30%"><font size="4">Birth
 						Day</font></label>
-				<!-- 				<label><input type="checkbox" id="bdCheck_s"/></label><br/> -->
 				<input type="date" id="birth_s" name="birth_s" class="form-control"
 					style="width: 45%" placeholder="yyyymmdd" />
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label for="birth" style="width: 15%"><font size="4">Birth
 						Day</font></label>
-				<!-- 				<label><input type="checkbox" id="bdCheck"/></label><br/> -->
 				<input type="date" id="birth" name="birth" class="form-control"
 					style="width: 20%" placeholder="yyyymmdd" />
 			</div>
@@ -79,13 +69,11 @@
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="phone_s" style="width: 30%"><font size="4">Phone</font></label>
-				<!-- 				<label><input type="checkbox" id="phoneCheck_s"/></label><br/> -->
 				<input type="text" id="phone_s" name="phone_s" class="form-control"
 					style="width: 45%" placeholder="01012345678" />
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label for="phone" style="width: 15%"><font size="4">Phone</font></label>
-				<!-- 				<label><input type="checkbox" id="phoneCheck"/></label><br/> -->
 				<input type="text" id="phone" name="phone" class="form-control"
 					style="width: 20%" placeholder="01012345678" />
 			</div>
@@ -93,7 +81,6 @@
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="email_s" style="width: 30%"><font size="4">Email</font></label><br />
-				<!-- 				<label><input type="checkbox" id="mailCheck_s"/></label><br/> -->
 				<input type="text" id="email_s" name="email_s"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					placeholder="Email" /> <label>@</label> <input type="text"
@@ -144,7 +131,6 @@
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="address_s" style="width: 30%"><font size="4">Address</font></label><br />
-				<!-- 				<label><input type="checkbox" id="addrCheck_s"/></label><br/> -->
 				<input type="text" id="post_s" name="post_s"
 					style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Post Number" /> <input
@@ -159,7 +145,6 @@
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
 				<label for="address" style="width: 15%"><font size="4">Address</font></label><br />
-				<!-- 				<label><input type="checkbox" id="addrCheck"/></label><br/> -->
 				<input type="text" id="post" name="post"
 					style="width: 10%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Post Number" /> <input
