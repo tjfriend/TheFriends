@@ -85,7 +85,9 @@ body, h1, h2, h3, h4, h5 {
 			var captionText = document.getElementById("caption");
 			captionText.innerHTML = element.alt;
 		}
+		
 		function onClickHome(id){
+<<<<<<< HEAD
 // 			$.ajax({
 // 				"method" : "get",
 // 				"url" : "/homepage/"+id,
@@ -93,6 +95,9 @@ body, h1, h2, h3, h4, h5 {
 // 			}).done(function(txt){
 				window.open("/homepage/"+id, "myHome", "width=1200, height=800, left=300, top=100, resizable=no");
 // 			});
+=======
+			window.open("/homepage/"+id, "myHome", "width=1200, height=800, left=300, top=100, resizable=no");
+>>>>>>> branch 'master' of https://github.com/tjfriend/TheFriends.git
 		}
 	</script>
 </body>
