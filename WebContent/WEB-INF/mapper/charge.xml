@@ -10,6 +10,11 @@
 		insert into charge values(charge_seq.nextval, #{id}, null, #{point}, sysdate)
 	</insert>
 	
+	<!-- 결제로 선물 -->
+	<insert id="chgift" parameterType="java.util.HashMap">
+		insert into charge values(charge_seq.nextval, #{id}, #{take}, #{point}, sysdate)
+	</insert>
+	
 	<!-- 선물하기 -/+ -->
 	<update id="gift1" parameterType="java.util.HashMap">
 		update member set point=point-#{point} where id=#{id}
@@ -37,7 +42,7 @@
 	<!-- 충전내역 페이지 -->
 	<select id="page" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
-			select temp.* from (select rownum rnum, r.* from charge r order by num desc) temp 
+			select temp.* from (select rownum rnum, r.* from charge r order by chargedate desc) temp 
 			where temp.rnum >= #{start} and temp.rnum <= #{end} 
 		]]>
 	</select>
@@ -50,7 +55,7 @@
 	<!-- 사용내역 페이지 -->
 	<select id="page2" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
-			select temp.* from (select rownum rnum, r.* from chargeuse r order by num desc) temp 
+			select temp.* from (select rownum rnum, r.* from chargeuse r order by usedate desc) temp 
 			where temp.rnum >= #{start} and temp.rnum <= #{end} 
 		]]>
 	</select>

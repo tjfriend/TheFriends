@@ -11,10 +11,17 @@ public class HomepageService {
 	@Autowired
 	SqlSessionFactory fac;
 	
-	public String myHome(String id){
+	public HashMap myHome(String name){
 		SqlSession ss = fac.openSession();
-		List<HashMap> list = ss.selectList("homepage.myhome", id);
+		List<HashMap> list = ss.selectList("homepage.myhome", name);
 		ss.close();
-		return (String) list.get(0).get("ADDRESS");
+		return list.get(0);
+	}
+	
+	public HashMap goHome(String id){
+		SqlSession ss = fac.openSession();
+		List<HashMap> list = ss.selectList("homepage.gohome", id);
+		ss.close();
+		return list.get(0);
 	}
 }

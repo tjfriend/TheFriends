@@ -27,12 +27,17 @@ public class ChargeController {
 	@RequestMapping("/cash")
 	@ResponseBody
 	public String charge(HttpSession id, String take, String point){
-		int p = Integer.parseInt(point.substring(0, point.length()-1));
+		int p ;
+		if(point.lastIndexOf("원")==point.length()-1){
+			p = Integer.parseInt(point.substring(0, point.length()-1));
+		}else{
+			p = Integer.parseInt(point);
+		}
 		int a = 0;
 		if(take.equals("나에게")){
 			a = charge.charge((String)id.getAttribute("id"), p);
 		}else{
-			a = use.gift((String)id.getAttribute("id"), take, p);
+			a = use.cash((String)id.getAttribute("id"), take, p);
 		}
 		if(a==1){
 			return "true";
@@ -47,7 +52,7 @@ public class ChargeController {
 		List li = charge.chargeAll((String)id.getAttribute("id"));
 		List li2 = charge.page(p);
 		int size = charge.total();
-		if(li!=null){
+		if(li.size()!=0){
 			ma.addObject("li2",li2);
 			ma.addObject("size",size);
 			ma.addObject("li",li);
