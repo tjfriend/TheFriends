@@ -55,7 +55,7 @@ public class QnAcontroller {
 			return mav;
 		} else {
 			List lis = qp.GetMode(p, mode);
-			int size = qp.size();
+			int size = qp.modesize(mode);
 			mav.addObject("qnadata", lis);
 			mav.addObject("qnasize", size);
 			mav.addObject("qnamode", mode);
@@ -106,11 +106,12 @@ public class QnAcontroller {
 
 	
 	@RequestMapping("/qnacomment")
-	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int endpa) {
+	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p) {
 		String id = (String) session.getAttribute("id");
 		int r = qw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/qna/details/"+num+"?p="+endpa);
+		System.out.println("∆‰¿Ã¡ˆ"+p);
+		mav.setViewName("redirect:/qna/details/"+num+"?p="+p);
 		return mav;
 	}
 	

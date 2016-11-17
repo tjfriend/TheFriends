@@ -78,8 +78,8 @@
 			</c:when>
 			<c:otherwise>
 				<form action="/qna/qnacomment">
-					<input type="hidden" name="num" value="${details.NUM }"> <input
-						type="hidden" name="endpa" value="${qnacommentsi }">
+					<input type="hidden" name="num" value="${details.NUM }">  
+					<input type="hidden" name="endpa" value="${qnacommentsi }">
 					<div style="float: left; margin-right: 10">
 						<textarea rows="5" cols="80" style="resize: vertical;" name="memo"> </textarea>
 					</div>

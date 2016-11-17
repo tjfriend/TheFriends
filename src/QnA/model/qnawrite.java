@@ -52,6 +52,28 @@ public class qnawrite {
 			return -1;
 		}
 	}
+
+	// ±Û¼öÁ¤
+	public List num(int num) {
+		SqlSession sql = fac.openSession();
+		HashMap map = new HashMap();
+		map.put("num", num);
+		List list = sql.selectOne("qna.numadjust", map);
+		sql.close();
+		return list;
+
+	}
 	
-	
+	public int Adjust(int num, String content,String category,String title){
+		HashMap map = new HashMap();
+			map.put("num", num);
+			map.put("title", title);
+			map.put("content", content);
+			map.put("category", category);
+		SqlSession sql = fac.openSession();
+		int li = sql.update("qna.qnaadjust",map);
+		sql.close();
+		return li;
+	}
+
 }
