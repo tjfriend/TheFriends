@@ -1,5 +1,7 @@
 package homepage.controller;
 
+import java.util.*;
+
 import javax.servlet.http.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -16,19 +18,23 @@ public class HomepageController {
 	@Autowired
 	VisitService vs;
 	
-	@RequestMapping("/myhome/{id}")
+	@RequestMapping("/myhome/{name}")
 	@ResponseBody
-	public String myHome(@PathVariable(name="id")String id, HttpSession session){
-		String address = hs.myHome(id);
-		if(!session.getAttribute("id").equals(id)){
-			vs.visit(id);
+	public String myHome(@PathVariable(name="name")String name, HttpSession session){
+		HashMap map = hs.myHome(name);
+		String id = (String)map.get("ID");
+		if(session.getAttribute("id")!=null){
+			if(!session.getAttribute("id").equals(id)){
+				vs.visit(id);
+			}
 		}
-		return address;
+		return (String)map.get("ID");
 	}
 	
-	@RequestMapping("/{homeType}")
-	public String homeType(@PathVariable(name="homeType")String homeType){
-		String page = "t:"+homeType;
+	@RequestMapping("/{id}")
+	public String homeType(@PathVariable(name="id")String id){
+		HashMap map = hs.goHome(id);
+		String page = "t:"+map.get("ADDRESS");
 		return page;
 	}
 }

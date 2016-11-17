@@ -60,11 +60,10 @@
 	<select id="qnacommentlist" parameterType="java.util.HashMap"
 		resultType="QnA.model.CommentQnA">
 	<![CDATA[
-
 	select temp.* from	(
-		select rownum rnum, r.* from qnacomment r 
+		select rownum rnum, r.* from qnacomment r where r.QNANUM = #{qnanum}
 	) temp 
-   	where temp.rnum >=#{start} and temp.rnum <=#{end} and qnanum =#{qnanum}
+   	where temp.rnum >=#{start} and temp.rnum <=#{end}  
 	]]>
 
 	</select>

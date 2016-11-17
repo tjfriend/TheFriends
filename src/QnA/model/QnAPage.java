@@ -68,9 +68,9 @@ public class QnAPage {
 	
 	}
 	
-	public int commentsize(){ 	// 페이지 숫자
-		SqlSession sql = fac.openSession();
-		int size = sql.selectOne("qna.commentpagesize");
+	public int commentsize(int num){ 	// 페이지 숫자
+		SqlSession sql = fac.openSession();	
+		int size = sql.selectOne("qna.commentpagesize",num);	
 		int psize = size % 10 == 0? size/10 : size/10+1;
 	
 		return psize;
