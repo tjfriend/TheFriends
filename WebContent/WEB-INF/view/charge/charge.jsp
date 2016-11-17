@@ -68,8 +68,8 @@
 		 
 		<br />
 		<span id="span" style="display: none"> 
-		<label></label><input type="radio" name="c" value="p" id="p2" /> 개인소득공제용
-		<input type="radio" name="c" value="c" id="c2" /> 사업자증빙용
+		<label><input type="radio" name="c" value="p" id="p2" /> 개인소득공제용</label>
+		<label><input type="radio" name="c" value="c" id="c2" /> 사업자증빙용</label>
 		</span>
 	</div>
 
