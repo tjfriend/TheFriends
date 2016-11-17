@@ -22,8 +22,8 @@
 			</select>
 			<br /> <br /> 
 
-	제목 :&nbsp; <input type="text" name="title"> <br /><br/>
-	내용 :&nbsp; <textarea rows="15" cols="60" name="content"></textarea>
+	제목 :&nbsp; <input type="text" name="title" required="required"> <br /><br/>
+	내용 :&nbsp; <textarea rows="15" cols="60" name="content" required="required"></textarea>
 	<br /> 
 
 	<input
