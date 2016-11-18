@@ -1,15 +1,14 @@
 package board.model;
 
-import java.util.Date;
-
-import org.springframework.stereotype.*;
+import java.text.*;
+import java.util.*;
 
 public class ReviewData {
 	int num;
 	String title;
 	String content;
 	String id;
-	Date time;
+	String time;
 	int inquiry;
 	String category;
 	public int getNum() {
@@ -42,11 +41,12 @@ public class ReviewData {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
 	public void setTime(Date time) {
-		this.time = time;
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		this.time = sdf.format(time);
 	}
 	public int getInquiry() {
 		return inquiry;
