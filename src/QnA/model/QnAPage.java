@@ -65,13 +65,11 @@ public class QnAPage {
 //	댓글보기
 	
 	public List Getcommentpage(int p,int num){
-		System.out.println("서비스 페이지"+p);
 		int endpage = 10*p;
 		int startpage = endpage-9;
 		HashMap map = new HashMap();
 			map.put("start",startpage);
 			map.put("end", endpage);
-		System.out.println("서비스"+endpage);
 			map.put("qnanum", num);
 		SqlSession sql = fac.openSession();
 		List list = sql.selectList("qna.qnacommentlist",map);

@@ -5,6 +5,12 @@
 
 <div align="right">
 	<input type="button" value="목록보기" onClick="self.location='/qna/list';">
+	<input type="button" value="수정" onclick="location.href='/qna/qnaupdate?num=${details.NUM}'"/>
+	<form action="/qna/qnadelete" >
+		<input type="hidden" name="num" value="${details.NUM }">
+		<input type="submit" value="삭제" > 
+	</form>
+	
 
 </div>
 
@@ -18,10 +24,11 @@
 			<th width="10">${details.CATEGORY }</th>
 			<th width="45%">${details.TITLE }</th>
 			<th width="20%">${details.TIME }</th>
-			<td width="5" align="right"><a href="/qna/list">수정</a></td>
+<%-- 			<td width="5" align="right"><a href="/qna/qnaupdate?num=${details.NUM}">수정</a></td> --%>
 		</tr>
 		<tr>
 			<th>${details.ID }</th>
+			<th>${details.INQUIRY }
 		</tr>
 	</table>
 	<div>

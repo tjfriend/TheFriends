@@ -103,6 +103,7 @@ public class BoardController {
 
 	@RequestMapping("/crystal")
 	public ModelAndView make2board(int num, String title, String content, HttpSession session, String category) {
+		System.out.println("ad컨트롤러"+num+ content+ category + title);
 		int r = cs.crystal(num, content, category, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("make2sessionid", r); // 추가

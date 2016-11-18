@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qna">
 	<select id="pageNum" parameterType="java.util.HashMap"
-		resultType="QnA.model.ReviewData">
+		resultType="java.util.HashMap">
 	<![CDATA[
 
 	select * from
@@ -20,9 +20,9 @@
 	<select id="pagesize" resultType="java.lang.Integer">
 		select count(*) from QNA
 	</select>
-	
+
 	<select id="modeNum" parameterType="java.util.HashMap"
-		resultType="QnA.model.ReviewData">
+		resultType="java.util.HashMap">
 	<![CDATA[
 
 	select * from
@@ -34,15 +34,17 @@
 
 	</select>
 
-	<select id="modesize" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	<select id="modesize" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
 		select count(*) from QNA where category = #{mode }
 	</select>
-	
-	
+
+
 
 	<insert id="question" parameterType="java.util.HashMap">
 		insert into qna values
-		(QNA_NUMBER.nextval, #{title }, #{content },#{id } ,sysdate,0,#{category})
+		(QNA_NUMBER.nextval, #{title }, #{content },#{id }
+		,sysdate,0,#{category})
 	</insert>
 
 	<select id="qnadetails" parameterType="java.util.HashMap"
@@ -50,17 +52,18 @@
 
 		select * from qna where num = #{num }
 	</select>
-	
-<!-- 	<select id="qnacategory" parameterType="java.util.HashMap" -->
-<!-- 	resultType="java.util.HashMap"> -->
-	
-<!-- 	select * from qna where category = #{category} -->
-<!-- 	</select> -->
-	
-<!-- 	댓글 xml -->
-	
+
+	<!-- <select id="qnacategory" parameterType="java.util.HashMap" -->
+	<!-- resultType="java.util.HashMap"> -->
+
+	<!-- select * from qna where category = #{category} -->
+	<!-- </select> -->
+
+	<!-- 댓글 xml -->
+
 	<insert id="qnacomment" parameterType="java.util.HashMap">
-		insert into qnacomment values
+		insert into qnacomment
+		values
 		(#{num}, #{id}, #{memo}, sysdate)
 	</insert>
 
@@ -74,17 +77,30 @@
 	]]>
 
 	</select>
-	
+
 	<select id="commentpagesize" resultType="java.lang.Integer">
-		select count(*) from qnacomment where qnanum = #{num}
+		select count(*) from
+		qnacomment where qnanum = #{num}
 	</select>
-	
+
+	<!-- 게시글 수정 -->
 	<update id="qnaadjust" parameterType="java.util.HashMap">
-		update qna set title = #{title} , content =#{content}, category=#{category} where num=#{num }
+		update qna set title =
+		#{title} , content =#{content}, category=#{category} where num=#{num }
 	</update>
-	
-	<select id="numadjust" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+
+	<select id="numadjust"  parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
 		select * from qna where num = #{num }
 	</select>
 
+	<!-- 삭제 -->
+
+	<delete id="qnadelete" parameterType="java.util.HashMap">
+		delete qna where num = #{num }
+	</delete>
+	
+	<update id="upinqu" parameterType="java.util.HashMap">
+		  update qna set inquiry = inquiry+1 where num = #{num }
+	</update>
 </mapper>

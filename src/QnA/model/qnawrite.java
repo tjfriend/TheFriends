@@ -58,7 +58,7 @@ public class qnawrite {
 		SqlSession sql = fac.openSession();
 		HashMap map = new HashMap();
 		map.put("num", num);
-		List list = sql.selectOne("qna.numadjust", map);
+		List list = sql.selectList("qna.qnadetails", map);
 		sql.close();
 		return list;
 
@@ -74,6 +74,16 @@ public class qnawrite {
 		int li = sql.update("qna.qnaadjust",map);
 		sql.close();
 		return li;
+	}
+	
+	public int upinquiry(int num){
+		HashMap map = new HashMap();
+			map.put("num", num);
+		SqlSession sql = fac.openSession();
+		int up = sql.update("qna.upinqu",map);
+		sql.close();
+		return up;
+				
 	}
 
 }
