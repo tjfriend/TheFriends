@@ -25,16 +25,25 @@ public class SearchFriendController {
 	@RequestMapping("/friend/{find}/{con}")
 	public ModelAndView search(@RequestParam(defaultValue="1") int p, @PathVariable(name="find") String find, @PathVariable(name="con") String con){
 		ModelAndView mav = new ModelAndView("/search/searchview.jsp");
-		List map = search.search(find,con);
-		List li = (List)add.page(p);
-		int size = add.total();
+		List li = search.search(find,con,p);
+		int size = search.total();
 		if(li.size() != 0){
 			mav.addObject("li",li);
 			mav.addObject("size",size);
 			mav.addObject("find",find);
 			mav.addObject("con",con);
 		}
-		mav.addObject("map",map);
+		
+/*		int a = search.test(find, con);
+		if(a==1){
+			System.out.println("find"+find);
+			System.out.println("con"+con);
+		}else{
+			System.out.println(find);
+			System.out.println(con);
+			System.out.println("null");
+		}
+*/
 		return mav;
 	}
 	

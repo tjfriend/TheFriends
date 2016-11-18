@@ -43,18 +43,19 @@ public class ChargeService {
 		SqlSession ss = fac.openSession();
 		List li = ss.selectList("charge.chargeAll",id);
 		ss.close();
-		if(li.size()!=0){
+		if(li.size() != 0){
 			return li;
 		}
 		return null;
 	}
 	
 	// 面傈郴开 其捞瘤 贸府
-	public List page(int p){
+	public List page(int p, String id){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
 		map.put("start", (p*10)-9);
 		map.put("end", p*10);
+		map.put("id", id);
 		List li = ss.selectList("charge.page",map);
 		ss.close();
 		return li;

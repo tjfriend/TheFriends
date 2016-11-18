@@ -38,12 +38,10 @@ public class ChargeUseController {
 	// 사용내역
 	@RequestMapping("/use")
 	public ModelAndView use(@RequestParam(defaultValue="1") int p, HttpSession id){
-		List li = use.chargeuse((String)id.getAttribute("id"));
-		List li2 = use.page(p);
+		List li = use.page(p, (String)id.getAttribute("id"));
 		int size = use.total();
 		ModelAndView ma = new ModelAndView("t:charge/chargeuse");
-		if(li != null){
-			ma.addObject("li2",li2);
+		if(li.size() != 0){
 			ma.addObject("size",size);
 			ma.addObject("li",li);
 		}else{

@@ -8,7 +8,7 @@
 </c:forEach>
 
 <c:choose>
-	<c:when test="${li != null }">
+	<c:when test="${li.size() != 0 }">
 		<table class="table">
 			<tr></tr>
 			<tr>
