@@ -15,26 +15,32 @@ public class JoinService {
 	SqlSessionFactory fac;
 	
 	public boolean join(String id, String password, String name, String birth, String phone, String add01, String add02, String email, String email2, @RequestParam(required=false) String recommender,
-									String key, HttpSession session){
+									String nickname, String key, HttpSession session){
 		SqlSession ss = fac.openSession();
-		HashMap<String, String> map = new HashMap<>();
-		map.put("id", id);
-		map.put("password", password);
-		map.put("name", name);
-		map.put("birth", birth);
-		map.put("phone", phone);
-		map.put("address", add01+add02);
-		map.put("email", email+"@"+email2);
-		map.put("recommender", recommender);
+		HashMap<String, String> memberMap = new HashMap<>();
+		memberMap.put("id", id);
+		memberMap.put("password", password);
+		memberMap.put("name", name);
+		memberMap.put("birth", birth);
+		memberMap.put("phone", phone);
+		memberMap.put("address", add01+add02);
+		memberMap.put("email", email+"@"+email2);
+		memberMap.put("nickname", nickname);
+		memberMap.put("recommender", recommender);
 		
-		HashMap<String, String> map2 = new HashMap<>();
-		map2.put("id", id);
-		map2.put("uuid", key);
-		map2.put("email", email+"@"+email2);
+		HashMap<String, String> emailMap = new HashMap<>();
+		emailMap.put("id", id);
+		emailMap.put("uuid", key);
+		emailMap.put("email", email+"@"+email2);
+		
+		HashMap<String, String> homeMap = new HashMap<>();
+		homeMap.put("id", id);
+		homeMap.put("name", name);
 
 		try{
-			ss.insert("member.emailAuth", map2);
-			ss.insert("member.join", map);
+			ss.insert("member.join", memberMap);
+			ss.insert("member.emailAuth", emailMap);
+			ss.insert("member.homepage", homeMap);
 			ss.commit();
 			if(recommender!="admin"){
 				ss.update("member.pointup", id);

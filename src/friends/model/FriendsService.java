@@ -71,9 +71,9 @@ public class FriendsService {
 		return list;
 	}
 	
-	public int size(){ 	// 페이지 숫자
+	public int size(String id){ 	// 페이지 숫자
 		SqlSession sql = fac.openSession();
-		int size = sql.selectOne("member.friendsSize");
+		int size = sql.selectOne("member.friendsSize", id);
 		int psize = size % 10 == 0? size/10 : size/10+1;
 		return psize;
 	}

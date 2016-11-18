@@ -4,14 +4,13 @@ import java.util.Date;
 
 import org.springframework.stereotype.*;
 
-@Component
 public class ReviewData {
 	int num;
 	String title;
 	String content;
 	String id;
 	Date time;
-	int inqutry;
+	int inquiry;
 	String category;
 	public int getNum() {
 		return num;
@@ -49,11 +48,11 @@ public class ReviewData {
 	public void setTime(Date time) {
 		this.time = time;
 	}
-	public int getInqutry() {
-		return inqutry;
+	public int getInquiry() {
+		return inquiry;
 	}
-	public void setInqutry(int inqutry) {
-		this.inqutry = inqutry;
+	public void setInquiry(int inquiry) {
+		this.inquiry = inquiry;
 	}
 
 }
