@@ -18,17 +18,29 @@ public class SearchFriendService {
 	public List search(String find, String con, int p) {
 		SqlSession ss = fac.openSession();
 		HashMap m = new HashMap<>();
-//		m.put("ctg", find);
 		m.put("ctg2", "%"+con+"%");
 		m.put("start", (p*10)-9);
 		m.put("end", p*10);
-		List<HashMap> li = ss.selectList("searchfriend.page",m);
+		List li;
+
+		switch(find){
+		case "id" :
+			li = ss.selectList("searchfriend.page1", m);
+			break;
+		case "name" : 
+			li = ss.selectList("searchfriend.page2", m);
+			break;
+		case "phone" :
+			li = ss.selectList("searchfriend.page3", m);
+			break;
+		default : 
+			li = ss.selectList("searchfriend.page4", m);	
+		}
+		
 		ss.close();
 		return li;
 	}
 	
-	
-	// 페이지 처리
 	
 	// 전체페이지 수 
 	public int total(){
