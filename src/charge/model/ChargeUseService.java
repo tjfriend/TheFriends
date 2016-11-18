@@ -1,12 +1,13 @@
 package charge.model;
 
-import java.util.HashMap;
-import java.util.List;
+import java.text.*;
+import java.util.*;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.session.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import freemarker.template.*;
 
 @Component
 public class ChargeUseService {
@@ -76,7 +77,15 @@ public class ChargeUseService {
 		map.put("start", (p*10)-9);
 		map.put("end", p*10);
 		map.put("id", id);
-		List li = ss.selectList("charge.page2",map);
+		List<HashMap> li = ss.selectList("charge.page2",map);
+		for(int i=0; i<li.size(); i++){
+			HashMap map2 = li.get(i);
+			Date date = (Date)map2.get("USEDATE");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			map2.put("USEDATE", day);
+			li.set(i, map2);
+		}
 		ss.close();
 		return li;
 	}

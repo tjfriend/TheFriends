@@ -1,12 +1,11 @@
 package charge.model;
 
-import java.util.HashMap;
-import java.util.List;
+import java.text.*;
+import java.util.*;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.session.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
 @Component
 public class ChargeService {
@@ -41,12 +40,18 @@ public class ChargeService {
 	// 面傈郴开
 	public List chargeAll(String id){
 		SqlSession ss = fac.openSession();
-		List li = ss.selectList("charge.chargeAll",id);
+		List<HashMap> li = ss.selectList("charge.chargeAll",id);
 		ss.close();
-		if(li.size() != 0){
-			return li;
+		for(int i=0; i<li.size(); i++){
+			HashMap map = li.get(i);
+			Date date = (Date)map.get("CHARGEDATE");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			System.out.println(map.get("CHARGEDATE"));
+			map.put("CHARGEDATE", day);
+			li.set(i, map);
 		}
-		return null;
+		return li;
 	}
 	
 	// 面傈郴开 其捞瘤 贸府
@@ -56,7 +61,15 @@ public class ChargeService {
 		map.put("start", (p*10)-9);
 		map.put("end", p*10);
 		map.put("id", id);
-		List li = ss.selectList("charge.page",map);
+		List<HashMap> li = ss.selectList("charge.page",map);
+		for(int i=0; i<li.size(); i++){
+			HashMap map2 = li.get(i);
+			Date date = (Date)map2.get("CHARGEDATE");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			map2.put("CHARGEDATE", day);
+			li.set(i, map2);
+		}
 		ss.close();
 		return li;
 	}
@@ -68,5 +81,4 @@ public class ChargeService {
 		ss.close();
 		return a%10==0? a/10 : a/10+1;
 	}
-	
 }
