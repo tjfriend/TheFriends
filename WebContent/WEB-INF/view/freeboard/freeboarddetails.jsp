@@ -1,11 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h1>Talk & Talk</h1> <br/> <br/> <br/>
+<h1>Talk & Talk</h1>
+<br />
+<br />
+<br />
+
 <div align="right">
-	<input type="button" value="목록보기" onclick="location.href='/board/list'"/>
-	<input type="button" value="수정" onclick="location.href='/board/freeboardupdate?num=${freeboarddetailsdata[0].NUM}'"/>
+	
+	<input type="button" value="목록보기"
+		onclick="self.location='/board/list';">
+	<c:forEach var="fbd" items="${freeboarddetailsdata }">
+		<c:choose>
+			<c:when test="${freeboarddetailsdata2 == fbd.ID }">
+			<input type="button" value="수정"
+						onclick="location.href='/board/freeboardupdate?num=${fbd.NUM}'" />
+					<input type="button" value="삭제"
+						onclick="location.href='/board/freeboarddelete?num=${fbd.NUM}'" />
+		</c:when>
+	 </c:choose>
+	</c:forEach>
 </div>
+
+
 <div style="margin: 0px;">
 	<table class="table" style="margin: 0px;">
 		<tr align="center">
@@ -28,7 +45,7 @@
 		</c:forEach>
 	</table>
 </div>
-<div align="center" >
+<div align="center">
 	<table class="table">
 		<c:forEach var="fbd" items="${freeboarddetailsdata }">
 			<tr>
@@ -36,5 +53,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
+
 </div>
