@@ -3,22 +3,40 @@
 
 <mapper namespace="searchfriend">
 	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		select * from member where #{ctg} like #{ctg2}
+		select * from member where id like #{ctg2}
 	</select>
-<!-- 	<select id="searchName" parameterType="java.lang.String" resultType="java.util.HashMap"> -->
-<!-- 		select * from member where name like #{name} -->
-<!-- 	</select> -->
-<!-- 	<select id="searchEmail" parameterType="java.lang.String" resultType="java.util.HashMap"> -->
-<!-- 		select * from member where email like #{email} -->
-<!-- 	</select> -->
-<!-- 	<select id="searchPhone" parameterType="java.lang.String" resultType="java.util.HashMap"> -->
-<!-- 		select * from member where phone like #{phone}  -->
-<!-- 	</select> -->
+	<select id="searchName" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from member where name like #{name}
+	</select>
+	<select id="searchEmail" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from member where email like #{email}
+	</select>
+	<select id="searchPhone" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from member where phone like #{phone} 
+	</select>
 	
 	<!-- 페이지처리 -->
-	<select id="page" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	<select id="page1" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
-			select temp.* from(select rownum rnum, r.* from member r where #{ctg} like #{ctg2} order by id asc)temp
+			select temp.* from(select rownum rnum, r.* from member r where id like #{ctg2} order by id asc)temp
+			where temp.rnum >= #{start} and temp.rnum <= #{end}
+		]]>
+	</select>
+	<select id="page2" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		<![CDATA[
+			select temp.* from(select rownum rnum, r.* from member r where name like #{ctg2} order by id asc)temp
+			where temp.rnum >= #{start} and temp.rnum <= #{end}
+		]]>
+	</select>
+	<select id="page3" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		<![CDATA[
+			select temp.* from(select rownum rnum, r.* from member r where email like #{ctg2} order by id asc)temp
+			where temp.rnum >= #{start} and temp.rnum <= #{end}
+		]]>
+	</select>
+	<select id="page4" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		<![CDATA[
+			select temp.* from(select rownum rnum, r.* from member r where phone like #{ctg2} order by id asc)temp
 			where temp.rnum >= #{start} and temp.rnum <= #{end}
 		]]>
 	</select>

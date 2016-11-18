@@ -10,7 +10,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
-	align="center">Notice</h2>
+	align="center">Event</h2>
 <div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive">
 		<table class="table">

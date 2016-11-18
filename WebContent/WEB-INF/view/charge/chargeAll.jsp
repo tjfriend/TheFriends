@@ -1,28 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<h2>충전내역</h2>
-<c:forEach var="i" begin="1" end="${size }">
-	<a href="/charge/chargeAll?p=${i }">${i }</a>
-</c:forEach>
+<h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
+	align="center">충전내역</h2>
 
-<c:choose>
-	<c:when test="${li.size() != 0 }">
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
+	<div class="table-responsive">
 		<table class="table">
-			<tr>
-				<td align="center">충전일</td>
-				<td align="center">충전 포인트</td>
-			</tr>
-			<c:forEach items="${li }" var="i">
-				<tr>
-					<td align="center">${i.CHARGEDATE }</td>
-					<td align="center">${i.POINT }point</td>
+			<thead align="center">
+				<tr align="center">
+					<td><label>#</label></td>
+					<td><label>충전 포인트</label></td>
+					<td><label>충전일</label></td>
 				</tr>
-			</c:forEach>
+			</thead>
+			<c:if test="${list.size()!=0 }">
+				<tbody>
+					<c:forEach var="i" items="${li }">
+						<tr align="center">
+							<td>${i.NUM }</td>
+							<td>${i.POINT }</td>
+							<td>${i.CHARGEDATE }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</c:if>
 		</table>
-	</c:when>
-	<c:otherwise>
-		<h2>충전 내역이 없습니다</h2>
-	</c:otherwise>
-</c:choose>
+		<div align="right">
+			<input type="button" value="목록으로" class="btn btn-default" onclick="javascript:location.href='/charge'"/>
+		</div>
+	</div>
+</div>
+<div align="center">
+	<label id="page">
+		<c:forEach var="i" begin="1" end="${size }">
+			<a href="/charge/chargeAll?p=${i }">${i }</a>
+		</c:forEach>
+	</label>
+</div>

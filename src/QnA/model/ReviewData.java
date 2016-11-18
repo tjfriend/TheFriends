@@ -1,5 +1,6 @@
 package QnA.model;
 
+import java.text.*;
 import java.util.Date;
 
 public class ReviewData {
@@ -7,7 +8,7 @@ public class ReviewData {
 	String title;
 	String content;
 	String id;
-	Date time;
+	String time;
 	int inqutry;
 	String category;
 	public int getNum() {
@@ -40,11 +41,12 @@ public class ReviewData {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
 	public void setTime(Date time) {
-		this.time = time;
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		this.time = sdf.format(time);
 	}
 	public int getInqutry() {
 		return inqutry;
