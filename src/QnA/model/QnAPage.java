@@ -1,5 +1,6 @@
 package QnA.model;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,17 @@ public class QnAPage {
 		SqlSession sql = fac.openSession();
 		int size = sql.selectOne("qna.pagesize");
 		int psize = size % 10 == 0? size/10 : size/10+1;
-	
+		sql.close();
 		return psize;
+	}
+	
+	public int modesize(String mode){
+		SqlSession sql = fac.openSession();
+		int size = sql.selectOne("qna.modesize",mode);
+		int psize = size % 10 == 0? size/10 : size/10+1;
+		sql.close();
+		return psize;
+
 	}
 	
 	public List GetMode(int p,String mode){
@@ -64,6 +74,7 @@ public class QnAPage {
 		SqlSession sql = fac.openSession();
 		List list = sql.selectList("qna.qnacommentlist",map);
 		sql.close();
+		
 		return list;
 	
 	}
@@ -72,7 +83,7 @@ public class QnAPage {
 		SqlSession sql = fac.openSession();	
 		int size = sql.selectOne("qna.commentpagesize",num);	
 		int psize = size % 10 == 0? size/10 : size/10+1;
-	
+		sql.close();
 		return psize;
 	}
 	

@@ -5,6 +5,7 @@
 
 <div class="w3-row" style="margin-top: 50px">
 	<h2>Search</h2>
+	
 	<script>
 		// 벨류값 가져오기
 		function getSelectValue(frm) {
@@ -13,7 +14,6 @@
 		}
 	</script>
 
-	
 	
 	
 	<form action="/qna/list" id="ctg">
@@ -40,14 +40,16 @@
 			<th width="50%">제목</th>
 			<th width="100">ID</th>
 			<th>day</th>
+			<th>조회수</th>
 		</tr>
 		<c:forEach var="qna" items="${qnadata }">
 			<tr>
-				<td align="center">${qna.num }</td>
-				<td align="center">${qna.category }</td>
-				<th><a href="/qna/details/${qna.num }">${qna.title }</a></th>
-				<th>${qna.id }</th>
-				<th>${qna.time }</th>
+				<td align="center">${qna.NUM }</td>
+				<td align="center">${qna.CATEGORY}</td>
+				<th><a href="/qna/details/${qna.NUM}">${qna.TITLE}</a></th>
+				<th>${qna.ID }</th>
+				<th>${qna.TIME }</th>
+				<th>${qna.INQUIRY }</th>
 			</tr>
 		</c:forEach>
 	</table>

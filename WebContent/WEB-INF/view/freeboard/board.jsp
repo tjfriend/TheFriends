@@ -5,6 +5,9 @@
 
 <div class="w3-row" style="margin-top: 50px">
 	<h1>Talk & Talk</h1>
+	<br/>
+	<br/>
+	<br/>
 	<script>
 		function getSelectValue(frm) {
 			frm.textValue.value = frm.selectBox.options[frm.selectBox.selectedIndex].text;
@@ -28,6 +31,7 @@
 			<option value="남자들끼리만" ${freeboardmode eq '남자들끼리만'?'selected':'' }>남자들끼리만</option>
 			<option value="여자들끼리만" ${freeboardmode eq '여자들끼리만'?'selected':'' }>여자들끼리만</option>
 		</select>
+		<input type="text" name="search" placeholder="검색할 내용을 입력하세요." >
 	</form>
 	
 	<script>

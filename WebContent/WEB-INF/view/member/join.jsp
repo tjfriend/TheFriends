@@ -97,7 +97,7 @@
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					placeholder="Email" /> <label>@</label> <input type="text"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					id="email2_s" name="email2_S" placeholder="직접입력" /> <select
+					id="email2_s" name="email2_s" placeholder="직접입력" /> <select
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
 					id="selMail_s">
 					<option>직접입력</option>

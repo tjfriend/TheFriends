@@ -1,31 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<h2>사용내역</h2>
+<h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
+	align="center">사용내역</h2>
 
-<c:choose>
-	<c:when test="${li.size() != 0 }">
-	<table class="table">
-		<tr>
-			<td>충전일</td>
-			<td>선물한 친구</td>
-			<td>선물한 포인트</td>
-		</tr>
-		<c:forEach items="${li }" var="i">
-		<tr>
-			<td>${i.USEDATE }</td>
-			<td>${i.TAKEID }</td>
-			<td>${i.POINT }  point </td>
-		</tr>
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
+	<div class="table-responsive">
+		<table class="table">
+			<thead align="center">
+				<tr align="center">
+					<td><label>#</label></td>
+					<td><label>선물한 친구</label></td>
+					<td><label>선물한 포인트</label></td>
+					<td><label>충전일</label></td>
+				</tr>
+			</thead>
+			<c:if test="${list.size()!=0 }">
+				<tbody>
+					<c:forEach var="i" items="${li }">
+						<tr align="center">
+							<td>${i.NUM }</td>
+							<td>${i.TAKEID }</td>
+							<td>${i.POINT }</td>
+							<td>${i.USEDATE }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</c:if>
+		</table>
+		<div align="right">
+			<input type="button" value="목록으로" class="btn btn-default" onclick="javascript:location.href='/charge'"/>
+		</div>
+	</div>
+</div>
+<div align="center">
+	<label id="page">
+		<c:forEach var="i" begin="1" end="${size }">
+			<a href="/charge/use?p=${i }">${i }</a>
 		</c:forEach>
-	</table>
-	</c:when>
-	<c:otherwise>
-		사용 내역이 없습니다
-	</c:otherwise>
-</c:choose>
-
-<c:forEach var="i" begin="1" end="${size }">
-	<a href="/charge/use?p=${i }">${i }</a>
-</c:forEach>
+	</label>
+</div>

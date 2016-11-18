@@ -1,102 +1,163 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <div class="w3-row" style="margin-top: 50px">
-	<h2>Charge</h2>
-
-	→ 충전 금액
-	<input type="text" id="point" name="point" />
-	<select id="spoint">
-		<option>직접입력</option>
-		<option>100원</option>
-		<option>1000원</option>
-		<option>10000원</option>
-		<option>100000원</option>
-	</select>  
-	<br/>
-	
-	→ 받는사람
-	<select id="take">
-		<option>나에게</option>
-		<c:forEach var="t" items="${list }">
-			<option>${t.FRIEND }</option>
-		</c:forEach>
-	</select> 
-	<br/>
-	 
-	→ 결제수단  &nbsp;
-	<label><input type="radio" name="pay" value="card" id="card"  /> 카드</label> 
-	<label><input type="radio" name="pay" value="cash" id="cash" /> 무통장 입금 </label> 
-	<br />
-
-	<!-- 카드 목록 -->
-	<div id="cardctg" style="display: none">
-		카드선택
-		<select id="scard">
-			<option>선택해주세요</option> 
-			<option>국민</option>
-			<option>우리</option>
-			<option>신한</option>
-			<option>농협</option>
-			<option>삼성</option>
-		</select>
-		<br />
-		카드번호 <input type="text" name="card" size="4" maxlength="4" id="c1" />
-		- <input type="text" name="card" size="4" maxlength="4" id="c2"/> - <input
-			type="text" name="card" size="4" maxlength="4" id="c3"/> - <input
-			type="text" name="card" size="4" maxlength="4" id="c4"/><br />
-		유효기간 <input	type="text" size="2" placeholder="년" maxlength="2" id="c5" /> / 
-			<input type="text" size="2" placeholder="월" maxlength="2" id="c6"/> <br />
-		카드비밀번호 <input type="password" size="4" maxlength="4" id="c7"/> <br /> 
-		cvc <input type="password" size="4" maxlength="3" id="c8"/> <br />
-	</div>
-
-	<!-- 무통장 목록 -->
-	<div id="cashctg" style="display: none">
-		계좌번호 <br/>
-		국민 1111-1111-1111-1111 <br/>
-		우리 1111-1111-1111-1111 <br/>
-		신한 1111-1111-1111-1111 <br/>
-		농협 1111-1111-1111-1111 <br/>
-		입금자명 <input type="text" id="name" size="7" maxlength="5"/>
-		<br />
-		휴대폰 
-		<select>
-			<option>010</option>
-			<option>011</option>
-			<option>016</option>
-			<option>017</option>
-			<option>019</option>
-		</select> 
-		- <input type="text" size="4" id="ph1"/> - <input type="text" size="4" id="ph2"/>
-	</div>
-
- 	<input type="button" value="충전하기" id="cc" />
-	<font id="rst"></font>
-
-	<br/>
-	
-	<h3>내포인트 선물하기</h3>
-
-		내 보유 포인트 
-		<input type="text" name="mypoint" value="${point }" readonly="readonly"/> <br />
-		선물할 친구 
-		<select id="gtake">
-			<c:forEach var="t" items="${list }">
-				<option>${t.FRIEND }</option>
-			</c:forEach>	
-		</select> <br />
+	<h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
+			align="center">Charge</h2>
+	<div id="btnDib" align="center">
+		<input type="button" class="btn btn-default" id="viewCharge" value="충전하기" style="height: 33px" onclick="which(this)"/>
+		<input type="button" class="btn btn-default" id="viewGift" value="선물하기" style="height: 33px" onclick="which(this)"/>
+		<input type="button" class="btn btn-default" id="chargeList" value="충전내역" style="height: 33px" onclick="which(this)"/>
+		<input type="button" class="btn btn-default" id="useList" value="사용내역" style="height: 33px" onclick="which(this)"/>
+	</div><br>
+	<div id="chargeDiv" hidden="hidden">
+		<h3 class="w3-text-grey" align="center">Charge</h3><br/>
+		<div align="center" class="form-group">
+			<label for="point" style="width: 20%" class="w3-text-grey"><font size="4">충전금액</font></label><br/>
+			<input type="text" id="point" name="point" placeholder="Points"
+						style="width: 10%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+			<select id="spoint" style="width: 9%; height: 33px; border: 1px solid #ccc; border-radius: 5px">
+				<option>직접입력</option>
+				<option>100원</option>
+				<option>1000원</option>
+				<option>10000원</option>
+				<option>100000원</option>
+			</select>  
+		</div>
+		<div align="center" class="form-group">
+			<label for="point" style="width: 20%" class="w3-text-grey"><font size="4">받는사람</font></label><br/>
+			<select id="take" style="width: 9%; height: 33px; border: 1px solid #ccc; border-radius: 5px">
+				<option>나에게</option>
+				<c:forEach var="t" items="${list }">
+					<option>${t.FRIEND }</option>
+				</c:forEach>
+			</select> 
+		</div>
+		<div align="center" class="form-group">	 
+			<label for="point" style="width: 20%" class="w3-text-grey"><font size="4">결제방법</font></label><br/>
+			<label class="w3-text-grey"><input type="radio" name="pay" value="card" id="card"  /> 카드</label> &nbsp;&nbsp;
+			<label class="w3-text-grey"><input type="radio" name="pay" value="cash" id="cash" /> 무통장 입금 </label> 
+		</div>
+		<div align="center" class="form-group">
+			<!-- 카드 목록 -->
+			<div id="cardctg" style="display: none">
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="2">카드선택</font></label>&nbsp;
+				<select id="scard" style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
+					<option>선택</option> 
+					<option>국민</option>
+					<option>우리</option>
+					<option>신한</option>
+					<option>농협</option>
+					<option>삼성</option>
+				</select>
+				<br />
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="2">카드번호</font></label><br/>
+				<input type="text" name="card" size="4" maxlength="4" id="c1"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+				- <input type="text" name="card" size="4" maxlength="4" id="c2"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+				- <input type="text" name="card" size="4" maxlength="4" id="c3"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+				- <input type="text" name="card" size="4" maxlength="4" id="c4"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/><br />
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="2">유효기간</font></label><br/>
+				<input type="text" size="2" placeholder="년" maxlength="2" id="c5"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+				/ <input type="text" size="2" placeholder="월" maxlength="2" id="c6"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/><br />
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="2">비밀번호</font></label><br/>
+				<input type="password" size="4" maxlength="4" id="c7"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/><br /> 
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="2">CVC</font></label><br/>
+				<input type="password" size="4" maxlength="3" id="c8"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/><br />
+			</div>
+		</div>
+		<div align="center" class="form-group">
+			<!-- 무통장 목록 -->
+			<div id="cashctg" style="display: none">
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="2">계좌번호</font></label><br/>
+				<table class="table" style="width:20%">
+					<tr align="center">
+						<td>국민은행</td>
+						<td>123-123456-123</td>
+					</tr>
+					<tr align="center">
+						<td>우리은행</td>
+						<td>1234-12-123456</td>
+					</tr>
+					<tr align="center">
+						<td>신한은행</td>
+						<td>123-123-123456</td>
+					</tr>
+					<tr align="center">
+						<td>농협</td>
+						<td>123-12-123-123</td>
+					</tr>
+				</table>
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="2">입금자명</font></label>
+				<input type="text" id="name" size="7" maxlength="8"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+				<br />
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="2">연락처</font></label>
+				<select style="width: 4%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
+					<option>010</option>
+					<option>011</option>
+					<option>016</option>
+					<option>017</option>
+					<option>018</option>
+					<option>019</option>
+				</select> 
+				- <input type="text" size="4" id="ph1" maxlength="4"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+				- <input type="text" size="4" id="ph2" maxlength="4"
+							style="width: 5%; height: 25px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+			</div>
+		</div>
+		<div align="center" class="form-group">
+			<input type="button" class="btn btn-default" id="cc" value="충전하기" style="height: 33px" />
+			<font id="rst" size="2"></font>
 		
-		선물할 포인트 <input type="text" id="gpoint" /> <br />
-		<input type="button" value="선물하기"  id="gb"/>
-		<font id="gt"></font>
-	<hr/>
+			<br/>
+		</div>
+	</div>
 	
-	<input type="button" value="충전내역" onclick="javascript:location.href='/charge/chargeAll'" />
-	<input type="button" value="사용내역" onclick="javascript:location.href='/charge/use'" />
+	<div id="giftDiv" hidden="hidden">
+		<div align="center">
+			<h3 class="w3-text-grey" align="center">Gift</h3><br/>
+			<div align="center" class="form-group">
+				<label for="point" style="width: 7%" class="w3-text-grey"><font size="4">내 포인트</font></label><br/>
+				<input type="text" name="mypoint" value="${point }" readonly="readonly"
+							style="width: 10%; height: 25px; border: 1px solid #ccc; border-radius: 5px; text-align: center"/>
+				<label class="w3-text-grey">Points</label>
+			</div>
+			<div align="center" class="form-group">
+				<label for="point" style="width: 10%" class="w3-text-grey"><font size="4">선물 받을 친구</font></label>
+				<select id="gtake" style="width: 8%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
+					<c:forEach var="t" items="${list }">
+						<option>${t.FRIEND }</option>
+					</c:forEach>	
+				</select>
+			</div>
+			<div align="center" class="form-group">
+				<label for="point" style="width: 10%" class="w3-text-grey"><font size="4">선물할 포인트</font></label><br>
+				<input type="text" id="gpoint"
+							style="width: 10%; height: 25px; border: 1px solid #ccc; border-radius: 5px; text-align: center"/><br />
+			</div>
+			<div align="center" class="form-group">
+				<input type="button" value="선물하기"  id="gb" class="btn btn-default" style="height: 33px"/>
+				<font id="gt"></font>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
@@ -127,12 +188,12 @@
 	// 충전버튼
 	$("#cc").click(function(){
 		if($("#card").prop("checked")) {
-			if($("#point").val() == "" || $("#scard").prop("value") == "선택해주세요" || $("#c1").val() == "" || $("#c2").val() == "" || $("#c3").val() == "" || $("#c4").val() == "" ||
+			if($("#point").val() == "" || $("#scard").prop("value") == "선택" || $("#c1").val() == "" || $("#c2").val() == "" || $("#c3").val() == "" || $("#c4").val() == "" ||
 					$("#c5").val() == "" || $("#c6").val() == "" || $("#c7").val() == "" || $("#c8").val() == ""){
 				$("#cc").disabled();				
 			}
 		}else if($("#cash").prop("checked")){
-			if($("#point").val() == "" || $("#name").val() == "" || $("#scash").prop("value") == "선택해주세요"
+			if($("#point").val() == "" || $("#name").val() == "" || $("#scash").prop("value") == "선택"
 					|| $("#ph1").val() == "" || $("#ph2").val() == ""){
 				$("#cc").disabled();
 			}
@@ -151,6 +212,14 @@
 				$("#rst").prop("color", "green");
 				$("#rst").text("충전 성공");
 				$("#point").val("");
+// 				${"#c1"}.val("");
+// 				${"#c2"}.val("");
+// 				${"#c3"}.val("");
+// 				${"#c4"}.val("");
+// 				${"#c5"}.val("");
+// 				${"#c6"}.val("");
+// 				${"#c7"}.val("");
+// 				${"#c8"}.val("");
 			}else{
 				$("#rst").prop("color", "red");
 				$("#rst").text("충전 실패");
@@ -183,4 +252,19 @@
 			}
 		})
 	});
+	
+	function which(element){
+		var val = element.value;
+		if(val=="충전하기"){
+			$("#chargeDiv").prop("hidden", null);
+			$("#giftDiv").prop("hidden", "hidden");
+		} else if(val=="선물하기"){
+			$("#giftDiv").prop("hidden", null);
+			$("#chargeDiv").prop("hidden", "hidden");
+		} else if(val=="충전내역"){
+			location.href = "/charge/chargeAll";
+		} else if(val=="사용내역"){
+			location.href = "/charge/use";
+		}
+	}
 </script>

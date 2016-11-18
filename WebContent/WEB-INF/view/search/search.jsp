@@ -1,20 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<div class="w3-row" style="margin-top: 50px">
-	<h2>Search</h2>
-	찾을 방법 
-	<select id="find">
-		<option value="id">아이디</option>
-		<option value="name">이름</option>
-		<option value="email">이메일</option>
-		<option value="phone">휴대폰</option>
-	</select>
-	<input type="text" name="con" id="con"> <input type="button" value="검색하기" id="search" />
-	<br /> <span id="span"></span>
+<h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
+	align="center">Search</h2>
+
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px" align="center">
+	<div>
+		<select id="find" style="width: 7%; height: 33px; border: 1px solid #ccc; border-radius: 5px">
+			<option value="choose">선택</option>
+			<option value="id">아이디</option>
+			<option value="name">이름</option>
+			<option value="email">이메일</option>
+			<option value="phone">휴대폰</option>
+		</select>&nbsp;
+		<input type="text" name="con" id="con"
+					style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px">&nbsp;
+		<input type="button" value="검색하기" id="search" style="height: 33px" class="btn btn-default"/>
+	</div><br/>
+	<div>
+		<span id="span"></span>
+	</div>
 </div>
 
 <script>

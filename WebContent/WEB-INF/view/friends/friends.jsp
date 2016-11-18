@@ -13,6 +13,13 @@
 	align="center">Friends</h2>
 <div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive">
+		<div align="right" style="margin-right: 50px">
+			<select id="range" style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
+				<option>이름순</option>
+				<option>방문자순</option>
+				<option>거리순</option>
+			</select>
+		</div>
 		<table class="table">
 			<thead align="center">
 				<tr>
@@ -22,13 +29,6 @@
 					<td><label>NickName</label></td>
 					<td><label>Distance(m)</label></td>
 					<td><label>Visitors</label></td>
-					<td width="10%">
-						<select id="range">
-							<option>이름순</option>
-							<option>방문자순</option>
-							<option>거리순</option>
-						</select>
-					</td>
 				</tr>
 			</thead>
 			<tbody id="tbody" align="center"></tbody>
@@ -49,7 +49,7 @@
 			var html = "";
 			for(var i=0; i<txt.length; i++){
 				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
-				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
 			html = "";
@@ -70,7 +70,7 @@
 			var html = "";
 			for(var i=0; i<txt.length; i++){
 				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
-				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
 		});
@@ -97,7 +97,7 @@
 			var html = "";
 			for(var i=0; i<txt.length; i++){
 				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
-				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
 		});

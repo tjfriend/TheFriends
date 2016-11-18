@@ -45,6 +45,11 @@
 	<update id="crystal" parameterType="java.util.HashMap">
 		update freeboard set title = #{title} , content =#{content}, category=#{category} where num=#{num }
 	</update>
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		delete freeboard where num = #{num}
+	
+	</delete>
 
 
 	<select id="freeboarddetails" parameterType="java.util.HashMap"
