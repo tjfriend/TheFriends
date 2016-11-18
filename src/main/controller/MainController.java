@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import charge.model.ChargeFriendsService;
+import navigation.model.NaviService;
 
 @Controller
 public class MainController {
 	@Autowired
 	ChargeFriendsService cfs;
+	
+	@Autowired
+	NaviService navi;
 
 	@RequestMapping("/")
 	public ModelAndView index(@CookieValue(name = "remember", required = false) String cooId) {
@@ -84,8 +88,13 @@ public class MainController {
 	}
 
 	@RequestMapping("/navigation")
-	public ModelAndView navigation() {
+	public ModelAndView navigation(HttpSession id) {
 		ModelAndView mav = new ModelAndView("t:navigation/navigation");
+		String my = navi.navi((String)id.getAttribute("id"));
+		if(my.contains("(")){
+			my = my.substring(0,my.lastIndexOf("("));
+		}
+		mav.addObject("my",my);
 		return mav;
 	}
 
