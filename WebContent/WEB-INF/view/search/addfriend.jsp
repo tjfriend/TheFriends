@@ -13,7 +13,7 @@
 
 <script>
 	$("#cancel").click(function(){
-		$(this).close();
+		close();
 	});
 </script>
 

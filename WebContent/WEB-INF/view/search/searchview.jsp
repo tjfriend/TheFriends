@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<c:forEach var="i" begin="1" end="${size }">
-	<a href="/search/${find }/${con }?p=${i }">${i }</a>
-</c:forEach>
-
 <c:choose>
 	<c:when test="${li.size() != 0 }">
 		<table class="table">
@@ -35,3 +31,6 @@
 		<h2>검색 내용이 없습니다</h2>
 	</c:otherwise>
 </c:choose>
+<c:forEach var="i" begin="1" end="${size }">
+	<a href="/search/${find }/${con }?p=${i }">${i }</a>
+</c:forEach>
