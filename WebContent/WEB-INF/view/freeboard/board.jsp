@@ -39,10 +39,11 @@
 	<table class="table">
 		<tr align="center">
 			<td>번호</td>
-			<td width="80">분류</td>
-			<td width="50%">제목</td>
+			<td width="200">분류</td>
+			<td width="40%">제목</td>
 			<td width="100">ID</td>
 			<td>day</td>
+			<td width="100">조회수</td>
 		</tr>
 		<c:forEach var="freeboard" items="${freeboarddata }">
 			<tr align="center">
@@ -51,6 +52,7 @@
 				<td><a href="/board/freeboarddetails?num=${freeboard.num }">${freeboard.title }</a></td>
 				<td>${freeboard.id }</td>
 				<td>${freeboard.time }</td>
+				<td>${freeboard.inquiry }</td>
 		</c:forEach>
 	</table>
 	

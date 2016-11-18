@@ -11,15 +11,8 @@
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">Friends</h2>
-<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 20px">
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive">
-		<div align="right">
-			<select id="range">
-					<option>이름순</option>
-					<option>방문자순</option>
-					<option>거리순</option>
-			</select>
-		</div>
 		<table class="table">
 			<thead align="center">
 				<tr>
@@ -29,6 +22,13 @@
 					<td><label>NickName</label></td>
 					<td><label>Distance(m)</label></td>
 					<td><label>Visitors</label></td>
+					<td width="10%">
+						<select id="range">
+							<option>이름순</option>
+							<option>방문자순</option>
+							<option>거리순</option>
+						</select>
+					</td>
 				</tr>
 			</thead>
 			<tbody id="tbody" align="center"></tbody>
@@ -48,8 +48,8 @@
 		}).done(function(txt){
 			var html = "";
 			for(var i=0; i<txt.length; i++){
-				html += "<tr><td>"+txt[i].RNUM+"</td><td><font color='blue'><label onclick='friends(this)'>"+txt[i].NAME+"</label></font></td><td>"+txt[i].BIRTH+"</td>";
-				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
 			html = "";
@@ -69,8 +69,8 @@
 		}).done(function(txt){
 			var html = "";
 			for(var i=0; i<txt.length; i++){
-				html += "<tr><td>"+txt[i].RNUM+"</td><td><font color='blue'><label onclick='friends(this)'>"+txt[i].NAME+"</label></font></td><td>"+txt[i].BIRTH+"</td>";
-				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
 		});
@@ -96,8 +96,8 @@
 		}).done(function(txt){
 			var html = "";
 			for(var i=0; i<txt.length; i++){
-				html += "<tr><td>"+txt[i].RNUM+"</td><td><font color='blue'><label onclick='friends(this)'>"+txt[i].NAME+"</label></font></td><td>"+txt[i].BIRTH+"</td>";
-				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td colspan='2'>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
 		});

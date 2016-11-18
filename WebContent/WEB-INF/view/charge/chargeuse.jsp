@@ -8,14 +8,14 @@
 </c:forEach>
 
 <c:choose>
-	<c:when test="${li2 != null }">
+	<c:when test="${li.size() != 0 }">
 	<table class="table">
 		<tr>
 			<td>충전일</td>
 			<td>선물한 친구</td>
 			<td>선물한 포인트</td>
 		</tr>
-		<c:forEach items="${li2 }" var="i">
+		<c:forEach items="${li }" var="i">
 		<tr>
 			<td>${i.USEDATE }</td>
 			<td>${i.TAKEID }</td>

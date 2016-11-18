@@ -69,22 +69,13 @@ public class ChargeUseService {
 		}
 	}
 
-	// 사용내역
-	public List chargeuse(String id) {
-		SqlSession ss = fac.openSession();
-		List li = ss.selectList("charge.chargeuse", id);
-		if (li == null) {
-			return null;
-		}
-		return li;
-	}
-	
 	// 사용내역 페이지 처리
-	public List page(int p){
+	public List page(int p, String id){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
 		map.put("start", (p*10)-9);
 		map.put("end", p*10);
+		map.put("id", id);
 		List li = ss.selectList("charge.page2",map);
 		ss.close();
 		return li;

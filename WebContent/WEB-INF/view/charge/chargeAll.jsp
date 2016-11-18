@@ -8,13 +8,13 @@
 </c:forEach>
 
 <c:choose>
-	<c:when test="${li2!=null }">
+	<c:when test="${li.size() != 0 }">
 		<table class="table">
 			<tr>
 				<td align="center">충전일</td>
 				<td align="center">충전 포인트</td>
 			</tr>
-			<c:forEach items="${li2 }" var="i">
+			<c:forEach items="${li }" var="i">
 				<tr>
 					<td align="center">${i.CHARGEDATE }</td>
 					<td align="center">${i.POINT }point</td>
@@ -23,6 +23,6 @@
 		</table>
 	</c:when>
 	<c:otherwise>
-		충전 내역이 없습니다
+		<h2>충전 내역이 없습니다</h2>
 	</c:otherwise>
 </c:choose>
