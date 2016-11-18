@@ -3,9 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h2>사용내역</h2>
-<c:forEach var="i" begin="1" end="${size }">
-	<a href="/charge/use?p=${i }">${i }</a>
-</c:forEach>
 
 <c:choose>
 	<c:when test="${li.size() != 0 }">
@@ -28,3 +25,7 @@
 		사용 내역이 없습니다
 	</c:otherwise>
 </c:choose>
+
+<c:forEach var="i" begin="1" end="${size }">
+	<a href="/charge/use?p=${i }">${i }</a>
+</c:forEach>
