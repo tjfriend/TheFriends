@@ -28,7 +28,7 @@ public class QnAcontroller {
 
 	@Autowired
 	qnawrite qw;
-	
+
 	@Autowired
 	qnaDelete qd;
 
@@ -88,7 +88,9 @@ public class QnAcontroller {
 	}
 
 	@RequestMapping("/details/{num}")
-	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p) {
+	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
+			HttpSession session) {
+		String id = (String) session.getAttribute("id");
 		HashMap map = new HashMap();
 		map.put("num", num);
 		List list = qp.Getcommentpage(p, num);
@@ -97,51 +99,58 @@ public class QnAcontroller {
 		SqlSession sql = fac.openSession();
 		HashMap data = sql.selectOne("qna.qnadetails", map);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("loginid",id);
 		mav.addObject("details", data);
-		mav.addObject("qnacommentda",list);
-		mav.addObject("qnacommentsi",sizecom);
+		mav.addObject("qnacommentda", list);
+		mav.addObject("qnacommentsi", sizecom);
 		mav.setViewName("t:qna/qnadetails");
-		
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping("/qnacomment")
 	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p) {
 		String id = (String) session.getAttribute("id");
 		int r = qw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/qna/details/"+num+"?p="+p);
+		mav.setViewName("redirect:/qna/details/" + num + "?p=" + p);
 		return mav;
 	}
-	
+
 	@RequestMapping("/qnaupdate")
-	public ModelAndView QnaUpdate(@RequestParam(name="num")int num){
+	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num) {
 		ModelAndView mav = new ModelAndView();
 		List list = qw.num(num);
-			mav.addObject("list", list);
-			mav.setViewName("t:qna/adjust");
+		mav.addObject("list", list);
+		mav.setViewName("t:qna/adjust");
 		return mav;
 	}
-	
+
 	@RequestMapping("/qnaadjust")
-	public ModelAndView qnaAdjust( String category, int num, String title,String content,HttpSession session){
+	public ModelAndView qnaAdjust(String category, int num, String title, String content, HttpSession session) {
 		int r = qw.Adjust(num, content, category, title);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("qnaadjust",r);
+		mav.addObject("qnaadjust", r);
+		mav.setViewName("redirect:/qna/list");
+		return mav;
+	}
+
+	@RequestMapping("/qnadelete")
+	public ModelAndView qnaDelete(int num) {
+		int de = qd.QnaDelete(num);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("num", num);
 		mav.setViewName("redirect:/qna/list");
 		return mav;
 	}
 	
-	@RequestMapping("/qnadelete")
-	public ModelAndView qnaDelete( int num){
-		int de = qd.QnaDelete(num);
+	@RequestMapping("/commentdelete")
+	public ModelAndView CommentDelete(int commentnum,int num) {
+		int de = qd.CommentDelete(commentnum);
 		ModelAndView mav = new ModelAndView();
-			mav.addObject("num",num);
-			mav.setViewName("redirect:/qna/list");
+		mav.addObject("commentnum", commentnum);
+		mav.setViewName("redirect:/qna/details/"+num);
 		return mav;
 	}
-	
-	
-	
+
 }

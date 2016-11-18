@@ -17,4 +17,11 @@ public class qnaDelete {
 		sql.close();
 		return de;
 	}
+	
+	public int CommentDelete(int commentnum){
+		SqlSession sql = fac.openSession();
+			int de = sql.delete("qna.commentdelete",commentnum);
+		sql.close();
+		return de;
+	}
 }

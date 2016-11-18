@@ -36,7 +36,7 @@ public class QnAPage {
 		SqlSession sql = fac.openSession();
 		int size = sql.selectOne("qna.pagesize");
 		int psize = size % 10 == 0? size/10 : size/10+1;
-	
+		sql.close();
 		return psize;
 	}
 	
@@ -44,7 +44,7 @@ public class QnAPage {
 		SqlSession sql = fac.openSession();
 		int size = sql.selectOne("qna.modesize",mode);
 		int psize = size % 10 == 0? size/10 : size/10+1;
-		
+		sql.close();
 		return psize;
 
 	}
@@ -83,7 +83,7 @@ public class QnAPage {
 		SqlSession sql = fac.openSession();	
 		int size = sql.selectOne("qna.commentpagesize",num);	
 		int psize = size % 10 == 0? size/10 : size/10+1;
-	
+		sql.close();
 		return psize;
 	}
 	

@@ -5,6 +5,7 @@
 
 <div class="w3-row" style="margin-top: 50px">
 	<h2>Search</h2>
+	
 	<script>
 		// 벨류값 가져오기
 		function getSelectValue(frm) {
@@ -13,7 +14,6 @@
 		}
 	</script>
 
-	
 	
 	
 	<form action="/qna/list" id="ctg">
