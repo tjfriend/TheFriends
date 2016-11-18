@@ -19,7 +19,8 @@
 					class="form-control" style="width: 25%" placeholder="Title" /><br/>
 			<label for="content" style="width: 15%"><font size="4">CONTENT</font></label><br/>
 			<textarea rows="10" cols="100" style="width: 50%" placeholder="CONTENT" name="content"></textarea><br/><br/>
-			<input type="submit" class="btn btn-default" value="작성하기" />
+			<input type="submit" class="btn btn-default" value="작성하기" />&nbsp;&nbsp;
+			<input type="button" class="btn btn-default" value="취소" onclick="javascript:location.href='/notice/list'"/>
 		</form>
 	</div>
 </div>
