@@ -21,19 +21,37 @@
 	<h2 class="w3-text-grey" align="center">Add Friend</h2>
 	<div align="center">
 		<label for="point" style="width: 50%" class="w3-text-grey"><font size="3">내 아이디</font></label><br/>
-		<input type="text" name="id" value="${id }" size="7" readonly="readonly"
+		<input type="text" name="id" value="${id }" size="7" readonly="readonly" id="id"
 					style="width: 50%; height: 25px; border: 1px solid #ccc; border-radius: 5px; text-align: center"/><br/>
 		<label for="point" style="width: 50%" class="w3-text-grey"><font size="3">친구 아이디</font></label><br/>
-		<input type="text" name="friend" value="${friend }" size="7" readonly="readonly"
+		<input type="text" name="friend" value="${friend }" size="7" readonly="readonly" id="friend"
 					style="width: 50%; height: 25px; border: 1px solid #ccc; border-radius: 5px; text-align: center"/><br/>
 	</div>
 	<div align="center">
-		<input type="submit" value="추가하기" class="btn btn-default"/>
+		<input type="button" value="추가하기" id="add" class="btn btn-info"/>
 		<input type="button" value="취소" id="cancel" class="btn btn-default"/>
 	</div>
 </div>
 
 <script>
+	$("#add").click(function(){
+		var id = $("#id").val();
+		var friend = $("#friend").val();
+		$.ajax({
+			"method" : "get",
+			"url" : "/search/add/"+id+"/"+friend,
+			"async" : false
+		}).done(function(txt){
+			if(txt==true){
+				alert("친구신청이 완료되었습니다.");
+				window.close();
+			} else {
+				alert("친구신청에 실패하였습니다.");
+				window.close();
+			}
+		});
+	});
+
 	$("#cancel").click(function(){
 		close();
 	});

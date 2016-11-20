@@ -56,6 +56,6 @@
 
 <script>
 	function noticeWrite(){
-		location.href = "/notice/write";
+		location.href = "/event/write";
 	}
 </script>
