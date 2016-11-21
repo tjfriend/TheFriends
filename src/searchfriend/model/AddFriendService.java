@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddfriendService {
+public class AddFriendService {
 	@Autowired
 	SqlSessionFactory fac;
 	
@@ -30,6 +30,24 @@ public class AddfriendService {
 		int a = ss.selectOne("searchfriend.total");
 		ss.close();
 		return a%10==0? a/10 : a/10+1;
+	}
+	
+	public boolean add(String id, String friend){
+		SqlSession ss = fac.openSession();
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("friend", friend);
+		try{
+			ss.insert("friends.add", map);
+			ss.commit();
+			ss.close();
+			return true;
+		} catch(Exception e){
+			e.printStackTrace();
+			ss.rollback();
+			ss.close();
+			return false;
+		}
 	}
 }
 

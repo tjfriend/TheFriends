@@ -40,8 +40,10 @@
 			where temp.rnum >= #{start} and temp.rnum <= #{end}
 		]]>
 	</select>
-	
 	<select id="total" resultType="java.lang.Integer">
 		select count(*) from member
+	</select>
+	<select id="addFriends" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from addfriends where id=#{id} and friends=#{friends}
 	</select>
 </mapper>

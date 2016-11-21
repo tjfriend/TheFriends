@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="friends">
+	<select id="friends" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from friends where id=#{id} and friend=#{friends} or id=#{friends} and friend=#{id}
+	</select>
+	<insert id="add" parameterType="java.util.HashMap">
+		insert into addfriends
+		values(#{id}, #{friend}, sysdate)
+	</insert>
+	<select id="request" resultType="java.util.HashMap">
+		select m.*, a.adddate from
+		member m, addfriends a where a.friends=#{id} and m.id=a.id;
+	</select>
+	<select id="friendsSize" resultType="java.lang.Integer">
+		select count(*) from
+		addfriends
+	</select>
+	<select id="requestN" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		select * from (select rownum rnum, temp.* from (select
+		m.*, a.adddate, h.visit from member m, addfriends a, homepage h where
+		a.friends=#{id} and m.id=a.id and m.id=h.id order by a.id asc)
+		temp)temp2 where temp2.rnum&gt;=#{start} and temp2.rnum&lt;=#{end}
+	</select>
+	<select id="requestV" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		select * from (select rownum rnum, temp.* from (select
+		m.*, a.adddate, h.visit from member m, addfriends a, homepage h where
+		a.friends=#{id} and m.id=a.id and m.id=h.id order by h.visit desc)
+		temp)temp2 where temp2.rnum&gt;=#{start} and temp2.rnum&lt;=#{end}
+	</select>
+	<select id="requestD" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		select * from (select rownum rnum, temp.* from (select
+		m.*, a.adddate, h.visit from member m, addfriends a, homepage h where
+		a.friends=#{id} and m.id=a.id and m.id=h.id order by a.ADDDATE desc)
+		temp)temp2 where temp2.rnum&gt;=#{start} and temp2.rnum&lt;=#{end}
+	</select>
+	<select id="accept" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select a.*, m.id from addfriends a, (select id from member where name=#{name}) m where a.id=#{id} and a.friends=m.id or a.id=m.id and a.friends=#{id}
+	</select>
+	<delete id="refuse" parameterType="java.util.HashMap">
+		delete from addfriends where id=#{id} and friends=(select id from member where name=#{name}) or id=(select id from member where name=#{name}) and friends=#{id}
+	</delete>
+	<insert id="acceptAdd" parameterType="java.util.HashMap">
+		insert into friends values(#{id}, (select id from member where name=#{name}), (select nickname from member where name=#{name}), 0)
+	</insert>
+	<insert id="acceptAdd2" parameterType="java.util.HashMap">
+		insert into friends values((select id from member where name=#{name}), #{id}, (select nickname from member where id=#{id}), 0)
+	</insert>
+</mapper>

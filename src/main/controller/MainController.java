@@ -75,12 +75,6 @@ public class MainController {
 		return mav;
 	}
 
-	@RequestMapping("/event")
-	public ModelAndView event() {
-		ModelAndView mav = new ModelAndView("t:event/event");
-		return mav;
-	}
-
 	@RequestMapping("/search")
 	public ModelAndView search() {
 		ModelAndView mav = new ModelAndView("t:search/search");

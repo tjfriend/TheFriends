@@ -30,7 +30,17 @@
 						<td>${i.PHONE }</td>
 						<td>${i.EMAIL }</td>
 						<td>${i.ADDRESS }</td>
-						<td><input class="fi" type="button" value="친구추가" id="${i.ID }" onclick="addFriend(this)"/></td>
+						<c:choose>
+							<c:when test="${i.friend != null }">
+								<td><input class="btn btn-default" type="button" value="친구" readonly="readonly"/></td>
+							</c:when>
+							<c:when test="${i.add != null }">
+								<td><input class="btn btn-success" type="button" value="신청완료" readonly="readonly"/></td>
+							</c:when>
+							<c:otherwise>
+								<td><input class="btn btn-info" type="button" value="친구신청" id="${i.ID }" onclick="addFriend(this)"/></td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 				</c:forEach>
 			</tbody>
