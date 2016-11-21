@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class AddFriendService {
 	@Autowired
 	SqlSessionFactory fac;
-	
+	  
 	public List page(int p){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap();
