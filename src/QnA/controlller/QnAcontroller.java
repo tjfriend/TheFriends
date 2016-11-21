@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,28 +36,37 @@ public class QnAcontroller {
 	@Autowired
 	SqlSessionFactory fac;
 
-	// @RequestMapping("/list")
-	// public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p) {
-	// List lis = qp.GetRnage(p);
-	// int size = qp.size();
-	// ModelAndView mav = new ModelAndView();
-	// mav.addObject("qnadata", lis);
-	// mav.addObject("qnasize", size);
-	// mav.setViewName("t:qna/qna");
-	// return mav;
-	// }
+	@RequestMapping("/test")
+	public ModelAndView test() {
+		ModelAndView mav = new ModelAndView("t:qna/test");
+		return mav;
+	}
+
 
 	@RequestMapping("/list")
-	public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "") String mode) {
+	public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "") String mode
+			, @RequestParam (defaultValue="") String search) {
 		ModelAndView mav = new ModelAndView();
 		if (mode.equals("")) {
-			List lis = qp.GetRnage(p);
-			int size = qp.size();
-			mav.addObject("qnadata", lis);
-			mav.addObject("qnasize", size);
-			mav.setViewName("t:qna/qna");
-			return mav;
+			if(search.equals("")){
+				List lis = qp.GetRnage(p);
+				int size = qp.size();
+				mav.addObject("qnadata", lis);
+				mav.addObject("qnasize", size);
+				mav.setViewName("t:qna/qna");
+				return mav;
+			}else{
+				List lis = qp.searchqna(search,p);
+				int size = qp.searchqnasize(search);
+				mav.addObject("qnadata", lis);
+				mav.addObject("qnasize", size);
+				mav.addObject("qnasearch", search);
+				mav.setViewName("t:qna/qna");
+				return mav;
+		
+			}
 		} else {
+			if(search.equals("")){
 			List lis = qp.GetMode(p, mode);
 			int size = qp.modesize(mode);
 			mav.addObject("qnadata", lis);
@@ -64,6 +74,16 @@ public class QnAcontroller {
 			mav.addObject("qnamode", mode);
 			mav.setViewName("t:qna/qna");
 			return mav;
+			}else{
+				List lis = qp.searchqnamode(search, p, mode);
+				int size = qp.searchqnasizemode(search, mode);
+				mav.addObject("qnadata", lis);
+				mav.addObject("qnasize", size);
+				mav.addObject("qnasearch", search);
+				mav.addObject("qnamode", mode);
+				mav.setViewName("t:qna/qna");
+				return mav;
+			}
 		}
 	}
 
@@ -86,7 +106,7 @@ public class QnAcontroller {
 		return mav;
 
 	}
-
+/* 
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
 			HttpSession session) {
@@ -99,7 +119,30 @@ public class QnAcontroller {
 		SqlSession sql = fac.openSession();
 		HashMap data = sql.selectOne("qna.qnadetails", map);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("loginid",id);
+		mav.addObject("loginid", id);
+		mav.addObject("details", data);
+		mav.addObject("qnacommentda", list);
+		mav.addObject("qnacommentsi", sizecom);
+		mav.setViewName("t:qna/qnadetails");
+
+		return mav;
+	}
+
+*/
+	// ½ÇÇè
+	@RequestMapping("/details/{num}")
+	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
+			HttpSession session,@CookieValue(name = "count", required = false) String countup) {
+		String id = (String) session.getAttribute("id");
+		HashMap map = new HashMap();
+		map.put("num", num);
+		List list = qp.Getcommentpage(p, num);
+		int sizecom = qp.commentsize(num);
+		int upinq = qw.upinquiry(num);
+		SqlSession sql = fac.openSession();
+		HashMap data = sql.selectOne("qna.qnadetails", map);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("loginid", id);
 		mav.addObject("details", data);
 		mav.addObject("qnacommentda", list);
 		mav.addObject("qnacommentsi", sizecom);
@@ -143,13 +186,13 @@ public class QnAcontroller {
 		mav.setViewName("redirect:/qna/list");
 		return mav;
 	}
-	
+
 	@RequestMapping("/commentdelete")
-	public ModelAndView CommentDelete(int commentnum,int num) {
+	public ModelAndView CommentDelete(int commentnum, int num) {
 		int de = qd.CommentDelete(commentnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("commentnum", commentnum);
-		mav.setViewName("redirect:/qna/details/"+num);
+		mav.setViewName("redirect:/qna/details/" + num);
 		return mav;
 	}
 

@@ -1,11 +1,11 @@
-<%@page import="org.springframework.beans.factory.annotation.Value"%>
+<%@ page import="org.springframework.beans.factory.annotation.Value"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="w3-row" style="margin-top: 50px">
 	<h2>Search</h2>
-	
+
 	<script>
 		// 벨류값 가져오기
 		function getSelectValue(frm) {
@@ -14,8 +14,8 @@
 		}
 	</script>
 
-	
-	
+
+
 	<form action="/qna/list" id="ctg">
 		<select name="mode" id="sel">
 			<option value="" ${qnamode eq ''?'selected':'' }>분류</option>
@@ -86,9 +86,17 @@
 				<b>${u }</b>
 			</c:when>
 			<c:otherwise>
-				<a href="/qna/list?mode=${qnamode }&p=${i }">${i }</a>
+				<a href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }">${i }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 
+	<br />
+	<hr />
+	<form action="/qna/list">
+		<input type="hidden" name="mode" value="${qnamode }"> 
+		검색 : <input type="search" name="search"> 
+			 <input type="submit" value="검색"  >
+
+	</form>
 </div>
