@@ -31,7 +31,6 @@
 			<option value="남자들끼리만" ${freeboardmode eq '남자들끼리만'?'selected':'' }>남자들끼리만</option>
 			<option value="여자들끼리만" ${freeboardmode eq '여자들끼리만'?'selected':'' }>여자들끼리만</option>
 		</select>
-		<input type="text" name="search" placeholder="검색할 내용을 입력하세요." >
 	</form>
 	
 	<script>
@@ -51,12 +50,12 @@
 		</tr>
 		<c:forEach var="freeboard" items="${freeboarddata }">
 			<tr align="center">
-				<td align="center">${freeboard.num }</td>
-				<td align="center">${freeboard.category }</td>
-				<td><a href="/board/freeboarddetails?num=${freeboard.num }">${freeboard.title }</a></td>
-				<td>${freeboard.id }</td>
-				<td>${freeboard.time }</td>
-				<td>${freeboard.inquiry }</td>
+				<td align="center">${freeboard.NUM }</td>
+				<td align="center">${freeboard.CATEGORY }</td>
+				<td><a href="/board/freeboarddetails?num=${freeboard.NUM }">${freeboard.TITLE }</a></td>
+				<td>${freeboard.ID }</td>
+				<td>${freeboard.TIME }</td>
+				<td>${freeboard.INQUIRY }</td>
 		</c:forEach>
 	</table>
 	
@@ -67,15 +66,38 @@
 	</form>
 	
 	
+<%-- 	<c:forEach var="i" begin="1" end="${freeboardsize }"> --%>
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${current == i }"> --%>
+<%-- 				<b>${u }</b> --%>
+<%-- 			</c:when> --%>
+<%-- 			<c:otherwise> --%>
+<%-- 				<a href="/board/list?mode=${freeboardmode }&p=${i }">${i }</a> --%>
+<%-- 			</c:otherwise> --%>
+<%-- 		</c:choose> --%>
+<%-- 	</c:forEach> --%>
+
+
+
 	<c:forEach var="i" begin="1" end="${freeboardsize }">
 		<c:choose>
 			<c:when test="${current == i }">
 				<b>${u }</b>
 			</c:when>
 			<c:otherwise>
-				<a href="/board/list?mode=${freeboardmode }&p=${i }">${i }</a>
+				<a href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }">${i }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
+
+	<br />
+	<hr />
+	<form action="/board/list">
+		<input type="hidden" name="mode" value="${freeboardmode }"> 
+		검색 : <input type="search" name="search"> 
+			 <input type="submit" value="검색"  >
+
+	</form>
+
 
 </div>

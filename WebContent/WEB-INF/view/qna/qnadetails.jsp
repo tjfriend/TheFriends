@@ -3,6 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h1>QnA 상세 보기</h1>
 
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+	
+</script>
+
+<!-- 테스트용도 -->
+<div>
+	<input type="button" value="테스트" onclick="self.location='/qna/test';">
+</div>
+<!-- 테스트 끝 -->
+
 <div align="right">
 	<input type="button" value="목록보기" onClick="self.location='/qna/list';">
 	<c:choose>
@@ -61,30 +73,40 @@
 	</div>
 
 	<!--  	댓글 -->
-	
+
 
 	<div>
 		<table class="table">
 			<c:forEach var="qnac" items="${qnacommentda }">
 				<tr>
-					<th>${qnac.commentnum }</th>
+					<th><input type="text" value="text${qnac.commentnum }"> </th>
 					<th>${qnac.id }</th>
 					<td>${qnac.day }</td>
-					<td align="right"><input type="button" value="수정" id="change"
-						onclick="changecomment('memo_${qnac.commentnum }')">
-						
+					<td align="right">
+						<%-- 						<input type="button" value="수정" id="change" onclick="changecomment('memo_${qnac.commentnum }')"> --%>
+						<input type="button" value="수정" id="${qnac.commentnum }">
+						<input type="button" value="수정취소"
+						id="chagecancel">
+
 						<form action="/qna/commentdelete">
 							<input type="hidden" name="commentnum"
 								value="${qnac.commentnum }"> <input type="hidden"
 								name="num" value="${details.NUM }"> <input type="submit"
-								value="삭제">
-						</form></td>
+								value="삭제" id="deletesumit">
+						</form>
+					</td>
 				</tr>
 				<tr>
-					<td><textarea rows="3" cols="100%" id="memo_${qnac.commentnum }"
-							disabled="disabled" style="border: 1px; resize: none;">${qnac.memo }</textarea></td>
+					<td>${qnac.memo }</td>
+					<%-- <td><textarea rows="3" cols="100%" id="memo_${qnac.commentnum }" --%>
+					<%-- 	disabled="disabled" style="border: 1px; resize: none;">${qnac.memo }</textarea></td> --%>
 
 				</tr>
+				
+<!-- 				<script> -->
+<%--  	수정		var chang = "<c:set value="+"${qnac.commentnum }"+" />";  --%>
+<!--    수정		var change = "#"+change; -->
+<!-- 				</script> -->
 			</c:forEach>
 		</table>
 		<c:forEach var="p" begin="1" end="${qnacommentsi }">
@@ -98,15 +120,35 @@
 			</c:choose>
 		</c:forEach>
 	</div>
-	<script>
-		function changecomment(target) {
-			document.getElementById(target).disabled= !document.getElementById(target).disabled;
-			if(document.getElementById(target).disabled){
-				document.getElementById(target).focus();
-				
-			}
-		}
-	</script>
+
+		<script>
+			/*
+				function changecomment(target) {
+					document.getElementById(target).disabled= !document.getElementById(target).disabled;
+					if(document.getElementById(target).disabled){
+						document.getElementById(target).focus();
+						
+					}
+				}
+			 */
+
+			$(document).ready(function() {
+				$("#chagecancel").hide();
+				$("#change").show();
+				$("#deletesumit").show();
+
+				$(change).click(function() {
+					$(change).hide();
+					$("#deletesumit").hide();
+					$("#chagecancel").show();
+				});
+				$("#chagecancel").click(function() {
+					$("#change").show();
+					$("#deletesumit").show();
+					$("#chagecancel").hide();
+				});
+			});
+		</script>
 
 	<!-- 로그인시 댓글등록창이 보이게 한다 -->
 	<div>
