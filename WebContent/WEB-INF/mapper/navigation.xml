@@ -11,7 +11,13 @@
 		select * from member where name like #{name}
 	</select>
 	
-	<select id="dis">
-		select * from memberaddress where 
+	<select id="dis" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select member.*, memaddress.* from member, memaddress 
+  		where member.id=memaddress.id and member.name =#{name} and member.address like #{address}
 	</select>
+	
+	<select id="mdis" resultType="java.util.HashMap">
+		select * from memaddress where id=#{id}
+	</select>
+	
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import charge.model.ChargeFriendsService;
@@ -82,17 +83,12 @@ public class MainController {
 	}
 
 	@RequestMapping("/navigation")
-	public ModelAndView navigation(HttpSession id) {
+	public ModelAndView navigation(HttpSession id, HttpSession session) {
 		ModelAndView mav = new ModelAndView("t:navigation/navigation");
 		String my = navi.navi((String)id.getAttribute("id"));
-		if(my.contains("(")){
-			my = my.substring(0,my.lastIndexOf("("));
-		}
-		HashMap map = new HashMap();
-		map.put("location", "·Ôµ¥¿ùµå");
-		map.put("locX", 37.511131);
-		map.put("locY", 127.098180 );
-		mav.addObject("target", map);
+		HashMap map = navi.mydis((String)id.getAttribute("id"));
+		session.setAttribute("x", map.get("X"));
+		session.setAttribute("y", map.get("Y"));
 		mav.addObject("my",my);
 		return mav;
 	}
