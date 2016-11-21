@@ -84,16 +84,6 @@ public class MainController {
 	@RequestMapping("/navigation")
 	public ModelAndView navigation(HttpSession id) {
 		ModelAndView mav = new ModelAndView("t:navigation/navigation");
-		String my = navi.navi((String)id.getAttribute("id"));
-		if(my.contains("(")){
-			my = my.substring(0,my.lastIndexOf("("));
-		}
-		HashMap map = new HashMap();
-		map.put("location", "·Ôµ¥¿ùµå");
-		map.put("locX", 37.511131);
-		map.put("locY", 127.098180 );
-		mav.addObject("target", map);
-		mav.addObject("my",my);
 		return mav;
 	}
 

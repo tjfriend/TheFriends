@@ -134,13 +134,13 @@
 		<div align="center">
 			<h3 class="w3-text-grey" align="center">Gift</h3><br/>
 			<div align="center" class="form-group">
-				<label for="point" style="width: 7%" class="w3-text-grey"><font size="4">내 포인트</font></label><br/>
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="4">내 포인트</font></label><br/>
 				<input type="text" name="mypoint" value="${point }" readonly="readonly"
 							style="width: 10%; height: 25px; border: 1px solid #ccc; border-radius: 5px; text-align: center"/>
 				<label class="w3-text-grey">Points</label>
 			</div>
 			<div align="center" class="form-group">
-				<label for="point" style="width: 10%" class="w3-text-grey"><font size="4">선물 받을 친구</font></label><br/>
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="4">선물 받을 친구</font></label><br/>
 				<select id="gtake" style="width: 8%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
 					<c:forEach var="t" items="${list }">
 						<option>${t.FRIEND }</option>
@@ -148,12 +148,12 @@
 				</select>
 			</div>
 			<div align="center" class="form-group">
-				<label for="point" style="width: 10%" class="w3-text-grey"><font size="4">선물할 포인트</font></label><br>
+				<label for="point" style="width: 20%" class="w3-text-grey"><font size="4">선물할 포인트</font></label><br>
 				<input type="text" id="gpoint"
 							style="width: 10%; height: 25px; border: 1px solid #ccc; border-radius: 5px; text-align: center"/><br />
 			</div>
 			<div align="center" class="form-group">
-				<input type="button" value="선물하기"  id="gb" class="btn btn-default" style="height: 33px"/>
+				<input type="button" value="선물하기"  id="gb" class="btn btn-default" style="height: 33px"/><br/>
 				<font id="gt"></font>
 			</div>
 		</div>
@@ -220,6 +220,9 @@
 // 				${"#c6"}.val("");
 // 				${"#c7"}.val("");
 // 				${"#c8"}.val("");
+// 				$("#ph1").val("");
+// 				$("#ph2").val("");
+// 				$("#name").val("");
 			}else{
 				$("#rst").prop("color", "red");
 				$("#rst").text("충전 실패");
@@ -237,20 +240,25 @@
 		
 		var take = $("#gtake").val();
 		var point = $("#gpoint").val();
-		$.ajax({
-			"method" : "get",
-			"url" : "/charge/gift?take="+take+"&point="+point
-		}).done(function(txt){
-			if(txt == "true"){
-				$("#gt").prop("color", "green");
-				$("#gt").text("선물 성공");
-				$("#gpoint").val("");
-			}else{
-				$("#gt").prop("color", "red");
-				$("#gt").text("선물 실패");
-				$("#gpoint").val("");
-			}
-		})
+		if(point<=${point}){
+			$.ajax({
+				"method" : "get",
+				"url" : "/charge/gift?take="+take+"&point="+point
+			}).done(function(txt){
+				if(txt == "true"){
+					$("#gt").prop("color", "green");
+					$("#gt").text("선물 성공");
+					$("#gpoint").val("");
+				}else{
+					$("#gt").prop("color", "red");
+					$("#gt").text("선물 실패");
+					$("#gpoint").val("");
+				}
+			});
+		} else {
+			$("#gt").prop("color", "red");
+			$("#gt").text("선물포인트는 현재포인트보다 작거나 같아야 합니다.");
+		}
 	});
 	
 	function which(element){
