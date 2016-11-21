@@ -57,4 +57,61 @@ public class freeboardPage {
 		sql.close();
 		return psize;
 	}
+	
+	// °Ë»ö
+
+	public List searchfreeboard(String search, int p) {
+		int endpage = 10 * p;
+		int startpage = endpage - 9;
+		String search1 = "%" + search + "%";
+		HashMap map = new HashMap();
+		map.put("search", search1);
+		map.put("start", startpage);
+		map.put("end", endpage);
+		SqlSession sql = fac.openSession();
+		List li = sql.selectList("freeboard.freeboardsearch", map);
+		sql.close();
+		return li;
+	}
+
+	public int searchfreeboardsize(String search) {
+		SqlSession sql = fac.openSession();
+		String search1 = "%" + search + "%";
+		int size = sql.selectOne("freeboard.searchfreeboardsize", search1);
+		int psize = size % 10 == 0 ? size / 10 : size / 10 + 1;
+		sql.close();
+		return psize;
+
+	}
+
+	public List searchfreeboardmode(String search, int p, String mode) {
+		int endpage = 10 * p;
+		int startpage = endpage - 9;
+		String search1 = "%" + search + "%";
+		HashMap map = new HashMap();
+		map.put("search", search1);
+		map.put("start", startpage);
+		map.put("end", endpage);
+		map.put("mode", mode);
+		SqlSession sql = fac.openSession();
+		List li = sql.selectList("freeboard.freeboardsearchmode", map);
+		sql.close();
+		return li;
+	}
+
+	public int searchfreeboardsizemode(String search, String mode) {
+		SqlSession sql = fac.openSession();
+		String search1 = "%" + search + "%";
+		HashMap map = new HashMap();
+		map.put("mode", mode);
+		map.put("search", search1);
+		int size = sql.selectOne("freeboard.freeboardsearchmodesize", map);
+		int psize = size % 10 == 0 ? size / 10 : size / 10 + 1;
+		sql.close();
+		return psize;
+
+	}
+	
+
+	
 }

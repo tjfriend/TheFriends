@@ -42,29 +42,73 @@ public class BoardController {
 	// return mav;
 	// }
 
-	@RequestMapping("/list")
-	public ModelAndView boardList(@RequestParam(defaultValue = "1") int p,
-			@RequestParam(defaultValue = "") String mode) {
-		ModelAndView mav = new ModelAndView();
+//	@RequestMapping("/list")
+//	public ModelAndView boardList(@RequestParam(defaultValue = "1") int p,
+//			@RequestParam(defaultValue = "") String mode) {
+//		ModelAndView mav = new ModelAndView();
+//
+//		if (mode.equals("")) {
+//			List list = fb.GetRnage(p);
+//			int size = fb.size();
+//			mav.addObject("freeboarddata", list);
+//			mav.addObject("freeboardsize", size);
+//			mav.setViewName("t:freeboard/board");
+//			return mav;
+//		} else {
+//			List list = fb.GetMode(p, mode);
+//			int size = fb.casize(mode);
+//			mav.addObject("freeboarddata", list);
+//			mav.addObject("freeboardsize", size);
+//			mav.addObject("freeboardmode", mode);
+//			mav.setViewName("t:freeboard/board");
+//			return mav;
+//		}
+//	}
 
+	@RequestMapping("/list")
+	public ModelAndView boardList(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "") String mode
+			, @RequestParam (defaultValue="") String search) {
+		ModelAndView mav = new ModelAndView();
 		if (mode.equals("")) {
-			List list = fb.GetRnage(p);
-			int size = fb.size();
-			mav.addObject("freeboarddata", list);
-			mav.addObject("freeboardsize", size);
-			mav.setViewName("t:freeboard/board");
-			return mav;
+			if(search.equals("")){
+				List list = fb.GetRnage(p);  
+				int size = fb.size();
+				mav.addObject("freeboarddata", list);
+				mav.addObject("freeboardsize", size);
+				mav.setViewName("t:freeboard/board");
+				return mav;
+			}else{
+				List list = fb.searchfreeboard(search,p);
+				int size = fb.searchfreeboardsize(search);
+				mav.addObject("freeboarddata", list);
+				mav.addObject("freeboardsize", size);
+				mav.addObject("freeboardsearch", search);
+				mav.setViewName("t:freeboard/board");
+				return mav;
+		
+			}
 		} else {
+			if(search.equals("")){
 			List list = fb.GetMode(p, mode);
-			int size = fb.casize(mode);
+			int size = fb.casize(mode); 
 			mav.addObject("freeboarddata", list);
 			mav.addObject("freeboardsize", size);
 			mav.addObject("freeboardmode", mode);
 			mav.setViewName("t:freeboard/board");
 			return mav;
+			}else{
+				List list = fb.searchfreeboardmode(search, p, mode);
+				int size = fb.searchfreeboardsizemode(search, mode);
+				mav.addObject("freeboarddata", list);
+				mav.addObject("freeboardsize", size);
+				mav.addObject("freeboardsearch", search);
+				mav.addObject("freeboardmode", mode);
+				mav.setViewName("t:freeboard/board");
+				return mav;
+			}
 		}
 	}
-
+	
 	@RequestMapping("/write")
 	public ModelAndView writeboard() {
 		ModelAndView mav = new ModelAndView();
@@ -90,10 +134,11 @@ public class BoardController {
 		String id = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		List list = cs.Content(num);
+		int upinq = fw.upinquiry(num);
 		mav.addObject("freeboarddetailsdata", list);
 		mav.addObject("freeboarddetailsdata2", id);
 		mav.setViewName("t:freeboard/freeboarddetails");
-		return mav;
+		return mav; 
 	}
 
 	@RequestMapping("/freeboardupdate")
@@ -107,7 +152,6 @@ public class BoardController {
 
 	@RequestMapping("/crystal")
 	public ModelAndView make2board(int num, String title, String content, HttpSession session, String category) {
-		System.out.println("ad컨트롤러"+num+ content+ category + title);
 		int r = cs.crystal(num, content, category, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("make2sessionid", r); // 추가
@@ -134,5 +178,7 @@ public class BoardController {
 		return mav;
 
 	}
+	
+	
 
 }

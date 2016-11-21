@@ -29,4 +29,27 @@ public class NaviService {
 		ss.close();
 		return li;
 	}
+	
+	// ÁÂÇ¥°Ë»ö
+	public HashMap coordinate(String name, String address){
+		SqlSession ss = fac.openSession();
+		HashMap map = new HashMap();
+		map.put("name", name);
+		map.put("address", "%"+address+"%");
+		List<HashMap> li = ss.selectList("navi.dis",map);
+		for(int i=0; i<li.size(); i++){
+			map.put("X", Double.parseDouble((String) li.get(i).get("X")));
+			map.put("Y", Double.parseDouble((String) li.get(i).get("Y")));
+		}
+		ss.close();
+		return map;
+	}
+	
+	// »ç¿ëÀÚ ÁÂÇ¥
+	public HashMap mydis(String id){
+		SqlSession ss = fac.openSession();
+		HashMap map = ss.selectOne("navi.mdis",id);
+		ss.close();
+		return map;
+	}
 }
