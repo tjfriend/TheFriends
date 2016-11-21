@@ -45,7 +45,7 @@
 	</select>
 	<update id="distance" parameterType="java.util.HashMap">
 		update friends set
-		distance=#{distance} where friend=#{friend}
+		distance=#{distance} where id=#{id} and friend=#{friend}
 	</update>
 	<select id="latlng" resultType="java.util.HashMap">
 		select * from memaddress where
@@ -56,5 +56,8 @@
 	</select>
 	<insert id="homepage" parameterType="java.util.HashMap">
 		insert into homepage values(#{id}, #{name}, 'homeType1', 0)
+	</insert>
+	<insert id="memLocation" parameterType="java.util.HashMap">
+		insert into memaddress values(#{id}, #{x}, #{y})
 	</insert>
 </mapper>
