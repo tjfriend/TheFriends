@@ -23,13 +23,18 @@ public class FriendsService {
 		map1.put("start", startpage);
 		map1.put("end", endpage);
 		List<HashMap> list = ss.selectList("member.friends", map1);
-//		for(HashMap map : list){			//테스트 끝나면 주석 풀어야함!!!!
-//			double distance = ds.distance(id, (String)map.get("FRIEND"));
-//			HashMap map2 = new HashMap();
-//			map2.put("friend", (String)map.get("FRIEND"));
-//			map2.put("distance", distance);
-//			ss.update("member.distance", map2);
-//		}		//여기까지 주석 풀어야함!!!!
+		for(HashMap map : list){			//테스트 끝나면 주석 풀어야함!!!!
+			double distance = ds.distance(id, (String)map.get("FRIEND"));
+			HashMap map2 = new HashMap();
+			map2.put("id", id);
+			map2.put("friend", (String)map.get("FRIEND"));
+			map2.put("distance", distance);
+			ss.update("member.distance", map2);
+			map2.put("id", (String)map.get("FRIEND"));
+			map2.put("friend", id);
+			map2.put("distance", distance);
+			ss.update("member.distance", map2);
+		}		//여기까지 주석 풀어야함!!!!
 		ss.commit();
 		list = ss.selectList("member.friends", map1);
 		ss.close();

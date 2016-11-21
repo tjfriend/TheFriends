@@ -11,4 +11,7 @@
 		select * from member where name like #{name}
 	</select>
 	
+	<select id="dis">
+		select * from memberaddress where 
+	</select>
 </mapper>

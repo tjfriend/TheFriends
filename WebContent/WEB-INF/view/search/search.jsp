@@ -44,6 +44,6 @@
 	
 	function addFriend(element){
 		var friend = element.id;
-		window.open("/search/addfriend?friend="+friend, "addfriend", "width=300, height=200, left=600, top=200, resizable=no");
+		window.open("/search/addFriend?friend="+friend, "addfriend", "width=300, height=200, left=600, top=200, resizable=no");
 	}
 </script>

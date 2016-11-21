@@ -75,12 +75,6 @@ public class MainController {
 		return mav;
 	}
 
-	@RequestMapping("/event")
-	public ModelAndView event() {
-		ModelAndView mav = new ModelAndView("t:event/event");
-		return mav;
-	}
-
 	@RequestMapping("/search")
 	public ModelAndView search() {
 		ModelAndView mav = new ModelAndView("t:search/search");
@@ -94,6 +88,11 @@ public class MainController {
 		if(my.contains("(")){
 			my = my.substring(0,my.lastIndexOf("("));
 		}
+		HashMap map = new HashMap();
+		map.put("location", "·Ôµ¥¿ùµå");
+		map.put("locX", 37.511131);
+		map.put("locY", 127.098180 );
+		mav.addObject("target", map);
 		mav.addObject("my",my);
 		return mav;
 	}

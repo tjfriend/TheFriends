@@ -8,6 +8,7 @@ import org.apache.ibatis.session.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.*;
 
 @Component
 public class JoinService {
@@ -36,6 +37,23 @@ public class JoinService {
 		HashMap<String, String> homeMap = new HashMap<>();
 		homeMap.put("id", id);
 		homeMap.put("name", name);
+		
+		List<HashMap> memList = ss.selectList("member.idcheck", id);
+		String addr = add01+add02;
+		if(addr.contains("(")){
+			addr = addr.substring(0, addr.indexOf('('));
+		}
+		RestTemplate rt = new RestTemplate();
+		String url = "https://maps.googleapis.com/maps/api/geocode/json?address="+addr+"&key=AIzaSyCDR-huxTUPDmTznn7No15RNAOKOW9xHoY";
+		LinkedHashMap addrMap = rt.getForObject(url, LinkedHashMap.class);
+		LinkedHashMap liAddrMap = (LinkedHashMap)((LinkedHashMap)(((LinkedHashMap)((ArrayList)addrMap.get("results")).get(0)).get("geometry"))).get("location");
+		// id¿« x¡¬«•
+		double dd = (double)liAddrMap.get("lat");
+		String lat1 = (String.valueOf((double)liAddrMap.get("lat"))).substring(0, (String.valueOf((double)liAddrMap.get("lat"))).indexOf('.'));
+		lat1 += String.valueOf((double)liAddrMap.get("lat")).substring((String.valueOf((double)liAddrMap.get("lat"))).indexOf('.'), (String.valueOf((double)liAddrMap.get("lat")).indexOf('.'))+7);
+		// id¿« y¡¬«•
+		String lng1 = (String.valueOf((double)liAddrMap.get("lng"))).substring(0, (String.valueOf((double)liAddrMap.get("lng"))).indexOf('.'));
+		lng1 += String.valueOf((double)liAddrMap.get("lng")).substring((String.valueOf((double)liAddrMap.get("lng"))).indexOf('.'), (String.valueOf((double)liAddrMap.get("lng")).indexOf('.'))+7);
 
 		try{
 			ss.insert("member.join", memberMap);
@@ -48,6 +66,13 @@ public class JoinService {
 				ss.update("member.pointup", id);
 				ss.commit();
 			}
+			
+			HashMap insertMap = new HashMap();
+			insertMap.put("id", id);
+			insertMap.put("x", lat1);
+			insertMap.put("y", lng1);
+			ss.insert("member.memLocation", insertMap);
+			
 			ss.close();
 			return true;
 		} catch(Exception e){

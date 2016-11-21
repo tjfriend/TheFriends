@@ -5,6 +5,7 @@ import java.util.*;
 import org.apache.ibatis.session.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.web.client.*;
 
 @Component
 public class DistanceService {
@@ -13,6 +14,7 @@ public class DistanceService {
 	
 	public double distance(String id, String friend){
 		SqlSession ss = fac.openSession();
+		
 		List<HashMap> list1 = ss.selectList("member.latlng", id);
 		List<HashMap> list2 = ss.selectList("member.latlng", friend);
 		

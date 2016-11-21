@@ -140,7 +140,7 @@
 				<label class="w3-text-grey">Points</label>
 			</div>
 			<div align="center" class="form-group">
-				<label for="point" style="width: 10%" class="w3-text-grey"><font size="4">선물 받을 친구</font></label>
+				<label for="point" style="width: 10%" class="w3-text-grey"><font size="4">선물 받을 친구</font></label><br/>
 				<select id="gtake" style="width: 8%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
 					<c:forEach var="t" items="${list }">
 						<option>${t.FRIEND }</option>

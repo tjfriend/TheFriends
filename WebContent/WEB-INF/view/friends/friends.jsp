@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -12,29 +13,65 @@
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">Friends</h2>
 <div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
-	<div class="table-responsive">
-		<div align="right" style="margin-right: 50px">
-			<select id="range" style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
-				<option>이름순</option>
-				<option>방문자순</option>
-				<option>거리순</option>
-			</select>
+	<ul class=" nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#friends">친구</a></li>
+		<li><a data-toggle="tab" href="#add">친구요청</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane fade in active" id="friends">
+			<div class="table-responsive">
+				<div align="right" style="margin-right: 50px">
+					<select id="range" style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
+						<option>이름순</option>
+						<option>방문자순</option>
+						<option>거리순</option>
+					</select>
+				</div>
+				<table class="table">
+					<thead align="center">
+						<tr>
+							<td><label>#</label></td>
+							<td><label>Name</label></td>
+							<td><label>Birth Day</label></td>
+							<td><label>NickName</label></td>
+							<td><label>Distance(m)</label></td>
+							<td><label>Visitors</label></td>
+						</tr>
+					</thead>
+					<tbody id="tbody" align="center"></tbody>
+				</table>
+				<div align="center">
+					<label id="page"></label>
+				</div>
+			</div>
 		</div>
-		<table class="table">
-			<thead align="center">
-				<tr>
-					<td><label>#</label></td>
-					<td><label>Name</label></td>
-					<td><label>Birth Day</label></td>
-					<td><label>NickName</label></td>
-					<td><label>Distance(m)</label></td>
-					<td><label>Visitors</label></td>
-				</tr>
-			</thead>
-			<tbody id="tbody" align="center"></tbody>
-		</table>
-		<div align="center">
-			<label id="page"></label>
+		<div class="tab-pane fade" id="add">
+			<div class="table-responsive">
+				<div align="right" style="margin-right: 50px">
+					<select id="addRange" style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
+						<option>이름순</option>
+						<option>방문자순</option>
+						<option>날짜순</option>
+					</select>
+				</div>
+				<table class="table">
+					<thead align="center">
+						<tr>
+							<td><label>#</label></td>
+							<td><label>Name</label></td>
+							<td><label>Birth Day</label></td>
+							<td><label>NickName</label></td>
+							<td><label>Visitors</label></td>
+							<td><label>Date</label></td>
+							<td><label>Accept / Refuse</label>
+						</tr>
+					</thead>
+					<tbody id="addBody" align="center"></tbody>
+				</table>
+				<div align="center">
+					<label id="addPage"></label>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -58,6 +95,25 @@
 			}
 			$("#page").html(html);
 		});
+		$.ajax({
+			"method" : "get",
+			"url" : "/friends/request/${id}/이름순",
+			"async" : false
+		}).done(function(txt){
+			var html = "";
+			for(var i=0; i<txt.length; i++){
+				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
+				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept"+i+"("+i+")'/>&nbsp;&nbsp;";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' id='refuce+'"+i+"/></tr>";
+			}
+			$("#addBody").html(html);
+			html = "";
+			for(var i=0; i<${size}; i++){
+				html += "<a onclick='addPage(this)'>"+(i+1)+"</a>";
+			}
+			$("#addPage").html(html);
+		});
 	};
 	
 	function page(element){
@@ -73,6 +129,24 @@
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
+		});
+	}
+	
+	function page(element){
+		var page = element.innerHTML;
+		$.ajax({
+			"method" : "post",
+			"url" : "/friends/request/${id}/"+$("#addRange").prop("value")+"/?page="+page,
+			"async" : false
+		}).done(function(txt){
+			var html = "";
+			for(var i=0; i<txt.length; i++){
+				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
+				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept"+i+"("+i+")'/>&nbsp;&nbsp;";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' id='refuce+'"+i+"/></tr>";
+			}
+			$("#addBody").html(html);
 		});
 	}
 
@@ -102,4 +176,42 @@
 			$("#tbody").html(html);
 		});
 	});
+	
+	$("#addRange").change(function(){
+		var val = $("#addRange").prop("value");
+		$.ajax({
+			"method" : "get",
+			"url" : "/friends/request/${id}/"+val,
+			"async" : false
+		}).done(function(txt){
+			var html = "";
+			for(var i=0; i<txt.length; i++){
+				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
+				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
+				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept"+i+"("+i+")'/>&nbsp;&nbsp;";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' id='refuce+'"+i+"/></tr>";
+			}
+			$("#addBody").html(html);
+		});
+	});
+	
+	function accept0(txt){
+		var name = "";
+		for(var i=0; i<10; i++){
+			if(txt==i){
+				name = $("#"+i).html();
+				break;
+			}
+		}
+		$.ajax({
+			"method" : "get",
+			"url" : "/friends/accept/"+name,
+			"async" : false
+		}).done(function(txt){
+			if(txt==true){
+				alert("수락되었습니다.");
+				location.href="/friends/${id }";
+			}
+		});
+	}
 </script>

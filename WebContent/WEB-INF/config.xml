@@ -15,12 +15,12 @@
 	<context:component-scan base-package="searchfriend" />
 	<context:component-scan base-package="QnA" />
 	<context:component-scan base-package="charge" />
-	<context:component-scan base-package="QnA" />
 	<context:component-scan base-package="board" />
 	<context:component-scan base-package="friends" />
 	<context:component-scan base-package="notice" />
 	<context:component-scan base-package="homepage" />
 	<context:component-scan base-package="navigation" />
+	<context:component-scan base-package="event" />
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		id="beanNameViewResolver" p:order="2" />
