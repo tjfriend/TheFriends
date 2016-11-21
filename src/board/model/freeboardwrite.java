@@ -33,4 +33,15 @@ public class freeboardwrite {
 			return -1;
 		}
 	}
+	
+	// 조회수 증가
+	public int upinquiry(int num){
+		HashMap map = new HashMap();
+			map.put("num", num);
+		SqlSession sql = fac.openSession();
+		int up = sql.update("freeboard.upinqu",map);
+		sql.close();
+		return up;
+				
+	}
 }
