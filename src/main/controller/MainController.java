@@ -85,11 +85,15 @@ public class MainController {
 	@RequestMapping("/navigation")
 	public ModelAndView navigation(HttpSession id, HttpSession session) {
 		ModelAndView mav = new ModelAndView("t:navigation/navigation");
-		String my = navi.navi((String)id.getAttribute("id"));
-		HashMap map = navi.mydis((String)id.getAttribute("id"));
-		session.setAttribute("x", map.get("X"));
-		session.setAttribute("y", map.get("Y"));
-		mav.addObject("my",my);
+		if(id.getAttribute("id")!=null){
+			String my = navi.navi((String)id.getAttribute("id"));
+			HashMap map = navi.mydis((String)id.getAttribute("id"));
+			session.setAttribute("x", map.get("X"));
+			session.setAttribute("y", map.get("Y"));
+			mav.addObject("my",my);
+		} else {
+			mav.setViewName("t:index");
+		}
 		return mav;
 	}
 

@@ -9,48 +9,38 @@
 
 <div class="w3-row" style="margin-top: 50px; min-height: 600px;">
 	<h2>Navigation</h2>
-	출발지(내주소) <input type="text" id="myhome" value="${my }" size="30" /> <br />
+	출발지(내주소) <input type="text" id="myhome" value="${my }" size="30" />
+	<br />
 	찾을 친구이름 <input type="text" id="friend" list="rst" size="30" />
-	<datalist id="rst" ></datalist>
-	<br /> <input type="button" value="찾기" id="find" />
+	<datalist id="rst">
+	</datalist>
+	<br />
+	<input type="button" value="찾기" id="find" />
 	<div id="map" style="min-height: 500px;"></div>
 </div>
 <script>
-	var address;
 	var name;
-	$("#friend").keyup(function() {
+	var address;
+	$("#friend").on("input", function() {
 		$.ajax({
 			"url" : "/navi/find?friend=" + $("#friend").val()
-		}).done(function(txt) {
+		}).done(function(txt){
 			$("#rst").html(txt);
-			
-			$("#friend").on('input', function() {
-				var con = $(this).val();
-				
-				
-				alert(con);
-				
-				
-				
-			/*	
-				$("#rst").find("option").each(function() {
-					if ($(this).val() == con) {
-						address = $(this).val();
-						name = address.slice(0,address.indexOf(":"));
-						var end = address.indexOf(":") + 1;
-						address = address.slice(end);
-						if (address.indexOf("(") != -1) {
-							var s = address.indexOf("(");
-							address = address.slice(0, s);
-						}
-					}
-					if (address.length != 0)
-						$("#friend").val(address);
-				})
-			*/
-			})
-		})
-	});
+		});
+		
+		var old = $(this).val();
+    	$("#rst").find("option").each(function() {
+    		if($(this).val() == old) {
+    			var temp = $(this).val();
+    			name = temp.slice(0, temp.indexOf(":"));
+    			address = temp.slice(temp.indexOf(":")+1);
+    			if (address.indexOf("(") != -1) {
+					address = address.slice(0, address.indexOf("("));
+				}
+    			$("#friend").val(address);
+      		}
+    	});
+  	});
 			
 	var dx;
 	var dy;
@@ -102,6 +92,5 @@
 				}
 			});
 		}
-	
 </script>
 
