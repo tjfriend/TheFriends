@@ -16,7 +16,7 @@ import homepage.model.PictureUploadService;
 
 @Controller
 @RequestMapping("/picture")
-public class PictureUploadController {
+public class PictureController {
 	@Autowired
 	PictureUploadService pic;
 	

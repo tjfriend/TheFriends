@@ -29,7 +29,7 @@
 <a href="" class="w3-padding">
 	<i class="glyphicon glyphicon-comment w3-margin-right"></i>BOARD
 </a>
-<a href="" class="w3-padding">
+<a href="/picture/pictureview" class="w3-padding">
 	<i class="glyphicon glyphicon-picture w3-margin-right"></i>PICTURE
 </a>
 <a href="" class="w3-padding">
