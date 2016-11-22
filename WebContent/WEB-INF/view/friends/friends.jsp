@@ -85,7 +85,7 @@
 		}).done(function(txt){
 			var html = "";
 			for(var i=0; i<txt.length; i++){
-				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><font color='blue'><label onclick='friends(this)'>"+txt[i].NAME+"</label></font></td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
@@ -125,7 +125,7 @@
 		}).done(function(txt){
 			var html = "";
 			for(var i=0; i<txt.length; i++){
-				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><font color='blue'><label onclick='friends(this)'>"+txt[i].NAME+"</label></font></td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);
@@ -170,7 +170,7 @@
 		}).done(function(txt){
 			var html = "";
 			for(var i=0; i<txt.length; i++){
-				html += "<tr><td>"+txt[i].RNUM+"</td><td><label onclick='friends(this)'>"+txt[i].FRIEND+"</label></td><td>"+txt[i].BIRTH+"</td>";
+				html += "<tr><td>"+txt[i].RNUM+"</td><td><font color='blue'><label onclick='friends(this)'>"+txt[i].NAME+"</label></font></td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].DISTANCE+"</td><td>"+txt[i].VISIT+"</td></tr>";
 			}
 			$("#tbody").html(html);

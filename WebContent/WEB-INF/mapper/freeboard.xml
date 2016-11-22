@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="freeboard">
 	<select id="pageNum" parameterType="java.util.HashMap"
-		resultType="board.model.ReviewData">
+		resultType="java.util.HashMap">
 	<![CDATA[
 
 	select * from
@@ -15,7 +15,7 @@
 	</select>
 
 	<select id="modeNum" parameterType="java.util.HashMap"
-		resultType="board.model.ReviewData">
+		resultType="java.util.HashMap">
 	<![CDATA[
 
 	select * from
@@ -62,6 +62,53 @@
 		resultType="java.util.HashMap">
 
 		select * from freeboard where category = #{category}
+	</select>
+	<!-- 조회수 증가 -->
+		<update id="upinqu" parameterType="java.util.HashMap">
+			update freeboard set inquiry =
+			inquiry+1 where num = #{num }
+		</update>
+
+<!-- 	<update id="upinqu" parameterType="java.util.HashMap"> -->
+<!-- 	UPDATE freeboard SET inquiry = IFNULL(inquiry,0) + 1 WHERE num = #{num} LIMIT 1 -->
+<!-- 	</update> -->
+		
+	
+	<!-- 검색 -->
+
+	<select id="freeboardsearchmode" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	<![CDATA[
+		select * from
+       (select rownum rnum, temp.* from	(
+		  select * from freeboard where (title like #{search } or content like #{search } ) and category = #{mode }  order by num desc
+	  ) temp ) temp2
+   	where temp2.rnum >=#{start } and temp2.rnum <= #{end }
+	
+	]]>
+	</select>
+
+	<select id="freeboardsearchmodesize" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from freeboard where (title like #{search } or
+		content like #{search })and category = #{mode }
+	</select>
+
+	<select id="freeboardsearch" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	<![CDATA[
+	select * from
+       (select rownum rnum, temp.* from	(
+		  select * from freeboard where  title like #{search } or content like #{search }  order by num desc
+	  ) temp ) temp2
+   	where temp2.rnum >=#{start } and temp2.rnum <=#{end }	
+	]]>
+	</select>
+
+	<select id="searchfreeboardsize" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from freeboard where title like #{search } or
+		content like #{search }
 	</select>
 
 </mapper>
