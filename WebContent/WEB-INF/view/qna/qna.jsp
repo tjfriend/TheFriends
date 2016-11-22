@@ -26,12 +26,30 @@
 			<option value="기타" ${qnamode eq '기타'?'selected':'' }>기타</option>
 		</select>
 	</form>
-
 	<script>
 		document.getElementById("sel").addEventListener("change", function() {
 			document.getElementById("ctg").submit();
 		});
 	</script>
+
+	<c:choose>
+	<c:when test="${p==1 }">
+	<table class="table">
+		<tr>
+		<td style="color: blue; "><h3>자주 묻는 질문 </h3> </td>
+		</tr>
+		<c:forEach var = "best" items="${qnabest }">
+		<tr>
+			<th><a href="/qna/details/${best.NUM}">${best.TITLE }</a></th>
+		</tr>
+			
+		</c:forEach>
+	
+	</table>
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>
+	</c:choose>
 
 	<table class="table">
 		<tr>
@@ -83,13 +101,16 @@
 	<c:forEach var="i" begin="1" end="${qnasize }">
 		<c:choose>
 			<c:when test="${current == i }">
-				<b>${u }</b>
+				<b></b>
 			</c:when>
 			<c:otherwise>
 				<a href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }">${i }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
+
+
+
 
 	<br />
 	<hr />

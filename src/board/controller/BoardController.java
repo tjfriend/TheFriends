@@ -130,15 +130,32 @@ public class BoardController {
 	}
 
 	@RequestMapping("/freeboarddetails")
-	public ModelAndView detailsboard(@RequestParam(defaultValue = "-1") int num, HttpSession session) {
+	public ModelAndView detailsboard(@RequestParam(defaultValue = "-1") int num, HttpSession session, HttpServletRequest req, HttpServletResponse resp) {
 		String id = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		List list = cs.Content(num);
-		int upinq = fw.upinquiry(num);
+		
+		Cookie[] ar = req.getCookies();
+		int n = 0;
+		for(Cookie c : ar){
+			if(c.getName().equals("board#"+num)){
+				n = 1;
+				break;
+			}
+		}
+		if(n==0){
+			fw.upinquiry(num);
+			Cookie cc = new Cookie("board#"+num, "board#"+num);
+			cc.setMaxAge(60*30);
+			cc.setPath("/");
+			resp.addCookie(cc);
+		}
+		
 		mav.addObject("freeboarddetailsdata", list);
 		mav.addObject("freeboarddetailsdata2", id);
 		mav.setViewName("t:freeboard/freeboarddetails");
 		return mav; 
+		
 	}
 
 	@RequestMapping("/freeboardupdate")
@@ -179,6 +196,6 @@ public class BoardController {
 
 	}
 	
-	
+
 
 }

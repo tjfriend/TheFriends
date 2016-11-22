@@ -91,6 +91,14 @@
 		select * from qna where num = #{num }
 	</select>
 
+<!-- 	댓글 수정 -->
+
+	<update id="qnacommentupdate" parameterType="java.util.HashMap">
+		update qnacomment  set memo = #{memo }, day=sysdate where commentnum = #{commentnum}
+	
+	</update>
+	
+
 	<!-- 게시글 삭제 -->
 
 	<delete id="qnadelete" parameterType="java.util.HashMap">
@@ -146,5 +154,18 @@
 		select count(*) from qna where title like #{search } or
 		content like #{search }
 	</select>
+
+<!-- 	조회수 많은순 -->
+	<select id="qnabest" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	<![CDATA[
+		select * from
+       (select rownum rnum, temp.* from	(
+		  select * from qna order by inquiry desc
+	  ) temp ) temp2
+   	where temp2.rnum <= 3
+   	]]>
+	</select>
+
+
 
 </mapper>
