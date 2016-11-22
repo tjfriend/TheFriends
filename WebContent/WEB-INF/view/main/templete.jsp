@@ -87,7 +87,7 @@ body, h1, h2, h3, h4, h5 {
 		}
 		
 		function onClickHome(id){
-			window.open("/homepage/"+id, "myHome", "width=1000, height=600, left=300, top=100, resizable=no");
+			window.open("/homepage/"+id, "myHome", "width=1200, height=700, left=300, top=100, resizable=no");
 		}
 	</script>
 </body>

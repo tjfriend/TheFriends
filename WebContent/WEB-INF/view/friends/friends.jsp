@@ -157,7 +157,7 @@
 			"url" : "/homepage/myhome/" + name,
 			"async" : false
 		}).done(function(txt) {
-			window.open("/homepage/" + txt, "myHome", "width=1200, height=800, left=300, top=100, resizable=no");
+			window.open("/homepage/" + txt, "myHome", "width=1200, height=700, left=300, top=100, resizable=no");
 		});
 	};
 	

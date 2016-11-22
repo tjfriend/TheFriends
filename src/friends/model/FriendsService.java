@@ -14,6 +14,11 @@ public class FriendsService {
 	@Autowired
 	DistanceService ds;
 	
+	public List homeFriends(String id){
+		SqlSession ss = fac.openSession();
+		return ss.selectList("friends.homeFriends", id);
+	}
+	
 	public List friends(String id, int p){
 		int endpage = 10*p;
 		int startpage = endpage-9;

@@ -21,6 +21,12 @@ public class FriendsController {
 	@Autowired
 	AcceptService as;
 	
+	@RequestMapping("/home/{id}")
+	@ResponseBody
+	public List homeFriends(@PathVariable(name="id")String id){
+		return fs.homeFriends(id);
+	}
+	
 	@RequestMapping("/{id}")
 	public ModelAndView friends(@PathVariable(name="id")String id, @RequestParam(defaultValue="1", name="page")int p){
 		ModelAndView mav = new ModelAndView("t:friends/friends");
