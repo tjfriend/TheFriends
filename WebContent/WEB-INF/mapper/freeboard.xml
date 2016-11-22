@@ -68,6 +68,7 @@
 			update freeboard set inquiry =
 			inquiry+1 where num = #{num }
 		</update>
+		
 
 <!-- 	<update id="upinqu" parameterType="java.util.HashMap"> -->
 <!-- 	UPDATE freeboard SET inquiry = IFNULL(inquiry,0) + 1 WHERE num = #{num} LIMIT 1 -->

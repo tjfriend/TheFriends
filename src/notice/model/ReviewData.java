@@ -10,7 +10,7 @@ public class ReviewData {
 	String id;
 	String time;
 	int inqutry;
-	public int getNum() {
+	public int getNum() {   
 		return num;
 	}
 	public void setNum(int num) {
