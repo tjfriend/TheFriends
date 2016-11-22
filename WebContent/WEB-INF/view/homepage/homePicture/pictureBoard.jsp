@@ -13,7 +13,7 @@
 				${i.ID } <br />
 				${i.TITLE } <br />
 				${i.CONTENT } <br />
-			<img src="/files/${i.UUID }" />
+			<img src="/files/${i.UUID }" style="width: 100px" />
 			<br />
 		</c:forEach>
 	</c:when>

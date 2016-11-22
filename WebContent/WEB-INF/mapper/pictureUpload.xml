@@ -13,7 +13,7 @@
 		select * from pictureboard where id=#{id}
 	</select>
 	
-	
+	<!-- -->
 	
 	
 </mapper>
