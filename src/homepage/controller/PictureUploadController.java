@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,16 +34,12 @@ public class PictureUploadController {
 		if(uuid != null){
 			a = pic.upload((String)id.getAttribute("id"), title, content, picture, uuid);
 		}
-		if(a==1){
-			ma.addObject("a",a);
-		}else{
-			ma.addObject("a",a);
-		}
+		ma.addObject("a",a);
 		return ma;
 	}
 	
 	@RequestMapping("/pictureview")
-	public ModelAndView view(HttpSession id){
+	public ModelAndView view(HttpSession id, @RequestParam(name="a", defaultValue="2")int a){
 		List li = pic.view((String)id.getAttribute("id"));
 		ModelAndView ma = new ModelAndView("t:homepage/homePicture/pictureBoard");
 		if(li.size() != 0){
@@ -50,6 +47,7 @@ public class PictureUploadController {
 		}else{
 			ma.addObject("li","null");
 		}
+		ma.addObject("a",a);
 		return ma;
 	}
 }

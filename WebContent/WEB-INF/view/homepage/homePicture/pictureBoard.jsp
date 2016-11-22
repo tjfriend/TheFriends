@@ -19,18 +19,15 @@
 	</c:when>
 	<c:otherwise>
 			사진이 없습니다
-		</c:otherwise>
+	</c:otherwise>
 </c:choose>
-
-<c:choose>
-	<c:if test="${a.containsKey() == true }">
-		<c:if test="${a==0 || a==1 }">
+	<c:if test="${a == 0 || a == 1 }">
+		<c:choose>
 			<c:when test="${a == 1 }">
 				<script>alert("업로드 성공");</script>
 			</c:when>
 			<c:otherwise>
 				<script>alert("업로드 실패");</script>
 			</c:otherwise>
-		</c:if>
+		</c:choose>
 	</c:if>
-</c:choose>
