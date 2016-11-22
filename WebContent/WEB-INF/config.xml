@@ -21,6 +21,7 @@
 	<context:component-scan base-package="homepage" />
 	<context:component-scan base-package="navigation" />
 	<context:component-scan base-package="event" />
+	<context:component-scan base-package="myinfo" />
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		id="beanNameViewResolver" p:order="2" />
