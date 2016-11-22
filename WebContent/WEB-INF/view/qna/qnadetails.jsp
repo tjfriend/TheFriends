@@ -9,11 +9,6 @@
 	
 </script>
 
-<!-- 테스트용도 -->
-<div>
-	<input type="button" value="테스트" onclick="self.location='/qna/test';">
-</div>
-<!-- 테스트 끝 -->
 
 <div align="right">
 	<input type="button" value="목록보기" onClick="self.location='/qna/list';">
@@ -79,34 +74,59 @@
 		<table class="table">
 			<c:forEach var="qnac" items="${qnacommentda }">
 				<tr>
-					<th><input type="text" value="text${qnac.commentnum }"> </th>
 					<th>${qnac.id }</th>
 					<td>${qnac.day }</td>
 					<td align="right">
-						<%-- 						<input type="button" value="수정" id="change" onclick="changecomment('memo_${qnac.commentnum }')"> --%>
-						<input type="button" value="수정" id="${qnac.commentnum }">
-						<input type="button" value="수정취소"
-						id="chagecancel">
+						<%-- 
+						<input type="button" value="수정" id="change" onclick="changecomment('memo_${qnac.commentnum }')"> --%>
+					<c:choose>
+		<c:when test="${loginid == details.ID }">
+						<input type="button" value="수정" id="change${qnac.commentnum }"
+						onclick="change(this)" class="change"> <input
+						type="button" value="수정취소" id="chagecancel${qnac.commentnum }"
+						class="changeCancel" onclick="changeCancel(this)">
 
 						<form action="/qna/commentdelete">
 							<input type="hidden" name="commentnum"
 								value="${qnac.commentnum }"> <input type="hidden"
 								name="num" value="${details.NUM }"> <input type="submit"
-								value="삭제" id="deletesumit">
+								value="삭제" id="deletesumit${qnac.commentnum }"
+								class="deleteSumit">
 						</form>
+						</c:when>
+						<c:otherwise></c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
-				<tr>
-					<td>${qnac.memo }</td>
-					<%-- <td><textarea rows="3" cols="100%" id="memo_${qnac.commentnum }" --%>
-					<%-- 	disabled="disabled" style="border: 1px; resize: none;">${qnac.memo }</textarea></td> --%>
 
+				<tr>
+			<td>
+						<form action="/qna/commentupdate">
+					<textarea rows="3" cols="80"
+							id="changememo${qnac.commentnum }" class="changeMemo"
+							disabled="disabled" style="border: 1px; resize: none;">${qnac.memo }</textarea>
+						<div style="float: left; margin-right: 10">
+							<textarea rows="3" cols="80" id="memo${qnac.commentnum }"
+								class="memo" style="resize: none;" name="memo">${qnac.memo }</textarea>
+						</div>
+						<div style="float: left; left:">
+							<input type="hidden" name="commentnum"
+								value="${qnac.commentnum }"><input type="hidden"
+								name="num" value="${details.NUM }"> <input type="submit"
+								value="수정완료" style="width: 80px; height: 66px;"
+								id="changecubmit${qnac.commentnum }" class="changeCubmit">
+							<%-- 					<td><textarea rows="3" cols="100%" id="memo_${qnac.commentnum }" --%>
+							<%-- 						disabled="disabled" style="border: 1px; resize: none;">${qnac.memo }</textarea></td> --%>
+						</div>
+						</form>
 				</tr>
-				
-<!-- 				<script> -->
-<%--  	수정		var chang = "<c:set value="+"${qnac.commentnum }"+" />";  --%>
-<!--    수정		var change = "#"+change; -->
-<!-- 				</script> -->
+
+
+
+				<!-- 				<script> -->
+				<%--  	수정		var chang = "<c:set value="+"${qnac.commentnum }"+" />";  --%>
+				<!--    수정		var change = "#"+change; -->
+				<!-- 				</script> -->
 			</c:forEach>
 		</table>
 		<c:forEach var="p" begin="1" end="${qnacommentsi }">
@@ -121,34 +141,39 @@
 		</c:forEach>
 	</div>
 
-		<script>
-			/*
-				function changecomment(target) {
-					document.getElementById(target).disabled= !document.getElementById(target).disabled;
-					if(document.getElementById(target).disabled){
-						document.getElementById(target).focus();
-						
-					}
-				}
-			 */
+	<script>
+		function change(element) {
+			var id = element.id;
+			var num = id.substring(id.indexOf('e') + 1);
+			$("#change" + num).hide();
+			$("#deletesumit" + num).hide();
+			$("#chagecancel" + num).show();
+			$("#memo" + num).show();
+			$("#changecubmit" + num).show();
+			$("#changememo" + num).hide();
+		}
 
-			$(document).ready(function() {
-				$("#chagecancel").hide();
-				$("#change").show();
-				$("#deletesumit").show();
+		function changeCancel(element) {
+			var id = element.id;
+			var num = id.substring(id.indexOf('l') + 1);
+			$("#change" + num).show();
+			$("#changememo" + num).show();
+			$("#deletesumit" + num).show();
+			$("#chagecancel" + num).hide();
+			$("#changecubmit" + num).hide();
+			$("#memo" + num).hide();
+		}
 
-				$(change).click(function() {
-					$(change).hide();
-					$("#deletesumit").hide();
-					$("#chagecancel").show();
-				});
-				$("#chagecancel").click(function() {
-					$("#change").show();
-					$("#deletesumit").show();
-					$("#chagecancel").hide();
-				});
-			});
-		</script>
+		$(document).ready(function() {
+			$(".changeCancel").hide();
+			$(".change").show();
+			$(".changeMemo").show();
+			$(".deleteSumit").show();
+			$(".memo").hide();
+			$(".changeCubmit").hide();
+
+		});
+	</script>
 
 	<!-- 로그인시 댓글등록창이 보이게 한다 -->
 	<div>

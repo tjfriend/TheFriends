@@ -20,7 +20,7 @@
 					<td><label>#</label></td>
 					<td><label>선물한 친구</label></td>
 					<td><label>선물한 포인트</label></td>
-					<td><label>충전일</label></td>
+					<td><label>사용일</label></td>
 				</tr>
 			</thead>
 			<c:if test="${list.size()!=0 }">

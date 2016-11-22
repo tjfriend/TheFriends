@@ -43,6 +43,7 @@ public class QnAcontroller {
 	}
 
 
+	// 조회수 많은거3개 , 리스트 들
 	@RequestMapping("/list")
 	public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "") String mode
 			, @RequestParam (defaultValue="") String search) {
@@ -53,6 +54,12 @@ public class QnAcontroller {
 				int size = qp.size();
 				mav.addObject("qnadata", lis);
 				mav.addObject("qnasize", size);
+				if(p==1){
+					SqlSession sql = fac.openSession();
+					List best = sql.selectList("qna.qnabest");
+					mav.addObject("qnabest",best);
+					mav.addObject("p",p);
+				}
 				mav.setViewName("t:qna/qna");
 				return mav;
 			}else{
@@ -106,30 +113,8 @@ public class QnAcontroller {
 		return mav;
 
 	}
-/* 
-	@RequestMapping("/details/{num}")
-	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
-			HttpSession session) {
-		String id = (String) session.getAttribute("id");
-		HashMap map = new HashMap();
-		map.put("num", num);
-		List list = qp.Getcommentpage(p, num);
-		int sizecom = qp.commentsize(num);
-		int upinq = qw.upinquiry(num);
-		SqlSession sql = fac.openSession();
-		HashMap data = sql.selectOne("qna.qnadetails", map);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("loginid", id);
-		mav.addObject("details", data);
-		mav.addObject("qnacommentda", list);
-		mav.addObject("qnacommentsi", sizecom);
-		mav.setViewName("t:qna/qnadetails");
 
-		return mav;
-	}
-
-*/
-	// 실험
+	
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
 			HttpSession session,@CookieValue(name = "count", required = false) String countup) {
@@ -156,7 +141,8 @@ public class QnAcontroller {
 		String id = (String) session.getAttribute("id");
 		int r = qw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/qna/details/" + num + "?p=" + p);
+		int si = qp.commentsize(num);
+		mav.setViewName("redirect:/qna/details/" + num + "?p="+si);
 		return mav;
 	}
 
@@ -195,5 +181,16 @@ public class QnAcontroller {
 		mav.setViewName("redirect:/qna/details/" + num);
 		return mav;
 	}
+	
+	// 댓글 수정
+	@RequestMapping("/commentupdate")
+	public ModelAndView commentupdate(@RequestParam(name = "memo")String memo,@RequestParam(name = "commentnum") int commentnum,@RequestParam(name = "num") int num){
+		int r = qw.CommentAdjust(memo, commentnum);
+		ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/qna/details/"+num);
+		return mav;
+		
+	}
 
+	
 }

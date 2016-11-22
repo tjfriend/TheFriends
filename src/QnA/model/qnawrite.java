@@ -76,6 +76,18 @@ public class qnawrite {
 		return li;
 	}
 	
+	// 댓글 수정 
+	
+	public int CommentAdjust(String memo,int commentnum){
+		HashMap map = new HashMap();
+			map.put("commentnum", commentnum);
+			map.put("memo", memo);
+		SqlSession sql = fac.openSession();
+		int li = sql.update("qna.qnacommentupdate",map);
+		sql.close();
+		return li;
+	}
+	
 	// 조회수 증가
 	public int upinquiry(int num){
 		HashMap map = new HashMap();
@@ -86,5 +98,6 @@ public class qnawrite {
 		return up;
 				
 	}
+
 
 }
