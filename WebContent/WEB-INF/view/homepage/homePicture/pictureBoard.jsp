@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	function reple(idx){
+		alert(idx);
+	}
+</script>
 
 <h2>사진첩</h2>
 
@@ -15,6 +20,7 @@
 				${i.CONTENT } <br />
 			<img src="/files/${i.UUID }" style="width: 100px" />
 			<br />
+			<input type="button" value="댓글달기" onclick="reple(${i.NUM})"/>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
