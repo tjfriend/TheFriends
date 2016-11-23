@@ -14,12 +14,16 @@
 				${i.CONTENT } <br />
 				<img src="/files/${i.UUID }" />
 				<br />
-			</c:forEach>
-		</c:when>
-		<c:otherwise>
+			<a href="/picture/reple?num=${i.NUM }&file=/files/${i.UUID}"><img src="/files/${i.UUID }" style="width: 100px" /></a>
+			<br />
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
 			사진이 없습니다
 	</c:otherwise>
-	</c:choose>
+</c:choose>
+
+>>>>>>> branch 'master' of https://github.com/tjfriend/TheFriends.git
 	<c:if test="${a == 0 || a == 1 }">
 		<c:choose>
 			<c:when test="${a == 1 }">

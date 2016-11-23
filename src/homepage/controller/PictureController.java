@@ -65,4 +65,14 @@ public class PictureController {
 		ma.addObject("a",a);
 		return ma;
 	}
+	
+	// 댓글등록 페이지
+	@RequestMapping("/reple")
+	public ModelAndView reple(@RequestParam(name="num") int num, @RequestParam(name="file") MultipartFile file){
+		ModelAndView ma = new ModelAndView("t:homepage/homePicture/pictureReple");
+		
+		
+		return ma;
+		
+	}
 }
