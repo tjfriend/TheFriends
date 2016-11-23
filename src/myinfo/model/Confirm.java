@@ -19,6 +19,7 @@ public class Confirm {
 			map.put("pass", pass);
 		SqlSession sql = fac.openSession();
 		List list = sql.selectList("myinfo.Confirm",map);
+		
 		sql.close();
 		return list;
 		
@@ -41,4 +42,29 @@ public class Confirm {
 		return up;
 		
 	}
+	// 개인정보수정
+		public int changemyinfo(String id,String birth,String email,String email2, String add01,String add02,
+				String Eamiloff,String addressoff,String birthoff){
+			System.out.println("서비스 id: "+id+"//birth//"+birth+"//ema//"+email+"//ema2//"+email2+"//add//"
+						+add01+"//qwr//"+add02+"//eaof//"+Eamiloff+"//adof//"+addressoff+"//birof//"+birthoff);
+				String email3 = email+"@"+email2;
+				String add03 = add01+" "+add02;
+				if(Eamiloff != null)
+					email3 = "비공개";
+				if(addressoff != null)
+					add03 = "비공개";
+				if(birthoff != null)
+					birth = "비공개";
+			HashMap map = new HashMap();
+				map.put("id", id);
+				map.put("email", email3);
+				map.put("address", add03);
+				map.put("birth", birth);
+				System.out.println("map : "+map);
+			SqlSession sql = fac.openSession();
+			int upda = sql.update("myinfo.changemyinfo",map);
+			System.out.println("up : "+upda);
+			sql.close();
+			return upda;
+		}
 }

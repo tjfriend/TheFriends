@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -8,7 +9,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
 <style>
 hre {
 	display: block;
@@ -76,21 +76,7 @@ hre {
 <div id="ChangeInfodiv" align="center">
 	<hre></hre>
 	<br />
-	<c:forEach var="info" items="${confirm }">
-		<script>
-		$("#selMail_s").change(function() {
-			var sel = $("#selMail_s").prop("value");
-			var email = $("#email2_s");
-			if (sel == "직접입력") {
-				email.val("");
-				email.prop("readonly", null);
-			} else {
-				email.val(sel);
-				email.prop("readonly", "readonly");
-			}
-		});
-		</script>
-
+	<form action="/myinfo/changeoff">
 		<div class="w3-hide-large">
 			<label style="width: 30%"><font size="4">ID</font></label> <input
 				type="text" class="form-control" style="width: 35%"
@@ -98,28 +84,28 @@ hre {
 
 		</div>
 		<div class="w3-hide-large">
-			<label for="name_s" style="width: 30%"><font size="4">Name</font></label>
-			<input type="text" id="name_s" name="name_s" class="form-control"
+			<label for="name" style="width: 30%"><font size="4">Name</font></label>
+			<input type="text" id="name" name="name" class="form-control"
 				style="width: 35%" value="${info.NAME }" disabled="disabled" />
 		</div>
 		<div class="w3-hide-large">
-			<label for="nickname_s" style="width: 30%"><font size="4">NickName</font></label>
-			<input type="text" id="nickname_s" name="nickname_s"
-				class="form-control" style="width: 35%" value="${info.NICKNAME }"
-				disabled="disabled" />
+			<label for="nickname" style="width: 30%"><font size="4">NickName</font></label>
+			<input type="text" id="nickname" name="nickname" class="form-control"
+				style="width: 35%" value="${info.NICKNAME }" disabled="disabled" />
 		</div>
-
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
-				<label for="email_s" style="width: 30%"><font size="4">Email</font></label><br />
-				<input type="text" id="email_s" name="email_s"
+				<label for="email" style="width: 30%"><font size="4">Email</font></label><font
+					size="2">비공개 : &nbsp;</font><input type="checkbox" name="Eamiloff" ${fn:split(info.EMAIL,'@')[0] eq '비공개'?'checked':'' }
+					value="Emailoff" ><br /> <input type="text" id="email"
+					name="email"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					placeholder="Email" value="123" /> <label>@</label> <input
-					type="text"
+					placeholder="Email" value="${fn:split(info.EMAIL,'@')[0] }" /> <label>@</label>
+				<input type="text" value="${fn:split(info.EMAIL,'@')[1] }"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					id="email2_s" name="email2_s" placeholder="직접입력" /> <select
+					id="email2" name="email2" placeholder="직접입력" /> <select
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
-					id="selMail_s">
+					id="selMail">
 					<option>직접입력</option>
 					<option>naver.com</option>
 					<option>daum.net</option>
@@ -131,37 +117,41 @@ hre {
 		</div>
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
-				<label for="birth_s" style="width: 30%"><font size="4">Birth
-						Day</font></label> <input type="date" id="birth_s" name="birth_s"
-					class="form-control" style="width: 45%" placeholder="yyyymmdd" />
+				<label for="birth" style="width: 30%"><font size="4">Birth
+						Day</font></label><font size="2">비공개 : &nbsp;</font><input type="checkbox" ${fn:split(info.BIRTH,'-')[0] eq '비공개'?'checked':'' }
+					name="Birthoff" value="Birthoff"> <input type="date"
+					id="birth" name="birth" class="form-control" style="width: 45%"
+					placeholder="yyyymmdd"
+					value="${fn:split(info.BIRTH,'-')[0]}-${fn:split(info.BIRTH,'-')[1]}-${fn:split(fn:split(info.BIRTH,'-')[2],' ')[0]}" />
 			</div>
 		</div>
 
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
-				<label for="address_s" style="width: 30%"><font size="4">Address</font></label><br />
-				<input type="text" id="post_s" name="post_s"
+				<label for="address" style="width: 30%"><font size="4">Address</font></label><font
+					size="2">비공개 : &nbsp;</font><input type="checkbox" ${add01 eq '비공개'?'checked':'' }
+					name="Addressoff" value="Addressoff"><br /> <input
+					type="text" id="post" name="post"
 					style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Post Number" /> <input
 					type="button" class="btn btn-default" style="width: 40%"
 					onclick="searchPost()" value="우편번호 찾기" /><br /> <input
-					type="text" id="add01_s" name="add01_s"
+					type="text" id="add01" name="add01"
 					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Address" /> <input type="text"
-					id="add02_s" name="add02_s"
+					id="add02" name="add02"
 					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					placeholder="Detailed Address" />
 			</div>
 		</div>
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
-				<input type="button" id="submit_s" value="수정완료"
+				<input type="submit" id="submit" value="수정완료"
 					style="width: 35%; background-color: #4CAF50; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer;" /><br />
-				<font id="joinrst_s"></font>
+				<font id="joinrst"></font>
 			</div>
 		</div>
-	</c:forEach>
-
+	</form>
 </div>
 
 <script>
@@ -251,11 +241,11 @@ hre {
 						}
 
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById('post_s').value = data.zonecode; //5자리 새우편번호 사용
-						document.getElementById('add01_s').value = fullAddr;
+						document.getElementById('post').value = data.zonecode; //5자리 새우편번호 사용
+						document.getElementById('add01').value = fullAddr;
 
 						// 커서를 상세주소 필드로 이동한다.
-						document.getElementById('add02_s').focus();
+						document.getElementById('add02').focus();
 					}
 				}).open();
 	}
