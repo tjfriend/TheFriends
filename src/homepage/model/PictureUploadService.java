@@ -61,10 +61,13 @@ public class PictureUploadService {
 		}
 	}
 	
+	// 전체 목록
 	public List view(String id){
 		SqlSession ss = fac.openSession();
 		List li = ss.selectList("picture.view",id);
 		ss.close();
 		return li;
 	}
+	
+
 }
