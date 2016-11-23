@@ -20,28 +20,32 @@ public class PictureController {
 	@Autowired
 	HomepageService hs;
 	
+	// 기본 뷰
 	@RequestMapping("/up/{id}")
 	public String a(@PathVariable(name="id")String id){
 		return "/homepage/homePicture/pictureupload.jsp";
 	}
 	
-	@RequestMapping("/upload")    
-	public ModelAndView upload(HttpSession id, String title, String content, 
+	// 사진 업로드
+	@RequestMapping("/upload/{id}")    
+	public ModelAndView upload(@PathVariable(name="id") String id, String title, String content, 
 			@RequestParam(name="picture") MultipartFile picture){
-		ModelAndView ma = new ModelAndView("redirect:/picture/pictureview");
+		ModelAndView ma = new ModelAndView("redirect:/picture/pictureview/{id}");
 		String uuid = pic.execute(picture);
 		int a = 0;
 		if(uuid != null){
-			a = pic.upload((String)id.getAttribute("id"), title, content, picture, uuid);
+			a = pic.upload(id, title, content, picture, uuid);
 		}
 		ma.addObject("a",a);
 		return ma;
 	}
 	
+	// 사진 전체목록
 	@RequestMapping("/pictureview/{id}")
-	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a, @RequestParam(name="p", defaultValue="1")  int p){
+	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a, 
+			@RequestParam(name="p", defaultValue="1")  int p){
 		List li = pic.view(id, p);
-		int size = pic.total();
+		int size = pic.total(id);
 		String hometype = (String)hs.goHome(id).get("ADDRESS");
 		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureBoard.jsp");
 		if(li.size() != 0){
@@ -54,13 +58,7 @@ public class PictureController {
 		return ma;
 	}
 	
-	// 댓글등록 페이지
-	@RequestMapping("/reple")
-	public ModelAndView reple(@RequestParam(name="num") int num, @RequestParam(name="file") MultipartFile file){
-		ModelAndView ma = new ModelAndView("t:homepage/homePicture/pictureReple");
-		
-		
-		return ma;
-		
-	}
+	
+	
+
 }

@@ -14,7 +14,7 @@ public class PictureRepleService {
 	SqlSessionFactory fac;
 	
 	// ¥Ò±€ ¿€º∫
-	public int reple(String num, String writer, String content){
+	public int reple(int num, String writer, String content){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
 		map.put("num", num);
@@ -45,9 +45,9 @@ public class PictureRepleService {
 	}
 	
 	// ¥Ò±€ ¿¸√º ∏Ò∑œ
-	public int total(){
+	public int total(String id){
 		SqlSession ss = fac.openSession();
-		int a = ss.selectOne("picture.total2");
-		return a/10==0 ? a%10 : a%10+1;
+		int a = ss.selectOne("picture.total2",id);
+		return a%10==0 ? a/10 : a/10+1;
 	}
 }

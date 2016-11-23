@@ -75,9 +75,9 @@ public class PictureService {
 	}
 	
 	// 전체페이지
-	public int total(){
+	public int total(String id){
 		SqlSession ss = fac.openSession();
-		int a = ss.selectOne("picture.total");
-		return a/10==0 ? a%10 : a%10+1;
+		int a = ss.selectOne("picture.total", id);
+		return a%10==0 ? a/10 : a/10+1;
 	}
 }

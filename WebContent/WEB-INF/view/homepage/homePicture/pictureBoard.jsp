@@ -5,17 +5,23 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <div class="w3-container" style="max-height: 700px; overflow-y: auto" align="center">
+	
+	<c:if test="${sessionScope.id == id }">
 	<input type="button" value="등록" id="add"/>
+	</c:if>
+	
 	<h2>사진첩</h2>
+	
 	<c:choose>
 		<c:when test="${li != 'null' }">
 			<c:forEach items="${li }" var="i">
-				${i.ID } <br />
-				${i.TITLE } <br />
-				${i.CONTENT } <br />
+				제목 : ${i.TITLE } <br />
 				<br />
-				<a href="/picture/reple?num=${i.NUM }&file=/files/${i.UUID}"><img
-					src="/files/${i.UUID }" style="width: 100px" /></a>
+				<input type="hidden" value="${i.NUM }" name="${i.NUM }" />
+				<a id="reple" onclick="re(this)" accesskey="${i.UUID }" class="${i.NUM }">
+				<img src="/files/${i.UUID }" style="width: 100px" /><br/>
+				</a>
+				<br/>${i.CONTENT } <br />
 				<br />
 			</c:forEach>
 		</c:when>
@@ -23,35 +29,43 @@
 			사진이 없습니다
 		</c:otherwise>
 </c:choose>
-
 	<c:forEach var="i" begin="1" end="${size }">
-			<a href="/picture/pictureview/${id }?p=${i }">${i }</a>
+			<a id="page" onclick="pg(this)">${i }</a>
 	</c:forEach>
-	
-
-	<c:if test="${a == 0 || a == 1 }">
-		<c:choose>
-			<c:when test="${a == 1 }">
-				<script>alert("업로드 성공");
-				</script>
-			</c:when>
-			<c:otherwise>
-				<script>alert("업로드 실패");
-				</script>
-			</c:otherwise>
-		</c:choose>
-	</c:if>
 </div>
 
 <script>
-	$("#add").click(function(){
-		var url = "/picture/up/${id}";
+	window.onload = function(){
+		if(${a==1}){
+			alert("업로드 성공");
+			window.close();
+		} else {
+			alert("업로드 실패");
+			window.close();
+		}
+	};
+
+	function pg(element){
+		window.alert($(element).attr("accesskey"));
+		var url  = "/picture/pictureview/${id}?p="+element.innerHTML;
 		$.ajax({
-			"method" : "get",
-			"url" : url,
-			"async" : false
+			"url" : url
 		}).done(function(txt){
 			$("#homeMain").html(txt);
 		});
+	}
+
+	$("#add").click(function(){
+		window.open("/picture/up/${id}", "picup", "width: 60px, height: 30px");
 	});
+	
+	function re(element){
+		var url = "/picture/reple?uuid="+$(element).attr("accesskey")+"&num="+$(element).attr("class");
+		$.ajax({
+			"url" : url 
+		}).done(function(txt){
+			$("#homeMain").html(txt);
+		});		
+	}
+	
 </script>

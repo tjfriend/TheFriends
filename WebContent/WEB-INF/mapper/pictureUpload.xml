@@ -21,9 +21,9 @@
 		]]>
 	</select>
 	
-	<!-- 사진 전체페이지 수 -->
+	<!-- 전체페이지 수 -->
 	<select id="total" resultType="java.lang.Integer">
-		select count(*) from pictureboard
+		select count(*) from pictureboard where id=#{id}
 	</select>
 	
 	<!-- 댓글 작성 -->
@@ -34,13 +34,14 @@
 	<!-- 댓글 페이지 작성 -->
 	<select id="replepage" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
-		select temp.* from (select rownum r, p.* from picturereply p where id=#{id} order by day desc)temp
-		where temp.r >= #{start} and temp.r <= #{end}
+			select temp.* from (select rownum r, p.* from picturereply p where id=#{id} order by day desc)temp
+			where temp.r >= #{start} and temp.r <= #{end}
 		]]>
 	</select>
 	
 	<!-- 댓글 전체페이지 수 -->
 	<select id="total2" resultType="java.lang.Integer">
-		select count(*) from picturereply
+		select count(*) from picturereply where id=#{id}
 	</select>
+	
 </mapper>

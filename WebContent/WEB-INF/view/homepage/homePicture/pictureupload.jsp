@@ -7,7 +7,7 @@
 <div class="w3-container">
 	<h2>사진 올리기</h2>
 
-	<form action="/picture/upload" method="post" enctype="multipart/form-data">	
+	<form action="/picture/upload/${id }" method="post" enctype="multipart/form-data">	
 		제목 : <input type="text" name="title"/> <br/>
 		내용 : <textarea rows="10" cols="30" name="content"></textarea> <br/>
 		사진등록 :  
