@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component 
@@ -61,10 +62,22 @@ public class PictureService {
 		}
 	}
 	
-	public List view(String id){
+	// 전체목록
+	public List view(String id, int p){
 		SqlSession ss = fac.openSession();
-		List li = ss.selectList("picture.view",id);
+		HashMap map = new HashMap<>();
+		map.put("id", id);
+		map.put("start", (p*10)-9);
+		map.put("end", p*10);
+		List li = ss.selectList("picture.boardpage",map);
 		ss.close();
 		return li;
+	}
+	
+	// 전체페이지
+	public int total(){
+		SqlSession ss = fac.openSession();
+		int a = ss.selectOne("picture.total");
+		return a/10==0 ? a%10 : a%10+1;
 	}
 }

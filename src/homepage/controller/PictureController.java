@@ -20,9 +20,9 @@ public class PictureController {
 	@Autowired
 	HomepageService hs;
 	
-	@RequestMapping("/up")
-	public String a(){
-		return "t:homepage/homePicture/pictureupload";
+	@RequestMapping("/up/{id}")
+	public String a(@PathVariable(name="id")String id){
+		return "/homepage/homePicture/pictureupload.jsp";
 	}
 	
 	@RequestMapping("/upload")    
@@ -39,8 +39,9 @@ public class PictureController {
 	}
 	
 	@RequestMapping("/pictureview/{id}")
-	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a){
-		List li = pic.view(id);
+	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a, @RequestParam(name="p", defaultValue="1")  int p){
+		List li = pic.view(id, p);
+		int size = pic.total();
 		String hometype = (String)hs.goHome(id).get("ADDRESS");
 		ModelAndView ma = new ModelAndView();
 		switch(hometype){
@@ -63,6 +64,7 @@ public class PictureController {
 			ma.addObject("li","null");
 		}
 		ma.addObject("a",a);
+		ma.addObject("size",size);
 		return ma;
 	}
 	

@@ -4,7 +4,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-
+<div class="w3-container">
 	<h2>사진 올리기</h2>
 
 	<form action="/picture/upload" method="post" enctype="multipart/form-data">	
@@ -14,3 +14,5 @@
 		<input type="file" name="picture"/><br/>
 		<input type="submit" value="파일업로드"/>
 	</form>
+</div>
+	

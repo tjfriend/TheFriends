@@ -5,6 +5,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <div class="w3-container" style="max-height: 700px; overflow-y: auto" align="center">
+	<input type="button" value="등록" id="add"/>
 	<h2>사진첩</h2>
 	<c:choose>
 		<c:when test="${li != 'null' }">
@@ -12,8 +13,7 @@
 				${i.ID } <br />
 				${i.TITLE } <br />
 				${i.CONTENT } <br />
-				<img src="/files/${i.UUID }" />
-				<br />
+				<br/>
 			<a href="/picture/reple?num=${i.NUM }&file=/files/${i.UUID}"><img src="/files/${i.UUID }" style="width: 100px" /></a>
 			<br />
 		</c:forEach>
@@ -21,9 +21,13 @@
 	<c:otherwise>
 			사진이 없습니다
 	</c:otherwise>
+
+	<c:forEach var="i" begin="1" end="${size }">
+			<a href="/picture/pictureview/${id }?p=${i }">${i }</a>
+	</c:forEach>
+	
 </c:choose>
 
->>>>>>> branch 'master' of https://github.com/tjfriend/TheFriends.git
 	<c:if test="${a == 0 || a == 1 }">
 		<c:choose>
 			<c:when test="${a == 1 }">
@@ -37,3 +41,16 @@
 		</c:choose>
 	</c:if>
 </div>
+
+<script>
+	$("#add").click(function(){
+		var url = "/picture/up/${id}";
+		$.ajax({
+			"method" : "get",
+			"url" : url,
+			"async" : false
+		}).done(function(txt){
+			$("#homeMain").html(txt);
+		});
+	});
+</script>
