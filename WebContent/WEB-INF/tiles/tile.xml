@@ -16,18 +16,26 @@
 	<definition name="t:*/*" extends="t:index">
 		<put-attribute name="article" value="/WEB-INF/view/{1}/{2}.jsp"/>
 	</definition>
-	<definition name="t:*/*/*" extends="t:index">
-		<put-attribute name="article" value="/WEB-INF/view/{1}/{2}/{3}.jsp"/>
-	</definition>	
+<!-- 	<definition name="t:*/*/*" extends="t:index"> -->
+<!-- 		<put-attribute name="article" value="/WEB-INF/view/{1}/{2}/{3}.jsp"/> -->
+<!-- 	</definition>	 -->
 	
 	<definition name="t:homeType1" template="/WEB-INF/view/homepage/homeType1.jsp">
 		<put-attribute name="sideNav" value="/WEB-INF/view/homeType1/sideNav.jsp"/>
 		<put-attribute name="article" value="/WEB-INF/view/homeType1/article.jsp"/>
 	</definition>
+	
+	<definition name="t:homepage1/*/*" extends="t:homeType1">
+		<put-attribute name="article" value="/WEB-INF/view/homepage/{1}/{2}.jsp"/>
+	</definition>
 
 	<definition name="t:homeType2" template="/WEB-INF/view/homepage/homeType2.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/homeType2/header.jsp"/>
 		<put-attribute name="article" value="/WEB-INF/view/homeType2/article.jsp"/>
+	</definition>
+	
+	<definition name="t:homepage2/*/*" extends="t:homeType2">
+		<put-attribute name="article" value="/WEB-INF/view/homepage/{1}/{2}.jsp"/>
 	</definition>
 
 	<definition name="t:homeType3" template="/WEB-INF/view/homepage/homeType3.jsp">
@@ -35,9 +43,17 @@
 		<put-attribute name="article" value="/WEB-INF/view/homeType3/article.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/view/homeType3/footer.jsp"/>
 	</definition>
+	
+	<definition name="t:homepage3/*/*" extends="t:homeType3">
+		<put-attribute name="article" value="/WEB-INF/view/homepage/{1}/{2}.jsp"/>
+	</definition>
 
 	<definition name="t:homeType4" template="/WEB-INF/view/homepage/homeType4.jsp">
 		<put-attribute name="right" value="/WEB-INF/view/homeType4/right.jsp"/>
 		<put-attribute name="article" value="/WEB-INF/view/homeType4/article.jsp"/>
+	</definition>
+	
+	<definition name="t:homepage4/*/*" extends="t:homeType4">
+		<put-attribute name="article" value="/WEB-INF/view/homepage/{1}/{2}.jsp"/>
 	</definition>
 </tiles-definitions>
