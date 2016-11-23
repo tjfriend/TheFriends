@@ -22,12 +22,12 @@
 		<c:otherwise>
 			사진이 없습니다
 		</c:otherwise>
+</c:choose>
 
 	<c:forEach var="i" begin="1" end="${size }">
 			<a href="/picture/pictureview/${id }?p=${i }">${i }</a>
 	</c:forEach>
 	
-</c:choose>
 
 	<c:if test="${a == 0 || a == 1 }">
 		<c:choose>
