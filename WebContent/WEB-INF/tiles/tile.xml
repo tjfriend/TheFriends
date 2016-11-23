@@ -40,8 +40,8 @@
 
 	<definition name="t:homeType3" template="/WEB-INF/view/homepage/homeType3.jsp">
 		<put-attribute name="top" value="/WEB-INF/view/homeType3/top.jsp"/>
+		<put-attribute name="sideNav" value="/WEB-INF/view/homeType3/sideNav.jsp"/>
 		<put-attribute name="article" value="/WEB-INF/view/homeType3/article.jsp"/>
-		<put-attribute name="footer" value="/WEB-INF/view/homeType3/footer.jsp"/>
 	</definition>
 	
 	<definition name="t:homepage3/*/*" extends="t:homeType3">
@@ -49,7 +49,8 @@
 	</definition>
 
 	<definition name="t:homeType4" template="/WEB-INF/view/homepage/homeType4.jsp">
-		<put-attribute name="right" value="/WEB-INF/view/homeType4/right.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/view/homeType4/top.jsp"/>
+		<put-attribute name="left" value="/WEB-INF/view/homeType4/left.jsp"/>
 		<put-attribute name="article" value="/WEB-INF/view/homeType4/article.jsp"/>
 	</definition>
 	

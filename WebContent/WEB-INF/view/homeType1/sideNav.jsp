@@ -34,9 +34,12 @@
 <a class="w3-padding">
 	<i class="glyphicon glyphicon-pencil w3-margin-right"></i><label onclick="menu(this)">VISITORS</label>
 </a>
+<a class="w3-padding">
+	<i class="glyphicon glyphicon-wrench w3-margin-right"></i><label onclick="menu(this)">SETTING</label>
+</a>
 
 <div class="w3-section w3-padding-top">
-	<audio controls="controls" autoplay="autoplay" id="player"
+	<audio controls="controls" autoplay="autoplay" id="player" style="width: 100%"
 		onended="nextPlay()">
 		<source src="/music/alert.wav">
 	</audio>
@@ -44,8 +47,8 @@
 
 <div class="w3-section">
 	<h3 align="center"><b>Friends</b></h3>
-	<div class="w3-row w3-container" style="height: 230px">
-		<div class="w3-content" style="height: 230px; overflow-y: auto;">
+	<div class="w3-row w3-container" style="height: 150px">
+		<div class="w3-content" style="height: 150px; overflow-y: auto;">
 			<table class="table">
 				<thead align="center">
 					<tr>
@@ -101,9 +104,9 @@
 			case "VISITORS":
 				url = "/homepage/visitors/${id}";
 				break;
-// 			case "SETTING":
-// 				url = "/homepage/${id}";
-// 				break;
+			case "SETTING":
+				url = "/homepage/home/${id}";
+				break;
 		}
 		$.ajax({
 			"method" : "get",

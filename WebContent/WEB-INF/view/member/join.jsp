@@ -318,18 +318,19 @@
 		var name = $("#name");
 		var birthday = $("#birth");
 		var phone = $("#phone");
+		var post = $("#post");
 		var add01 = $("#add01");
 		var add02 = $("#add02");
 		var email = $("#email");
 		var email2 = $("#email2");
 		var nickname = $("#nickname");
 		var reco = $("#recommender");
-		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+
+		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+post.val()+
 						"/"+add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+nickname.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}
-		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" &&
+		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" && post.val()!="" &&
 				add02.val()!="" && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			if($("#hidden").val()=="1"){
 				$.ajax({
@@ -366,18 +367,19 @@
 		var name = $("#name_s");
 		var birthday = $("#birth_s");
 		var phone = $("#phone_s");
+		var post = $("#post_s");
 		var add01 = $("#add01_s");
 		var add02 = $("#add02_s");
 		var email = $("#email_s");
 		var email2 = $("#email2_s");
 		var nickname = $("#nickname");
 		var reco = $("#recommender_s");
-		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+
+		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+post.val();
 						"/"+add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+nickname.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}
-		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" &&
+		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" && post.val()!="" &&
 				add02.val()!="" && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			if($("#hidden").val()=="1"){
 				$.ajax({

@@ -22,10 +22,11 @@ html, body, h1, h2, h3, h4, h5 {
 <body class="w3-theme-l5">
 
 	<tile:insertAttribute name="top" />
+	
+	<tile:insertAttribute name="sideNav"/>
 
 	<!-- Page Container -->
-	<div class="w3-container w3-content"
-		style="max-width: 1400px; margin-top: 80px">
+	<div class="w3-container w3-content" style="max-width: 1200px; margin-top: 80px" id="homeMain">
 		<tile:insertAttribute name="article" />
 		<!-- End Page Container -->
 	</div>
@@ -53,6 +54,13 @@ function openNav() {
     } else {
         x.className = x.className.replace(" w3-show", "");
     }
+}
+
+function nextPlay(){		// ajax로 db에서 해당 아이디로 저장된 음악들 가져와서 순차재생
+	document.getElementById('player').src = "/music/mozart.mp3"; 
+	var media = document.getElementById('player');
+	media.currentTime = 0;
+	media.play();
 }
 </script>
 
