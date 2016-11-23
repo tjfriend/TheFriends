@@ -30,12 +30,19 @@ h1 {
 	<tile:insertAttribute name="header"/>
 
 	<!-- !PAGE CONTENT! -->
-	<div class="w3-content" style="max-width: 1500px">
+	<div class="w3-content" style="max-width: 1200px" id="homeMain">
 
 		<tile:insertAttribute name="article"/>
 		<!-- End Page Content -->
 	</div>
 
+<script>
+	function nextPlay(){		// ajax로 db에서 해당 아이디로 저장된 음악들 가져와서 순차재생
+		document.getElementById('player').src = "/music/mozart.mp3"; 
+		var media = document.getElementById('player');
+		media.currentTime = 0;
+		media.play();
+	}
+</script>
 </body>
 </html>
-

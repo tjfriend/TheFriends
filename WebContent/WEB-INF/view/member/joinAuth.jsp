@@ -324,6 +324,7 @@
 		var name = $("#name");
 		var birthday = $("#birth");
 		var phone = $("#phone");
+		var post = $("#post");
 		var add01 = $("#add01");
 		var add02 = $("#add02");
 		var email = $("#email");
@@ -331,12 +332,12 @@
 		var nickname = $("#nickname");
 		var reco = $("#recommender");
 		var authPass = $("#authPass");
-		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+
+		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+post.val();+"/"+
 							add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+nickname.val()+"/"+authPass.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}
-		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" &&
+		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" && post.val()!="" &&
 				add02.val()!="" && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			if($("#hidden").val()=="1"){
 				$.ajax({
@@ -380,12 +381,12 @@
 		var nickname = $("#nickname");
 		var reco = $("#recommender_s");
 		var authPass = $("#authPass_s");
-		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+
+		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+post.val()+"/"+
 							add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+nickname.val()+"/"+authPass.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
 		}
-		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" &&
+		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" && post.val()!="" &&
 				add02.val()!="" && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			if($("#hidden").val()=="1"){
 				$.ajax({

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Blog entries -->
-<div class="w3-col l8 s12">
+<div class="w3-col">
 	<!-- Blog entry -->
 	<div class="w3-card-4 w3-margin w3-white">
 		<img src="/w3images/woods.jpg" alt="Nature" style="width: 100%">

@@ -60,23 +60,24 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping("/join/{id}/{password}/{name}/{birth}/{phone}/{add01}/{add02}/{email}/{email2}/{nickname}/{key}/{recommender}")
+	@RequestMapping("/join/{id}/{password}/{name}/{birth}/{phone}/{post}/{add01}/{add02}/{email}/{email2}/{nickname}/{key}/{recommender}")
 	@ResponseBody
 	public boolean join(@PathVariable(name="id")String id, @PathVariable(name="password")String password, @PathVariable(name="name")String name, 
 											@PathVariable(name="birth")String birth, @PathVariable(name="phone")String phone, @PathVariable(name="add01")String add01,
 											@PathVariable(name="add02")String add02, @PathVariable(name="email")String email, @PathVariable(name="email2")String email2,
 											@PathVariable(name="recommender", required=false)String recommender, @PathVariable(name="nickname")String nickname, 
-											@PathVariable(name="key")String key, HttpSession session){
-		return js.join(id, password, name, birth, phone, add01, add02, email, email2, recommender, nickname, key, session);
+											@PathVariable(name="key")String key, @PathVariable(name="post")String post, HttpSession session){
+		return js.join(id, password, name, birth, phone, add01, add02, email, email2, recommender, nickname, key, session, post);
 	}
 	
-	@RequestMapping("/join/{id}/{password}/{name}/{birth}/{phone}/{add01}/{add02}/{email}/{email2}/{nickname}/{key}")
+	@RequestMapping("/join/{id}/{password}/{name}/{birth}/{phone}/{post}/{add01}/{add02}/{email}/{email2}/{nickname}/{key}")
 	@ResponseBody
 	public boolean join2(@PathVariable(name="id")String id, @PathVariable(name="password")String password, @PathVariable(name="name")String name, 
 											@PathVariable(name="birth")String birth, @PathVariable(name="phone")String phone, @PathVariable(name="add01")String add01,
 											@PathVariable(name="add02")String add02, @PathVariable(name="email")String email, @PathVariable(name="email2")String email2,
-											@PathVariable(name="nickname")String nickname, @PathVariable(name="key")String key, HttpSession session){
-		return js.join(id, password, name, birth, phone, add01, add02, email, email2, "admin", nickname, key, session);
+											@PathVariable(name="nickname")String nickname, @PathVariable(name="key")String key, @PathVariable(name="post")String post,
+											HttpSession session){
+		return js.join(id, password, name, birth, phone, add01, add02, email, email2, "admin", nickname, key, session, post);
 	}
 	
 	@RequestMapping("/idcheck/{id}")

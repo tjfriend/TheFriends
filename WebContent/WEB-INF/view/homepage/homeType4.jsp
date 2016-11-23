@@ -19,30 +19,33 @@ body, h1, h2, h3, h4, h5 {
 
 	<!-- w3-content defines a container for fixed size centered content,
 and is wrapped around the whole page content, except for the footer in this example -->
-	<div class="w3-content" style="max-width: 1400px">
+	<div class="w3-content" style="max-width: 1200px">
 
-		<!-- Header -->
-		<header class="w3-container w3-center w3-padding-32">
-			<h1>
-				<b>MY BLOG</b>
-			</h1>
-			<p>
-				Welcome to the blog of <span class="w3-tag">unknown</span>
-			</p>
-		</header>
+	<tile:insertAttribute name="header"/>
 
 		<!-- Grid -->
 		<div class="w3-row">
-
-			<tile:insertAttribute name="article"/>
-
-			<tile:insertAttribute name="right"/>
+			<div class="w3-col" style="width: 350px">
+				<tile:insertAttribute name="left"/>
+			</div>
+			<div id="homeMain" class="w3-col" style="width: 800px">
+				<tile:insertAttribute name="article"/>
+			</div>
 			<!-- END GRID -->
 		</div>
 		<br>
 
 		<!-- END w3-content -->
 	</div>
+
+<script>
+	function nextPlay(){		// ajax로 db에서 해당 아이디로 저장된 음악들 가져와서 순차재생
+		document.getElementById('player').src = "/music/mozart.mp3"; 
+		var media = document.getElementById('player');
+		media.currentTime = 0;
+		media.play();
+	}
+</script>
 
 </body>
 </html>

@@ -21,7 +21,7 @@ body, h1, h2, h3, h4, h5, h6 {
 	font-weight: bold
 }
 </style>
-<body class="w3-light-grey w3-content" style="max-width: 1600px">
+<body class="w3-light-grey w3-content" style="max-width: 1200px">
 
 	<!-- Sidenav/menu -->
 	<nav class="w3-sidenav w3-collapse w3-white"
