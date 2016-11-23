@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component 
-public class PictureUploadService {
+public class PictureService {
 	@Autowired
 	SqlSessionFactory fac;
 	

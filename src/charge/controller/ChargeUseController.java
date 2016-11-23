@@ -19,11 +19,6 @@ public class ChargeUseController {
 	@Autowired
 	ChargeUseService use;
 	
-	@RequestMapping("/view")
-	public String view(){
-		return "t:menu/charge/giftcharge";
-	}
-	
 	// 선물하기
 	@RequestMapping("/gift")
 	@ResponseBody

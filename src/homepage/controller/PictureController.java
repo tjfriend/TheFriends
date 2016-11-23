@@ -6,19 +6,19 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import homepage.model.PictureUploadService;
+import homepage.model.*;
 
 @Controller
 @RequestMapping("/picture")
 public class PictureController {
 	@Autowired
-	PictureUploadService pic;
+	PictureService pic;
+	@Autowired
+	HomepageService hs;
 	
 	@RequestMapping("/up")
 	public String a(){
@@ -38,10 +38,25 @@ public class PictureController {
 		return ma;
 	}
 	
-	@RequestMapping("/pictureview")
-	public ModelAndView view(HttpSession id, @RequestParam(name="a", defaultValue="2")int a){
-		List li = pic.view((String)id.getAttribute("id"));
-		ModelAndView ma = new ModelAndView("t:homepage/homePicture/pictureBoard");
+	@RequestMapping("/pictureview/{id}")
+	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a){
+		List li = pic.view(id);
+		String hometype = (String)hs.goHome(id).get("ADDRESS");
+		ModelAndView ma = new ModelAndView();
+		switch(hometype){
+			case "homeType1":
+				ma.setViewName("t:homepage1/homePicture/pictureBoard");
+				break;
+			case "homeType2":
+				ma.setViewName("t:homepage2/homePicture/pictureBoard");
+				break;
+			case "homeType3":
+				ma.setViewName("t:homepage3/homePicture/pictureBoard");
+				break;
+			case "homeType4":
+				ma.setViewName("t:homepage4/homePicture/pictureBoard");
+				break;
+		}
 		if(li.size() != 0){
 			ma.addObject("li",li);
 		}else{
