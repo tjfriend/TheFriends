@@ -53,7 +53,7 @@ public class HomepageController {
 	@RequestMapping("/picture/{id}")
 	public String picture(@PathVariable(name="id")String id){
 		String homeType = (String)hs.goHome(id).get("ADDRESS");
-		return "redirect:/picture/pictureview/{id}";
+		return "redirect:/picture/pictureview/"+id;
 	}
 	
 	@RequestMapping("/visitors/{id}")
