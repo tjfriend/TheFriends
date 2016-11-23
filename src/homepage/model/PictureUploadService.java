@@ -33,7 +33,7 @@ public class PictureUploadService {
 		map.put("uuid", uuid);
 		try{
 			ss.insert("picture.upload",map);
-			ss.close();
+			ss.close();    
 			return 1;
 		}catch(Exception e){
 			e.printStackTrace();

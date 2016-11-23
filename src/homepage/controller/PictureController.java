@@ -25,7 +25,7 @@ public class PictureController {
 		return "t:homepage/homePicture/pictureupload";
 	}
 	
-	@RequestMapping("/upload")
+	@RequestMapping("/upload")    
 	public ModelAndView upload(HttpSession id, String title, String content, 
 			@RequestParam(name="picture") MultipartFile picture){
 		ModelAndView ma = new ModelAndView("redirect:/picture/pictureview");
