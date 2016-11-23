@@ -22,17 +22,17 @@
 		<b>${id }</b>
 	</h4>
 </div>
-<a href="/homepage/${id }" class="w3-padding w3-text-teal">
-	<i class="glyphicon glyphicon-home w3-margin-right"></i>HOME
+<a class="w3-padding w3-text-teal">
+	<i class="glyphicon glyphicon-home w3-margin-right"></i><label onclick="menu(this)">HOME</label>
 </a>
-<a href="/homeBoard/${id }" class="w3-padding">
-	<i class="glyphicon glyphicon-comment w3-margin-right"></i>BOARD
+<a class="w3-padding">
+	<i class="glyphicon glyphicon-comment w3-margin-right"></i><label onclick="menu(this)">BOARD</label>
 </a>
-<a href="/picture/pictureview/${id}" class="w3-padding">
-	<i class="glyphicon glyphicon-picture w3-margin-right"></i>PICTURE
+<a class="w3-padding">
+	<i class="glyphicon glyphicon-picture w3-margin-right"></i><label onclick="menu(this)">PICTURE</label>
 </a>
-<a href="/visits/${id }" class="w3-padding">
-	<i class="glyphicon glyphicon-pencil w3-margin-right"></i>VISITORS
+<a class="w3-padding">
+	<i class="glyphicon glyphicon-pencil w3-margin-right"></i><label onclick="menu(this)">VISITORS</label>
 </a>
 
 <div class="w3-section w3-padding-top">
@@ -84,4 +84,33 @@
 			location.href = "/homepage/"+txt;
 		});
 	};
+	
+	function menu(element){
+		var menu = element.innerHTML;
+		var url = "";
+		switch(menu){
+			case "HOME":
+				url = "/homepage/home/${id}";
+				break;
+			case "BOARD":
+				url = "/homepage/board/${id}";
+				break;
+			case "PICTURE":
+				url = "/homepage/picture/${id}";
+				break;
+			case "VISITORS":
+				url = "/homepage/visitors/${id}";
+				break;
+// 			case "SETTING":
+// 				url = "/homepage/${id}";
+// 				break;
+		}
+		$.ajax({
+			"method" : "get",
+			"url" : url,
+			"async" : false
+		}).done(function(txt){
+			$("#homeMain").html(txt);
+		});
+	}
 </script>

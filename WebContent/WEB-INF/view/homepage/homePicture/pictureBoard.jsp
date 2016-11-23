@@ -13,14 +13,15 @@
 				${i.ID } <br />
 				${i.TITLE } <br />
 				${i.CONTENT } <br />
-				<br/>
-			<a href="/picture/reple?num=${i.NUM }&file=/files/${i.UUID}"><img src="/files/${i.UUID }" style="width: 100px" /></a>
-			<br />
-		</c:forEach>
-	</c:when>
-	<c:otherwise>
+				<br />
+				<a href="/picture/reple?num=${i.NUM }&file=/files/${i.UUID}"><img
+					src="/files/${i.UUID }" style="width: 100px" /></a>
+				<br />
+			</c:forEach>
+		</c:when>
+		<c:otherwise>
 			사진이 없습니다
-	</c:otherwise>
+		</c:otherwise>
 
 	<c:forEach var="i" begin="1" end="${size }">
 			<a href="/picture/pictureview/${id }?p=${i }">${i }</a>

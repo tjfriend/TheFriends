@@ -44,20 +44,6 @@ public class PictureController {
 		int size = pic.total();
 		String hometype = (String)hs.goHome(id).get("ADDRESS");
 		ModelAndView ma = new ModelAndView();
-		switch(hometype){
-			case "homeType1":
-				ma.setViewName("t:homepage1/homePicture/pictureBoard");
-				break;
-			case "homeType2":
-				ma.setViewName("t:homepage2/homePicture/pictureBoard");
-				break;
-			case "homeType3":
-				ma.setViewName("t:homepage3/homePicture/pictureBoard");
-				break;
-			case "homeType4":
-				ma.setViewName("t:homepage4/homePicture/pictureBoard");
-				break;
-		}
 		if(li.size() != 0){
 			ma.addObject("li",li);
 		}else{

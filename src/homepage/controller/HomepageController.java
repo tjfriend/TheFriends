@@ -37,4 +37,28 @@ public class HomepageController {
 		String page = "t:"+map.get("ADDRESS");
 		return page;
 	}
+	
+	@RequestMapping("/home/{id}")
+	public String home(@PathVariable(name="id")String id){
+		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		return "/"+homeType+"/article.jsp";
+	}
+
+	@RequestMapping("/board/{id}")
+	public String board(@PathVariable(name="id")String id){
+		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		return "/homepage/homeBoard/board.jsp";
+	}
+	
+	@RequestMapping("/picture/{id}")
+	public String picture(@PathVariable(name="id")String id){
+		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		return "redirect:/picture/pictureview/{id}";
+	}
+	
+	@RequestMapping("/visitors/{id}")
+	public String visitors(@PathVariable(name="id")String id){
+		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		return "/homepage/homeVisits/visits.jsp";
+	}
 }
