@@ -2,9 +2,33 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myinfo">
 
-	<select id="Confirm" resultType="java.util.HashMap">
+	<!-- 자기정보 -->
+	<select id="Confirm" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		select * from member where id =
 		#{id } and password = #{pass }
 	</select>
+	
+
+
+	<!-- 회원 탈퇴 -->
+	<delete id="myinfodelete" parameterType="java.util.HashMap">
+		delete myinfo where
+		id =
+		#{id }
+	</delete>
+
+	<delete id="memberdelete" parameterType="java.util.HashMap">
+		delete member where
+		id =
+		#{id }
+	</delete>
+
+	<!-- 비밀번호 변경 -->
+	<update id="passupdate" parameterType="java.util.HashMap">
+		update member set password
+		= #{pass } where id = #{id }
+	</update>
+
+
 
 </mapper>

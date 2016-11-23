@@ -21,6 +21,7 @@ hre {
 }
 </style>
 
+
 <table>
 	<tr>
 		<td><input type="button" value="회원정보수정" id="ChangeInfoButton"
@@ -40,100 +41,43 @@ hre {
 	하는 경우 신중히 판단해주세요.<br /> ●탈퇴 전 작성된 게시물이나 댓글 등은 탈퇴 후에도 유지됩니다.<br /> <font
 		color="red">●게시물 삭제 등을 원하는 경우 반드시 삭제 처리 후 탈퇴를 신청해주세요.</font><br /> <br />
 	아래 확인 버튼을 누르면 탈퇴가 진행됩니다.<br /> <br /> <br />
-	<center>
-		<input type="button" name="Check" value="확인"
-			style="height: 50px; width: 150px"> <input type="button"
-			name="Cancell" value="취소" style="height: 50px; width: 150px">
-	</center>
+
+
+	<div style="float: left; margin-left: 225px">
+		<form action="/myinfo/myinfodelete">
+			<input type="submit" name="Check" value="확인"
+				style="height: 50px; width: 150px">
+
+		</form>
+	</div>
+	<div style="float: left; margin-left: 20px;">
+		<input type="button" name="Cancell" value="취소"
+			style="height: 50px; width: 150px" id="Cancell" onclick="Cancell">
+
+	</div>
+
 </div>
 
+<div id="ChangePass">
+	<hre></hre>
+	<br />
+	<div align="center">
+		<form action="/myinfo/Passchange">
+			<label style="width: 30%"><font size="4">변경할 비밀번호</font></label> <input
+				type="text" class="form-control" style="width: 35%" name="pass" />
+			<br /> <br /> <input type="submit" value="확인"
+				style="margin: 0 auto; height: 50px; width: 150px">
+		</form>
+	</div>
+</div>
+
+
+
 <div id="ChangeInfodiv" align="center">
-	<div class="w3-hide-large">
-		<label style="width: 30%"><font size="4">ID</font></label> <input
-			type="text" class="form-control" style="width: 35%" />
-	</div>
-	<div class="w3-hide-large">
-		<label for="name_s" style="width: 30%"><font size="4">Name</font></label>
-		<input type="text" id="name_s" name="name_s" class="form-control"
-			style="width: 35%" />
-	</div>
-	<div class="w3-hide-large">
-		<label for="nickname_s" style="width: 30%"><font size="4">NickName</font></label>
-		<input type="text" id="nickname_s" name="nickname_s"
-			class="form-control" style="width: 35%" />
-	</div>
-
-	<div class="form-group" align="center">
-		<div class="w3-hide-large">
-			<label for="email_s" style="width: 30%"><font size="4">Email</font></label><br />
-			<input type="text" id="email_s" name="email_s"
-				style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-				placeholder="Email" /> <label>@</label> <input type="text"
-				style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-				id="email2_s" name="email2_s" placeholder="직접입력" /> <select
-				style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
-				id="selMail_s">
-				<option>직접입력</option>
-				<option>naver.com</option>
-				<option>daum.net</option>
-				<option>gmail.com</option>
-				<option>nate.com</option>
-				<option>yahoo.com</option>
-			</select><br /> <br />
-		</div>
-	</div>
-	<div class="form-group" align="center">
-		<div class="w3-hide-large">
-			<label for="birth_s" style="width: 30%"><font size="4">Birth
-					Day</font></label> <input type="date" id="birth_s" name="birth_s"
-				class="form-control" style="width: 45%" placeholder="yyyymmdd" />
-		</div>
-	</div>
-	<div class="form-group" align="center">
-		<div class="w3-hide-large">
-			<label for="address_s" style="width: 30%"><font size="4">Address</font></label><br />
-			<input type="text" id="post_s" name="post_s"
-				style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-				readonly="readonly" placeholder="Post Number" /> <input
-				type="button" class="btn btn-default" style="width: 40%"
-				onclick="searchPost()" value="우편번호 찾기" /><br /> <input type="text"
-				id="add01_s" name="add01_s"
-				style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-				readonly="readonly" placeholder="Address" /> <input type="text"
-				id="add02_s" name="add02_s"
-				style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-				placeholder="Detailed Address" />
-		</div>
-
-
-	</div>
-
-	<script>
-		$(document).ready(function() {
-			$("#Secessiondiv").hide();
-			$("#ChangeInfodiv").show();
-		});
-		$("#ChangeInfoButton").click(function() {
-			$("#ChangeInfodiv").show();
-			$("#Secessiondiv").hide();
-		});
-		$("#SecessionButton").click(function() {
-			$("#Secessiondiv").show();
-			$("#ChangeInfodiv").hide();
-		});
-
-		$("#selMail").change(function() {
-			var sel = $("#selMail").prop("value");
-			var email = $("#email2");
-			if (sel == "직접입력") {
-				email.val("");
-				email.prop("readonly", null);
-			} else {
-				email.val(sel);
-				email.prop("readonly", "readonly");
-			}
-		});
-
+	<hre></hre>
+	<br />
+	<c:forEach var="info" items="${confirm }">
+		<script>
 		$("#selMail_s").change(function() {
 			var sel = $("#selMail_s").prop("value");
 			var email = $("#email2_s");
@@ -145,48 +89,174 @@ hre {
 				email.prop("readonly", "readonly");
 			}
 		});
-		function searchPost() {
-		    new daum.Postcode({
-		        oncomplete: function(data) {
-		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-		
-		            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-		            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		            var fullAddr = ''; // 최종 주소 변수
-		            var extraAddr = ''; // 조합형 주소 변수
-		
-		            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-		            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-		                fullAddr = data.roadAddress;
-		
-		            } else { // 사용자가 지번 주소를 선택했을 경우(J)
-		                fullAddr = data.jibunAddress;
-		            }
-		
-		            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-		            if(data.userSelectedType === 'R'){
-		                //법정동명이 있을 경우 추가한다.
-		                if(data.bname !== ''){
-		                    extraAddr += data.bname;
-		                }
-		                // 건물명이 있을 경우 추가한다.
-		                if(data.buildingName !== ''){
-		                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-		                }
-		                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-		                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-		            }
-		
-		            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		            document.getElementById('post').value = data.zonecode; //5자리 새우편번호 사용
-		            document.getElementById('post_s').value = data.zonecode; //5자리 새우편번호 사용
-		            document.getElementById('add01').value = fullAddr;
-		            document.getElementById('add01_s').value = fullAddr;
-		
-		            // 커서를 상세주소 필드로 이동한다.
-		            document.getElementById('add02').focus();
-		            document.getElementById('add02_s').focus();
-		        }
-		    }).open();
+		</script>
+
+		<div class="w3-hide-large">
+			<label style="width: 30%"><font size="4">ID</font></label> <input
+				type="text" class="form-control" style="width: 35%"
+				value="${info.ID }" disabled="disabled" />
+
+		</div>
+		<div class="w3-hide-large">
+			<label for="name_s" style="width: 30%"><font size="4">Name</font></label>
+			<input type="text" id="name_s" name="name_s" class="form-control"
+				style="width: 35%" value="${info.NAME }" disabled="disabled" />
+		</div>
+		<div class="w3-hide-large">
+			<label for="nickname_s" style="width: 30%"><font size="4">NickName</font></label>
+			<input type="text" id="nickname_s" name="nickname_s"
+				class="form-control" style="width: 35%" value="${info.NICKNAME }"
+				disabled="disabled" />
+		</div>
+
+		<div class="form-group" align="center">
+			<div class="w3-hide-large">
+				<label for="email_s" style="width: 30%"><font size="4">Email</font></label><br />
+				<input type="text" id="email_s" name="email_s"
+					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
+					placeholder="Email" value="123" /> <label>@</label> <input
+					type="text"
+					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
+					id="email2_s" name="email2_s" placeholder="직접입력" /> <select
+					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
+					id="selMail_s">
+					<option>직접입력</option>
+					<option>naver.com</option>
+					<option>daum.net</option>
+					<option>gmail.com</option>
+					<option>nate.com</option>
+					<option>yahoo.com</option>
+				</select><br /> <br />
+			</div>
+		</div>
+		<div class="form-group" align="center">
+			<div class="w3-hide-large">
+				<label for="birth_s" style="width: 30%"><font size="4">Birth
+						Day</font></label> <input type="date" id="birth_s" name="birth_s"
+					class="form-control" style="width: 45%" placeholder="yyyymmdd" />
+			</div>
+		</div>
+
+		<div class="form-group" align="center">
+			<div class="w3-hide-large">
+				<label for="address_s" style="width: 30%"><font size="4">Address</font></label><br />
+				<input type="text" id="post_s" name="post_s"
+					style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
+					readonly="readonly" placeholder="Post Number" /> <input
+					type="button" class="btn btn-default" style="width: 40%"
+					onclick="searchPost()" value="우편번호 찾기" /><br /> <input
+					type="text" id="add01_s" name="add01_s"
+					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
+					readonly="readonly" placeholder="Address" /> <input type="text"
+					id="add02_s" name="add02_s"
+					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
+					placeholder="Detailed Address" />
+			</div>
+		</div>
+		<div class="form-group" align="center">
+			<div class="w3-hide-large">
+				<input type="button" id="submit_s" value="수정완료"
+					style="width: 35%; background-color: #4CAF50; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer;" /><br />
+				<font id="joinrst_s"></font>
+			</div>
+		</div>
+	</c:forEach>
+
+</div>
+
+<script>
+	$(document).ready(function() {
+		$("#ChangePass").hide();
+		$("#Secessiondiv").hide();
+		$("#ChangeInfodiv").show();
+
+	});
+	$("#ChangeInfoButton").click(function() {
+		$("#ChangeInfodiv").show();
+		$("#Secessiondiv").hide();
+		$("#ChangePass").hide();
+	});
+	$("#Cancell").click(function() {
+		$("#ChangeInfodiv").show();
+		$("#Secessiondiv").hide();
+		$("#ChangePass").hide();
+	});
+	$("#SecessionButton").click(function() {
+		$("#Secessiondiv").show();
+		$("#ChangeInfodiv").hide();
+		$("#ChangePass").hide();
+	});
+	$("#ChangePassButton").click(function() {
+		$("#Secessiondiv").hide();
+		$("#ChangeInfodiv").hide();
+		$("#ChangePass").show();
+	});
+
+	$("#selMail").change(function() {
+		var sel = $("#selMail").prop("value");
+		var email = $("#email2");
+		if (sel == "직접입력") {
+			email.val("");
+			email.prop("readonly", null);
+		} else {
+			email.val(sel);
+			email.prop("readonly", "readonly");
 		}
-	</script>
+	});
+
+	$("#selMail_s").change(function() {
+		var sel = $("#selMail_s").prop("value");
+		var email = $("#email2_s");
+		if (sel == "직접입력") {
+			email.val("");
+			email.prop("readonly", null);
+		} else {
+			email.val(sel);
+			email.prop("readonly", "readonly");
+		}
+	});
+	function searchPost() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						var fullAddr = ''; // 최종 주소 변수
+						var extraAddr = ''; // 조합형 주소 변수
+
+						// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+							fullAddr = data.roadAddress;
+
+						} else { // 사용자가 지번 주소를 선택했을 경우(J)
+							fullAddr = data.jibunAddress;
+						}
+
+						// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+						if (data.userSelectedType === 'R') {
+							//법정동명이 있을 경우 추가한다.
+							if (data.bname !== '') {
+								extraAddr += data.bname;
+							}
+							// 건물명이 있을 경우 추가한다.
+							if (data.buildingName !== '') {
+								extraAddr += (extraAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+							// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+							fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+									+ ')' : '');
+						}
+
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						document.getElementById('post_s').value = data.zonecode; //5자리 새우편번호 사용
+						document.getElementById('add01_s').value = fullAddr;
+
+						// 커서를 상세주소 필드로 이동한다.
+						document.getElementById('add02_s').focus();
+					}
+				}).open();
+	}
+</script>
