@@ -38,10 +38,4 @@ public class SearchFriendController {
 		}
 		return mav;
 	}
-	
-	@RequestMapping("/friend")
-	public ModelAndView search(){
-		ModelAndView ma = new ModelAndView("t:menu/search/search");
-		return ma;
-	}
 }

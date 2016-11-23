@@ -7,7 +7,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <br>
 <a href="#" onclick="w3_close()"
@@ -23,16 +22,16 @@
 		<b>${id }</b>
 	</h4>
 </div>
-<a href="" class="w3-padding w3-text-teal">
+<a href="/homepage/${id }" class="w3-padding w3-text-teal">
 	<i class="glyphicon glyphicon-home w3-margin-right"></i>HOME
 </a>
-<a href="" class="w3-padding">
+<a href="/homeBoard/${id }" class="w3-padding">
 	<i class="glyphicon glyphicon-comment w3-margin-right"></i>BOARD
 </a>
-<a href="" class="w3-padding">
+<a href="/picture/pictureview/${id}" class="w3-padding">
 	<i class="glyphicon glyphicon-picture w3-margin-right"></i>PICTURE
 </a>
-<a href="" class="w3-padding">
+<a href="/visits/${id }" class="w3-padding">
 	<i class="glyphicon glyphicon-pencil w3-margin-right"></i>VISITORS
 </a>
 
