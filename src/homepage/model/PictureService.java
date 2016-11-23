@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component 
-public class PictureUploadService {
+public class PictureService {
 	@Autowired
 	SqlSessionFactory fac;
 	
@@ -33,7 +33,7 @@ public class PictureUploadService {
 		map.put("uuid", uuid);
 		try{
 			ss.insert("picture.upload",map);
-			ss.close();    
+			ss.close();
 			return 1;
 		}catch(Exception e){
 			e.printStackTrace();
@@ -61,13 +61,10 @@ public class PictureUploadService {
 		}
 	}
 	
-	// 전체 목록
 	public List view(String id){
 		SqlSession ss = fac.openSession();
 		List li = ss.selectList("picture.view",id);
 		ss.close();
 		return li;
 	}
-	
-
 }
