@@ -43,7 +43,7 @@ public class PictureController {
 		List li = pic.view(id, p);
 		int size = pic.total();
 		String hometype = (String)hs.goHome(id).get("ADDRESS");
-		ModelAndView ma = new ModelAndView();
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureBoard.jsp");
 		if(li.size() != 0){
 			ma.addObject("li",li);
 		}else{
