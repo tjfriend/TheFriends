@@ -35,7 +35,7 @@ body, h1, h2, h3, h4, h5, h6 {
 		id="myOverlay"></div>
 
 	<!-- !PAGE CONTENT! -->
-	<div class="w3-main" style="margin-left: 300px">
+	<div class="w3-main" style="margin-left: 300px" id="homeMain">
 
 		<tile:insertAttribute name="article" />
 		<!-- End page content -->
