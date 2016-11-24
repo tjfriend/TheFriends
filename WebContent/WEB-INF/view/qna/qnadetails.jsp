@@ -67,7 +67,7 @@
 			</div>
 		
 			<!--  	댓글 -->
-			<div>
+			<div>  
 				<table class="table">
 					<c:forEach var="qnac" items="${qnacommentda }">
 						<tr align="center">
