@@ -59,4 +59,7 @@
 	<insert id="memLocation" parameterType="java.util.HashMap">
 		insert into memaddress values(#{id}, #{x}, #{y})
 	</insert>
+	<insert id="myinfo" parameterType="java.util.HashMap">
+		insert into myinfo values(#{id}, #{phone}, #{email}, #{birth}, #{add01}, #{add02})
+	</insert>
 </mapper>
