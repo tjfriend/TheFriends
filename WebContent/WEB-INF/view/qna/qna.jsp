@@ -23,7 +23,7 @@
 		}
 	</script>
 
-	<c:if test="${p==1 }">
+	
 		<table class="table">
 			<thead>
 				<tr align="center">
@@ -51,7 +51,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</c:if>
+	
 
 	<form action="/qna/list" id="ctg" align="right" method="post">
 		<select name="mode" id="sel" style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
