@@ -44,7 +44,7 @@ hre {
 
 
 	<div style="float: left; margin-left: 225px">
-		<form action="/myinfo/myinfodelete">
+		<form action="/myinfo/myinfodelete" method="post">
 			<input type="submit" name="Check" value="확인"
 				style="height: 50px; width: 150px">
 
@@ -62,10 +62,23 @@ hre {
 	<hre></hre>
 	<br />
 	<div align="center">
-		<form action="/myinfo/Passchange">
+		<form action="/myinfo/Passchange" method="post" name="checkpass">
 			<label style="width: 30%"><font size="4">변경할 비밀번호</font></label> <input
 				type="text" class="form-control" style="width: 35%" name="pass" />
-			<br /> <br /> <input type="submit" value="확인"
+				<br/>
+			<label style="width: 30%"><font size="4">변경할 비밀번호확인 </font></label> <input
+				type="text" class="form-control" style="width: 35%" name="passcheck" />
+			<c:choose>
+				<c:when test="${passch == 1 }">
+					<p><font size="2" color="red">비밀번호가 틀렸습니다</font></p>
+					<br/>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>	
+			
+			
+			<br /> <input type="submit" value="확인"
 				style="margin: 0 auto; height: 50px; width: 150px">
 		</form>
 	</div>
@@ -76,7 +89,7 @@ hre {
 <div id="ChangeInfodiv" align="center">
 	<hre></hre>
 	<br />
-	<form action="/myinfo/changeoff">
+	<form action="/myinfo/changeoff" method="post">
 		<div class="w3-hide-large">
 			<label style="width: 30%"><font size="4">ID</font></label> <input
 				type="text" class="form-control" style="width: 35%"
@@ -138,17 +151,17 @@ hre {
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="address" style="width: 30%"><font size="4">Address</font></label><font
-					size="2">비공개 : &nbsp;</font><input type="checkbox" ${fn:split(info.ADDRESS,'@')[0] eq '비공개'?'checked':'' }
+					size="2">비공개 : &nbsp;</font><input type="checkbox" ${fn:split(info.ADD01,'@')[0] eq '비공개'?'checked':'' }
 				id="Addressoff"	name="checkbox" value="Addressoff"><br /> <input
 					type="text" id="post" name="post" 
 					style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					readonly="readonly" placeholder="Post Number" value="${post }"/> <input
+					readonly="readonly" placeholder="Post Number" value="${info.POST }"/> <input
 					type="button" class="btn btn-default" style="width: 40%"
 					onclick="searchPost()" value="우편번호 찾기" /><br /> <input
-					type="text" id="add01" name="add01" value="${fn:split(infomy.ADDRESS,')')[0]})"
+					type="text" id="add01" name="add01" value="${infomy.ADD01}"
 					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Address" /> <input type="text"
-					id="add02" name="add02" value="${fn:split(infomy.ADDRESS,')')[1]}"
+					id="add02" name="add02" value="${infomy.ADD02}"
 					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					placeholder="Detailed Address" />
 			</div>
@@ -164,6 +177,16 @@ hre {
 </div>
 
 <script>
+	function checkpass() {
+		var pass = document.getElementById('pass');
+		var pass_check = document.getElementById('passcheck');
+		
+		if(pass.value != pass_check.value){
+			alert('비밀번호가 다릅니다');
+			return false;
+		}
+	}
+
 	$(document).ready(function() {
 		$("#ChangePass").hide();
 		$("#Secessiondiv").hide();

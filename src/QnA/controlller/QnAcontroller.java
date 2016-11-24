@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import QnA.model.*;
@@ -48,18 +50,18 @@ public class QnAcontroller {
 	public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "") String mode
 			, @RequestParam (defaultValue="") String search) {
 		ModelAndView mav = new ModelAndView();
+		
+			SqlSession sql = fac.openSession();
+			List best = sql.selectList("qna.qnabest");
+			mav.addObject("qnabest",best);
+			
 		if (mode.equals("")) {
 			if(search.equals("")){
 				List lis = qp.GetRnage(p);
 				int size = qp.size();
 				mav.addObject("qnadata", lis);
 				mav.addObject("qnasize", size);
-				if(p==1){
-					SqlSession sql = fac.openSession();
-					List best = sql.selectList("qna.qnabest");
-					mav.addObject("qnabest",best);
-					mav.addObject("p",p);
-				}
+				
 				mav.setViewName("t:qna/qna");
 				return mav;
 			}else{
@@ -117,13 +119,30 @@ public class QnAcontroller {
 	
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
-			HttpSession session,@CookieValue(name = "count", required = false) String countup) {
+			HttpSession session,HttpServletRequest req, HttpServletResponse resp ) {
 		String id = (String) session.getAttribute("id");
+		
+		Cookie[] ar = req.getCookies();
+		int n =0;
+		for(Cookie c : ar){
+			if(c.getName().equals("qna#"+num)){
+				n=1;
+				break;
+			}
+		}
+		if(n==0){
+			int upinq = qw.upinquiry(num);  
+			
+			Cookie cc = new Cookie("qna#"+num,"qna#"+num );
+			cc.setMaxAge(60);
+			cc.setPath("/");
+			resp.addCookie(cc);
+		}
 		HashMap map = new HashMap();
 		map.put("num", num);
 		List list = qp.Getcommentpage(p, num);
 		int sizecom = qp.commentsize(num);
-		int upinq = qw.upinquiry(num);
+//		int upinq = qw.upinquiry(num);
 		SqlSession sql = fac.openSession();
 		HashMap data = sql.selectOne("qna.qnadetails", map);
 		ModelAndView mav = new ModelAndView();

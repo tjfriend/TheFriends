@@ -57,20 +57,22 @@ public class Confirm {
 
 	// 개인정보수정
 	public int changemember(String id,String phone, String birth, String email, String email2, String add01, String add02,
-			String checkbox) {
+			String checkbox,String post) {
 		String email3 = email + "@" + email2;
-		String add03 = add01 + " " + add02;
 		
 		if(checkbox.contains("Emailoff"))
 			email3 = "비공개";
-		if(checkbox.contains("Addressoff"))
-			add03 = "비공개";
+		if(checkbox.contains("Addressoff")){
+			add01 = "비공개";add02 = " ";
+		}
 		if(checkbox.contains("phoneoff"))
 			phone = "비공개";
 		HashMap map = new HashMap();
 		map.put("id", id);
 		map.put("email", email3);
-		map.put("address", add03);
+		map.put("add01", add01);
+		map.put("add02", add02);
+		map.put("post", post);
 		map.put("phone", phone);
 		
 		SqlSession sql = fac.openSession();
@@ -90,11 +92,12 @@ public class Confirm {
 			String checkbox) {
 		
 		String email4 = email + "@" + email2;
-		String add04 = add01+ add02;
+		
 		HashMap map = new HashMap();
 		map.put("id", id);
 		map.put("email", email4);
-		map.put("address", add04);
+		map.put("add01", add01);
+		map.put("add02", add02);
 		map.put("birth", birth);
 		map.put("phone", phone);
 		SqlSession sql = fac.openSession();

@@ -38,19 +38,19 @@
 	<!-- 개인정보 변경 -->
 	<update id="changemember" parameterType="java.util.HashMap">
 		update member set email
-		= #{email } , birth = #{birth}, address = #{address}, phone = #{phone }
+		= #{email } , birth = #{birth}, post = #{post} ,add01 = #{add01}, add02 = #{add02} , phone = #{phone }
 		where id = #{id }
 	</update>
 	
 	<update id="changemembercheckboxbirth" parameterType="java.util.HashMap">
 		update member set email
-		= #{email }, birth = sysdate , address = #{address}, phone = #{phone }
+		= #{email }, birth = sysdate , add01 = #{add01}, add02 = #{add02} , phone = #{phone }
 		where id = #{id }
 	</update>
 
 	<update id="changemyinfo" parameterType="java.util.HashMap">
 		update myinfo set email
-		= #{email }, birth = #{birth} , address = #{address}, phone = #{phone }
+		= #{email }, birth = #{birth} ,add01 = #{add01}, add02 = #{add02} , phone = #{phone }
 		where id = #{id }
 	</update>
 
