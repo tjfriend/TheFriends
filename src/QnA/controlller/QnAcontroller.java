@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.text.*;
 import java.util.*;
 
 import javax.servlet.http.Cookie;
@@ -52,7 +54,14 @@ public class QnAcontroller {
 		ModelAndView mav = new ModelAndView();
 		
 			SqlSession sql = fac.openSession();
-			List best = sql.selectList("qna.qnabest");
+			List<HashMap> best = sql.selectList("qna.qnabest");
+			for(int i=0; i<best.size(); i++){
+				Date date = (Date)best.get(i).get("TIME");
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+				String day = sdf.format(date);
+				best.get(i).put("TIME", day);
+				best.set(i, best.get(i));
+			}
 			mav.addObject("qnabest",best);
 			
 		if (mode.equals("")) {
@@ -145,6 +154,10 @@ public class QnAcontroller {
 //		int upinq = qw.upinquiry(num);
 		SqlSession sql = fac.openSession();
 		HashMap data = sql.selectOne("qna.qnadetails", map);
+		Date date = (Date)data.get("TIME");
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		String day = sdf.format(date);
+		data.put("TIME", day);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("loginid", id);
 		mav.addObject("details", data);

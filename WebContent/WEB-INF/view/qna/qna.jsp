@@ -13,7 +13,7 @@
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">QnA</h2>
 
-<div class="w3-row" style="margin-top: 50px">
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 
 	<script>
 		// 벨류값 가져오기
@@ -23,12 +23,9 @@
 		}
 	</script>
 
-	
+		<h3 align="center">The Most QnA</h3>
 		<table class="table">
 			<thead>
-				<tr align="center">
-					<td colspan="6" style="color: blue; "><h3>The Most QnA </h3> </td>
-				</tr>
 				<tr align="center">
 					<td width="5%"><label>#</label></td>
 					<td width="15%"><label>Category</label></td>
@@ -70,24 +67,28 @@
 	</script>
 
 	<table class="table">
-		<tr align="center">
-			<td width="5%"><label>#</label></td>
-			<td width="15%"><label>Category</label></td>
-			<td width="50%"><label>Title</label></td>
-			<td width="8%"><label>ID</label></td>
-			<td width="15%"><label>Day</label></td>
-			<td width="7%"><label>Count</label></td>
-		</tr>
-		<c:forEach var="qna" items="${qnadata }">
+		<thead>
 			<tr align="center">
-				<td>${qna.NUM }</td>
-				<td>${qna.CATEGORY}</td>
-				<td><a href="/qna/details/${qna.NUM}">${qna.TITLE}</a></td>
-				<td>${qna.ID }</td>
-				<td>${qna.TIME }</td>
-				<td>${qna.INQUIRY }</td>
+				<td width="5%"><label>#</label></td>
+				<td width="15%"><label>Category</label></td>
+				<td width="50%"><label>Title</label></td>
+				<td width="8%"><label>ID</label></td>
+				<td width="15%"><label>Day</label></td>
+				<td width="7%"><label>Count</label></td>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach var="qna" items="${qnadata }">
+				<tr align="center">
+					<td>${qna.NUM }</td>
+					<td>${qna.CATEGORY}</td>
+					<td><a href="/qna/details/${qna.NUM}">${qna.TITLE}</a></td>
+					<td>${qna.ID }</td>
+					<td>${qna.TIME }</td>
+					<td>${qna.INQUIRY }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 	
 	<div align="center">

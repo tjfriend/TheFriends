@@ -13,7 +13,7 @@
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">Free Board</h2>
 
-<div class="w3-row" style="margin-top: 50px">
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<script>
 		function getSelectValue(frm) {
 			frm.textValue.value = frm.selectBox.options[frm.selectBox.selectedIndex].text;
@@ -46,23 +46,27 @@
 	</script>
 
 	<table class="table">
-		<tr align="center">
-			<td width="5%"><label>#</label></td>
-			<td width="15%"><label>Category</label></td>
-			<td width="50%"><label>Title</label></td>
-			<td width="8%"><label>Writer</label></td>
-			<td width="15%"><label>Day</label></td>
-			<td width="7%"><label>Count</label></td>
-		</tr>
-		<c:forEach var="freeboard" items="${freeboarddata }">
+		<thead>
 			<tr align="center">
-				<td align="center">${freeboard.NUM }</td>
-				<td align="center">${freeboard.CATEGORY }</td>
-				<td><a href="/board/freeboarddetails?num=${freeboard.NUM }">${freeboard.TITLE }</a></td>
-				<td>${freeboard.ID }</td>
-				<td>${freeboard.TIME }</td>
-				<td>${freeboard.INQUIRY }</td>
-		</c:forEach>
+				<td width="5%"><label>#</label></td>
+				<td width="15%"><label>Category</label></td>
+				<td width="50%"><label>Title</label></td>
+				<td width="8%"><label>Writer</label></td>
+				<td width="15%"><label>Day</label></td>
+				<td width="7%"><label>Count</label></td>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="freeboard" items="${freeboarddata }">
+				<tr align="center">
+					<td align="center">${freeboard.NUM }</td>
+					<td align="center">${freeboard.CATEGORY }</td>
+					<td><a href="/board/freeboarddetails?num=${freeboard.NUM }">${freeboard.TITLE }</a></td>
+					<td>${freeboard.ID }</td>
+					<td>${freeboard.TIME }</td>
+					<td>${freeboard.INQUIRY }</td>
+			</c:forEach>
+		</tbody>
 	</table>
 	
 	<div align="center">

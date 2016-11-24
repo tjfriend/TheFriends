@@ -1,12 +1,13 @@
 package QnA.model;
 
+import java.text.*;
 import java.util.Date;
 
 public class CommentQnA {
 	int qnanum;
 	String id;
 	String memo;
-	Date day;
+	String day;
 	int commentnum;
 	public int getQnanum() {
 		return qnanum;
@@ -26,11 +27,12 @@ public class CommentQnA {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	public Date getDay() {
+	public String getDay() {
 		return day;
 	}
 	public void setDay(Date day) {
-		this.day = day;
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		this.day = sdf.format(day);
 	}
 	public int getCommentnum() {
 		return commentnum;
