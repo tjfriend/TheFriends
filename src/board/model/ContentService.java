@@ -1,5 +1,6 @@
 package board.model;
 
+import java.text.*;
 import java.util.*;
 
 import org.apache.ibatis.session.*;
@@ -15,8 +16,15 @@ public class ContentService {
 		SqlSession sql = fac.openSession();
 		HashMap map = new HashMap();
 		map.put("num", num);
-		List li = sql.selectList("freeboard.freeboarddetails", map);
+		List<HashMap> li = sql.selectList("freeboard.freeboarddetails", map);
 		sql.close();
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
 		return li;
 	}
 	

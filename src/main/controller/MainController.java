@@ -97,10 +97,4 @@ public class MainController {
 		return mav;
 	}
 
-	@RequestMapping("/shop")
-	public ModelAndView shop() {
-		ModelAndView mav = new ModelAndView("t:shop/shop");
-		return mav;
-	}
-
 }

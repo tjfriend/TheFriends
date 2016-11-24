@@ -156,7 +156,7 @@
 	</select>
 
 <!-- 	조회수 많은순 -->
-	<select id="qnabest" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	<select id="qnabest" resultType="java.util.HashMap">
 	<![CDATA[
 		select * from
        (select rownum rnum, temp.* from	(

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.text.*;
 import java.util.*;
 
 import javax.servlet.http.HttpSession;
@@ -25,8 +26,15 @@ public class QnAPage {
 		map.put("start", startpage);
 		map.put("end", endpage);
 		SqlSession sql = fac.openSession();
-		List li = sql.selectList("qna.pageNum", map);
+		List<HashMap> li = sql.selectList("qna.pageNum", map);
 		sql.close();
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
 		return li;
 	}
 
@@ -55,8 +63,15 @@ public class QnAPage {
 		map.put("end", endpage);
 		map.put("mode", mode);
 		SqlSession sql = fac.openSession();
-		List li = sql.selectList("qna.modeNum", map);
+		List<HashMap> li = sql.selectList("qna.modeNum", map);
 		sql.close();
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
 		return li;
 	}
 
@@ -72,9 +87,7 @@ public class QnAPage {
 		SqlSession sql = fac.openSession();
 		List list = sql.selectList("qna.qnacommentlist", map);
 		sql.close();
-
 		return list;
-
 	}
 
 	public int commentsize(int num) { // 페이지 숫자
@@ -96,8 +109,15 @@ public class QnAPage {
 		map.put("start", startpage);
 		map.put("end", endpage);
 		SqlSession sql = fac.openSession();
-		List li = sql.selectList("qna.qnasearch", map);
+		List<HashMap> li = sql.selectList("qna.qnasearch", map);
 		sql.close();
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
 		return li;
 	}
 
@@ -121,8 +141,15 @@ public class QnAPage {
 		map.put("end", endpage);
 		map.put("mode", mode);
 		SqlSession sql = fac.openSession();
-		List li = sql.selectList("qna.qnasearchmode", map);
+		List<HashMap> li = sql.selectList("qna.qnasearchmode", map);
 		sql.close();
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
 		return li;
 	}
 

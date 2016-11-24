@@ -4,7 +4,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<div class="w3-container" style="max-height: 700px; overflow-y: auto" align="center">
+<div class="w3-container" style="max-height: 700px;" align="center">
+	
 	<c:if test="${sessionScope.id == id }">
 	<input type="button" value="등록" id="add"/>
 	</c:if>
