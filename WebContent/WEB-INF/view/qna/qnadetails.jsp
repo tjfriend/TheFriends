@@ -144,7 +144,7 @@
 			<!-- 로그인시 댓글등록창이 보이게 한다 -->
 			<div align="center">
 				<c:if test="${login != null }">
-					<form action="/qna/qnacomment">
+					<form action="/qna/qnacomment" method="post">
 						<input type="hidden" name="num" value="${details.NUM }"> <input
 							type="hidden" name="endpa" value="${qnacommentsi }">
 						<input type="text" name="memo" style="width: 50%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px; resize: none;"/>
