@@ -32,7 +32,7 @@
 				<tr align="center">
 					<td width="5%"><label>#</label></td>
 					<td width="15%"><label>Category</label></td>
-					<td width="50%"><label>Title</label></td>
+					<td width="50%"><label>Writer</label></td>
 					<td width="8%"><label>ID</label></td>
 					<td width="15%"><label>Day</label></td>
 					<td width="7%"><label>Count</label></td>
@@ -127,10 +127,10 @@
 
 	<div align="center">
 		<form action="/qna/list">
-			<input type="hidden" name="mode" value="${qnamode }"> 
+			<input type="hidden" name="mode" value="${qnamode }"/> 
 			<label>검색 </label>
-			<input type="search" name="search" style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"> 
-				 <input type="submit" value="검색"  class="btn btn-default">
+			<input type="search" name="search" style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/> 
+				 <input type="submit" value="검색"  class="btn btn-default"/>
 		</form>
 	</div>
 </div>
