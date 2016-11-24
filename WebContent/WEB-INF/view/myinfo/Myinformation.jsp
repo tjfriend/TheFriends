@@ -142,7 +142,7 @@ hre {
 				id="Addressoff"	name="checkbox" value="Addressoff"><br /> <input
 					type="text" id="post" name="post" 
 					style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					readonly="readonly" placeholder="Post Number" /> <input
+					readonly="readonly" placeholder="Post Number" value="${post }"/> <input
 					type="button" class="btn btn-default" style="width: 40%"
 					onclick="searchPost()" value="우편번호 찾기" /><br /> <input
 					type="text" id="add01" name="add01" value="${fn:split(infomy.ADDRESS,')')[0]})"

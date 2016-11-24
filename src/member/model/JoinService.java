@@ -24,10 +24,11 @@ public class JoinService {
 		memberMap.put("name", name);
 		memberMap.put("birth", birth);
 		memberMap.put("phone", phone);
-		memberMap.put("address", add01+add02);
+		memberMap.put("address", add01+" "+add02);
 		memberMap.put("email", email+"@"+email2);
 		memberMap.put("nickname", nickname);
 		memberMap.put("recommender", recommender);
+		memberMap.put("post", post);
 		
 		HashMap<String, String> emailMap = new HashMap<>();
 		emailMap.put("id", id);
@@ -60,12 +61,6 @@ public class JoinService {
 			ss.insert("member.emailAuth", emailMap);
 			ss.insert("member.homepage", homeMap);
 			ss.commit();
-			if(recommender!="admin"){
-				ss.update("member.pointup", id);
-				id = recommender;
-				ss.update("member.pointup", id);
-				ss.commit();
-			}
 			
 			HashMap insertMap = new HashMap();
 			insertMap.put("id", id);
@@ -73,9 +68,12 @@ public class JoinService {
 			insertMap.put("y", lng1);
 			ss.insert("member.memLocation", insertMap);
 			
-			session.setAttribute("post", post);
-			session.setAttribute("addr1", add01);
-			session.setAttribute("addr2", add02);
+			if(recommender!="admin"){
+				ss.update("member.pointup", id);
+				id = recommender;
+				ss.update("member.pointup", id);
+				ss.commit();
+			}
 			
 			ss.close();
 			return true;

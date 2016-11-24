@@ -1,23 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjeEPKUNUAfmGw8M1UZ-Avgdhuoey0oQo&callback=initMap"
 	async defer></script>
 
-<div class="w3-row" style="margin-top: 50px; min-height: 600px;">
-	<h2>Navigation</h2>
-	출발지(내주소) <input type="text" id="myhome" value="${my }" size="30" />
-	<br />
-	찾을 친구이름 <input type="text" id="friend" list="rst" size="30" />
-	<datalist id="rst">
-	</datalist>
-	<br />
-	<input type="button" value="찾기" id="find" />
-	<div id="map" style="min-height: 500px;"></div>
+<h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
+	align="center">Navigation</h2>
+	
+<div class="w3-form" align="center">
+	<label>출발지(내주소)</label>&nbsp;&nbsp;<input type="text" id="myhome" value="${my }" size="50"/>&nbsp;&nbsp;
+	<label>도착지(친구주소)</label>&nbsp;&nbsp;<input type="text" id="friend" list="rst" size="50"/>&nbsp;&nbsp;
+	<input type="button" class="btn btn-default" value="찾기" id="find"/>
+	<datalist id="rst"></datalist>
 </div>
+<div align="center">
+	<div id="map" style="width: 1000px; min-height: 500px; border-radius: 25px"></div>
+</div>
+
 <script>
 	var name;
 	var address;
@@ -74,6 +81,12 @@
 				scrollwheel : true,
 				zoom : 15
 			});
+			
+			var marker = new google.maps.Marker({
+		          map: map,
+		          position: chicago,
+		          title: 'Home'
+		        });
 
 			var directionsDisplay = new google.maps.DirectionsRenderer({
 				map : map

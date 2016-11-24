@@ -332,7 +332,7 @@
 		var nickname = $("#nickname");
 		var reco = $("#recommender");
 		var authPass = $("#authPass");
-		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+post.val();+"/"+
+		var url = "/member/join/"+id.val()+"/"+password.val()+"/"+name.val()+"/"+birthday.val()+"/"+phone.val()+"/"+post.val()+"/"+
 							add01.val()+"/"+add02.val()+"/"+email.val()+"/"+email2.val()+"/"+nickname.val()+"/"+authPass.val();
 		if(reco.val()!=""){
 			url += "/"+reco.val();
