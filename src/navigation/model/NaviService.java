@@ -17,7 +17,8 @@ public class NaviService {
 	public String navi(String id){
 		SqlSession ss = fac.openSession();
 		HashMap map = ss.selectOne("navi.myhome",id);
-		String my = (String)map.get("ADDRESS");
+		String my = (String)map.get("ADD01");
+		my += " "+(String)map.get("ADD02");
 		ss.close();
 		return my;
 	}
@@ -35,7 +36,7 @@ public class NaviService {
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap();
 		map.put("name", name);
-		map.put("address", "%"+address+"%");
+		map.put("add01", "%"+address+"%");
 		List<HashMap> li = ss.selectList("navi.dis",map);
 		for(int i=0; i<li.size(); i++){
 			map.put("X", Double.parseDouble((String) li.get(i).get("X")));

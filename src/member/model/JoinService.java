@@ -24,7 +24,8 @@ public class JoinService {
 		memberMap.put("name", name);
 		memberMap.put("birth", birth);
 		memberMap.put("phone", phone);
-		memberMap.put("address", add01+" "+add02);
+		memberMap.put("add01", add01);
+		memberMap.put("add02", add02);
 		memberMap.put("email", email+"@"+email2);
 		memberMap.put("nickname", nickname);
 		memberMap.put("recommender", recommender);
