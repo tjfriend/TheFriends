@@ -2,6 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:forEach items="${li }" var="i">
-	<option>${i.NAME}:${i.ADDRESS }</option>
+	<option>${i.NAME}:${i.ADD01 } ${i.ADD02 }</option>
 </c:forEach>
 

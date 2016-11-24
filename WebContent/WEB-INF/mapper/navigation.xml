@@ -13,7 +13,7 @@
 	
 	<select id="dis" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		select member.*, memaddress.* from member, memaddress 
-  		where member.id=memaddress.id and member.name =#{name} and member.address like #{address}
+  		where member.id=memaddress.id and member.name =#{name} and member.add01 like #{add01}
 	</select>
 	
 	<select id="mdis" resultType="java.util.HashMap">

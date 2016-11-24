@@ -32,6 +32,8 @@ public class MemberController {
 			session.setAttribute("id", list.get(0).get("ID"));
 			session.setAttribute("point", list.get(0).get("POINT"));
 			session.setAttribute("post", list.get(0).get("POST"));
+			session.setAttribute("addr01", list.get(0).get("ADD01"));
+			session.setAttribute("addr02", list.get(0).get("ADD02"));
 			if(remember != null){
 				Cookie cookie = new Cookie("remember", id);
 				cookie.setPath("/");

@@ -24,7 +24,8 @@ public class JoinService {
 		memberMap.put("name", name);
 		memberMap.put("birth", birth);
 		memberMap.put("phone", phone);
-		memberMap.put("address", add01+" "+add02);
+		memberMap.put("add01", add01);
+		memberMap.put("add02", add02);
 		memberMap.put("email", email+"@"+email2);
 		memberMap.put("nickname", nickname);
 		memberMap.put("recommender", recommender);
@@ -38,6 +39,14 @@ public class JoinService {
 		HashMap<String, String> homeMap = new HashMap<>();
 		homeMap.put("id", id);
 		homeMap.put("name", name);
+		
+		HashMap<String, String> infoMap = new HashMap<>();
+		infoMap.put("id", id);
+		infoMap.put("phone", phone);
+		infoMap.put("email", email+"@"+email2);
+		infoMap.put("birth", birth);
+		infoMap.put("add01", add01);
+		infoMap.put("add02", add02);
 		
 		List<HashMap> memList = ss.selectList("member.idcheck", id);
 		String addr = add01+add02;
@@ -60,13 +69,15 @@ public class JoinService {
 			ss.insert("member.join", memberMap);
 			ss.insert("member.emailAuth", emailMap);
 			ss.insert("member.homepage", homeMap);
-			ss.commit();
+			ss.insert("member.myinfo", infoMap);
 			
 			HashMap insertMap = new HashMap();
 			insertMap.put("id", id);
 			insertMap.put("x", lat1);
 			insertMap.put("y", lng1);
 			ss.insert("member.memLocation", insertMap);
+			
+			ss.commit();
 			
 			if(recommender!="admin"){
 				ss.update("member.pointup", id);

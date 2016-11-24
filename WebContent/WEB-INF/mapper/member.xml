@@ -7,8 +7,7 @@
 	<insert id="join" parameterType="java.util.HashMap">
 		insert into member values(#{id},
 		#{password}, #{name}, #{birth}, #{phone},
-		#{email}, #{address},
-		#{recommender}, 0, #{nickname}, #{post})
+		#{email}, #{recommender}, 0, #{nickname}, #{post}, #{add01}, #{add02})
 	</insert>
 	<select id="idcheck" resultType="java.util.HashMap">
 		select * from member where
@@ -59,5 +58,8 @@
 	</insert>
 	<insert id="memLocation" parameterType="java.util.HashMap">
 		insert into memaddress values(#{id}, #{x}, #{y})
+	</insert>
+	<insert id="myinfo" parameterType="java.util.HashMap">
+		insert into myinfo values(#{id}, #{phone}, #{email}, #{birth}, #{add01}, #{add02})
 	</insert>
 </mapper>

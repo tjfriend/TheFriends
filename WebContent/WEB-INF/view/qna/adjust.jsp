@@ -1,24 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h1>ADJUST</h1>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<form action="/qna/qnaadjust" method="post">
-<input type="hidden"  name="num" value="${list.get(0).NUM }"/>
-	${list.get(0).CATEGORY }
-	분류 :&nbsp; <select name="category" style="width: 150px">
+<h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
+	align="center">QnA</h2>
+
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px" align="center">
+	<form action="/qna/qnaadjust" method="post">
+		<input type="hidden"  name="num" value="${list.get(0).NUM }"/>
+<%-- 		${list.get(0).CATEGORY } --%>
+		<label>분류 </label>&nbsp;&nbsp;
+		<select name="category" style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
 			<option value="개인정보">개인정보</option>
 			<option value="이벤트">이벤트</option>
 			<option value="홈페이지">홈페이지</option>
 			<option value="유료">유료</option>
 			<option value="기타">기타</option>	
-			</select>
-			<br /> <br /> 
-
-	제목 :&nbsp; <input type="text" name="title" value="${list.get(0).TITLE }"> <br /><br/>
-	내용 :&nbsp; <textarea rows="15" cols="60" name="content">${list.get(0).CONTENT }</textarea>
-	<br /> 
-
-	<input
-		type="submit" value="수정하기" /><br />
-</form>
+		</select><br/><br/>
+	
+		<label for="title" style="width: 15%"><font size="4">TITLE</font></label>
+		<input type="text" id="title" name="title" value="${list.get(0).TITLE }"
+				class="form-control" style="width: 25%" placeholder="Title" required="required"/><br/>
+		<label for="content" style="width: 15%"><font size="4">CONTENT</font></label><br/>
+		<textarea rows="10" cols="100" style="width: 50%; resize: none;" placeholder="CONTENT" name="content" required="required">${list.get(0).CONTENT }</textarea><br/><br/>
+		<input type="submit" value="수정하기" class="btn btn-default"/>&nbsp;&nbsp;
+		<input type="button" value="취소" class="btn btn-default" onclick="self.location='/qna/details/${list.get(0).NUM}'">
+	</form>
+</div>
