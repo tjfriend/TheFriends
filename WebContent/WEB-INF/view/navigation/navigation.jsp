@@ -17,7 +17,8 @@
 	
 <div class="w3-form" align="center">
 	<label>출발지(내주소)</label>&nbsp;&nbsp;<input type="text" id="myhome" value="${my }" size="50"/>&nbsp;&nbsp;
-	<label>도착지(친구주소)</label>&nbsp;&nbsp;<input type="text" id="friend" list="rst" size="50"/>&nbsp;&nbsp;
+	<br/>
+	<label>도착지(친구주소)</label>&nbsp;&nbsp;<input type="text" name="friend" id="friend" list="rst" size="50"/>&nbsp;&nbsp;
 	<input type="button" class="btn btn-default" value="찾기" id="find"/>
 	<datalist id="rst"></datalist>
 </div>
@@ -29,6 +30,7 @@
 	var name;
 	var address;
 	$("#friend").on("input", function() {
+		
 		$.ajax({
 			"url" : "/navi/find?friend=" + $("#friend").val()
 		}).done(function(txt){
@@ -44,6 +46,10 @@
     			var temp = $(this).val();
     			name = temp.slice(0, temp.indexOf(":"));
     			address = temp.slice(temp.indexOf(":")+1);
+    			alert(address=="비공개");
+    			if(address=="비공개"){
+    				$("#find").prop("disabled", "disabled");	
+    			}
     			$("#friend").val(address);
       		}
     	});

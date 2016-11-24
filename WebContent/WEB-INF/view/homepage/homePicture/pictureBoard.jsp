@@ -5,13 +5,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <div class="w3-container" style="max-height: 700px; overflow-y: auto" align="center">
-	
 	<c:if test="${sessionScope.id == id }">
 	<input type="button" value="등록" id="add"/>
 	</c:if>
-	
 	<h2>사진첩</h2>
-	
 	<c:choose>
 		<c:when test="${li != 'null' }">
 			<c:forEach items="${li }" var="i">
@@ -56,7 +53,7 @@
 	}
 
 	$("#add").click(function(){
-		window.open("/picture/up/${id}", "picup", "width: 60px, height: 30px");
+		window.open("/picture/up/${id}", "picup", "width: 5px, height: 5px");
 	});
 	
 	function re(element){

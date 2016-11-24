@@ -34,14 +34,14 @@
 	<!-- 댓글 페이지 작성 -->
 	<select id="replepage" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
-			select temp.* from (select rownum r, p.* from picturereply p where id=#{id} order by day desc)temp
+			select temp.* from (select rownum r, p.* from picturereply p where num=#{num} order by day desc)temp
 			where temp.r >= #{start} and temp.r <= #{end}
 		]]>
 	</select>
 	
 	<!-- 댓글 전체페이지 수 -->
 	<select id="total2" resultType="java.lang.Integer">
-		select count(*) from picturereply where id=#{id}
+		select count(*) from picturereply where num=#{num}
 	</select>
 	
 </mapper>

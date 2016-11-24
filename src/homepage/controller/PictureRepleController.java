@@ -1,6 +1,6 @@
 package homepage.controller;
 
-import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,18 +19,45 @@ public class PictureRepleController {
 	@Autowired
 	PictureRepleService pic;
 	
-	// ´ñ±Ûµî·Ï ÆäÀÌÁö
-	@RequestMapping("/reple")
-	public ModelAndView reple(String uuid) {
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureReple.jsp");
-		ma.addObject("uuid",uuid);
+	@RequestMapping("/view")
+	public ModelAndView view(String uuid, int num, @RequestParam(defaultValue="1") int p){
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/view.jsp");
+		List li = pic.page(num, p);
+		ma.addObject("li",li);
 		return ma;
 	}
 	
+	// ´ñ±Ûµî·Ï ÆäÀÌÁö
+	@RequestMapping("/reple")
+	public ModelAndView reple(String uuid, int num, @RequestParam(defaultValue="1") int p) {
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureReple.jsp");
+		List li = pic.page(num, p);
+		int size = pic.total(num);
+		ma.addObject("uuid",uuid);
+		ma.addObject("num",num);
+		ma.addObject("li",li);
+		ma.addObject("size",size);
+		return ma;
+	}
+	
+	// ´ñ±Û µî·Ï
 	@RequestMapping("/reup")
-	public int repleup(int num, HttpSession session, String content){
+	public ModelAndView repleup(int num, HttpSession session, String content){
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureReple.jsp");
 		int a = pic.reple(num, (String)session.getAttribute("id"), content);
-		return a;
+		ma.addObject("a",a);
+		return ma;
+	}
+	
+	// ÀüÃ¼ ´ñ±Û
+	@RequestMapping("/replyAll")
+	public ModelAndView replyAll(int num, @RequestParam(defaultValue="1") int p){
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureReple.jsp");
+		List li = pic.page(num, p);
+		int size = pic.total(num);
+		ma.addObject("li",li);
+		ma.addObject("size",size);
+		return ma;
 	}
 
 	

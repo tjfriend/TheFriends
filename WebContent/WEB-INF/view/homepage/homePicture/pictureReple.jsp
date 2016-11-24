@@ -4,21 +4,47 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<form action="/picture/reple">
 	<img src="/files/${uuid }" style="width: 100px"><br /> 댓글<br />
-	<textarea name="content" rows="10" cols="30"></textarea>
-	<input type="button" value="댓글등록" id="btr"/><br/>
+	<textarea name="content" id="content" rows="10" cols="30"></textarea>
+	<input type="button" value="댓글등록" id="btr" onclick="reply(${num})" /><br/>
 	<a href="/picture/up">사진목록</a>
-</form>
-<h2>댓글</h2>
-<div id="reple"></div>
+	<br/>
+
+<div id="re">
+
+<h3>댓글</h3>
+
+<c:forEach items="${li }" var="i">
+	작성자 : ${i.WRITER } <br/>
+	내용 : ${i.CONTENT } <br/>
+	<hr/>
+</c:forEach>
+</div>
+<div align="center">
+	<label id="page">
+		<c:forEach var="i" begin="1" end="${size }">
+			<a "/picture/replyAll?p=${i }&num=${num}" id="pg">${i }</a>
+		</c:forEach>
+	</label>
+</div>
 
 <script>
-	$("#btr").click(function(){
+	function reply(num){
+		if($("#content").val()==""){
+			$("#reply").disabled();
+		}
 		$.ajax({
-			"url" : ""
+			"method" : "get",
+			"url" : "/picture/reup?num="+num+"&content="+$("#content").val()
 		}).done(function(txt){
-			$("#homeMain").html(txt);
+			$("#content").val("");
+			$.ajax({
+				"method" : "get",
+				"url" : "/picture/view?num="+num+"&p="+$("#pg").val()
+			}).done(function(txt){
+				$("#re").html(txt);
+			});
 		});
-	});
+	};
+	
 </script>

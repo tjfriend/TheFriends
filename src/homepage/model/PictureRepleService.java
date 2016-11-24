@@ -34,10 +34,10 @@ public class PictureRepleService {
 	}   
 	
 	// 전체 댓글 페이지
-	public List page(String id, int p){
+	public List page(int num, int p){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
-		map.put("id", id);
+		map.put("num", num);
 		map.put("start", (p*10)-9);
 		map.put("end", p*10);
 		List li = ss.selectList("picture.replepage",map);
@@ -45,9 +45,9 @@ public class PictureRepleService {
 	}
 	
 	// 댓글 전체 목록
-	public int total(String id){
+	public int total(int num){
 		SqlSession ss = fac.openSession();
-		int a = ss.selectOne("picture.total2",id);
+		int a = ss.selectOne("picture.total2",num);
 		return a%10==0 ? a/10 : a/10+1;
 	}
 }
