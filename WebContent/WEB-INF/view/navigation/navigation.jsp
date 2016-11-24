@@ -44,9 +44,6 @@
     			var temp = $(this).val();
     			name = temp.slice(0, temp.indexOf(":"));
     			address = temp.slice(temp.indexOf(":")+1);
-    			if (address.indexOf("(") != -1) {
-					address = address.slice(0, address.indexOf("("));
-				}
     			$("#friend").val(address);
       		}
     	});
@@ -58,7 +55,7 @@
 	
 	 $("#find").click(function(){
 		$.ajax({
-			"url" : "/navi/coordinate?name="+name+"&address="+address
+			"url" : "/navi/coordinate?name="+name+"&address="+address.slice(0, 5)
 		}).done(function(obj){
 			 dx = obj.X;
 			 dy = obj.Y;

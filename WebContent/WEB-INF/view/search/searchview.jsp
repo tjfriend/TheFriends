@@ -29,7 +29,7 @@
 						<td>${i.NAME }</td>
 						<td>${i.PHONE }</td>
 						<td>${i.EMAIL }</td>
-						<td>${i.ADDRESS }</td>
+						<td>${i.ADD01}&nbsp;${i.ADD02 }</td>
 						<c:choose>
 							<c:when test="${i.friend != null }">
 								<td><input class="btn btn-default" type="button" value="친구" readonly="readonly"/></td>

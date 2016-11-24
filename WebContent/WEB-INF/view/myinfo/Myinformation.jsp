@@ -44,7 +44,7 @@ hre {
 
 
 	<div style="float: left; margin-left: 225px">
-		<form action="/myinfo/myinfodelete">
+		<form action="/myinfo/myinfodelete" method="post">
 			<input type="submit" name="Check" value="확인"
 				style="height: 50px; width: 150px">
 
@@ -62,10 +62,23 @@ hre {
 	<hre></hre>
 	<br />
 	<div align="center">
-		<form action="/myinfo/Passchange">
+		<form action="/myinfo/Passchange" method="post" name="checkpass">
 			<label style="width: 30%"><font size="4">변경할 비밀번호</font></label> <input
 				type="text" class="form-control" style="width: 35%" name="pass" />
-			<br /> <br /> <input type="submit" value="확인"
+				<br/>
+			<label style="width: 30%"><font size="4">변경할 비밀번호확인 </font></label> <input
+				type="text" class="form-control" style="width: 35%" name="passcheck" />
+			<c:choose>
+				<c:when test="${passch == 1 }">
+					<p><font size="2" color="red">비밀번호가 틀렸습니다</font></p>
+					<br/>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>	
+			
+			
+			<br /> <input type="submit" value="확인"
 				style="margin: 0 auto; height: 50px; width: 150px">
 		</form>
 	</div>
@@ -76,7 +89,7 @@ hre {
 <div id="ChangeInfodiv" align="center">
 	<hre></hre>
 	<br />
-	<form action="/myinfo/changeoff">
+	<form action="/myinfo/changeoff" method="post">
 		<div class="w3-hide-large">
 			<label style="width: 30%"><font size="4">ID</font></label> <input
 				type="text" class="form-control" style="width: 35%"
@@ -93,15 +106,24 @@ hre {
 			<input type="text" id="nickname" name="nickname" class="form-control"
 				style="width: 35%" value="${info.NICKNAME }" disabled="disabled" />
 		</div>
+		
+			<div class="w3-hide-large">
+				<label for="phone" style="width: 30%"><font size="4">Phone</font></label><input type="checkbox" name="checkbox" 
+				${info.PHONE eq '비공개'?'checked':'' } value="phoneoff">
+				
+				<input type="text" id="phone" name="phone" class="form-control" value="${infomy.PHONE }"
+					style="width: 45%" placeholder="01012345678" />
+			</div>
+		
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="email" style="width: 30%"><font size="4">Email</font></label><font
-					size="2">비공개 : &nbsp;</font><input type="checkbox" name="Eamiloff" ${fn:split(info.EMAIL,'@')[0] eq '비공개'?'checked':'' }
-					value="Emailoff" ><br /> <input type="text" id="email"
+					size="2">비공개 : &nbsp;</font><input type="checkbox" name="checkbox" ${fn:split(info.EMAIL,'@')[0] eq '비공개'?'checked':'' }
+					value="Emailoff" id="Emailoff" ><br /> <input type="text" id="email"
 					name="email"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					placeholder="Email" value="${fn:split(info.EMAIL,'@')[0] }" /> <label>@</label>
-				<input type="text" value="${fn:split(info.EMAIL,'@')[1] }"
+					placeholder="Email" value="${fn:split(infomy.EMAIL,'@')[0] }" /> <label>@</label>
+				<input type="text" value="${fn:split(infomy.EMAIL,'@')[1] }"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					id="email2" name="email2" placeholder="직접입력" /> <select
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
@@ -118,28 +140,28 @@ hre {
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="birth" style="width: 30%"><font size="4">Birth
-						Day</font></label><font size="2">비공개 : &nbsp;</font><input type="checkbox" ${fn:split(info.BIRTH,'-')[0] eq '비공개'?'checked':'' }
-					name="Birthoff" value="Birthoff"> <input type="date"
+						Day</font></label><font size="2">비공개 : &nbsp;</font><input type="checkbox" ${info.BIRTH eq infomy.BIRTH  ?'':'checked' }
+				id="Birthoff"	name="checkbox" value="Birthoff"> <input type="date"
 					id="birth" name="birth" class="form-control" style="width: 45%"
 					placeholder="yyyymmdd"
-					value="${fn:split(info.BIRTH,'-')[0]}-${fn:split(info.BIRTH,'-')[1]}-${fn:split(fn:split(info.BIRTH,'-')[2],' ')[0]}" />
+					value="${fn:split(infomy.BIRTH,'-')[0]}-${fn:split(infomy.BIRTH,'-')[1]}-${fn:split(fn:split(infomy.BIRTH,'-')[2],' ')[0]}" />
 			</div>
 		</div>
 
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="address" style="width: 30%"><font size="4">Address</font></label><font
-					size="2">비공개 : &nbsp;</font><input type="checkbox" ${add01 eq '비공개'?'checked':'' }
-					name="Addressoff" value="Addressoff"><br /> <input
-					type="text" id="post" name="post"
+					size="2">비공개 : &nbsp;</font><input type="checkbox" ${fn:split(info.ADD01,'@')[0] eq '비공개'?'checked':'' }
+				id="Addressoff"	name="checkbox" value="Addressoff"><br /> <input
+					type="text" id="post" name="post" 
 					style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
-					readonly="readonly" placeholder="Post Number" value="${post }"/> <input
+					readonly="readonly" placeholder="Post Number" value="${info.POST }"/> <input
 					type="button" class="btn btn-default" style="width: 40%"
 					onclick="searchPost()" value="우편번호 찾기" /><br /> <input
-					type="text" id="add01" name="add01"
+					type="text" id="add01" name="add01" value="${infomy.ADD01}"
 					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Address" /> <input type="text"
-					id="add02" name="add02"
+					id="add02" name="add02" value="${infomy.ADD02}"
 					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					placeholder="Detailed Address" />
 			</div>
@@ -155,6 +177,16 @@ hre {
 </div>
 
 <script>
+	function checkpass() {
+		var pass = document.getElementById('pass');
+		var pass_check = document.getElementById('passcheck');
+		
+		if(pass.value != pass_check.value){
+			alert('비밀번호가 다릅니다');
+			return false;
+		}
+	}
+
 	$(document).ready(function() {
 		$("#ChangePass").hide();
 		$("#Secessiondiv").hide();
@@ -249,4 +281,4 @@ hre {
 					}
 				}).open();
 	}
-</script>
+</script> 	

@@ -1,7 +1,5 @@
 package QnA.model;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.*;
 import java.util.*;
 
 @Component
@@ -60,9 +59,16 @@ public class qnawrite {
 		SqlSession sql = fac.openSession();
 		HashMap map = new HashMap();
 		map.put("num", num);
-		List list = sql.selectList("qna.qnadetails", map);
+		List<HashMap> li = sql.selectList("qna.qnadetails", map);
 		sql.close();
-		return list;
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
+		return li;
 
 	}
 	

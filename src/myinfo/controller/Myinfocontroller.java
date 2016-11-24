@@ -30,12 +30,14 @@ public class Myinfocontroller {
 		String id = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		List list = cf.PassConfirm(id, pass);
-
+		List lis = cf.Myinfo(id);
 		if (list.isEmpty()) {
 			mav.setViewName("/myinfo/Passcertification.jsp");
+			mav.addObject("passch",1);
 		} else {
 			mav.setViewName("/myinfo/Myinformation.jsp");
 			mav.addObject("info", list.get(0));
+			mav.addObject("infomy",lis.get(0));
 		}
 
 		return mav;
@@ -52,11 +54,12 @@ public class Myinfocontroller {
 	}
 
 	@RequestMapping("/Passchange")
-	public ModelAndView changepassword(String pass, HttpSession session) {
+	public ModelAndView changepassword(String pass,String passcheck,HttpSession session) {
 
 		String id = (String) session.getAttribute("id");
 		int r = cf.chagepass(id, pass);
 		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("/myinfo/Passcertification.jsp");
 
 		return mav;
@@ -64,17 +67,20 @@ public class Myinfocontroller {
 	
 	// 정보수정
 	@RequestMapping("/changeoff")
-	public ModelAndView openoff(HttpSession session,String birth,String email,String email2, String add01,String add02,String Eamiloff,String addressoff,String birthoff){
+	public ModelAndView openoff(HttpSession session,String birth,String email,String email2, String add01,
+			String add02,String phone,String checkbox,String post){
 		String id = (String) session.getAttribute("id");
-		System.out.println("컨트 id: "+id+"//birth//"+birth+"//ema//"+email+"//ema2//"+email2+"//add//"
-		+add01+"..qwr,,"+add02+"//eaof//"+Eamiloff+"//adof//"+addressoff+"//birof//"+birthoff);
-		int r = cf.changemyinfo(id, birth, email, email2, add01,add02, Eamiloff, addressoff, birthoff);
-		System.out.println("컨트 r : "+r);
+		if(checkbox==null)
+			checkbox = "값이없음";
+		
+		
+		int changemember = cf.changemember(id, phone, birth, email, email2, add01, add02, checkbox,post);
+		int changemyinfo = cf.changemyinfo(id, phone, birth, email, email2, add01, add02, checkbox);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("myinfo",r);
-		mav.setViewName("/myinfo/Myinformation.jsp");
+		mav.addObject("changemember",changemember);
+		mav.addObject("changemyinfo",changemyinfo);
+		mav.setViewName("/myinfo/Passcertification.jsp");
 //		mav.setViewName("/myinfo/Passcertification.jsp");
-		System.out.println("mav : " +mav);
 		return mav;
 		
 	}

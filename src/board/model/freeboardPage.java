@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.text.*;
 import java.util.*;
 
 @Component
@@ -23,8 +24,15 @@ public class freeboardPage {
 			map.put("start", startpage);
 			map.put("end", endpage);
 		SqlSession sql = fac.openSession();
-		List li = sql.selectList("freeboard.pageNum",map);
+		List<HashMap> li = sql.selectList("freeboard.pageNum",map);
 		sql.close();
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
 		return li;
 	}
 	
@@ -36,8 +44,15 @@ public class freeboardPage {
 			map.put("end", endpage);
 			map.put("mode", mode);
 		SqlSession sql = fac.openSession();
-		List li = sql.selectList("freeboard.modeNum",map);
+		List<HashMap> li = sql.selectList("freeboard.modeNum",map);
 		sql.close();
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
 		return li;
 	}
 		
@@ -69,8 +84,15 @@ public class freeboardPage {
 		map.put("start", startpage);
 		map.put("end", endpage);
 		SqlSession sql = fac.openSession();
-		List li = sql.selectList("freeboard.freeboardsearch", map);
+		List<HashMap> li = sql.selectList("freeboard.freeboardsearch", map);
 		sql.close();
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
 		return li;
 	}
 

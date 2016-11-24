@@ -16,11 +16,11 @@
 		<table class="table">
 			<thead align="center">
 				<tr>
-					<td><label>#</label></td>
-					<td><label>Title</label></td>
-					<td><label>Writer</label></td>
-					<td><label>Date</label></td>
-					<td><label>Count</label></td>
+					<td width="5%"><label>#</label></td>
+					<td width="50%"><label>Title</label></td>
+					<td width="15%"><label>Writer</label></td>
+					<td width="15%"><label>Day</label></td>
+					<td width="15%"><label>Count</label></td>
 				</tr>
 			</thead>
 			<tbody id="tbody" align="center">
