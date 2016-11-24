@@ -9,7 +9,11 @@
 		#{id } and password = #{pass
 		}
 	</select>
-
+	
+	<select id="myinfotable" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select * from myinfo where id = #{id } 
+	</select>
 
 
 	<!-- 회원 탈퇴 -->
@@ -32,9 +36,21 @@
 	</update>
 
 	<!-- 개인정보 변경 -->
-	<update id="changemyinfo" parameterType="java.util.HashMap">
+	<update id="changemember" parameterType="java.util.HashMap">
 		update member set email
-		= #{email }, birth = #{birth} , address = #{address}
+		= #{email } , birth = #{birth}, address = #{address}, phone = #{phone }
+		where id = #{id }
+	</update>
+	
+	<update id="changemembercheckboxbirth" parameterType="java.util.HashMap">
+		update member set email
+		= #{email }, birth = sysdate , address = #{address}, phone = #{phone }
+		where id = #{id }
+	</update>
+
+	<update id="changemyinfo" parameterType="java.util.HashMap">
+		update myinfo set email
+		= #{email }, birth = #{birth} , address = #{address}, phone = #{phone }
 		where id = #{id }
 	</update>
 
