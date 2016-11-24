@@ -23,7 +23,7 @@
 		}
 	</script>
 
-	<c:if test="${p==1 }">
+	
 		<table class="table">
 			<thead>
 				<tr align="center">
@@ -51,9 +51,9 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</c:if>
+	
 
-	<form action="/qna/list" id="ctg" align="right">
+	<form action="/qna/list" id="ctg" align="right" method="post">
 		<select name="mode" id="sel" style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
 			<option value="" ${qnamode eq ''?'selected':'' }>분류</option>
 			<option value="개인정보" ${qnamode eq '개인정보'?'selected':'' }>개인정보</option>
@@ -126,7 +126,7 @@
 	</div>
 
 	<div align="center">
-		<form action="/qna/list">
+		<form action="/qna/list" method="post">
 			<input type="hidden" name="mode" value="${qnamode }"> 
 			<label>검색 </label>
 			<input type="search" name="search" style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"> 

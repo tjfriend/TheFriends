@@ -16,7 +16,7 @@
 		<c:when test="${loginid == details.ID }">
 			<input type="button" value="수정"
 				onclick="location.href='/qna/qnaupdate?num=${details.NUM}'" />
-			<form action="/qna/qnadelete">
+			<form action="/qna/qnadelete" method="post">
 				<input type="hidden" name="num" value="${details.NUM }"> <input
 					type="submit" value="삭제">
 
@@ -52,21 +52,7 @@
 		</table>
 		<hr />
 	</div>
-	<div>
-		<table class="table">
-			<c:forEach var="qcm" items="${qnacommentdata }">
-				<tr>
-					<th>${qcm.ID }</th>
-					<td>${qcm.DAY }</td>
-				</tr>
-				<tr>
-					<td>${qcm.MEMO }</td>
-
-				</tr>
-			</c:forEach>
-		</table>
-	</div>
-
+	
 	<!--  	댓글 -->
 
 
@@ -86,7 +72,7 @@
 						type="button" value="수정취소" id="chagecancel${qnac.commentnum }"
 						class="changeCancel" onclick="changeCancel(this)">
 
-						<form action="/qna/commentdelete">
+						<form action="/qna/commentdelete" method="post">
 							<input type="hidden" name="commentnum"
 								value="${qnac.commentnum }"> <input type="hidden"
 								name="num" value="${details.NUM }"> <input type="submit"
@@ -101,7 +87,7 @@
 
 				<tr>
 			<td>
-						<form action="/qna/commentupdate">
+						<form action="/qna/commentupdate" method="post">
 					<textarea rows="3" cols="80"
 							id="changememo${qnac.commentnum }" class="changeMemo"
 							disabled="disabled" style="border: 1px; resize: none;">${qnac.memo }</textarea>
@@ -181,7 +167,7 @@
 			<c:when test="${login == null }">
 			</c:when>
 			<c:otherwise>
-				<form action="/qna/qnacomment">
+				<form action="/qna/qnacomment" method="post">
 					<input type="hidden" name="num" value="${details.NUM }"> <input
 						type="hidden" name="endpa" value="${qnacommentsi }">
 					<div style="float: left; margin-right: 10">
