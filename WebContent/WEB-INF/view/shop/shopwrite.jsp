@@ -7,7 +7,7 @@
 
 
 	곡정보 :&nbsp; <input type="text" name="title" required="required"> <br /><br/>
-	판매금액 :&nbsp; <input type="text" name="title" required="required">잣 	<br /> 
+	판매금액 :&nbsp; <input type="text" name="money" required="required">잣 	<br /> 
 
 
 	<input type="submit" value="올리기" /><br />

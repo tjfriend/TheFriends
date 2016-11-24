@@ -14,7 +14,7 @@
 			frm.optionValue.value = frm.selectBox.options[frm.selectBox.selectedIndex].value;
 		}
 	</script>
-	<form action="/board/list" id="ctg">
+	<form action="/board/list" id="ctg" method="post">
 		<select name="mode" id="sel">
 			<option value="" ${freeboardmode eq ''?'selected':'' }>분류</option>
 			<option value="10대 이야기" ${freeboardmode eq '10대 이야기'?'selected':'' }>10대 이야기</option>
@@ -59,7 +59,7 @@
 		</c:forEach>
 	</table>
 	
-	<form action="write">
+	<form action="write" method="post">
 		<div align="right">
 		<input type="submit" value="글작성"  />
 		</div>
@@ -92,7 +92,7 @@
 
 	<br />
 	<hr />
-	<form action="/board/list">
+	<form action="/board/list" method="post">
 		<input type="hidden" name="mode" value="${freeboardmode }"> 
 		검색 : <input type="search" name="search"> 
 			 <input type="submit" value="검색"  >
