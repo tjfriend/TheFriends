@@ -4,13 +4,9 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<<<<<<< HEAD
 <div class="w3-container" style="max-height: 700px; overflow-y: auto" align="center">
 	
 	<c:if test="${sessionScope.id == id }">
-=======
-<div class="w3-container" style="max-height: 700px" align="center">
->>>>>>> branch 'master' of https://github.com/tjfriend/TheFriends.git
 	<input type="button" value="등록" id="add"/>
 	</c:if>
 	

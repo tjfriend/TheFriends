@@ -8,7 +8,7 @@
 		insert into member values(#{id},
 		#{password}, #{name}, #{birth}, #{phone},
 		#{email}, #{address},
-		#{recommender}, 0, #{nickname})
+		#{recommender}, 0, #{nickname}, #{post})
 	</insert>
 	<select id="idcheck" resultType="java.util.HashMap">
 		select * from member where
