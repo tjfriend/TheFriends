@@ -23,7 +23,8 @@ public class PictureService {
 	@Autowired
 	ServletContext application;
 	
-	public int upload(String id, String title, String content, MultipartFile picture, String uuid){
+	// 댓글 등록
+	public int upload(String id, String title, String content, MultipartFile picture, String uuid, String open){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap();
 		String name = picture.getOriginalFilename();
@@ -32,6 +33,7 @@ public class PictureService {
 		map.put("content", content);
 		map.put("picture", name);
 		map.put("uuid", uuid);
+		map.put("open", open);
 		try{
 			ss.insert("picture.upload",map);
 			ss.close();
@@ -79,5 +81,19 @@ public class PictureService {
 		SqlSession ss = fac.openSession();
 		int a = ss.selectOne("picture.total", id);
 		return a%10==0 ? a/10 : a/10+1;
+	}
+	
+	// 좋아요
+	public int good(int num){
+		SqlSession ss = fac.openSession();
+		int a = ss.update("picture.upgood",num);
+		return a;
+	}
+	
+	// 조회수
+	public int count(int num){
+		SqlSession ss = fac.openSession();
+		int a = ss.update("picture.upcount",num);
+		return a;
 	}
 }

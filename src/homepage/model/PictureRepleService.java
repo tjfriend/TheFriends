@@ -50,4 +50,21 @@ public class PictureRepleService {
 		int a = ss.selectOne("picture.total2",num);
 		return a%10==0 ? a/10 : a/10+1;
 	}
+	
+	// ´ñ±Û ¼öÁ¤
+	public int update(int replynum, String content){
+		SqlSession ss = fac.openSession();
+		HashMap map = new HashMap();
+		map.put("replynum", replynum);
+		map.put("content", content);
+		int a = ss.update("picture.modify",map);
+		return a;
+	}
+	
+	// ´ñ±Û »èÁ¦
+	public int delete(int replynum){
+		SqlSession ss = fac.openSession();
+		int a = ss.delete("picture.delete",replynum);
+		return a;
+	}
 }

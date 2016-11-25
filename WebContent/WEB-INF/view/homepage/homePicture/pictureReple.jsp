@@ -3,9 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-	<img src="/files/${uuid }" style="width: 100px"><br /> 댓글<br />
-	<textarea name="content" id="content" rows="10" cols="30"></textarea>
+	<img src="/files/${uuid }" style="width: 100px"><br /> 
+	<a id="good">좋아요 : ${i.GOOD }</a> <br/>
+	댓글<br />
+	<textarea name="content" id="content" rows="5" cols="50"></textarea>
 	<input type="button" value="댓글등록" id="btr" onclick="reply(${num})" /><br/>
 	<a href="/picture/up">사진목록</a>
 	<br/>
@@ -16,21 +17,51 @@
 
 <c:forEach items="${li }" var="i">
 	작성자 : ${i.WRITER } <br/>
-	내용 : ${i.CONTENT } <br/>
+	내용 
+	<br/>
+	<span id="con${i.REPLYNUM }" >${i.CONTENT } </span><br/>
+	
 	<c:if test="${sessionScope.id == id }">
-		<input type="button" value="수정" onclick="modify(${i.WRITER})"/>
-		<input type="button" value="삭제" onclick="delete(${i.CONTENT})"/>
+		<textarea id="${i.REPLYNUM }" rows="3" cols="50" style="display: none" >${i.CONTENT }</textarea>
+		<br/>
+		<a onclick="modify(${i.REPLYNUM })" > 수정 </a>
+		<a onclick="del(${i.REPLYNUM })" > 삭제 </a>
+		<a onclick="newcon(${i.REPLYNUM })" id="new${i.REPLYNUM }" style="display: none ">수정하기</a>
 	</c:if>
 	<hr/>
 </c:forEach>
 </div>
+
+<script>
+	function newcon(element){
+		$("#"+element).hide();
+		$("#new"+element).hide();
+		$("#con"+element).show();
+		$("#con"+element).html($("#"+element).val());
+		
+		$.ajax({
+			"url" : "/picture/modify?replynum="+element+"&content="+$("#con").html()
+		}).done(function(txt){
+			
+		});
+	};
+
+	function modify(element){
+		$("#con"+element).hide();
+		$("#"+element).show();
+		$("#new"+element).show();
+	};
+	
+	
+</script>
+
+
 <div align="center" id="pa">
 	<label id="page">
 		<c:forEach var="i" begin="1" end="${size }">
-			<a  onclick="pg(this)">${i }</a>
+			<a id="pag" onclick="pg(this)">${i }</a>
 		</c:forEach>
 	</label>
-
 </div>
 
 <script>
@@ -43,17 +74,22 @@
 			"url" : "/picture/reup?num="+num+"&content="+$("#content").val()
 		}).done(function(txt){
 			$("#content").val("");
+			var url = ""
+			if($("#pag").val()!=null){
+				url = "/picture/view?num="+num+"&p="+$("#pag").val();
+			} else {
+				url = "/picture/view?num="+num;
+			}
 			$.ajax({
 				"method" : "get",
-				"url" : "/picture/view?num="+num+"&p="+$("#pg").val()
+				"url" : url
 			}).done(function(txt){
 				$("#re").html(txt);
 			});
-		});
+		});                           
 	};
 	
 	function pg(element){
-		alert(element.innerHTML);
 		var url = "/picture/replyAll?p="+element.innerHTML+"&num="+${num};
 		$.ajax({
 			"url" : url
@@ -62,8 +98,25 @@
 		});
 	};
 	
-	
-	function modify(element){
-		
+	function del(element){
+		$.ajax({
+			"url" : "/picture/delete?replynum="+element
+		}).done(function(txt){
+			alert("삭제되었습니다");
+			var url = ""
+			if($("#pag").val()!=null){
+				url = "/picture/view?num="+${num}+"&p="+$("#pag").val();
+			} else {
+				url = "/picture/view?num="+${num};
+			}
+			$.ajax({
+				"method" : "get",
+				"url" : url
+			}).done(function(txt){
+				$("#re").html(txt);
+			});
+		});
 	};
+	
+
 </script>
