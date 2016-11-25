@@ -10,15 +10,13 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<div class="w3-row" style="margin-top: 50px">
-	<h1>Music Market</h1>
-	<br /> <br /> <br /> <br /> <br />
+<h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
+	align="center">Shop</h2>
 
-	<form action="/shop/write" method="post">
-		<div align="right">
-			<input type="submit" value="음악올리기" />
-		</div>
-	</form>
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
+	<div align="right">
+		<input type="button" value="음악올리기" class="btn btn-default" id="musicUp"/>
+	</div>
 
 	<table class="table">
 		<tr align="center">
@@ -46,6 +44,10 @@
 	<div id="audio"></div>
 
 <script>
+$("#musicUp").click(function(){
+	window.open("/shop/write", "musicUp", "width=400px, height=500px");
+})
+
 function listen(title) {
 	$("#audio").html("<audio controls='controls' autoplay='autoplay'><source src='/music/"+title+"'></audio>");
 }
