@@ -21,6 +21,9 @@ public class ShopController {
 	
 	@Autowired
 	ShopWrite sw;
+	
+	@Autowired
+	Shopbuy sb;
 
 //	@RequestMapping("/list")
 //	public ModelAndView shopList(@RequestParam(defaultValue = "1") int p) {
@@ -55,14 +58,14 @@ public class ShopController {
 	}
 
 	@RequestMapping("/write")
-	public ModelAndView writeboard() {
+	public ModelAndView shopwrite() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/shop/shopwrite.jsp");
 		return mav;
 	}
 	
 	@RequestMapping("/upload")
-	public ModelAndView makfreeboard(String title, int money) {
+	public ModelAndView shopupload(String title, int money) {
 		int r = sw.write(title, money);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/shop/list");
@@ -71,9 +74,11 @@ public class ShopController {
 	}
 	
 	@RequestMapping("/shopbuy")
-	public ModelAndView shopbuy() {
+	public ModelAndView shopbuy(String title, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		int r = sb.musicbuy(id, title);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/shop/shopbuy.jsp");
+		mav.setViewName("redirect:/shop/list");
 		
 		return mav;
 	}

@@ -7,3 +7,5 @@
 
 <input type="button" value="구매" onclick="" />
 <input type="button" value="취소" onclick="" />
+
+

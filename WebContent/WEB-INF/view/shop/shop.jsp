@@ -32,7 +32,7 @@
 				<td>${fn:split(shop.TITLE,'.')[0] }</td>
 				<td>${shop.MONEY }잣</td>
 				<td><input type="button" value="듣기" onclick="listen('${shop.TITLE}')"/>
-				<input type="button" value="구매" onclick="javascript:openbuy()"/>
+				<input type="button" value="구매" id="buy${shop.TITLE }" onclick="javascript:openbuy(this)" />
 				<input type="button" value="선물" onclick="javascript:opengift()"/></td>
 				
 			
@@ -55,10 +55,11 @@ function listen(title) {
 LeftPosition = (screen.width - 400) / 2;
 TopPosition = (screen.height - 300) / 2;
 
-function openbuy() {
-	window.open("/shop/shopbuy", "buy",
-			"width=400, height=150,left=" + LeftPosition
-					+ ",top=" + TopPosition);
+function openbuy(element) {
+	var id = element.id;
+	var title = id.substring(id.indexOf('y') + 1);
+	
+	location.href="/shop/shopbuy?title="+title;
 }
 
 LeftPosition = (screen.width - 400) / 2;
