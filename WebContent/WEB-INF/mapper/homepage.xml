@@ -2,12 +2,30 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="homepage">
 	<select id="myhome" resultType="java.util.HashMap">
-		select * from homepage where name=#{name}
+		select * from homepage where
+		name=#{name}
 	</select>
 	<select id="gohome" resultType="java.util.HashMap">
-		select * from homepage where id=#{id}
+		select * from homepage where
+		id=#{id}
 	</select>
 	<update id="visit">
 		update homepage set visit=visit+1 where id=#{id}
 	</update>
+	<insert id="visitors" parameterType="java.util.HashMap">
+		insert into visitors
+		values(VISITOR_SEQ.nextval, #{id}, #{writer}, #{memo}, #{private},
+		sysdate)
+	</insert>
+	<select id="viewVisitors" resultType="java.util.HashMap">
+		select temp.* from (select
+		rownum rnum, v.* from (select * from visitors where id=#{id} order
+		by day desc) v)temp where temp.rnum &gt;= #{start} and temp.rnum &lt;= #{end}
+	</select>
+	<select id="viewVisitors2" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select temp.* from (select
+		rownum rnum, v.* from (select * from visitors where id=#{id} and writer=#{writer} or private='false' order
+		by day desc) v)temp where temp.rnum &gt;= #{start} and temp.rnum &lt;= #{end}
+	</select>
 </mapper>
