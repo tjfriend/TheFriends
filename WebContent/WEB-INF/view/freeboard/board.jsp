@@ -69,22 +69,25 @@
 		</tbody>
 	</table>
 	
+	<div align="center">
+		<c:forEach var="i" begin="1" end="${freeboardsize }">
+			<c:choose>
+				<c:when test="${current == i }">
+					<b>${u }</b>
+				</c:when>
+				<c:otherwise>
+					<a href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }">${i }</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</div>
+
 	<div align="right">
 		<form action="/board/write" method="post">
 			<input type="submit" value="글작성"  class="btn btn-default"/>
 		</form>
 	</div>
-
-	<c:forEach var="i" begin="1" end="${freeboardsize }">
-		<c:choose>
-			<c:when test="${current == i }">
-				<b>${u }</b>
-			</c:when>
-			<c:otherwise>
-				<a href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }">${i }</a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
+	
 	<div align="center">
 		<form action="/board/list" method="post">
 			<input type="hidden" name="mode" value="${freeboardmode }"/> 

@@ -57,8 +57,7 @@ public class ShopController {
 	@RequestMapping("/write")
 	public ModelAndView writeboard() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t:shop/shopwrite");
-		
+		mav.setViewName("/shop/shopwrite.jsp");
 		return mav;
 	}
 	

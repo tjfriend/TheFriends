@@ -26,11 +26,11 @@
 			<tbody id="tbody" align="center">
 				<c:forEach var="notice" items="${noticedata }">
 					<tr>
-						<td align="center">${notice.num }</td>
-						<td>${notice.title }</td>
-						<td>${notice.id }</td>
-						<td>${notice.time }</td>
-						<td>0</td>
+						<td align="center">${notice.NUM }</td>
+						<td>${notice.TITLE }</td>
+						<td>${notice.ID }</td>
+						<td>${notice.TIME }</td>
+						<td>${notice.INQUIRY }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
