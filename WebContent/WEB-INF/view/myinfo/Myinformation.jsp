@@ -108,7 +108,8 @@ hre {
 		</div>
 		
 			<div class="w3-hide-large">
-				<label for="phone" style="width: 30%"><font size="4">Phone</font></label><input type="checkbox" name="checkbox" 
+				<label for="phone" style="width: 30%"><font size="4">Phone</font></label>비공개 :&nbsp;
+				<input type="checkbox" name="checkbox" 
 				${info.PHONE eq '비공개'?'checked':'' } value="phoneoff">
 				
 				<input type="text" id="phone" name="phone" class="form-control" value="${infomy.PHONE }"

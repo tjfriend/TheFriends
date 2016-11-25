@@ -105,6 +105,10 @@
 		delete qna where num =
 		#{num }
 	</delete>
+	
+	<delete id="qnadeletecomment" parameterType="java.util.HashMap">
+		delete qnacomment where qnanum = #{num }
+	</delete>
 
 	<!-- 조회수 증가 -->
 	<update id="upinqu" parameterType="java.util.HashMap">
