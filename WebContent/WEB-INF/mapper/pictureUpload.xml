@@ -5,7 +5,7 @@
 	<!-- 업로드 -->
 	<insert id="upload" parameterType="java.util.HashMap">
 		insert into pictureboard values(pictureboard_seq.nextval, #{id}, #{title}, #{content}, 
-			#{picture}, #{uuid}, sysdate, 0, 0)
+			#{picture}, #{uuid}, sysdate, 0, 0, #{open})
 	</insert>
 
 	<!-- 전체목록 -->
@@ -16,8 +16,10 @@
 	<!-- 전체목록 페이지 -->
 	<select id="boardpage" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
-			select temp.* from (select rownum r, p.* from pictureboard p where id=#{id} order by day desc) temp
-			where temp.r >= #{start} and temp.r <= #{end}
+			select temp.* from 
+			(select rownum rnum, p.* from
+			(select * from pictureboard where id=#{id} order by day desc) p) temp
+			where temp.rnum>=#{start} and temp.rnum<=#{end}
 		]]>
 	</select>
 	
@@ -28,14 +30,15 @@
 	
 	<!-- 댓글 작성 -->
 	<insert id="reple" parameterType="java.util.HashMap">
-		insert into picturereply values(#{num}, #{writer}, #{content}, sysdate)
+		insert into picturereply values(#{num}, #{writer}, #{content}, sysdate, picturereply_seq.nextval)
 	</insert>
 	
 	<!-- 댓글 페이지 작성 -->
 	<select id="replepage" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
-			select temp.* from (select rownum r, p.* from picturereply p where num=#{num} order by day desc)temp
-			where temp.r >= #{start} and temp.r <= #{end}
+			select temp.* from (select rownum r, p.* from 
+			(select * from picturereply where num=#{num} order by day desc) p)temp
+			where temp.r >= #{start} and temp.r <= #{end} 
 		]]>
 	</select>
 	
@@ -45,18 +48,23 @@
 	</select>
 	
 	<!-- 댓글 수정 -->
-	<select id="content" parameterType="java.util.HashMap">
-		select * from picturereply where num=#{num} and id=#{id} and content=#{content}
-	</select>
-	
 	<update id="modify" parameterType="java.util.HashMap">
-		update set picturereply where id=#{id} 
+		update picturereply set content=#{content} where replynum=#{replynum} 
 	</update>
 	<!-- 댓글 삭제 -->
+	<delete id="delete">
+		delete picturereply where replynum = #{replynum}
+	</delete>
 	
-	
-	
-	
+	<!-- 좋아요 -->
+	<update id="upgood" >
+		update pictureboard set good=good+1 where num=#{num} 
+	</update>
+
+	<!-- 조회수 -->
+	<update id="upcount" >
+		update pictureboard set count=count+1 where num=#{num} 
+	</update>
 	
 	
 </mapper>

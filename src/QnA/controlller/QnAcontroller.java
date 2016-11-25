@@ -199,18 +199,20 @@ public class QnAcontroller {
 	@RequestMapping("/qnadelete")
 	public ModelAndView qnaDelete(int num) {
 		int de = qd.QnaDelete(num);
+		int da = qd.QnaDeletecomment(num);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("num", num);
 		mav.setViewName("redirect:/qna/list");
 		return mav;
 	}
 
+
 	@RequestMapping("/commentdelete")
-	public ModelAndView CommentDelete(int commentnum, int num) {
+	public ModelAndView CommentDelete(int commentnum,@RequestParam (defaultValue="-1") int num) {
 		int de = qd.CommentDelete(commentnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("commentnum", commentnum);
-		mav.setViewName("redirect:/qna/details/" + num);
+		mav.setViewName("redirect:/qna/details/"+num);
 		return mav;
 	}
 	
@@ -220,9 +222,12 @@ public class QnAcontroller {
 		int r = qw.CommentAdjust(memo, commentnum);
 		ModelAndView mav = new ModelAndView();
 			mav.setViewName("redirect:/qna/details/"+num);
+			
 		return mav;
 		
 	}
+	
+	
 
 	
 }

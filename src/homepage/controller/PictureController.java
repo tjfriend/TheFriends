@@ -29,12 +29,12 @@ public class PictureController {
 	// 사진 업로드
 	@RequestMapping("/upload/{id}")    
 	public ModelAndView upload(@PathVariable(name="id") String id, String title, String content, 
-			@RequestParam(name="picture") MultipartFile picture){
+			@RequestParam(name="picture") MultipartFile picture, String open){
 		ModelAndView ma = new ModelAndView("redirect:/picture/pictureview/{id}");
 		String uuid = pic.execute(picture);
 		int a = 0;
 		if(uuid != null){
-			a = pic.upload(id, title, content, picture, uuid);
+			a = pic.upload(id, title, content, picture, uuid, open);
 		}
 		ma.addObject("a",a);
 		return ma;
@@ -57,6 +57,17 @@ public class PictureController {
 		ma.addObject("size",size);
 		return ma;
 	}
+	
+	// 좋아요
+	@RequestMapping("/good")
+	public ModelAndView good(int num){
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureBoard.jsp");
+		int a = pic.good(num);
+		System.out.println(a);
+		return ma;
+	}
+	
+	// 조회수
 	
 	
 	

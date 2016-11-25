@@ -20,8 +20,8 @@
 				<c:when test="${loginid == details.ID }">
 					<input type="button" value="수정" class="btn btn-default"
 						onclick="location.href='/qna/qnaupdate?num=${details.NUM}'" />
-					<input type="button" value="삭제" class="btn btn-default"
-						onclick="location.href='/qna/qnadelete?num=${details.NUM}'">
+					<input type="button" value="삭제" class="btn btn-default" id="QnADelete${details.NUM }"
+						onclick="QnADelete(this)">
 				</c:when>
 				<c:otherwise>
 				</c:otherwise>
@@ -91,7 +91,7 @@
 									<input type="hidden" name="commentnum"
 										value="${qnac.commentnum }">
 									<input type="button" value="삭제" id="deletesumit${qnac.commentnum }" class="btn btn-default"
-										onclick="location.href='/qna/commentdelete?commentnum=${qnac.commentnum}&num=${details.NUM}'">
+										onclick="deletesumit(this)">
 								</c:if>
 							</td>
 						</tr>
@@ -139,6 +139,34 @@
 					$("#changecubmit" + num).hide();
 					$("#memo" + num).hide();
 				}
+				
+
+				
+			function QnADelete(element) {
+				var id = element.id;
+				var num = id.substring(id.indexOf('e') + 5);
+				
+				if(confirm("이 게시글을 정말로 삭제하시겠습니까?") == true ){
+					location.href="/qna/qnadelete?num="+num;
+				}else{
+					return;
+				}
+				
+			}
+			
+			
+			function deletesumit(element) {
+				var id = element.id;
+				var commentnum = id.substring(id.indexOf('t') + 7 );
+				
+				if(confirm("이 댓글을 정말로 삭제하시겠습니까?") == true ){
+					location.href="/qna/commentdelete?num=${details.NUM}&commentnum="+commentnum;
+				}else{
+					return;
+				}
+				
+			}
+				
 			</script>
 		
 			<!-- 로그인시 댓글등록창이 보이게 한다 -->
