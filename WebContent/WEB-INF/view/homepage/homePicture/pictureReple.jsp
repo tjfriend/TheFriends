@@ -17,15 +17,20 @@
 <c:forEach items="${li }" var="i">
 	작성자 : ${i.WRITER } <br/>
 	내용 : ${i.CONTENT } <br/>
+	<c:if test="${sessionScope.id == id }">
+		<input type="button" value="수정" onclick="modify(${i.WRITER})"/>
+		<input type="button" value="삭제" onclick="delete(${i.CONTENT})"/>
+	</c:if>
 	<hr/>
 </c:forEach>
 </div>
-<div align="center">
+<div align="center" id="pa">
 	<label id="page">
 		<c:forEach var="i" begin="1" end="${size }">
-			<a "/picture/replyAll?p=${i }&num=${num}" id="pg">${i }</a>
+			<a  onclick="pg(this)">${i }</a>
 		</c:forEach>
 	</label>
+
 </div>
 
 <script>
@@ -47,4 +52,18 @@
 		});
 	};
 	
+	function pg(element){
+		alert(element.innerHTML);
+		var url = "/picture/replyAll?p="+element.innerHTML+"&num="+${num};
+		$.ajax({
+			"url" : url
+		}).done(function(txt){
+			$("#re").html(txt);
+		});
+	};
+	
+	
+	function modify(element){
+		
+	};
 </script>

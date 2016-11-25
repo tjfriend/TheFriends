@@ -52,7 +52,7 @@ public class PictureRepleController {
 	// ÀüÃ¼ ´ñ±Û
 	@RequestMapping("/replyAll")
 	public ModelAndView replyAll(int num, @RequestParam(defaultValue="1") int p){
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureReple.jsp");
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/viewAll.jsp");
 		List li = pic.page(num, p);
 		int size = pic.total(num);
 		ma.addObject("li",li);

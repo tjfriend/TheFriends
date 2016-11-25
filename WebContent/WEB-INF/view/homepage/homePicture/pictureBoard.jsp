@@ -44,7 +44,6 @@
 	};
 
 	function pg(element){
-		window.alert($(element).attr("accesskey"));
 		var url  = "/picture/pictureview/${id}?p="+element.innerHTML;
 		$.ajax({
 			"url" : url
@@ -64,6 +63,6 @@
 		}).done(function(txt){
 			$("#homeMain").html(txt);
 		});		
-	}
+	};
 	
 </script>

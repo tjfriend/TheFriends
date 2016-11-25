@@ -44,4 +44,19 @@
 		select count(*) from picturereply where num=#{num}
 	</select>
 	
+	<!-- 댓글 수정 -->
+	<select id="content" parameterType="java.util.HashMap">
+		select * from picturereply where num=#{num} and id=#{id} and content=#{content}
+	</select>
+	
+	<update id="modify" parameterType="java.util.HashMap">
+		update set picturereply where id=#{id} 
+	</update>
+	<!-- 댓글 삭제 -->
+	
+	
+	
+	
+	
+	
 </mapper>
