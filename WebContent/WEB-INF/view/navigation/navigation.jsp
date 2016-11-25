@@ -46,7 +46,6 @@
     			var temp = $(this).val();
     			name = temp.slice(0, temp.indexOf(":"));
     			address = temp.slice(temp.indexOf(":")+1);
-    			alert(address=="비공개");
     			if(address=="비공개"){
     				$("#find").prop("disabled", "disabled");	
     			}
