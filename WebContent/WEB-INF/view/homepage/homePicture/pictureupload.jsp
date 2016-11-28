@@ -9,9 +9,9 @@
 
 	<form action="/picture/upload/${id }" method="post" enctype="multipart/form-data">
 		공개 설정 : 
-		<input type="radio" name="open" value="all">전체공개
-		<input type="radio" name="open" value="friend">친구공개
-		<input type="radio" name="open" value="none">비공개	
+		<input type="radio" name="open" value="전체공개">전체공개
+		<input type="radio" name="open" value="친구공개">친구공개
+		<input type="radio" name="open" value="비공개">비공개	
 		<br/>
 		제목 : <input type="text" name="title"/> <br/>
 		내용 : <textarea rows="10" cols="30" name="content"></textarea> <br/>

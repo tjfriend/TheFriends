@@ -12,8 +12,8 @@
 		<c:when test="${li != 'null' }">
 			<c:forEach items="${li }" var="i">
 				제목 : ${i.TITLE } <br />
+				공개설정 : ${i.OPEN }
 				<br />
-				<input type="hidden" value="${i.NUM }" name="${i.NUM }" />
 				<a id="reple" onclick="re(this)" accesskey="${i.UUID }" class="${i.NUM }">
 				<img src="/files/${i.UUID }" style="width: 100px" /><br/>
 				</a>
@@ -42,15 +42,17 @@
 			window.close();
 		}
 	};
-	function goodss(element){
-		var num = $("#good"+element).indexOf("d");
-		alert(num);
-		$.ajax({
-			"url" : "/picture/good?num="+${num}
-		}).done(function(txt){
+	
+// 	function goodss(element){
+// 		var num = $("#good"+element).indexOf("d");
+// 		alert(num);
+// 		$.ajax({
+// 			"url" : "/picture/good?num="+${num}
+// 		}).done(function(txt){
 			
-		});
-	};
+// 		});
+// 	};
+	
 	function pg(element){
 		var url  = "/picture/pictureview/${id}?p="+element.innerHTML;
 		$.ajax({
@@ -58,11 +60,12 @@
 		}).done(function(txt){
 			$("#homeMain").html(txt);
 		});
-	}
+	};
 
 	$("#add").click(function(){
 		window.open("/picture/up/${id}", "picup", "width: 5px, height: 5px");
 	});
+	
 	
 	function re(element){
 		var url = "/picture/reple?uuid="+$(element).attr("accesskey")+"&num="+$(element).attr("class");
@@ -71,6 +74,6 @@
 		}).done(function(txt){
 			$("#homeMain").html(txt);
 		});		
-	};
+	}
 	
 </script>

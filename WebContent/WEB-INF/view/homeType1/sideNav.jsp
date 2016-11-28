@@ -115,5 +115,5 @@
 		}).done(function(txt){
 			$("#homeMain").html(txt);
 		});
-	}
+	};
 </script>
