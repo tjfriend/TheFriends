@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="event">
+	<!-- 리스트 -->
+	<select id="pageNum" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	<![CDATA[
+	select * from
+       (select rownum rnum, temp.* from	(
+		  select * from event order by num desc
+	  ) temp ) temp2
+   	where temp2.rnum >=#{start} and temp2.rnum <=#{end}  	
+	]]>
+	</select>
+
+
+	<select id="pagesize" resultType="java.lang.Integer">
+		select count(*) from event
+	</select>
+
+	<!-- 글쓰기 -->
+	<insert id="question" parameterType="java.util.HashMap">
+		insert into event values
+		(EVENT_SEQ.nextval, #{title }, #{content },sysdate,0,#{id})
+	</insert>
+
+	<!-- 조회수증가 -->
+	<update id="upinqu" parameterType="java.util.HashMap">
+		update event set inquiry =
+		inquiry+1 where num = #{num }
+	</update>
+
+	<!-- 상세보기 -->
+	<select id="eventdetails" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+
+		select * from event where num = #{num }
+	</select>
+
+	<!-- 댓글 xml -->
+
+	<insert id="eventcomment" parameterType="java.util.HashMap">
+		insert into eventcomment
+		values
+		(#{num } , #{id }, #{memo },sysdate,EVENT_COMMENT.NEXTVAL)
+	</insert>
+
+	<select id="eventcommentlist" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	<![CDATA[
+	select temp.* from	(
+		select rownum rnum, r.* from eventcomment r where r.EVENTNUM = #{eventnum}
+	) temp 
+   	where temp.rnum >=#{start} and temp.rnum <=#{end}  
+	]]>
+
+	</select>
+
+	<select id="commentpagesize" resultType="java.lang.Integer">
+		select count(*) from
+		eventcomment where eventnum = #{num}
+	</select>
+
+
+
+	<!-- 댓글 수정 -->
+
+	<update id="eventcommentupdate" parameterType="java.util.HashMap">
+		update
+		eventcomment
+		set memo = #{memo }, day=sysdate where commentnum =
+		#{commentnum}
+
+	</update>
+
+	<!-- 댓글 삭제 -->
+	
+	<delete id="eventcommentdelete" parameterType="java.util.HashMap">
+		delete eventcomment where
+		commentnum = #{commentnum }
+	</delete>
+
+
+</mapper>

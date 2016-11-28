@@ -13,7 +13,7 @@
 	align="center">Notice</h2>
 <div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive" align="center">
-		<form action="/notice/make" method="post">
+		<form action="/event/make" method="post">
 			<label for="title" style="width: 15%"><font size="4">TITLE</font></label>
 			<input type="text" id="title" name="title"
 					class="form-control" style="width: 25%" placeholder="Title" /><br/>

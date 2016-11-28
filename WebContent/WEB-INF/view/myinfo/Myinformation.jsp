@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -64,25 +65,34 @@ hre {
 	<div align="center">
 		<form action="/myinfo/Passchange" method="post" name="checkpass">
 			<label style="width: 30%"><font size="4">변경할 비밀번호</font></label> <input
-				type="text" class="form-control" style="width: 35%" name="pass" />
+				type="text" class="form-control" style="width: 35%" name="pass" id="pass" />
 				<br/>
 			<label style="width: 30%"><font size="4">변경할 비밀번호확인 </font></label> <input
-				type="text" class="form-control" style="width: 35%" name="passcheck" />
-			<c:choose>
-				<c:when test="${passch == 1 }">
-					<p><font size="2" color="red">비밀번호가 틀렸습니다</font></p>
-					<br/>
-				</c:when>
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>	
+				type="text" class="form-control" style="width: 35%" name="passcheck" id="passcheck"/>
 			
-			
-			<br /> <input type="submit" value="확인"
+			<br /> <input type="button" value="확인" name="passbu" id="passbu" onclick="passbu"
 				style="margin: 0 auto; height: 50px; width: 150px">
 		</form>
 	</div>
 </div>
+<script>
+	
+	$("#passbu").click(function() {
+		var pass = $('#pass').val();
+		var passcheck = $('#passcheck').val();
+		
+		if(pass == passcheck){
+			 alert("비밀번호가 성공적으로 변경되었습니다.");
+			 location.href="/myinfo/Passchange?pass="+ pass;
+		}else{
+			 alert("비밀번호를 다시 확인해주세요.");
+		}
+
+	});
+		 
+
+</script>
+
 
 
 
@@ -178,15 +188,7 @@ hre {
 </div>
 
 <script>
-	function checkpass() {
-		var pass = document.getElementById('pass');
-		var pass_check = document.getElementById('passcheck');
-		
-		if(pass.value != pass_check.value){
-			alert('비밀번호가 다릅니다');
-			return false;
-		}
-	}
+
 
 	$(document).ready(function() {
 		$("#ChangePass").hide();

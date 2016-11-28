@@ -20,7 +20,7 @@
 	<input type="text" id="myhome" value="${my }" size="50px" readonly="readonly"/>&nbsp;&nbsp;
 	<label>도착지(친구주소)</label>&nbsp;&nbsp;
 	<input type="text" name="friend" id="friend" list="rst" size="50px" />&nbsp;&nbsp;
-	<input type="button" class="btn btn-default" value="찾기" id="find"/>
+	<input type="button" class="btn btn-default" value="찾기" id="find" disabled="disabled"/>
 	<datalist id="rst"></datalist>
 </div>
 <div align="center">
@@ -47,8 +47,8 @@
     			var temp = $(this).val();
     			name = temp.slice(0, temp.indexOf(":"));
     			address = temp.slice(temp.indexOf(":")+1);
-    			if(address=="비공개"){
-    				$("#find").prop("disabled", "disabled");	
+    			if(address!="비공개" && !($("#myhome").val().contains("비공개"))){
+    				$("#find").prop("disabled", null);
     			}
     			$("#friend").val(address);
       		}

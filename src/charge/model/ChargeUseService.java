@@ -3,11 +3,11 @@ package charge.model;
 import java.text.*;
 import java.util.*;
 
+import javax.servlet.http.*;
+
 import org.apache.ibatis.session.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
-
-import freemarker.template.*;
 
 @Component
 public class ChargeUseService {
@@ -43,7 +43,7 @@ public class ChargeUseService {
 	
 	
 	// 내포인트 선물하기
-	public int gift(String id, String take, int point) {
+	public int gift(String id, String take, int point, HttpSession session) {
 		SqlSession ss = fac.openSession();
 
 		HashMap map = new HashMap<>();
@@ -56,10 +56,13 @@ public class ChargeUseService {
 			int b = ss.update("charge.gift2", map);
 			int c = ss.insert("charge.gift3", map);
 			int d = ss.insert("charge.gift4", map);
-			if (a == 1 && b == 1 && c == 1 && d == 1)
+			if (a == 1 && b == 1 && c == 1 && d == 1){
+				List<HashMap> list = ss.selectList("member.idcheck", id);
+				session.setAttribute("point", list.get(0).get("POINT"));
 				ss.commit();
-			else
+			} else{
 				ss.rollback();
+			}
 			ss.close();
 			return 1;
 		} catch (Exception e) {

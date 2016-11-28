@@ -23,7 +23,7 @@ public class ChargeUseController {
 	@RequestMapping("/gift")
 	@ResponseBody
 	public String gift(HttpSession id, String take, int point){
-		int a = use.gift((String)id.getAttribute("id"), take, point);
+		int a = use.gift((String)id.getAttribute("id"), take, point, id);
 		if(a==1){
 			return "true";
 		}

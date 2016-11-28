@@ -36,11 +36,13 @@
 				<i class="glyphicon glyphicon-pencil w3-margin-right"></i><label onclick="menu(this)">VISITORS</label>
 			</a>
 		</li>
-		<li class="w3-hide-small">
-			<a class="w3-padding-large w3-hover-white w3-text-white" title="Notifications">
-				<i class="glyphicon glyphicon-wrench w3-margin-right"></i><label onclick="menu(this)">SETTING</label>
-			</a>
-		</li>
+		<c:if test="${id==sessionScope.id }">
+			<li class="w3-hide-small">
+				<a class="w3-padding-large w3-hover-white w3-text-white" title="Notifications">
+					<i class="glyphicon glyphicon-wrench w3-margin-right"></i><label onclick="menu(this)">SETTING</label>
+				</a>
+			</li>
+		</c:if>
 		<li class="w3-hide-small w3-right">
 			<a href="#" class="w3-padding-large w3-hover-white" title="My Account">
 				<img src="/w3images/avatar2.png" class="w3-circle" style="height: 25px; width: 25px" alt="Avatar">
