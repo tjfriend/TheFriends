@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import shop.model.*;
@@ -74,13 +75,14 @@ public class ShopController {
 	}
 	
 	@RequestMapping("/shopbuy")
-	public ModelAndView shopbuy(String title, HttpSession session) {
+	@ResponseBody
+	public boolean shopbuy(String title, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		int r = sb.musicbuy(id, title);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/shop/list");
-		
-		return mav;
+		if(sb.musicbuy(id, title)>0){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	@RequestMapping("/shopgift")

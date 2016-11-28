@@ -2,10 +2,28 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shopbuy">
 
-
+	<!-- 음악 구매 -->
 	<insert id="musicbuy" parameterType="java.util.HashMap">
 		insert into shopbuy values (#{id }, #{title } )
 	</insert>
+	
+	<!-- 음악 중복 체크 -->
+	<select id="musiccheck" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from shopbuy where id = #{id} and title = #{title}
+	</select>
+
+	<select id="musicmoney" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from shop where title = #{title }
+	</select>
+	
+	<select id="mypoint" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from member where id = #{id }
+	</select>
+	
+	<update id="cash" parameterType="java.util.HashMap">
+		update member set point = point - #{money} where id = #{id }
+	</update>
+
 
 
 
