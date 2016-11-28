@@ -24,19 +24,21 @@
 				</tr>
 			</thead>
 			<tbody id="tbody" align="center">
+			<c:forEach var="event" items="${eventdata }">
 				<tr>
-					<td><label>1</label></td>
-					<td><label>제목</label></td>
-					<td><label>글쓴이</label></td>
-					<td><label>날짜</label></td>
-					<td><label>조회수</label></td>
+					<td><label>${event.NUM }</label></td>
+					<td><label><a href="/event/details/${event.NUM }">${event.TITLE }</a></label></td>
+					<td><label>${event.WRITER }</label></td>
+					<td><label>${event.DAY	 }</label></td>
+					<td><label>${event.INQUIRY }</label></td>
 				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<div align="center">
 			<label id="page">
 			<!-- 페이징 처리 -->
-				<%-- <c:forEach var="i" begin="1" end="${noticesize }">
+				 <c:forEach var="i" begin="1" end="${eventsize }">
 					<c:choose>
 						<c:when test="${current == i }">
 							<b>${u }</b>
@@ -45,7 +47,7 @@
 							<a href="/notice/list?p=${i }">${i }</a>
 						</c:otherwise>
 					</c:choose>
-				</c:forEach> --%>
+				</c:forEach> 
 			</label>
 			<div align="right">
 				<input type="button" value="글작성" class="btn btn-default" onclick="noticeWrite()"/>

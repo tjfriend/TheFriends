@@ -34,12 +34,15 @@ public class Myinfocontroller {
 		if (list.isEmpty()) {
 			mav.setViewName("/myinfo/Passcertification.jsp");
 			mav.addObject("passch",1);
+			System.out.println("if");
+			
 		} else {
 			mav.setViewName("/myinfo/Myinformation.jsp");
 			mav.addObject("info", list.get(0));
 			mav.addObject("infomy",lis.get(0));
+			System.out.println("else");
+			
 		}
-
 		return mav;
 	}
 
