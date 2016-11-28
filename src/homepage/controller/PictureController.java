@@ -43,11 +43,17 @@ public class PictureController {
 	// 사진 전체목록
 	@RequestMapping("/pictureview/{id}")
 	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a, 
-			@RequestParam(name="p", defaultValue="1")  int p){
+			@RequestParam(name="p", defaultValue="1") int p, HttpSession session){
+		String open;
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureBoard.jsp");
+		if(pic.find((String)session.getAttribute("id"), id).size() != 0){
+			ma.addObject("friend", true);
+		}else{
+			ma.addObject("friend", false);
+		}
 		List li = pic.view(id, p);
 		int size = pic.total(id);
 		String hometype = (String)hs.goHome(id).get("ADDRESS");
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureBoard.jsp");
 		if(li.size() != 0){
 			ma.addObject("li",li);
 		}else{
@@ -63,13 +69,6 @@ public class PictureController {
 	public ModelAndView good(int num){
 		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureBoard.jsp");
 		int a = pic.good(num);
-		System.out.println(a);
 		return ma;
 	}
-	
-	// 조회수
-	
-	
-	
-
 }

@@ -9,11 +9,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Header -->
-<header class="w3-panel w3-center w3-opacity w3-row" style="background-color: blue; height: 400px">
-	<div class="w3-col" style="width: 20%; background-color: green; margin-top: 130px">
+<header class="w3-panel w3-center w3-opacity w3-row" style="height: 400px">
+	<div class="w3-col" style="width: 20%; margin-top: 130px">
 		　
 	</div>
-	<div class="w3-col" align="center" style="width: 60%; background-color: red; margin-top: 130px">
+	<div class="w3-col" align="center" style="width: 60%; margin-top: 130px">
 		<h1>${id }</h1>
 		<div class="w3-padding-32">
 			<div class="w3-btn-bar w3-border w3-show-inline-block">
@@ -31,7 +31,7 @@
 			</audio>
 		</div>
 	</div>
-	<div class="w3-col" style="width: 20%; height: 270px; background-color: aqua; margin-top: 130px">
+	<div class="w3-col" style="width: 20%; height: 270px; margin-top: 130px">
 		<h3 align="center"><b>Friends</b></h3>
 		<table class="table" style="overflow-y: auto;">
 			<thead align="center">
@@ -76,7 +76,7 @@
 				url = "/homepage/visitors/${id}";
 				break;
 			case "SETTING":
-				url = "/homepage/home/${id}";
+				url = "/homepage/setting/${id}";
 				break;
 		}
 		$.ajax({

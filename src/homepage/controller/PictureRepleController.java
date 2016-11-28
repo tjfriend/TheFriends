@@ -56,7 +56,7 @@ public class PictureRepleController {
 	// ¿¸√º ¥Ò±€
 	@RequestMapping("/replyAll")
 	public ModelAndView replyAll(int num, @RequestParam(defaultValue="1") int p){
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/viewAll.jsp");
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/view.jsp");
 		List li = pic.page(num, p);
 		int size = pic.total(num);
 		ma.addObject("li",li);
@@ -68,14 +68,14 @@ public class PictureRepleController {
 	@RequestMapping("/modify")
 	public ModelAndView modify(int replynum, String content){
 		int a = pic.update(replynum, content);
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/viewAll.jsp");
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/view.jsp");
 		return ma;
 	}
 	
 	// ¥Ò±€ ªË¡¶
 	@RequestMapping("/delete")
 	public ModelAndView delete(int replynum){
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/viewAll.jsp");
+		ModelAndView ma = new ModelAndView("/homepage/homePicture/view.jsp");
 		int a = pic.delete(replynum);
 		return ma;
 	}

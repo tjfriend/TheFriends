@@ -16,10 +16,9 @@
 	<!-- 전체목록 페이지 -->
 	<select id="boardpage" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
-			select temp.* from 
-			(select rownum rnum, p.* from
-			(select * from pictureboard where id=#{id} order by day desc) p) temp
-			where temp.rnum>=#{start} and temp.rnum<=#{end}
+		select temp.*  from (select rownum rnum, p.* from
+		(select * from pictureboard where id=#{id} order by day desc) p) temp
+     	where temp.rnum>=#{start} and temp.rnum<=#{end}
 		]]>
 	</select>
 	
@@ -66,5 +65,9 @@
 		update pictureboard set count=count+1 where num=#{num} 
 	</update>
 	
+	<!-- 친구목록 -->
+	<select id="find" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from friends where id=#{id} and friend=#{friend}
+	</select>
 	
 </mapper>

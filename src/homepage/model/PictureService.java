@@ -96,4 +96,26 @@ public class PictureService {
 		int a = ss.update("picture.upcount",num);
 		return a;
 	}
+	
+	// 공개, 비공개
+	public List pri(String open, String id){
+		SqlSession ss = fac.openSession();
+		HashMap map = new HashMap<>();
+		map.put("open", open);
+		map.put("id", id);
+		List li = ss.selectList("picture.private",map);
+		ss.close();
+		return li;
+	}
+	
+	// 친구
+	public List find(String id, String fid){
+		SqlSession ss =fac.openSession();
+		HashMap map = new HashMap<>();
+		map.put("id", id);
+		map.put("friend", fid);
+		List li = ss.selectList("picture.find",map);
+		ss.close();
+		return li;
+	}
 }

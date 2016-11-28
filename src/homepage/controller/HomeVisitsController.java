@@ -1,5 +1,9 @@
 package homepage.controller;
 
+import java.util.*;
+
+import javax.servlet.http.*;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -12,25 +16,22 @@ import homepage.model.*;
 public class HomeVisitsController {
 	@Autowired
 	HomepageService hs;
+	@Autowired
+	VisitorsService vs;
 	
 	@RequestMapping("/{id}")
-	public ModelAndView visit(@PathVariable(name="id")String id){
+	public ModelAndView visit(@PathVariable(name="id")String id, HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		String homeType = (String)hs.goHome(id).get("ADDRESS");
-		switch(homeType){
-		case "homeType1":
-			mav.setViewName("t:homepage1/homeBoard/board");
-			break;
-		case "homeType2":
-			mav.setViewName("t:homepage2/homeBoard/board");
-			break;
-		case "homeType3":
-			mav.setViewName("t:homepage3/homeBoard/board");
-			break;
-		case "homeType4":
-			mav.setViewName("t:homepage4/homeBoard/board");
-			break;
+		List list;
+		if(id.equals((String)session.getAttribute("id"))){
+			list = vs.visitors(id, 1);
+		} else {
+			list = vs.visitors2(id, (String)session.getAttribute("id"), 1);
 		}
+		mav.setViewName("/homepage/homeVisits/visitors.jsp");
+		mav.addObject("owner", id);
+		mav.addObject("list", list);
 		return mav;
 	}
 }

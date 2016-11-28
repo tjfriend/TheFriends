@@ -40,7 +40,7 @@
 				url = "/homepage/visitors/${id}";
 				break;
 			case "SETTING":
-				url = "/homepage/home/${id}";
+				url = "/homepage/setting/${id}";
 				break;
 		}
 		$.ajax({

@@ -17,6 +17,8 @@ public class HomepageController {
 	HomepageService hs;
 	@Autowired
 	VisitService vs;
+	@Autowired
+	PictureService pic;
 	
 	@RequestMapping("/myhome/{name}")
 	@ResponseBody
@@ -51,14 +53,21 @@ public class HomepageController {
 	}
 	
 	@RequestMapping("/picture/{id}")
-	public String picture(@PathVariable(name="id")String id){
+	public String picture(@PathVariable(name="id")String id, HttpSession session){
 		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		String sessionId = (String)session.getAttribute("id");
 		return "redirect:/picture/pictureview/"+id;
 	}
 	
 	@RequestMapping("/visitors/{id}")
 	public String visitors(@PathVariable(name="id")String id){
 		String homeType = (String)hs.goHome(id).get("ADDRESS");
-		return "redirect:/visitors/"+id;
+		return "redirect:/visits/"+id;
+	}
+
+	@RequestMapping("/setting/{id}")
+	public String setting(@PathVariable(name="id")String id){
+		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		return "redirect:/settings/"+id;
 	}
 }

@@ -12,9 +12,11 @@
 <div class="w3-container" style="max-height: 700px" align="center">
 	<h3 class="w3-padding-32 w3-text-grey" align="center">Visitors</h3>
 	<div class="w3-row" style="padding-left: 30px; padding-right: 30px">
-		<textarea cols="70" rows="4" style="resize: none" id="memo"></textarea>&nbsp;&nbsp;
-		<input type="button" class="btn btn-default" value="등록" id="submit"/>
-		<input type="checkbox" id="mode"/>비공개<br/><br/>
+		<div>
+			<textarea cols="70" rows="4" style="resize: none" id="memo"></textarea>&nbsp;&nbsp;
+			<input type="button" class="btn btn-default" value="등록" id="submit" style="margin-bottom: 25px"/>
+			<input type="checkbox" id="mode" style="margin-bottom: 5px"/>비공개<br/><br/>
+		</div>
 		<div class="table-responsive">
 			<table class="table">
 				<thead align="center">
