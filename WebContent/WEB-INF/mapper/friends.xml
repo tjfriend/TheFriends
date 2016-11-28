@@ -53,4 +53,7 @@
 		select f.*, m.birth, h.name, h.visit from friends f, homepage h, member m where f.friend = h.id and m.id = f.id and f.id = #{id}
 		order by name asc
 	</select>
+	<select id="friendSearch" resultType="java.util.HashMap">
+		select * from friends where id=#{id}
+	</select>
 </mapper>

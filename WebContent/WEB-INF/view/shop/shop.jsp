@@ -32,8 +32,8 @@
 				<td>${fn:split(shop.TITLE,'.')[0] }</td>
 				<td>${shop.MONEY }잣</td>
 				<td><input type="button" value="듣기" onclick="listen('${shop.TITLE}')"/>
-				<input type="button" value="구매" id="buy${shop.TITLE }" onclick="javascript:openbuy(this)" />
-				<input type="button" value="선물" onclick="javascript:opengift()"/></td>
+				<input type="button" value="구매" id="buy${shop.TITLE }" onclick="javascript:openbuy('${shop.TITLE }', ${shop.MONEY })" />
+				<input type="button" value="선물" id="buy${shop.TITLE }" onclick="javascript:opengift('${shop.TITLE }', ${shop.MONEY })"/></td>
 				
 			
 				
@@ -55,18 +55,30 @@ function listen(title) {
 LeftPosition = (screen.width - 400) / 2;
 TopPosition = (screen.height - 300) / 2;
 
-function openbuy(element) {
-	var id = element.id;
-	var title = id.substring(id.indexOf('y') + 1);
+function openbuy(title, money) {
 	
-	location.href="/shop/shopbuy?title="+title;
+	if(confirm(money+"잣으로 "+title+"를 구매하시겠습니까?") == true ){
+		$.ajax({
+			"method" : "get",
+			"url" : "/shop/shopbuy?title="+title,
+			"async" : false
+		}).done(function(txt){
+			if(txt==true){
+				alert("구매성공");
+			} else {
+				alert("구매실패");
+			}
+		});
+	}else{
+		return;
+	}
 }
 
 LeftPosition = (screen.width - 400) / 2;
 TopPosition = (screen.height - 300) / 2;
 
-function opengift() {
-	window.open("/shop/shopgift", "buy",
+function opengift(title, money) {
+	window.open("/shop/shopgift?title="+title+"&money="+money, "buy",
 			"width=400, height=150,left=" + LeftPosition
 					+ ",top=" + TopPosition);
 }

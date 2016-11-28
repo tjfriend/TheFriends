@@ -13,12 +13,12 @@
 	align="center">Notice</h2>
 <div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive" align="center">
-		<form action="/notice/make" method="post">
+		<form action="/event/make" method="post">
 			<label for="title" style="width: 15%"><font size="4">TITLE</font></label>
 			<input type="text" id="title" name="title"
-					class="form-control" style="width: 25%" placeholder="Title" /><br/>
+					class="form-control" style="width: 25%" placeholder="Title" required="required"/><br/>
 			<label for="content" style="width: 15%"><font size="4">CONTENT</font></label><br/>
-			<textarea rows="10" cols="100" style="width: 50%; resize: none;" placeholder="CONTENT" name="content"></textarea><br/><br/>
+			<textarea rows="10" cols="100" style="width: 50%; resize: none;" placeholder="CONTENT"  required="required" name="content"></textarea><br/><br/>
 			<input type="submit" class="btn btn-default" value="작성하기" />&nbsp;&nbsp;
 			<input type="button" class="btn btn-default" value="취소" onclick="javascript:location.href='/event/list'"/>
 		</form>
