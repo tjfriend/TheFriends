@@ -66,10 +66,4 @@ public class PictureController {
 		System.out.println(a);
 		return ma;
 	}
-	
-	// Á¶È¸¼ö
-	
-	
-	
-
 }

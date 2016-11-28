@@ -18,14 +18,12 @@
 		sysdate)
 	</insert>
 	<select id="viewVisitors" resultType="java.util.HashMap">
-		select temp.* from (select
-		rownum rnum, v.* from (select * from visitors where id=#{id} order
+		select temp.* from (select rownum rnum, v.* from (select * from visitors where id=#{id} order
 		by day desc) v)temp where temp.rnum &gt;= #{start} and temp.rnum &lt;= #{end}
 	</select>
 	<select id="viewVisitors2" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-		select temp.* from (select
-		rownum rnum, v.* from (select * from visitors where id=#{id} and writer=#{writer} or private='false' order
+		select temp.* from (select rownum rnum, v.* from (select * from visitors where id=#{id} and writer=#{writer} or private='false' order
 		by day desc) v)temp where temp.rnum &gt;= #{start} and temp.rnum &lt;= #{end}
 	</select>
 	<update id="layout" parameterType="java.util.HashMap">
