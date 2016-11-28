@@ -66,9 +66,10 @@ public class PictureController {
 	
 	// ¡¡æ∆ø‰
 	@RequestMapping("/good")
-	public ModelAndView good(int num){
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureBoard.jsp");
-		int a = pic.good(num);
-		return ma;
+	@ResponseBody
+	public int good(int num){
+		pic.good(num);
+		int a = pic.goodcount(num);
+		return a;
 	}
 }

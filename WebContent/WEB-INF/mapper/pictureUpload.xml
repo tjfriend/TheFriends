@@ -65,6 +65,11 @@
 		update pictureboard set count=count+1 where num=#{num} 
 	</update>
 	
+	<!-- 좋아요 갯수 -->
+	<select id="goodCount" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+		select * from pictureboard where num=#{num}	
+	</select>
+	
 	<!-- 친구목록 -->
 	<select id="find" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		select * from friends where id=#{id} and friend=#{friend}

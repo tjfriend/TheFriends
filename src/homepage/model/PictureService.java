@@ -1,6 +1,7 @@
 package homepage.model;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -117,5 +118,13 @@ public class PictureService {
 		List li = ss.selectList("picture.find",map);
 		ss.close();
 		return li;
+	}
+	
+	// ÁÁ¾Æ¿ä °¹¼ö
+	public int goodcount(int num){
+		SqlSession ss = fac.openSession();
+		HashMap map = ss.selectOne("picture.goodCount",num);
+		int  a = ((BigDecimal)map.get("GOOD")).intValue();
+		return a;
 	}
 }
