@@ -28,4 +28,13 @@
 		rownum rnum, v.* from (select * from visitors where id=#{id} and writer=#{writer} or private='false' order
 		by day desc) v)temp where temp.rnum &gt;= #{start} and temp.rnum &lt;= #{end}
 	</select>
+	<update id="layout" parameterType="java.util.HashMap">
+		update homepage set address=#{homeType} where id=#{id}
+	</update>
+	<select id="music" resultType="java.util.HashMap">
+		select * from shopbuy where id=#{id}
+	</select>
+	<delete id="musicDelete" parameterType="java.util.HashMap">
+		delete from shopbuy where id=#{id} and title=#{music}
+	</delete>
 </mapper>
