@@ -65,4 +65,35 @@ public class EventPage {
 			sql.close();
 			return psize;
 		}
+		
+		public List searchqna(String search, int p) {
+			int endpage = 10 * p;
+			int startpage = endpage - 9;
+			String search1 = "%" + search + "%";
+			HashMap map = new HashMap();
+			map.put("search", search1);
+			map.put("start", startpage);
+			map.put("end", endpage);
+			SqlSession sql = fac.openSession();
+			List<HashMap> li = sql.selectList("event.eventsearch", map);
+			sql.close();
+			for(int i=0; i<li.size(); i++){
+				Date date = (Date)li.get(i).get("DAY");
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+				String day = sdf.format(date);
+				li.get(i).put("DAY", day);
+				li.set(i, li.get(i));
+			}
+			return li;
+		}
+
+		public int searchqnasize(String search) {
+			SqlSession sql = fac.openSession();
+			String search1 = "%" + search + "%";
+			int size = sql.selectOne("event.searcheventsize", search1);
+			int psize = size % 10 == 0 ? size / 10 : size / 10 + 1;
+			sql.close();
+			return psize;
+
+		}
 }

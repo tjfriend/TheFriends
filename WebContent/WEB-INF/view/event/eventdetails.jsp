@@ -10,7 +10,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
-	align="center">QnA</h2>
+	align="center">Event</h2>
 
 <div align="center">
 	<div class="w3-row"
@@ -19,9 +19,9 @@
 			<input type="button" value="목록보기" class="btn btn-default"
 				onClick="self.location='/event/list';">
 			<c:choose>
-				<c:when test="${loginid == details.ID }">
+				<c:when test="${loginid == details.WRITER }">
 					<input type="button" value="수정" class="btn btn-default"
-						onclick="location.href='/qna/qnaupdate?num=${details.NUM}'" />
+						onclick="location.href='/event/eventupdate?num=${details.NUM}'" />
 					<input type="button" value="삭제" class="btn btn-default"
 						id="QnADelete${details.NUM }" onclick="QnADelete(this)">
 				</c:when>
@@ -79,7 +79,7 @@
 							</td>
 							<td width="15%">${ecmda.DAY }</td>
 							<td width="20%">
-								<c:if test="${loginid == details.ID }">
+								<c:if test="${loginid == details.WRITER }">
 									<input type="button" value="수정" id="change${ecmda.COMMENTNUM }"
 										onclick="change(this)" class="btn btn-default"> 
 									<input type="button" value="완료" style="display: none;"
@@ -96,13 +96,13 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<c:forEach var="p" begin="1" end="${ecmdaommentsi }">
+				<c:forEach var="p" begin="1" end="${eventcommentsi }">
 					<c:choose>
 						<c:when test="${current == p }">
 							<b>${u }</b>
 						</c:when>
 						<c:otherwise>
-							<a href="/qna/details/${details.NUM }?p=${p }">${p }</a>
+							<a href="/event/details/${details.NUM }?p=${p }">${p }</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -147,7 +147,7 @@
 				var num = id.substring(id.indexOf('e') + 5);
 				
 				if(confirm("이 게시글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/qna/qnadelete?num="+num;
+					location.href="/event/eventdelete?num="+num;
 				}else{
 					return;
 				}
@@ -160,7 +160,7 @@
 				var commentnum = id.substring(id.indexOf('t') + 7 );
 				
 				if(confirm("이 댓글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/qna/commentdelete?num=${details.NUM}&commentnum="+commentnum;
+					location.href="/event/commentdelete?num=${details.NUM}&commentnum="+commentnum;
 				}else{
 					return;
 				}
@@ -172,7 +172,7 @@
 			<!-- 로그인시 댓글등록창이 보이게 한다 -->
 			<div align="center">
 				<c:if test="${login != null }">
-					<form action="/qna/ecmdaomment" method="post">
+					<form action="/event/eventcomment" method="post">
 						<input type="hidden" name="num" value="${details.NUM }"> 
 						<input type="hidden" name="endpa" value="${eventcommentsi }"> 
 						<input type="text" name="memo" style="width: 50%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px; resize: none;"/>

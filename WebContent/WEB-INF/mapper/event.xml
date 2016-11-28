@@ -17,6 +17,24 @@
 	<select id="pagesize" resultType="java.lang.Integer">
 		select count(*) from event
 	</select>
+	
+<!-- 	검색 -->
+	<select id="eventsearch" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	<![CDATA[
+	select * from
+       (select rownum rnum, temp.* from	(
+		  select * from event where  title like #{search } or content like #{search }  order by num desc
+	  ) temp ) temp2
+   	where temp2.rnum >=#{start } and temp2.rnum <=#{end }	
+	]]>
+	</select>
+
+	<select id="searcheventsize" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from event where title like #{search } or
+		content like #{search }
+	</select>
 
 	<!-- 글쓰기 -->
 	<insert id="question" parameterType="java.util.HashMap">
@@ -37,13 +55,10 @@
 		select * from event where num = #{num }
 	</select>
 
+
 	<!-- 댓글 xml -->
 
-	<insert id="eventcomment" parameterType="java.util.HashMap">
-		insert into eventcomment
-		values
-		(#{num } , #{id }, #{memo },sysdate,EVENT_COMMENT.NEXTVAL)
-	</insert>
+	
 
 	<select id="eventcommentlist" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
@@ -74,11 +89,42 @@
 	</update>
 
 	<!-- 댓글 삭제 -->
-	
+
 	<delete id="eventcommentdelete" parameterType="java.util.HashMap">
-		delete eventcomment where
+		delete
+		eventcomment where
 		commentnum = #{commentnum }
 	</delete>
+
+	<!-- 게시글 삭제 -->
+
+	<delete id="eventdelete" parameterType="java.util.HashMap">
+		delete event where num =
+		#{num }
+	</delete>
+
+	<delete id="eventdeletecomment" parameterType="java.util.HashMap">
+		delete
+		eventcomment where eventnum = #{num }
+	</delete>
+
+	<!-- 게시글 수정 -->
+	<update id="eventadjust" parameterType="java.util.HashMap">
+		update event set title =
+		#{title} , content =#{content} where num=#{num }
+	</update>
+
+	<!-- 댓글등록 -->
+	<insert id="eventcomment" parameterType="java.util.HashMap">
+		insert into eventcomment
+		values
+		(#{num } , #{id }, #{memo },sysdate,QNA_COMMENT.NEXTVAL)
+	</insert>
+	
+	<select id="member" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from member where id = #{id }
+	</select>
+
 
 
 </mapper>
