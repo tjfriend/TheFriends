@@ -27,8 +27,6 @@ public class Shopbuy {
 			List<HashMap> list3 = sql.selectList("shopbuy.mypoint", map);
 			int musicmoney = ((BigDecimal)list2.get(0).get("MONEY")).intValue();
 			int mypoint = ((BigDecimal)list3.get(0).get("POINT")).intValue();
-			System.out.println(musicmoney);
-			System.out.println(mypoint);
 			if(list.size() == 0) {
 				if(musicmoney <= mypoint) {
 					HashMap<String, Object> pmap  = new HashMap<>();

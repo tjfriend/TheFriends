@@ -25,6 +25,9 @@ public class ShopController {
 	
 	@Autowired
 	Shopbuy sb;
+	
+	@Autowired
+	Shopgift sg;
 
 //	@RequestMapping("/list")
 //	public ModelAndView shopList(@RequestParam(defaultValue = "1") int p) {
@@ -86,10 +89,14 @@ public class ShopController {
 	}
 	
 	@RequestMapping("/shopgift")
-	public ModelAndView shopgift() {
+	public ModelAndView shopgift(HttpSession session, String title, String money) {
+		String id = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/shop/shopgift.jsp");
-		
+		List<HashMap> list = sg.friend(id);
+		mav.addObject("list", list);
+		mav.addObject("title", title);
+		mav.addObject("money", money);
 		return mav;
 	}
 

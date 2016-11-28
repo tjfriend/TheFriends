@@ -33,7 +33,7 @@
 				<td>${shop.MONEY }잣</td>
 				<td><input type="button" value="듣기" onclick="listen('${shop.TITLE}')"/>
 				<input type="button" value="구매" id="buy${shop.TITLE }" onclick="javascript:openbuy('${shop.TITLE }', ${shop.MONEY })" />
-				<input type="button" value="선물" onclick="javascript:opengift()"/></td>
+				<input type="button" value="선물" id="buy${shop.TITLE }" onclick="javascript:opengift('${shop.TITLE }', ${shop.MONEY })"/></td>
 				
 			
 				
@@ -77,8 +77,8 @@ function openbuy(title, money) {
 LeftPosition = (screen.width - 400) / 2;
 TopPosition = (screen.height - 300) / 2;
 
-function opengift() {
-	window.open("/shop/shopgift", "buy",
+function opengift(title, money) {
+	window.open("/shop/shopgift?title="+title+"&money="+money, "buy",
 			"width=400, height=150,left=" + LeftPosition
 					+ ",top=" + TopPosition);
 }
