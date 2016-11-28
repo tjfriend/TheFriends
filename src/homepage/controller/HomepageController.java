@@ -62,6 +62,12 @@ public class HomepageController {
 	@RequestMapping("/visitors/{id}")
 	public String visitors(@PathVariable(name="id")String id){
 		String homeType = (String)hs.goHome(id).get("ADDRESS");
-		return "redirect:/visitors/"+id;
+		return "redirect:/visits/"+id;
+	}
+
+	@RequestMapping("/setting/{id}")
+	public String setting(@PathVariable(name="id")String id){
+		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		return "redirect:/settings/"+id;
 	}
 }

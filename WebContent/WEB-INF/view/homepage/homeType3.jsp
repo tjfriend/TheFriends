@@ -20,17 +20,21 @@ html, body, h1, h2, h3, h4, h5 {
 }
 </style>
 <body class="w3-theme-l5">
-
-	<tile:insertAttribute name="top" />
+	<div class="w3-content" style="max-width: 1200px">
+		<tile:insertAttribute name="top" />
 	
-	<tile:insertAttribute name="sideNav"/>
-
-	<!-- Page Container -->
-	<div class="w3-container w3-content" style="max-width: 1200px; margin-top: 80px" id="homeMain">
-		<tile:insertAttribute name="article" />
-		<!-- End Page Container -->
+		<div class="w3-row">
+			<div class="w3-col" style="width: 350px; margin-top: 80px">
+				<tile:insertAttribute name="sideNav"/>
+			</div>
+		<!-- Page Container -->
+			<div class="w3-col" style="width: 800px; margin-top: 80px" id="homeMain">
+				<tile:insertAttribute name="article" />
+				<!-- End Page Container -->
+			</div>
+		</div>
 	</div>
-	<br>
+
 
 	<script>
 // Accordion

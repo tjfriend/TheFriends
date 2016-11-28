@@ -21,7 +21,7 @@ body, h1, h2, h3, h4, h5 {
 and is wrapped around the whole page content, except for the footer in this example -->
 	<div class="w3-content" style="max-width: 1200px">
 
-	<tile:insertAttribute name="header"/>
+		<tile:insertAttribute name="header"/>
 
 		<!-- Grid -->
 		<div class="w3-row">
