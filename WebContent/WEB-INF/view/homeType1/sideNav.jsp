@@ -34,9 +34,11 @@
 <a class="w3-padding">
 	<i class="glyphicon glyphicon-pencil w3-margin-right"></i><label onclick="menu(this)">VISITORS</label>
 </a>
-<a class="w3-padding">
-	<i class="glyphicon glyphicon-wrench w3-margin-right"></i><label onclick="menu(this)">SETTING</label>
-</a>
+<c:if test="${id==sessionScope.id }">
+	<a class="w3-padding">
+		<i class="glyphicon glyphicon-wrench w3-margin-right"></i><label onclick="menu(this)">SETTING</label>
+	</a>
+</c:if>
 
 <div class="w3-section w3-padding-top">
 	<audio controls="controls" autoplay="autoplay" id="player" style="width: 100%"

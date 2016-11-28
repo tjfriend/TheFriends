@@ -3,6 +3,8 @@ package charge.model;
 import java.text.*;
 import java.util.*;
 
+import javax.servlet.http.*;
+
 import org.apache.ibatis.session.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -13,7 +15,7 @@ public class ChargeService {
 	SqlSessionFactory fac;
 	
 	// 충전하기
-	public int charge(String id, int point){
+	public int charge(String id, int point, HttpSession session){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
 		map.put("id",id);
@@ -25,6 +27,8 @@ public class ChargeService {
 				if(b==0){
 					return 0;
 				}
+				List<HashMap> list = ss.selectList("member.idcheck", id);
+				session.setAttribute("point", list.get(0).get("POINT"));
 				ss.commit();
 				ss.close();
 				return 1;

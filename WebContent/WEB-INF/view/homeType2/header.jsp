@@ -21,7 +21,9 @@
 				<a class="w3-btn" onclick="menu(this)">BOARD</a>
 				<a class="w3-btn" onclick="menu(this)">PICTURE</a>
 				<a class="w3-btn" onclick="menu(this)">VISITORS</a>
-				<a class="w3-btn" onclick="menu(this)">SETTING</a>
+				<c:if test="${id==sessionScope.id }">
+					<a class="w3-btn" onclick="menu(this)">SETTING</a>
+				</c:if>
 			</div>
 		</div>
 		<div class="w3-section w3-padding-top">
