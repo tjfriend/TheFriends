@@ -79,7 +79,7 @@
 							</td>
 							<td width="15%">${ecmda.DAY }</td>
 							<td width="20%">
-								<c:if test="${loginid == details.WRITER }">
+								<c:if test="${loginid == ecmda.ID }">
 									<input type="button" value="수정" id="change${ecmda.COMMENTNUM }"
 										onclick="change(this)" class="btn btn-default"> 
 									<input type="button" value="완료" style="display: none;"
