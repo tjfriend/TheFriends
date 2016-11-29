@@ -27,11 +27,11 @@
 			<tbody id="tbody" align="center">
 				<c:forEach var="notice" items="${noticedata }">
 					<tr>
-						<td align="center">${notice.NUM }</td>
-						<td><a href="/notice/details/${notice.NUM }">${notice.TITLE }</a></td>
-						<td>${notice.ID }</td>
-						<td>${notice.TIME }</td>
-						<td>${notice.INQUIRY }</td>
+						<td align="center"><label>${notice.NUM }</label></td>
+						<td><label><a href="/notice/details/${notice.NUM }">${notice.TITLE }</a></label></td>
+						<td><label>${notice.ID }</label></td>
+						<td><label>${notice.TIME }</label></td>
+						<td><label>${notice.INQUIRY }</label></td>
 					</tr>
 				</c:forEach>
 			</tbody>
