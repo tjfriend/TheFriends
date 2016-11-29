@@ -7,6 +7,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://masonry.desandro.com/masonry.pkgd.js"></script>
+<script src="/js/jquery.lazyload.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <div class="w3-text-grey" style="padding: 20px; border-radius: 5px"
@@ -220,18 +223,60 @@
 	</form>
 </div>
 
+<div class="w3-modal" style="display: none" id="finishDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="finish">
+		<input type="button" class="btn btn-success" value="가입되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="emailComDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="emailCom">
+		<input type="button" class="btn btn-success" value="인증되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="failDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="fail">
+		<input type="button" class="btn btn-danger" value="입력하지 않은 항목이 있습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="numChkDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="numChk">
+		<input type="button" class="btn btn-danger" value="인증번호를 확인해주세요." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="comChkDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="comChk">
+		<input type="button" class="btn btn-danger" value="인증 확인을 해주세요." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="joinFailDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="joinFail">
+		<input type="button" class="btn btn-danger" value="잠시후에 다시 시도해주세요." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
 <script>
+	function endDiv(txt){
+		$("#"+txt+"Div").fadeIn(300).delay(1000).fadeOut(300);
+	}
+	
 	$("#authCheck").click(function(){
 		var id = $("#join_id");
 		var authPass = $("#authPass");
 		if(authPass.val()=="${ranKey}"){
 			$("#hidden").prop("value", "1");
-			$("#checkRst").prop("color", "green");
-			$("#checkRst").text("인증되었습니다.");
+			endDiv("emailCom");
+// 			$("#scheckRst").prop("color", "green");
+// 			$("#checkRst").text("인증되었습니다.");
 			$("#emailSend").prop("hidden", "hidden");
 		} else {
-			$("#checkRst").prop("color", "red");
-			$("#checkRst").text("인증번호를 확인해주세요.");
+			endDiv("numChk");
+// 			$("#checkRst").prop("color", "red");
+// 			$("#checkRst").text("인증번호를 확인해주세요.");
 		}
 // 		$.ajax({
 // 			"method" : "get",
@@ -253,12 +298,15 @@
 		var id = $("#join_id_s");
 		var authPass = $("#authPass");
 		if(authPass.val()=="${ranKey}"){
-			$("#checkRst_s").prop("color", "green");
-			$("#checkRst_s").text("인증되었습니다.");
+			$("#hidden").prop("value", "1");
+			endDiv("emailCom");
+// 			$("#checkRst_s").prop("color", "green");
+// 			$("#checkRst_s").text("인증되었습니다.");
 			$("#emailSend_s").prop("hidden", "hidden");
 		} else {
-			$("#checkRst_s").prop("color", "red");
-			$("#checkRst_s").text("인증번호를 확인해주세요.");
+			endDiv("numChk");
+// 			$("#checkRst_s").prop("color", "red");
+// 			$("#checkRst_s").text("인증번호를 확인해주세요.");
 		}
 // 		$.ajax({
 // 			"method" : "get",
@@ -346,25 +394,29 @@
 					"async" : false
 				}).done(function(txt){
 					if(txt==true){
-						$("#result").prop("class", "alert alert-success");
-						$("#result").html(
-							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-						);
-						window.setInterval(geIndex, 1000);
+						endDiv("finish");
+// 						$("#result").prop("class", "alert alert-success");
+// 						$("#result").html(
+// 							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+// 						);
+						window.setInterval(goIndex, 1000);
 					} else {
-						$("#result").prop("class", "alert alert-danger");
-						$("#result").html(
-							"<strong>Fail!</strong> Please check any blank about all items!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-						);
+						endDiv("joinFail");
+// 						$("#result").prop("class", "alert alert-danger");
+// 						$("#result").html(
+// 							"<strong>Fail!</strong> Please check any blank about all items!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+// 						);
 					}
 				});
 			} else {
-				$("#emailSend").prop("color", "red");
-				$("#emailSend").text("인증 확인을 해주세요.");
+				endDiv("comChk");
+// 				$("#emailSend").prop("color", "red");
+// 				$("#emailSend").text("인증 확인을 해주세요.");
 			}
 		} else {
-			$("#joinrst").prop("color", "red");
-			$("#joinrst").text("입력되지 않은 항목이 있습니다.");
+			endDiv("fail");
+// 			$("#joinrst").prop("color", "red");
+// 			$("#joinrst").text("입력되지 않은 항목이 있습니다.");
 		}
 	});
 	
@@ -395,25 +447,29 @@
 					"async" : false
 				}).done(function(txt){
 					if(txt==true){
-						$("#result_s").prop("class", "alert alert-success");
-						$("#result_s").html(
-							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-						);
-						window.setInterval(geIndex, 1000);
+						endDiv("finish");
+// 						$("#result_s").prop("class", "alert alert-success");
+// 						$("#result_s").html(
+// 							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+// 						);
+						window.setInterval(goIndex, 1000);
 					} else {
-						$("#result_s").prop("class", "alert alert-danger");
-						$("#result_s").html(
-							"<strong>Fail!</strong> Please check any blank about all items!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-						);
+						endDiv("joinFail");
+// 						$("#result_s").prop("class", "alert alert-danger");
+// 						$("#result_s").html(
+// 							"<strong>Fail!</strong> Please check any blank about all items!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+// 						);
 					}
 				});
 			} else {
-				$("#emailSend_s").prop("color", "red");
-				$("#emailSend_s").text("인증 확인을 해주세요.");
+				endDiv("comChk");
+// 				$("#emailSend_s").prop("color", "red");
+// 				$("#emailSend_s").text("인증 확인을 해주세요.");
 			}
 		} else {
-			$("#joinrst_s").prop("color", "red");
-			$("#joinrst_s").text("입력되지 않은 항목이 있습니다.");
+			endDiv("fail");
+// 			$("#joinrst_s").prop("color", "red");
+// 			$("#joinrst_s").text("입력되지 않은 항목이 있습니다.");
 		}
 	});
 
@@ -510,7 +566,7 @@
 	    }).open();
 	}
 	
-	function geIndex(){
+	function goIndex(){
 		location.href="/";
 	}
 </script>

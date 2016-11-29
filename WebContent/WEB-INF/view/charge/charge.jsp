@@ -7,7 +7,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://masonry.desandro.com/masonry.pkgd.js"></script>
+<script src="/js/jquery.lazyload.js"></script>
 
 <div class="w3-row" style="margin-top: 50px">
 	<h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
@@ -160,7 +162,41 @@
 	</div>
 </div>
 
+<div class="w3-modal" style="display: none" id="finishDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="finish">
+		<input type="button" class="btn btn-success" value="충전되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="failDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="fail">
+		<input type="button" class="btn btn-danger" value="충전에 실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="giftDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="gift">
+		<input type="button" class="btn btn-success" value="충전되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="giftFailDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="giftFail">
+		<input type="button" class="btn btn-danger" value="충전에 실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="giftPoDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="giftPo">
+		<input type="button" class="btn btn-danger" value="선물포인트가 현재포인트보다 많습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
 <script>
+	function endDiv(txt){
+		$("#"+txt+"Div").fadeIn(300).delay(1000).fadeOut(300);
+	}
+
 	// 금액 선택
 	$("#spoint").change(function() {
 			var sel = $("#spoint").prop("value");
@@ -209,13 +245,19 @@
 			"url" : "/charge/cash?take="+take+"&point="+point
 		}).done(function(txt){
 			if(txt == "true"){
-				$("#rst").prop("color", "green");
-				$("#rst").text("충전 성공");
+				endDiv("finish");
+// 				$("#rst").prop("color", "green");
+// 				$("#rst").text("충전 성공");
 				$("#point").val("");
+				$("#ph1").val("");
+				$("#ph2").val("");
 			}else{
-				$("#rst").prop("color", "red");
-				$("#rst").text("충전 실패");
+				endDiv("fail");
+// 				$("#rst").prop("color", "red");
+// 				$("#rst").text("충전 실패");
 				$("#point").val("");
+				$("#ph1").val("");
+				$("#ph2").val("");
 			}
 		})
 	});
@@ -235,18 +277,21 @@
 				"url" : "/charge/gift?take="+take+"&point="+point
 			}).done(function(txt){
 				if(txt == "true"){
-					$("#gt").prop("color", "green");
-					$("#gt").text("선물 성공");
+					endDiv("gift");
+// 					$("#gt").prop("color", "green");
+// 					$("#gt").text("선물 성공");
 					$("#gpoint").val("");
 				}else{
-					$("#gt").prop("color", "red");
-					$("#gt").text("선물 실패");
+					endDiv("giftFail");
+// 					$("#gt").prop("color", "red");
+// 					$("#gt").text("선물 실패");
 					$("#gpoint").val("");
 				}
 			});
 		} else {
-			$("#gt").prop("color", "red");
-			$("#gt").text("선물포인트는 현재포인트보다 작거나 같아야 합니다.");
+			endDiv("giftPo");
+// 			$("#gt").prop("color", "red");
+// 			$("#gt").text("선물포인트는 현재포인트보다 작거나 같아야 합니다.");
 		}
 	});
 	
