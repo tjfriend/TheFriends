@@ -17,13 +17,16 @@
 		percentPosition: true
 	});
 	$(function(){
-		$('img.item').lazyload({
+		$(".item").lazyload({
 			threshold : 200
 		});
 	});
 </script>
 
 <style>
+	.grid-item{
+		display: none;
+	}
 	.grid-item-reply{
 		float: left;
 		width: 20%;

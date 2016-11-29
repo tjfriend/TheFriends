@@ -21,7 +21,6 @@ public class HomepageService {
 	public HashMap goHome(String id){
 		SqlSession ss = fac.openSession();
 		List<HashMap> list = ss.selectList("homepage.gohome", id);
-		System.out.println(id+"/"+list);
 		ss.close();
 		return list.get(0);
 	}

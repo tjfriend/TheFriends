@@ -42,32 +42,32 @@ public class HomepageController {
 	
 	@RequestMapping("/home/{id}")
 	public String home(@PathVariable(name="id")String id){
-		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		String homeType = (String)(hs.goHome(id).get("ADDRESS"));
 		return "/"+homeType+"/article.jsp";
 	}
 
 	@RequestMapping("/board/{id}")
 	public String board(@PathVariable(name="id")String id){
-		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		String homeType = (String)(hs.goHome(id).get("ADDRESS"));
 		return "/homepage/homeBoard/board.jsp";
 	}
 	
 	@RequestMapping("/picture/{id}")
 	public String picture(@PathVariable(name="id")String id, HttpSession session){
-		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		String homeType = (String)(hs.goHome(id).get("ADDRESS"));
 		String sessionId = (String)session.getAttribute("id");
 		return "redirect:/picture/pictureview/"+id;
 	}
 	
 	@RequestMapping("/visitors/{id}")
 	public String visitors(@PathVariable(name="id")String id){
-		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		String homeType = (String)(hs.goHome(id).get("ADDRESS"));
 		return "redirect:/visits/"+id;
 	}
 
 	@RequestMapping("/setting/{id}")
 	public String setting(@PathVariable(name="id")String id){
-		String homeType = (String)hs.goHome(id).get("ADDRESS");
+		String homeType = (String)(hs.goHome(id).get("ADDRESS"));
 		return "redirect:/settings/"+id;
 	}
 }
