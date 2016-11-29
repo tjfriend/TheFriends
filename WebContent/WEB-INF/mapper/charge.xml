@@ -49,7 +49,7 @@
 
 	<!-- 충전내역 전체 페이지 -->
 	<select id="total" resultType="java.lang.Integer">
-		select count(*) from charge
+		select count(*) from charge where id=#{id}
 	</select>
 
 	<!-- 사용내역 페이지 -->

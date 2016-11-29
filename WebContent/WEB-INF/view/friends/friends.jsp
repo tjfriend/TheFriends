@@ -91,7 +91,7 @@
 			$("#tbody").html(html);
 			html = "";
 			for(var i=0; i<${size}; i++){
-				html += "<a onclick='page(this)'>"+(i+1)+"</a>";
+				html += "<label><a onclick='page(this)'>"+(i+1)+"</label></a>";
 			}
 			$("#page").html(html);
 		});
@@ -110,7 +110,7 @@
 			$("#addBody").html(html);
 			html = "";
 			for(var i=0; i<${size}; i++){
-				html += "<a onclick='addPage(this)'>"+(i+1)+"</a>";
+				html += "<label><a onclick='addPage(this)'>"+(i+1)+"</a></label>";
 			}
 			$("#addPage").html(html);
 		});
@@ -132,7 +132,7 @@
 		});
 	}
 	
-	function page(element){
+	function addPage(element){
 		var page = element.innerHTML;
 		$.ajax({
 			"method" : "post",

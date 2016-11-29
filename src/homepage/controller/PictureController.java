@@ -68,6 +68,9 @@ public class PictureController {
 	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a, 
 			@RequestParam(name="p", defaultValue="1") int p, HttpSession session){
 		ModelAndView mav = new ModelAndView("/homepage/homePicture/pictureBoard3.jsp");
+		if(a!=2){
+			mav.setViewName("/common.jsp");
+		}
 		String loginId = (String)session.getAttribute("id");
 		List<HashMap> friend = pic.find(id, loginId);
 		List list;

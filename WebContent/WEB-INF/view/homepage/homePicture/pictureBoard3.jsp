@@ -76,60 +76,65 @@
 		</c:if>
 	</div>
 	<div class="grid" id="gridDiv">
-<%-- 		<c:forEach var="t" items="${list }"> --%>
-<%-- 		<c:forEach var="t" begin="0" end="${list.size()-1 }"> --%>
-		<c:forEach var="t" begin="0" end="${list.size()>9 ? 9 : list.size()-1 }">
-			<c:choose>
-				<c:when test="${list.get(t).ran>0.7 }">
-					<div class="grid-item-width2" id="grid-item${list.get(t).NUM }">
-						<img data-original="/files/${list.get(t).UUID }" style="width: 100%; height: 100%; border-radius: 15px" class="item" id="item${list.get(t).NUM }" onclick="grid(this)"/><br/><br/>
-						<div class="w3-row" style="display: none" id="span${list.get(t).NUM }">
-							<div class="w3-col" style="width: 90%">
-								<label>${list.get(t).TITLE }</label>&nbsp;&nbsp;
+		<c:choose>
+			<c:when test="${list.size()!=0 }">
+				<c:forEach var="t" begin="0" end="${list.size()>9 ? 9 : list.size()-1 }">
+					<c:choose>
+						<c:when test="${list.get(t).ran>0.7 }">
+							<div class="grid-item-width2" id="grid-item${list.get(t).NUM }">
+								<img data-original="/files/${list.get(t).UUID }" style="width: 100%; height: 100%; border-radius: 15px" class="item" id="item${list.get(t).NUM }" onclick="grid(this)"/><br/><br/>
+								<div class="w3-row" style="display: none" id="span${list.get(t).NUM }">
+									<div class="w3-col" style="width: 90%">
+										<label>${list.get(t).TITLE }</label>&nbsp;&nbsp;
+									</div>
+									<div class="w3-col" style="width: 10%">
+										<b class="glyphicon glyphicon-thumbs-up" onclick="good(this)" id="good${list.get(t).NUM }">${list.get(t).GOOD }</b>
+									</div>
+								</div>
+								<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 55%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+								<input type="button" class="btn btn-default" value="등록" style="width: 20%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"/>
+								<input type="button" class="btn btn-default" value="댓글" style="width: 20%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"/>
 							</div>
-							<div class="w3-col" style="width: 10%">
-								<b class="glyphicon glyphicon-thumbs-up" onclick="good(this)" id="good${list.get(t).NUM }">${list.get(t).GOOD }</b>
+						</c:when>
+						<c:when test="${list.get(t).ran>0.4 }">
+							<div class="grid-item" id="grid-item${list.get(t).NUM }">
+								<img data-original="/files/${list.get(t).UUID }" style="width: 100%; height: 100%; border-radius: 15px" class="item" id="item${list.get(t).NUM }" onclick="grid(this)"/><br/><br/>
+								<div class="w3-row" style="display: none" id="span${list.get(t).NUM }">
+									<div class="w3-col" style="width: 90%">
+										<label>${list.get(t).TITLE }</label>&nbsp;&nbsp;
+									</div>
+									<div class="w3-col" style="width: 10%">
+										<b class="glyphicon glyphicon-thumbs-up" onclick="good(this)" id="good${list.get(t).NUM }">${list.get(t).GOOD }</b>
+									</div>
+								</div>
+								<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 55%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+								<input type="button" class="btn btn-default" value="등록" style="width: 20%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"/>
+								<input type="button" class="btn btn-default" value="댓글" style="width: 20%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"/>
 							</div>
-						</div>
-						<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 55%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
-						<input type="button" class="btn btn-default" value="등록" style="width: 20%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"/>
-						<input type="button" class="btn btn-default" value="댓글" style="width: 20%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"/>
-					</div>
-				</c:when>
-				<c:when test="${list.get(t).ran>0.4 }">
-					<div class="grid-item" id="grid-item${list.get(t).NUM }">
-						<img data-original="/files/${list.get(t).UUID }" style="width: 100%; height: 100%; border-radius: 15px" class="item" id="item${list.get(t).NUM }" onclick="grid(this)"/><br/><br/>
-						<div class="w3-row" style="display: none" id="span${list.get(t).NUM }">
-							<div class="w3-col" style="width: 90%">
-								<label>${list.get(t).TITLE }</label>&nbsp;&nbsp;
+						</c:when>
+						<c:otherwise>
+							<div class="grid-item-height2" id="grid-item${list.get(t).NUM }">
+								<img data-original="/files/${list.get(t).UUID }" style="width: 100%; height: 100%; border-radius: 15px" class="item" id="item${list.get(t).NUM }" onclick="grid(this)"/><br/><br/>
+								<div class="w3-row" style="display: none" id="span${list.get(t).NUM }">
+									<div class="w3-col" style="width: 90%">
+										<label>${list.get(t).TITLE }</label>&nbsp;&nbsp;
+									</div>
+									<div class="w3-col" style="width: 10%">
+										<b class="glyphicon glyphicon-thumbs-up" onclick="good(this)" id="good${list.get(t).NUM }">${list.get(t).GOOD }</b>
+									</div>
+								</div>
+								<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 55%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+								<input type="button" class="btn btn-default" value="등록" style="width: 20%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"/>
+								<input type="button" class="btn btn-default" value="댓글" style="width: 20%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"/>
 							</div>
-							<div class="w3-col" style="width: 10%">
-								<b class="glyphicon glyphicon-thumbs-up" onclick="good(this)" id="good${list.get(t).NUM }">${list.get(t).GOOD }</b>
-							</div>
-						</div>
-						<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 55%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
-						<input type="button" class="btn btn-default" value="등록" style="width: 20%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"/>
-						<input type="button" class="btn btn-default" value="댓글" style="width: 20%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"/>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="grid-item-height2" id="grid-item${list.get(t).NUM }">
-						<img data-original="/files/${list.get(t).UUID }" style="width: 100%; height: 100%; border-radius: 15px" class="item" id="item${list.get(t).NUM }" onclick="grid(this)"/><br/><br/>
-						<div class="w3-row" style="display: none" id="span${list.get(t).NUM }">
-							<div class="w3-col" style="width: 90%">
-								<label>${list.get(t).TITLE }</label>&nbsp;&nbsp;
-							</div>
-							<div class="w3-col" style="width: 10%">
-								<b class="glyphicon glyphicon-thumbs-up" onclick="good(this)" id="good${list.get(t).NUM }">${list.get(t).GOOD }</b>
-							</div>
-						</div>
-						<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 55%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
-						<input type="button" class="btn btn-default" value="등록" style="width: 20%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"/>
-						<input type="button" class="btn btn-default" value="댓글" style="width: 20%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"/>
-					</div>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<p>등록된 사진이 없습니다.</p>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
 
@@ -287,6 +292,6 @@
 	};
 	
 	$("#add").click(function(){
-		window.open("/picture/up/${id}", "picup", "width= 500px, height= 500px");
+		window.open("/picture/up/${id}", "picup", "width= 500px, height= 500px, left= 300, top= 100, resizable=no");
 	});
 </script>
