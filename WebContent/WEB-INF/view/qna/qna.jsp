@@ -113,9 +113,10 @@
 					TopPosition = (screen.height - 300) / 2;
 
 					function openLogin() {
-						window.open("/login/simple", "login",
-								"width=400, height=300,left=" + LeftPosition
-										+ ",top=" + TopPosition);
+						alert("로그인이 필요한 서비스입니다 로그인을 해주세요.")
+// 						window.open("/login/simple", "login",
+// 								"width=400, height=300,left=" + LeftPosition
+// 										+ ",top=" + TopPosition);
 					}
 				</script>
 			</c:when>

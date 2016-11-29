@@ -67,10 +67,8 @@ public class EventController {
 	@RequestMapping("/make")
 	public ModelAndView eventMake(HttpSession session, String title, String content) {
 		String id = (String) session.getAttribute("id");
-		System.out.println("ÄÁÆ® : " + id + "./" + title + "ll:" + content);
 		ModelAndView mav = new ModelAndView();
 		int wr = ew.Eventwrite(id, title, content);
-		System.out.println("ÄÁ : " + wr);
 		mav.setViewName("redirect:/event/list");
 		return mav;
 	}

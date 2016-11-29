@@ -13,12 +13,11 @@
 	]]>
 	</select>
 
-
 	<select id="pagesize" resultType="java.lang.Integer">
 		select count(*) from event
 	</select>
-	
-<!-- 	검색 -->
+
+	<!-- 검색 -->
 	<select id="eventsearch" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
 	<![CDATA[
@@ -58,7 +57,7 @@
 
 	<!-- 댓글 xml -->
 
-	
+
 
 	<select id="eventcommentlist" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
@@ -120,8 +119,9 @@
 		values
 		(#{num } , #{id }, #{memo },sysdate,QNA_COMMENT.NEXTVAL)
 	</insert>
-	
-	<select id="member" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+
+	<select id="member" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
 		select * from member where id = #{id }
 	</select>
 
