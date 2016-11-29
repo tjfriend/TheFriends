@@ -38,14 +38,13 @@
 			</tbody>
 		</table>
 		<div align="center">
-			<label id="page"> <!-- 페이징 처리 --> <c:forEach var="i"
-					begin="1" end="${eventsize }">
+			<label id="page"> <!-- 페이징 처리 --> <c:forEach var="i" begin="${eventsize-2}" end="${eventsize+2 }">
 					<c:choose>
 						<c:when test="${current == i }">
 							<b>${u }</b>
 						</c:when>
 						<c:otherwise>
-							<a href="/notice/list?p=${i }">${i }</a>
+							<a href="/event/list?p=${i }">${i }</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>

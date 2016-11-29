@@ -33,23 +33,32 @@ public class EventController {
 	EventDelete ed;
 
 	@RequestMapping("/list")
-	public ModelAndView eventList(@RequestParam(defaultValue = "1") int p, @RequestParam (defaultValue="") String search,
-		HttpSession session) {
+	public ModelAndView eventList(@RequestParam(defaultValue = "1") int p,
+			@RequestParam(defaultValue = "") String search, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String id = (String)session.getAttribute("id");
-		if(id!=null){
-		List nick = ew.membernickname(id);
-		mav.addObject("nick",nick);
+		String id = (String) session.getAttribute("id");
+		if (id != null) {
+			List nick = ew.membernickname(id);
+			mav.addObject("nick", nick);
 		}
-		if(search.equals("")){
-		List lis = ep.eventlist(p);
-		int size = ep.size();
-		mav.addObject("eventdata", lis);
-		mav.addObject("eventsize", size);
-		mav.setViewName("t:event/event");
-		return mav;
-		}else{
-			List lis = ep.searchqna(search,p);
+		if (search.equals("")) {
+			List lis = ep.eventlist(p);
+			int size = ep.size();
+
+			if (p - 2 < 1) {
+				size = 3;
+			} else if (p + 2 > size) {
+				size = size - 2;
+			} else {
+				size = p;
+			}
+
+			mav.addObject("eventdata", lis);
+			mav.addObject("eventsize", size);
+			mav.setViewName("t:event/event");
+			return mav;
+		} else {
+			List lis = ep.searchqna(search, p);
 			int size = ep.searchqnasize(search);
 			mav.addObject("eventdata", lis);
 			mav.addObject("eventsize", size);
@@ -76,7 +85,7 @@ public class EventController {
 	// 상세보기
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
-			HttpServletRequest req, HttpServletResponse resp,HttpSession session) {
+			HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 
 		Cookie[] ar = req.getCookies();
@@ -100,14 +109,14 @@ public class EventController {
 		List list = ep.Getcommentpage(p, num);
 		int sizecom = ep.commentsize(num);
 		// int upinq = qw.upinquiry(num);'
-		
+
 		HashMap data = ep.eventdetails(num);
 		Date date = (Date) data.get("DAY");
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
 		String day = sdf.format(date);
 		data.put("DAY", day);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("loginid",id);
+		mav.addObject("loginid", id);
 		mav.addObject("details", data);
 		mav.addObject("eventcommentda", list);
 		mav.addObject("eventcommentsi", sizecom);
@@ -148,7 +157,7 @@ public class EventController {
 		mav.setViewName("redirect:/event/list");
 		return mav;
 	}
-	
+
 	// 게시글 수정
 	@RequestMapping("/eventupdate")
 	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num) {
@@ -158,17 +167,17 @@ public class EventController {
 		mav.setViewName("t:event/adjust");
 		return mav;
 	}
-	
+
 	@RequestMapping("/eventadjust")
 	public ModelAndView qnaAdjust(int num, String title, String content, HttpSession session) {
-		System.out.println("컨트 : "+num+"//"+title+"//"+content);
+		System.out.println("컨트 : " + num + "//" + title + "//" + content);
 		int r = ew.Adjust(num, content, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventadjust", r);
 		mav.setViewName("redirect:/event/list");
 		return mav;
 	}
-	
+
 	// 댓글 등록
 	@RequestMapping("/eventcomment")
 	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p) {
@@ -176,7 +185,7 @@ public class EventController {
 		int r = ew.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = ep.commentsize(num);
-		mav.setViewName("redirect:/event/details/" + num + "?p="+si);
+		mav.setViewName("redirect:/event/details/" + num + "?p=" + si);
 		return mav;
 	}
 }

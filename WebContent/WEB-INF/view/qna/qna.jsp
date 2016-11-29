@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -13,7 +14,8 @@
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">QnA</h2>
 
-<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
+<div class="w3-row"
+	style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 
 	<script>
 		// 벨류값 가져오기
@@ -23,35 +25,36 @@
 		}
 	</script>
 
-		<h3 align="center">The Most QnA</h3>
-		<table class="table">
-			<thead>
+	<h3 align="center">The Most QnA</h3>
+	<table class="table">
+		<thead>
+			<tr align="center">
+				<td width="5%"><label>#</label></td>
+				<td width="15%"><label>Category</label></td>
+				<td width="50%"><label>Writer</label></td>
+				<td width="8%"><label>ID</label></td>
+				<td width="15%"><label>Day</label></td>
+				<td width="7%"><label>Count</label></td>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="best" items="${qnabest }">
 				<tr align="center">
-					<td width="5%"><label>#</label></td>
-					<td width="15%"><label>Category</label></td>
-					<td width="50%"><label>Writer</label></td>
-					<td width="8%"><label>ID</label></td>
-					<td width="15%"><label>Day</label></td>
-					<td width="7%"><label>Count</label></td>
+					<td><label>${best.NUM }</label></td>
+					<td><label>${best.CATEGORY}</label></td>
+					<td><label><a href="/qna/details/${best.NUM}">${best.TITLE}</a></label></td>
+					<td><label>${best.ID }</label></td>
+					<td><label>${best.TIME }</label></td>
+					<td><label>${best.INQUIRY }</label></td>
 				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var = "best" items="${qnabest }">
-					<tr align="center">
-						<td><label>${best.NUM }</label></td>
-						<td><label>${best.CATEGORY}</label></td>
-						<td><label><a href="/qna/details/${best.NUM}">${best.TITLE}</a></label></td>
-						<td><label>${best.ID }</label></td>
-						<td><label>${best.TIME }</label></td>
-						<td><label>${best.INQUIRY }</label></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	
+			</c:forEach>
+		</tbody>
+	</table>
+
 
 	<form action="/qna/list" id="ctg" align="right" method="post">
-		<select name="mode" id="sel" style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
+		<select name="mode" id="sel"
+			style="width: 7%; height: 25px; border: 1px solid #ccc; border-radius: 5px">
 			<option value="" ${qnamode eq ''?'selected':'' }>분류</option>
 			<option value="개인정보" ${qnamode eq '개인정보'?'selected':'' }>개인정보</option>
 			<option value="이벤트" ${qnamode eq '이벤트'?'selected':'' }>이벤트</option>
@@ -90,49 +93,83 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
+
+
+	<fmt:parseNumber var="var3" value="${(qnasize-1)/5}" integerOnly="true" />
 	<div align="center">
-		<c:forEach var="i" begin="1" end="${qnasize }">
+	<c:if test="${qnasize !=5 }">
+	
+	<input type="button" value="이전" onclick="javascript:backpage()">
+	</c:if>
+		<c:forEach var="i" begin="${var3*5+1 }" end="${qnasize }">
 			<c:choose>
-				<c:when test="${current == i }">
-					<b></b>
+				<c:when test="${i == qnasize }">
+					<a href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }&nbsp;</a>
 				</c:when>
 				<c:otherwise>
-					<a href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }">${i }</a>
+					<a href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }&nbsp;</a>|
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
+		<c:if test="${qnabestsize != qnasize }">
+		<input type="button" value="다음" onclick="javascript:nextpage()" />
+		</c:if>
 	</div>
-	
+
+<c:if test="${qnabestsize == qnasize }">
+<fmt:parseNumber var="var3" value="${(qnasize-1)/5}" integerOnly="true" />
+<fmt:parseNumber var="qnasize" value="${(var3+1)*5}" integerOnly="true" />
+</c:if>
+	<script>
+		function nextpage() {
+			paging = ${qnasize + 5};
+			p = ${qnasize + 1};
+			location.href = "/qna/list?mode=${qnamode }&search=${qnasearch }&p="
+					+ p + "&paging=" + paging;
+		}
+		function backpage() {
+		
+		alert(${var3});
+         alert(${qnasize}); 
+         
+		paging  = ${qnasize-5};
+			p = paging-4;
+			location.href = "/qna/list?mode=${qnamode }&search=${qnasearch }&p="
+					+ p + "&paging=" + paging;
+		}
+	</script>
+
 	<div align="right">
 		<c:choose>
 			<c:when test="${login == null }">
-				<input type="button" value="질문하기" onclick="javascript:openLogin()" class="btn btn-default">
+				<input type="button" value="질문하기" onclick="javascript:openLogin()"
+					class="btn btn-default">
 				<script>
 					LeftPosition = (screen.width - 400) / 2;
 					TopPosition = (screen.height - 300) / 2;
 
 					function openLogin() {
-						alert("로그인이 필요한 서비스입니다 로그인을 해주세요.")
-// 						window.open("/login/simple", "login",
-// 								"width=400, height=300,left=" + LeftPosition
-// 										+ ",top=" + TopPosition);
+						alert("로그인이 필요한 서비스입니다 로그인을 해주세요.");
+						// 						window.open("/login/simple", "login",
+						// 								"width=400, height=300,left=" + LeftPosition
+						// 										+ ",top=" + TopPosition);
 					}
 				</script>
 			</c:when>
 			<c:otherwise>
 				<input type="button" value="질문하기"
-					onclick="javascript:location.href='/qna/write'" class="btn btn-default">
+					onclick="javascript:location.href='/qna/write'"
+					class="btn btn-default">
 			</c:otherwise>
 		</c:choose>
 	</div>
 
 	<div align="center">
 		<form action="/qna/list" method="post">
-			<input type="hidden" name="mode" value="${qnamode }"/> 
-			<label>검색&nbsp;</label>
-			<input type="search" name="search" style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/> 
-				 <input type="submit" value="검색"  class="btn btn-default"/>
+			<input type="hidden" name="mode" value="${qnamode }" /> <label>검색&nbsp;</label>
+			<input type="search" name="search"
+				style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px" />
+			<input type="submit" value="검색" class="btn btn-default" />
 		</form>
 	</div>
 </div>

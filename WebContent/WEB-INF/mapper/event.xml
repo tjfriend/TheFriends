@@ -37,8 +37,8 @@
 
 	<!-- 글쓰기 -->
 	<insert id="question" parameterType="java.util.HashMap">
-		insert into event values
-		(EVENT_SEQ.nextval, #{title }, #{content },sysdate,0,#{id})
+			insert into event values
+			(EVENT_SEQ.nextval, #{title }, #{content },sysdate,0,#{id})
 	</insert>
 
 	<!-- 조회수증가 -->

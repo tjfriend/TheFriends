@@ -45,10 +45,10 @@ public class QnAcontroller {
 	// 조회수 많은거3개 , 리스트 들
 	@RequestMapping("/list")
 	public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "") String mode
-			, @RequestParam (defaultValue="") String search) {
+			, @RequestParam (defaultValue="") String search,@RequestParam(defaultValue ="5")int paging) {
 		ModelAndView mav = new ModelAndView();
 		
-			
+			System.out.println("컨"+paging+"p는"+p);
 			List best = qp.qnabest();
 			
 			mav.addObject("qnabest",best);
@@ -57,9 +57,13 @@ public class QnAcontroller {
 			if(search.equals("")){
 				List lis = qp.GetRnage(p);
 				int size = qp.size();
+				if(size>paging){
+				size = paging;
+				}
+				int bestsize = qp.size();
+				mav.addObject("qnabestsize", bestsize);
 				mav.addObject("qnadata", lis);
 				mav.addObject("qnasize", size);
-				
 				mav.setViewName("t:qna/qna");
 				return mav;
 			}else{
