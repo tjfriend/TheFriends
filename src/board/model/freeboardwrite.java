@@ -22,15 +22,16 @@ public class freeboardwrite {
 		map.put("id", id);
 		map.put("category", category);
 		System.out.println("¼­ºñ½º : "+map);
+		SqlSession sql = fac.openSession();
 		try {
-			SqlSession sql = fac.openSession();
 			System.out.println("1");
 			int rst = sql.insert("freeboard.write", map);
-			
+			sql.commit();
 			sql.close();
 			return rst;
 		} catch (Exception e) {
-			
+			sql.rollback();
+			sql.close();
 			return -1;
 		}
 	}
