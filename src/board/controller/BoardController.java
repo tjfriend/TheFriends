@@ -5,7 +5,6 @@ import java.util.*;
 
 import javax.servlet.http.*;
 
-import org.apache.ibatis.session.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +22,6 @@ public class BoardController {
 	@Autowired
 	freeboardwrite fw;
 
-	@Autowired
-	SqlSessionFactory fac;
 
 	@Autowired
 	ContentService cs;

@@ -165,5 +165,24 @@ public class QnAPage {
 		return psize;
 
 	}
-
+	public List qnabest(){
+		SqlSession sql = fac.openSession();
+		List<HashMap> li = sql.selectList("qna.qnabest");
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("TIME");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("TIME", day);
+			li.set(i, li.get(i));
+		}
+		sql.close();
+		return li;
+	}
+	public HashMap qnadetails(int num){
+		SqlSession sql = fac.openSession();
+		HashMap data = sql.selectOne("qna.qnadetails", num);
+		sql.close();
+		return data;
+	
+	}
 }

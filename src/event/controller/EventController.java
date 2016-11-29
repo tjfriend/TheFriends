@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +22,6 @@ import event.model.Eventwrite;
 @Controller()
 @RequestMapping("/event")
 public class EventController {
-
-	@Autowired
-	SqlSessionFactory fac;
 
 	@Autowired
 	EventPage ep;
@@ -104,9 +99,9 @@ public class EventController {
 		map.put("num", num);
 		List list = ep.Getcommentpage(p, num);
 		int sizecom = ep.commentsize(num);
-		// int upinq = qw.upinquiry(num);
-		SqlSession sql = fac.openSession();
-		HashMap data = sql.selectOne("event.eventdetails", map);
+		// int upinq = qw.upinquiry(num);'
+		
+		HashMap data = ep.eventdetails(num);
 		Date date = (Date) data.get("DAY");
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
 		String day = sdf.format(date);

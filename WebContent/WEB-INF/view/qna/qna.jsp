@@ -38,12 +38,12 @@
 			<tbody>
 				<c:forEach var = "best" items="${qnabest }">
 					<tr align="center">
-						<td>${best.NUM }</td>
-						<td>${best.CATEGORY}</td>
-						<td><a href="/qna/details/${best.NUM}">${best.TITLE}</a></td>
-						<td>${best.ID }</td>
-						<td>${best.TIME }</td>
-						<td>${best.INQUIRY }</td>
+						<td><label>${best.NUM }</label></td>
+						<td><label>${best.CATEGORY}</label></td>
+						<td><label><a href="/qna/details/${best.NUM}">${best.TITLE}</a></label></td>
+						<td><label>${best.ID }</label></td>
+						<td><label>${best.TIME }</label></td>
+						<td><label>${best.INQUIRY }</label></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -80,12 +80,12 @@
 		<tbody>
 			<c:forEach var="qna" items="${qnadata }">
 				<tr align="center">
-					<td>${qna.NUM }</td>
-					<td>${qna.CATEGORY}</td>
-					<td><a href="/qna/details/${qna.NUM}">${qna.TITLE}</a></td>
-					<td>${qna.ID }</td>
-					<td>${qna.TIME }</td>
-					<td>${qna.INQUIRY }</td>
+					<td><label>${qna.NUM }</label></td>
+					<td><label>${qna.CATEGORY}</label></td>
+					<td><label><a href="/qna/details/${qna.NUM}">${qna.TITLE}</a></label></td>
+					<td><label>${qna.ID }</label></td>
+					<td><label>${qna.TIME }</label></td>
+					<td><label>${qna.INQUIRY }</label></td>
 				</tr>
 			</c:forEach>
 		</tbody>

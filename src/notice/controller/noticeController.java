@@ -5,8 +5,6 @@ import java.util.*;
 
 import javax.servlet.http.*;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +25,6 @@ public class noticeController {
 	
 	@Autowired
 	noticeDelete nd;
-	
-	@Autowired
-	SqlSessionFactory fac;
 	
 	@RequestMapping("/list")
 	public ModelAndView noticeList(@RequestParam(defaultValue = "1") int p, @RequestParam (defaultValue="") String search,
@@ -104,8 +99,8 @@ public class noticeController {
 		List list = np.Getcommentpage(p, num);
 		int sizecom = np.commentsize(num);
 		// int upinq = qw.upinquiry(num);
-		SqlSession sql = fac.openSession();
-		HashMap data = sql.selectOne("notice.noticedetails", map);
+		
+		HashMap data = np.noticedetails(num);
 		Date date = (Date) data.get("TIME");
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
 		String time = sdf.format(date);

@@ -21,9 +21,10 @@ public class freeboardwrite {
 		map.put("content", content);
 		map.put("id", id);
 		map.put("category", category);
-		
+		System.out.println("¼­ºñ½º : "+map);
 		try {
 			SqlSession sql = fac.openSession();
+			System.out.println("1");
 			int rst = sql.insert("freeboard.write", map);
 			
 			sql.close();

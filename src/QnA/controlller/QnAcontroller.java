@@ -1,8 +1,5 @@
 package QnA.controlller;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -37,8 +34,6 @@ public class QnAcontroller {
 	@Autowired
 	qnaDelete qd;
 
-	@Autowired
-	SqlSessionFactory fac;
 
 	@RequestMapping("/test")
 	public ModelAndView test() {
@@ -53,15 +48,9 @@ public class QnAcontroller {
 			, @RequestParam (defaultValue="") String search) {
 		ModelAndView mav = new ModelAndView();
 		
-			SqlSession sql = fac.openSession();
-			List<HashMap> best = sql.selectList("qna.qnabest");
-			for(int i=0; i<best.size(); i++){
-				Date date = (Date)best.get(i).get("TIME");
-				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
-				String day = sdf.format(date);
-				best.get(i).put("TIME", day);
-				best.set(i, best.get(i));
-			}
+			
+			List best = qp.qnabest();
+			
 			mav.addObject("qnabest",best);
 			
 		if (mode.equals("")) {
@@ -152,8 +141,9 @@ public class QnAcontroller {
 		List list = qp.Getcommentpage(p, num);
 		int sizecom = qp.commentsize(num);
 //		int upinq = qw.upinquiry(num);
-		SqlSession sql = fac.openSession();
-		HashMap data = sql.selectOne("qna.qnadetails", map);
+		
+		HashMap data = qp.qnadetails(num);
+		
 		Date date = (Date)data.get("TIME");
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
 		String day = sdf.format(date);

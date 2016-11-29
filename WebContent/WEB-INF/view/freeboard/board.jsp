@@ -59,12 +59,12 @@
 		<tbody>
 			<c:forEach var="freeboard" items="${freeboarddata }">
 				<tr align="center">
-					<td align="center">${freeboard.NUM }</td>
-					<td align="center">${freeboard.CATEGORY }</td>
-					<td><a href="/board/freeboarddetails?num=${freeboard.NUM }">${freeboard.TITLE }</a></td>
-					<td>${freeboard.ID }</td>
-					<td>${freeboard.TIME }</td>
-					<td>${freeboard.INQUIRY }</td>
+					<td align="center"><label>${freeboard.NUM }</label></td>
+					<td align="center"><label>${freeboard.CATEGORY }</label></td>
+					<td><label><a href="/board/freeboarddetails?num=${freeboard.NUM }">${freeboard.TITLE }</a></label></td>
+					<td><label>${freeboard.ID }</label></td>
+					<td><label>${freeboard.TIME }</label></td>
+					<td><label>${freeboard.INQUIRY }</label></td>
 			</c:forEach>
 		</tbody>
 	</table>

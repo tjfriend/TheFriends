@@ -99,5 +99,19 @@ public class ShopController {
 		mav.addObject("money", money);
 		return mav;
 	}
+	
+	@RequestMapping("/shopgiftend")
+	public ModelAndView shopgiftend(HttpSession session, String title, String money, String gtake) {
+		String id = (String) session.getAttribute("id");
+		ModelAndView mav = new ModelAndView();
+		List<HashMap> list = sg.friend(id);
+		mav.addObject("title", title);
+		mav.addObject("money", money);
+		mav.addObject("gtake", gtake);
+		int m = sg.friendgift(id, title, money, gtake);
+		mav.addObject("m", m);
+		mav.setViewName("/shop/shopgiftend.jsp");
+		return mav;
+	}
 
 }
