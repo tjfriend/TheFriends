@@ -7,12 +7,19 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<h3 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
+<style>
+	body, h1, h2, h3, h4, h5 {
+		font-family: "Raleway", sans-serif
+	}
+</style>
+
+<h3 class="w3-text-grey" style="margin-top: 50px"
 	align="center">Upload</h3>
 
-<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px" align="center">
+<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 20px" align="center">
 	<form action="/picture/upload/${id }" method="post" enctype="multipart/form-data">
 		<label style="width: 30%"><font size="3">공개설정 :</font></label><br/>
 		<input type="radio" name="open" value="all">&nbsp;<label>전체공개</label>&nbsp;

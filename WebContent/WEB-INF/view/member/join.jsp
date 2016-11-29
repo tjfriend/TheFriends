@@ -7,6 +7,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://masonry.desandro.com/masonry.pkgd.js"></script>
+<script src="/js/jquery.lazyload.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <div class="w3-text-grey" style="padding: 20px; border-radius: 5px"
@@ -210,7 +213,41 @@
 	</form>
 </div>
 
+<div class="w3-modal" style="display: none" id="finishDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="finish">
+		<input type="button" class="btn btn-success" value="가입되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="emailSenDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="emailSen">
+		<input type="button" class="btn btn-success" value="인증메일이 전송되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="failDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="fail">
+		<input type="button" class="btn btn-danger" value="입력하지 않은 항목이 있습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="emailConDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="emailCon">
+		<input type="button" class="btn btn-danger" value="이메일 인증을 해주세요." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="emailChkDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="emailChk">
+		<input type="button" class="btn btn-danger" value="이메일 인증을 해주세요." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
 <script>
+	function endDiv(txt){
+		$("#"+txt+"Div").fadeIn(300).delay(1000).fadeOut(300);
+	}
+
 	$("#emailAuth").click(function(){
 		$("#hidden").prop("value", "1");
 		var id = $("#join_id");
@@ -228,16 +265,19 @@
 				"async" : false
 			}).done(function(txt){
 				if(txt==true){
-					$("#emailSend").prop("color", "green");
-					$("#emailSend").text("메일전송 완료");
+					endDiv("emailSen");
+// 					$("#emailSend").prop("color", "green");
+// 					$("#emailSend").text("메일전송 완료");
 				} else {
-					$("#emailSend").prop("color", "red");
-					$("#emailSend").text("메일주소를 확인해주세요.");
+					endDiv("emailChk");
+// 					$("#emailSend").prop("color", "red");
+// 					$("#emailSend").text("메일주소를 확인해주세요.");
 				}
 			});
 		} else {
-			$("#emailSend").prop("color", "red");
-			$("#emailSend").text("입력되지 않은 항목이 있습니다.");
+			endDiv("fail");
+// 			$("#emailSend").prop("color", "red");
+// 			$("#emailSend").text("입력되지 않은 항목이 있습니다.");
 		}
 	});
 	
@@ -257,16 +297,19 @@
 				"async" : false
 			}).done(function(txt){
 				if(txt==true){
-					$("#emailSend_s").prop("color", "green");
-					$("#emailSend_s").text("메일전송 완료");
+					endDiv("emailSen");
+// 					$("#emailSend_s").prop("color", "green");
+// 					$("#emailSend_s").text("메일전송 완료");
 				} else {
-					$("#emailSend_s").prop("color", "red");
-					$("#emailSend_s").text("메일주소를 확인해주세요.");
+					endDiv("emailChk");
+// 					$("#emailSend_s").prop("color", "red");
+// 					$("#emailSend_s").text("메일주소를 확인해주세요.");
 				}
 			});
 		} else {
-			$("#emailSend_s").prop("color", "red");
-			$("#emailSend_s").text("입력되지 않은 항목이 있습니다.");
+			endDiv("fail");
+// 			$("#emailSend_s").prop("color", "red");
+// 			$("#emailSend_s").text("입력되지 않은 항목이 있습니다.");
 		}
 	});
 	
@@ -352,12 +395,14 @@
 					}
 				});
 			} else {
-				$("#emailSend").prop("color", "red");
-				$("#emailSend").text("이메일 인증을 해주세요.");
+				endDiv("emailCon");
+// 				$("#emailSend").prop("color", "red");
+// 				$("#emailSend").text("이메일 인증을 해주세요.");
 			}
 		} else {
-			$("#joinrst").prop("color", "red");
-			$("#joinrst").text("입력되지 않은 항목이 있습니다.");
+			endDiv("fail");
+// 			$("#joinrst").prop("color", "red");
+// 			$("#joinrst").text("입력되지 않은 항목이 있습니다.");
 		}
 	});
 	
@@ -401,12 +446,14 @@
 					}
 				});
 			} else {
-				$("#emailSend_s").prop("color", "red");
-				$("#emailSend_s").text("이메일 인증을 해주세요.");
+				endDiv("emailCon");
+// 				$("#emailSend_s").prop("color", "red");
+// 				$("#emailSend_s").text("이메일 인증을 해주세요.");
 			}
 		} else {
-			$("#joinrst_s").prop("color", "red");
-			$("#joinrst_s").text("입력되지 않은 항목이 있습니다.");
+			endDiv("fail");
+// 			$("#joinrst_s").prop("color", "red");
+// 			$("#joinrst_s").text("입력되지 않은 항목이 있습니다.");
 		}
 	});
 

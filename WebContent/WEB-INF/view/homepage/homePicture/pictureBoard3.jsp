@@ -91,9 +91,9 @@
 										<b class="glyphicon glyphicon-thumbs-up" onclick="good(this)" id="good${list.get(t).NUM }">${list.get(t).GOOD }</b>
 									</div>
 								</div>
-								<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 55%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
-								<input type="button" class="btn btn-default" value="등록" style="width: 20%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"/>
-								<input type="button" class="btn btn-default" value="댓글" style="width: 20%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"/>
+								<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 75%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+								<i class="glyphicon glyphicon-pencil" style="width: 10%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"></i>
+								<i class="glyphicon glyphicon-comment" style="width: 10%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"></i>
 							</div>
 						</c:when>
 						<c:when test="${list.get(t).ran>0.4 }">
@@ -107,9 +107,9 @@
 										<b class="glyphicon glyphicon-thumbs-up" onclick="good(this)" id="good${list.get(t).NUM }">${list.get(t).GOOD }</b>
 									</div>
 								</div>
-								<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 55%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
-								<input type="button" class="btn btn-default" value="등록" style="width: 20%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"/>
-								<input type="button" class="btn btn-default" value="댓글" style="width: 20%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"/>
+								<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 75%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+								<i class="glyphicon glyphicon-pencil" style="width: 10%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"></i>
+								<i class="glyphicon glyphicon-comment" style="width: 10%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"></i>
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -123,9 +123,9 @@
 										<b class="glyphicon glyphicon-thumbs-up" onclick="good(this)" id="good${list.get(t).NUM }">${list.get(t).GOOD }</b>
 									</div>
 								</div>
-								<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 55%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
-								<input type="button" class="btn btn-default" value="등록" style="width: 20%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"/>
-								<input type="button" class="btn btn-default" value="댓글" style="width: 20%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"/>
+								<input type="text" placeholder="댓글" id="text${list.get(t).NUM }" hidden="hidden" style="width: 75%;  height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/>
+								<i class="glyphicon glyphicon-pencil" style="width: 10%; display: none" id="submit${list.get(t).NUM }" onclick="submit(this)"></i>
+								<i class="glyphicon glyphicon-comment" style="width: 10%; display: none" id="reply${list.get(t).NUM }" onclick="reply(this)"></i>
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -139,40 +139,40 @@
 </div>
 
 <div class="w3-modal" style="display: none" id="replyDiv">
-	<div class="w3-modal-content w3-animate-zoom" style="width: 70%; height: 70%">
+	<div class="w3-modal-content" style="width: 70%; height: 70%">
 		<header class="w3-container w3-teal"> 
-			<span onclick="document.getElementById('replyDiv').style.display='none'" class="w3-closebtn">&times;</span>
+<!-- 			<span onclick="document.getElementById('replyDiv').style.display='none'" class="w3-closebtn">&times;</span> -->
+			<span onclick="$('#replyDiv').fadeOut(500)" class="w3-closebtn">&times;</span>
 			<h3 align="center">Reply</h3>
 		</header>
 		<div class="w3-container w3-padding-32" style="height: 80%; overflow-y: auto" id="replyComment"></div>
 	</div>
 </div>
 
-<div class="w3-modal" style="display: none" id="upload">
-	<div class="w3-modal-content w3-animate-top" style="width: 20%; height: 20%" align="center" id="uploadDiv">
-		<span onclick="document.getElementById('replyDiv').style.display='none'" class="w3-closebtn">&times;</span>
+<div class="w3-modal" style="display: none" id="finishDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="finish">
+		<input type="button" class="btn btn-success" value="등록되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="failDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="fail">
+		<input type="button" class="btn btn-danger" value="실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
 	</div>
 </div>
 
 <script>
-	window.onload = function(){
-		if(${a==1}){
-			$("#uploadDiv").html($("#uploadDiv").html()+"<h3>업로드 성공</h3>");
-			$("#upload").show();
-		} else if(${a==0}){
-			$("#uploadDiv").html($("#uploadDiv").html()+"<h3>업로드 실패</h3>");
-			$("#upload").show();
-		}
-		window.close();
+	function endDiv(txt){
+		$("#"+txt+"Div").fadeIn(300).delay(1000).fadeOut(300);
 	}
-	
+
 	var start = 10;
 	$(window).scroll(function() {
 		if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 			$.ajax({
 				"method" : "get",
 				"url" : "/picture/pictureview/ajax/${id}",
-				"async" : false
+				"async" : true
 			}).done(function(txt){
 				var html = $("#gridDiv").html();
 				var addHtml = "";
@@ -190,8 +190,8 @@
 								addHtml += "<b class='glyphicon glyphicon-thumbs-up' onclick='good(this)' id='good"+txt[start+i].NUM+"'>"+txt[start+i].GOOD+"</b>";
 								addHtml += "</div></div>";
 								addHtml += "<input type='text' placeholder='댓글' id='text"+txt[start+i].NUM+"' hidden='hidden' style='width: 55%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px'/>";
-								addHtml += "<input type='button' class='btn btn-default' value='등록' style='width: 20%; display: none' id='submit"+txt[start+i].NUM+"' onclick='submit(this)'/>";
-								addHtml += "<input type='button' class='btn btn-default' value='댓글' style='width: 20%; display: none' id='reply"+txt[start+i].NUM+"' onclick='reply(this)'/>";
+								addHtml += "<i class='glyphicon glyphicon-pencil' style='width: 10%; display: none' id='submit"+txt[start+i].NUM+"' onclick='submit(this)'></i>";
+								addHtml += "<i class='glyphicon glyphicon-comment' style='width: 10%; display: none' id='reply"+txt[start+i].NUM+"' onclick='reply(this)'></i>";
 								addHtml += "</div>";
 							} else if(txt[start+i].ran>0.4){
 								addHtml += "<div class='grid-item' id='grid-item"+txt[start+i].NUM+"'><img data-original='/files/"+txt[start+i].UUID+"' style='width: 100%; height: 100%; border-radius: 15px' ";
@@ -204,8 +204,8 @@
 								addHtml += "<b class='glyphicon glyphicon-thumbs-up' onclick='good(this)' id='good"+txt[start+i].NUM+"'>"+txt[start+i].GOOD+"</b>";
 								addHtml += "</div></div>";
 								addHtml += "<input type='text' placeholder='댓글' id='text"+txt[start+i].NUM+"' hidden='hidden' style='width: 55%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px'/>";
-								addHtml += "<input type='button' class='btn btn-default' value='등록' style='width: 20%; display: none' id='submit"+txt[start+i].NUM+"' onclick='submit(this)'/>";
-								addHtml += "<input type='button' class='btn btn-default' value='댓글' style='width: 20%; display: none' id='reply"+txt[start+i].NUM+"' onclick='reply(this)'/>";
+								addHtml += "<i class='glyphicon glyphicon-pencil' style='width: 10%; display: none' id='submit"+txt[start+i].NUM+"' onclick='submit(this)'></i>";
+								addHtml += "<i class='glyphicon glyphicon-comment' style='width: 10%; display: none' id='reply"+txt[start+i].NUM+"' onclick='reply(this)'></i>";
 								addHtml += "</div>";
 							} else {
 								addHtml += "<div class='grid-item-height2' id='grid-item"+txt[start+i].NUM+"'><img data-original='/files/"+txt[start+i].UUID+"' style='width: 100%; height: 100%; border-radius: 15px' ";
@@ -218,8 +218,8 @@
 								addHtml += "<b class='glyphicon glyphicon-thumbs-up' onclick='good(this)' id='good"+txt[start+i].NUM+"'>"+txt[start+i].GOOD+"</b>";
 								addHtml += "</div></div>";
 								addHtml += "<input type='text' placeholder='댓글' id='text"+txt[start+i].NUM+"' hidden='hidden' style='width: 55%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px'/>";
-								addHtml += "<input type='button' class='btn btn-default' value='등록' style='width: 20%; display: none' id='submit"+txt[start+i].NUM+"' onclick='submit(this)'/>";
-								addHtml += "<input type='button' class='btn btn-default' value='댓글' style='width: 20%; display: none' id='reply"+txt[start+i].NUM+"' onclick='reply(this)'/>";
+								addHtml += "<i class='glyphicon glyphicon-pencil' style='width: 10%; display: none' id='submit"+txt[start+i].NUM+"' onclick='submit(this)'></i>";
+								addHtml += "<i class='glyphicon glyphicon-comment' style='width: 10%; display: none' id='reply"+txt[start+i].NUM+"' onclick='reply(this)'></i>";
 								addHtml += "</div>";
 							}
 						}
@@ -253,7 +253,11 @@
 			"async" : false
 		}).done(function(txt){
 			if(txt=="1"){
-				$("#item"+id).trigger("click");
+				$("#text"+id).val("");
+				endDiv("finish");
+			} else {
+				$("#text"+id).val("");
+				endDiv("fail");
 			}
 		});
 	}
@@ -269,7 +273,7 @@
 		}).done(function(txt){
 			$("#replyComment").html(txt);
 		});
-		$("#replyDiv").show();
+		$("#replyDiv").fadeIn(500);
 	}
 
 	function grid(element){

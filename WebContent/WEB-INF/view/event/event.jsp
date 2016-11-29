@@ -13,7 +13,7 @@
 	align="center">Event</h2>
 
 <div class="w3-row"
-	style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
+	 style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive">
 		<table class="table">
 			<thead align="center">

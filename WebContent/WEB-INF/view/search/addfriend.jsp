@@ -7,6 +7,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://masonry.desandro.com/masonry.pkgd.js"></script>
+<script src="/js/jquery.lazyload.js"></script>
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Raleway">
@@ -33,7 +36,27 @@
 	</div>
 </div>
 
+<div class="w3-modal" style="display: none" id="finishDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 30%; border-radius: 10px; margin-top: 30px" align="center" id="finish">
+		<input type="button" class="btn btn-success" value="친구신청이 완료되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="failDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 30%; border-radius: 10px; margin-top: 30px" align="center" id="fail">
+		<input type="button" class="btn btn-danger" value="친구신청에 실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
 <script>
+	function endDiv(txt){
+		$("#"+txt+"Div").fadeIn(300).delay(1000).fadeOut(300);
+	}
+	
+	function winClose(){
+		close();
+	}
+
 	$("#add").click(function(){
 		var id = $("#id").val();
 		var friend = $("#friend").val();
@@ -43,12 +66,13 @@
 			"async" : false
 		}).done(function(txt){
 			if(txt==true){
-				alert("친구신청이 완료되었습니다.");
-				window.close();
+				endDiv("finish");
+// 				alert("친구신청이 완료되었습니다.");
 			} else {
-				alert("친구신청에 실패하였습니다.");
-				window.close();
+				endDiv("fail");
+// 				alert("친구신청에 실패하였습니다.");
 			}
+			setTimeout(winClose, 1000);
 		});
 	});
 

@@ -36,9 +36,9 @@
 			"url" : "/navi/find?friend=" + $("#friend").val()
 		}).done(function(txt){
 			$("#rst").html(txt);
-			$("#friend").on('input', function() {
-				var con = $(this).val();
-			})
+// 			$("#friend").on('input', function() {
+// 				var con = $(this).val();
+// 			})
 		});
 		
 		var old = $(this).val();
