@@ -130,7 +130,7 @@
 	<div align="center">
 		<form action="/qna/list" method="post">
 			<input type="hidden" name="mode" value="${qnamode }"/> 
-			<label>검색 </label>
+			<label>검색&nbsp;</label>
 			<input type="search" name="search" style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"/> 
 				 <input type="submit" value="검색"  class="btn btn-default"/>
 		</form>

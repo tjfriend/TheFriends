@@ -50,7 +50,7 @@ public class ChargeController {
 	public ModelAndView chargeAll(@RequestParam(defaultValue="1") int p, HttpSession id){
 		ModelAndView ma = new ModelAndView("t:charge/chargeAll");
 		List li = charge.page(p, (String)id.getAttribute("id"));
-		int size = charge.total();
+		int size = charge.total((String)id.getAttribute("id"));
 		if(li.size()!=0){
 			ma.addObject("size",size);
 			ma.addObject("li",li);
