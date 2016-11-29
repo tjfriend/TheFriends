@@ -1,5 +1,7 @@
 package QnA.model;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +32,8 @@ public class qnaDelete {
 		sql.close();
 		return de;
 	}
+	
+	
+	
+	
 }

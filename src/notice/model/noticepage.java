@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,5 +96,12 @@ public class noticepage {
 			sql.close();
 			return psize;
 
+		}
+		public HashMap noticedetails(int num){
+			SqlSession sql = fac.openSession();
+			HashMap data = sql.selectOne("notice.noticedetails", num);
+			sql.close();
+			return data;
+			
 		}
 }

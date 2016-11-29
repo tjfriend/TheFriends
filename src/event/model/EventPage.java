@@ -96,4 +96,10 @@ public class EventPage {
 			return psize;
 
 		}
+		public HashMap eventdetails(int num){
+			SqlSession sql = fac.openSession();
+			HashMap data = sql.selectOne("event.eventdetails", num);
+			sql.close();
+			return data;
+		}
 }
