@@ -199,6 +199,7 @@
 		$("#initialCo").hide();
 		$("#initialCa").hide();
 		$("#initial").show();
+		$(".initialCheck").prop("checked", false);
 	});
 
 	$("#layout").change(function(){

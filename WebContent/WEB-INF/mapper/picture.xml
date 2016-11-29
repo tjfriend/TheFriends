@@ -18,8 +18,28 @@
 		<![CDATA[
 		select temp.*  from (select rownum rnum, p.* from
 		(select * from pictureboard where id=#{id} order by day desc) p) temp
-     	where temp.rnum>=#{start} and temp.rnum<=#{end}
 		]]>
+<!--      	where temp.rnum>=#{start} and temp.rnum<=#{end} -->
+	</select>
+	
+	<!-- 친구공개 페이지 -->
+	<select id="viewFriend" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		<![CDATA[
+		select temp.*  from (select rownum rnum, p.* from
+		(select * from pictureboard where (id=#{id} and open='all') or
+		(id=#{id} and open='friend') order by day desc) p) temp
+		]]>
+<!--      	where temp.rnum>=#{start} and temp.rnum<=#{end} -->
+	</select>
+	
+	<!-- 전체 페이지 -->
+	<select id="viewAll" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		<![CDATA[
+		select temp.*  from (select rownum rnum, p.* from
+		(select * from pictureboard where (id=#{id} and open='all') or
+		(id=#{id} and open='all') order by day desc) p) temp
+		]]>
+<!--      	where temp.rnum>=#{start} and temp.rnum<=#{end} -->
 	</select>
 	
 	<!-- 전체페이지 수 -->

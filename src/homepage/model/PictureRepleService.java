@@ -1,12 +1,11 @@
 package homepage.model;
 
-import java.util.HashMap;
-import java.util.List;
+import java.text.*;
+import java.util.*;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.session.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
 @Component
 public class PictureRepleService {
@@ -40,7 +39,14 @@ public class PictureRepleService {
 		map.put("num", num);
 		map.put("start", (p*10)-9);
 		map.put("end", p*10);
-		List li = ss.selectList("picture.replepage",map);
+		List<HashMap> li = ss.selectList("picture.replepage",map);
+		for(int i=0; i<li.size(); i++){
+			Date date = (Date)li.get(i).get("DAY");
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			String day = sdf.format(date);
+			li.get(i).put("DAY", day);
+			li.set(i, li.get(i));
+		}
 		return li;
 	}
 	
@@ -58,6 +64,8 @@ public class PictureRepleService {
 		map.put("replynum", replynum);
 		map.put("content", content);
 		int a = ss.update("picture.modify",map);
+		ss.commit();
+		ss.close();
 		return a;
 	}
 	
@@ -65,6 +73,8 @@ public class PictureRepleService {
 	public int delete(int replynum){
 		SqlSession ss = fac.openSession();
 		int a = ss.delete("picture.delete",replynum);
+		ss.commit();
+		ss.close();
 		return a;
 	}
 }

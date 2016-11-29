@@ -1,14 +1,14 @@
 package homepage.controller;
 
-import java.util.List;
+import java.util.*;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.*;
+import org.springframework.web.servlet.*;
 
 import homepage.model.*;
 
@@ -41,27 +41,45 @@ public class PictureController {
 	}
 	
 	// 사진 전체목록
+//	@RequestMapping("/pictureview/{id}")
+//	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a, 
+//			@RequestParam(name="p", defaultValue="1") int p, HttpSession session){
+//		String open;
+//		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureBoard3.jsp");
+//		if(pic.find((String)session.getAttribute("id"), id).size() != 0){
+//			ma.addObject("friend", true);
+//		}else{
+//			ma.addObject("friend", false);
+//		}
+//		List li = pic.view(id, p);
+//		int size = pic.total(id);
+//		String hometype = (String)hs.goHome(id).get("ADDRESS");
+//		if(li.size() != 0){
+//			ma.addObject("li",li);
+//		}else{
+//			ma.addObject("li","null");
+//		}
+//		ma.addObject("a",a);
+//		ma.addObject("size",size);
+//		return ma;
+//	}
+	
 	@RequestMapping("/pictureview/{id}")
 	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a, 
 			@RequestParam(name="p", defaultValue="1") int p, HttpSession session){
-		String open;
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureBoard.jsp");
-		if(pic.find((String)session.getAttribute("id"), id).size() != 0){
-			ma.addObject("friend", true);
-		}else{
-			ma.addObject("friend", false);
+		ModelAndView mav = new ModelAndView("/homepage/homePicture/pictureBoard3.jsp");
+		String loginId = (String)session.getAttribute("id");
+		List<HashMap> friend = pic.find(id, loginId);
+		List list;
+		if(id.equals(loginId)){
+			list = pic.view(id, p);
+		} else if(friend.size()!=0){
+			list = pic.viewFriend(id, p);
+		} else {
+			list = pic.viewAll(id, p);
 		}
-		List li = pic.view(id, p);
-		int size = pic.total(id);
-		String hometype = (String)hs.goHome(id).get("ADDRESS");
-		if(li.size() != 0){
-			ma.addObject("li",li);
-		}else{
-			ma.addObject("li","null");
-		}
-		ma.addObject("a",a);
-		ma.addObject("size",size);
-		return ma;
+		mav.addObject("list", list);
+		return mav;
 	}
 	
 	// 좋아요

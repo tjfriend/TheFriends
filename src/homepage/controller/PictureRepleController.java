@@ -45,12 +45,17 @@ public class PictureRepleController {
 	}
 	
 	// ´ñ±Û µî·Ï
+//	@RequestMapping("/reup")
+//	public ModelAndView repleup(int num, HttpSession session, String content){
+//		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureReple.jsp");
+//		int a = pic.reple(num, (String)session.getAttribute("id"), content);
+//		ma.addObject("a",a);
+//		return ma;
+//	}
 	@RequestMapping("/reup")
-	public ModelAndView repleup(int num, HttpSession session, String content){
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/pictureReple.jsp");
-		int a = pic.reple(num, (String)session.getAttribute("id"), content);
-		ma.addObject("a",a);
-		return ma;
+	@ResponseBody
+	public int repleup(int num, HttpSession session, String content){
+		return pic.reple(num, (String)session.getAttribute("id"), content);
 	}
 	
 	// ÀüÃ¼ ´ñ±Û
@@ -65,19 +70,29 @@ public class PictureRepleController {
 	}
 	
 	// ´ñ±Û ¼öÁ¤
+//	@RequestMapping("/modify")
+//	public ModelAndView modify(int replynum, String content){
+//		int a = pic.update(replynum, content);
+//		ModelAndView ma = new ModelAndView("/homepage/homePicture/view.jsp");
+//		return ma;
+//	}
 	@RequestMapping("/modify")
-	public ModelAndView modify(int replynum, String content){
-		int a = pic.update(replynum, content);
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/view.jsp");
-		return ma;
+	@ResponseBody
+	public int modify(int replynum, String content){
+		return pic.update(replynum, content);
 	}
 	
 	// ´ñ±Û »èÁ¦
+//	@RequestMapping("/delete")
+//	public ModelAndView delete(int replynum){
+//		ModelAndView ma = new ModelAndView("/homepage/homePicture/view.jsp");
+//		int a = pic.delete(replynum);
+//		return ma;
+//	}
 	@RequestMapping("/delete")
-	public ModelAndView delete(int replynum){
-		ModelAndView ma = new ModelAndView("/homepage/homePicture/view.jsp");
-		int a = pic.delete(replynum);
-		return ma;
+	@ResponseBody
+	public int delete(int replynum){
+		return pic.delete(replynum);
 	}
 	
 	

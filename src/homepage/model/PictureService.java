@@ -70,11 +70,33 @@ public class PictureService {
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap<>();
 		map.put("id", id);
-		map.put("start", (p*10)-9);
-		map.put("end", p*10);
+//		map.put("start", (p*10)-9);
+//		map.put("end", p*10);
 		List li = ss.selectList("picture.boardpage",map);
 		ss.close();
 		return li;
+	}
+	
+	// 친구공개
+	public List viewFriend(String id, int p){
+		SqlSession ss = fac.openSession();
+		HashMap map = new HashMap();
+		map.put("id", id);
+//		map.put("start", (p*10)-9);
+//		map.put("end", p*10);
+		List list = ss.selectList("picture.viewFriend", map);
+		return list;
+	}
+	
+	// 전체공개
+	public List viewAll(String id, int p){
+		SqlSession ss = fac.openSession();
+		HashMap map = new HashMap();
+		map.put("id", id);
+//		map.put("start", (p*10)-9);
+//		map.put("end", p*10);
+		List list = ss.selectList("picture.viewAll", map);
+		return list;
 	}
 	
 	// 전체페이지
@@ -88,6 +110,8 @@ public class PictureService {
 	public int good(int num){
 		SqlSession ss = fac.openSession();
 		int a = ss.update("picture.upgood",num);
+		ss.commit();
+		ss.close();
 		return a;
 	}
 	
@@ -95,6 +119,8 @@ public class PictureService {
 	public int count(int num){
 		SqlSession ss = fac.openSession();
 		int a = ss.update("picture.upcount",num);
+		ss.commit();
+		ss.close();
 		return a;
 	}
 	

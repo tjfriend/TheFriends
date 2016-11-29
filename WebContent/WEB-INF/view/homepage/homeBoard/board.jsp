@@ -9,8 +9,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<div class="w3-container" style="max-height: 700px; overflow-y: auto" align="center">
-	<h2 class="w3-padding-64 w3-text-grey" align="center">Board</h2>
+<div class="w3-container" style="max-height: 700px" align="center">
+	<h3 class="w3-padding-32 w3-text-grey" align="center">Board</h3>
 	<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 		<div class="table-responsive">
 			<table class="table">
