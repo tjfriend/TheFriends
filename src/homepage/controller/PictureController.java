@@ -82,6 +82,22 @@ public class PictureController {
 		return mav;
 	}
 	
+	@RequestMapping("/pictureview/ajax/{id}")
+	@ResponseBody
+	public List ajaxView(@PathVariable(name="id")String id, HttpSession session, @RequestParam(name="p", defaultValue="1") int p){
+		String loginId = (String)session.getAttribute("id");
+		List<HashMap> friend = pic.find(id, loginId);
+		List list;
+		if(id.equals(loginId)){
+			list = pic.view(id, p);
+		} else if(friend.size()!=0){
+			list = pic.viewFriend(id, p);
+		} else {
+			list = pic.viewAll(id, p);
+		}
+		return list;
+	}
+	
 	// ¡¡æ∆ø‰
 	@RequestMapping("/good")
 	@ResponseBody
