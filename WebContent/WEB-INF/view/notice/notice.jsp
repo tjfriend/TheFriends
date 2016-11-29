@@ -11,7 +11,8 @@
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">Notice</h2>
-<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
+<div class="w3-row"
+	style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive">
 		<table class="table">
 			<thead align="center">
@@ -27,7 +28,7 @@
 				<c:forEach var="notice" items="${noticedata }">
 					<tr>
 						<td align="center">${notice.NUM }</td>
-						<td>${notice.TITLE }</td>
+						<td><a href="/notice/details/${notice.NUM }">${notice.TITLE }</a></td>
 						<td>${notice.ID }</td>
 						<td>${notice.TIME }</td>
 						<td>${notice.INQUIRY }</td>
@@ -36,8 +37,8 @@
 			</tbody>
 		</table>
 		<div align="center">
-			<label id="page">
-				<c:forEach var="i" begin="1" end="${noticesize }">
+			<label id="page"> <c:forEach var="i" begin="1"
+					end="${noticesize }">
 					<c:choose>
 						<c:when test="${current == i }">
 							<b>${u }</b>
@@ -48,15 +49,26 @@
 					</c:choose>
 				</c:forEach>
 			</label>
-			<div align="right">
-				<input type="button" value="글작성" class="btn btn-default" onclick="noticeWrite()"/>
-			</div>
+			<c:if test="${nick.get(0).NICKNAME eq '관리자' }">
+				<div align="right">
+					<input type="button" value="글작성" class="btn btn-default"
+						onclick="noticeWrite()" />
+				</div>
+			</c:if>
+		</div>
+		<div align="center">
+			<form action="/notice/list" method="post">
+				<label>검색&nbsp;</label> <input type="search" name="search"
+					style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px" />
+				<input type="submit" value="검색" class="btn btn-default" />
+			</form>
 		</div>
 	</div>
 </div>
 
+
 <script>
-	function noticeWrite(){
+	function noticeWrite() {
 		location.href = "/notice/write";
 	}
 </script>

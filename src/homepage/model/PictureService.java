@@ -72,9 +72,12 @@ public class PictureService {
 		map.put("id", id);
 //		map.put("start", (p*10)-9);
 //		map.put("end", p*10);
-		List li = ss.selectList("picture.boardpage",map);
+		List<HashMap> list = ss.selectList("picture.boardpage",map);
+		for(int i=0; i<list.size(); i++){
+			list.get(i).put("ran", Math.random());
+		}
 		ss.close();
-		return li;
+		return list;
 	}
 	
 	// 친구공개
@@ -84,7 +87,10 @@ public class PictureService {
 		map.put("id", id);
 //		map.put("start", (p*10)-9);
 //		map.put("end", p*10);
-		List list = ss.selectList("picture.viewFriend", map);
+		List<HashMap> list = ss.selectList("picture.viewFriend", map);
+		for(int i=0; i<list.size(); i++){
+			list.get(i).put("ran", Math.random());
+		}
 		return list;
 	}
 	
@@ -95,7 +101,10 @@ public class PictureService {
 		map.put("id", id);
 //		map.put("start", (p*10)-9);
 //		map.put("end", p*10);
-		List list = ss.selectList("picture.viewAll", map);
+		List<HashMap> list = ss.selectList("picture.viewAll", map);
+		for(int i=0; i<list.size(); i++){
+			list.get(i).put("ran", Math.random());
+		}
 		return list;
 	}
 	

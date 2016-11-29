@@ -1,3 +1,4 @@
+
 package board.controller;
 
 import java.util.*;
@@ -31,39 +32,6 @@ public class BoardController {
 	@Autowired
 	DeleteService ds;
 
-	// @RequestMapping("/list")
-	// public ModelAndView boardList(@RequestParam(defaultValue="1") int p){
-	// List list = fb.GetRnage(p);
-	// int size = fb.size();
-	// ModelAndView mav = new ModelAndView();
-	// mav.addObject("freeboarddata",list);
-	// mav.addObject("freeboardsize",size);
-	// mav.setViewName("t:freeboard/board");
-	// return mav;
-	// }
-
-//	@RequestMapping("/list")
-//	public ModelAndView boardList(@RequestParam(defaultValue = "1") int p,
-//			@RequestParam(defaultValue = "") String mode) {
-//		ModelAndView mav = new ModelAndView();
-//
-//		if (mode.equals("")) {
-//			List list = fb.GetRnage(p);
-//			int size = fb.size();
-//			mav.addObject("freeboarddata", list);
-//			mav.addObject("freeboardsize", size);
-//			mav.setViewName("t:freeboard/board");
-//			return mav;
-//		} else {
-//			List list = fb.GetMode(p, mode);
-//			int size = fb.casize(mode);
-//			mav.addObject("freeboarddata", list);
-//			mav.addObject("freeboardsize", size);
-//			mav.addObject("freeboardmode", mode);
-//			mav.setViewName("t:freeboard/board");
-//			return mav;
-//		}
-//	}
 
 	@RequestMapping("/list")
 	public ModelAndView boardList(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "") String mode

@@ -79,9 +79,9 @@ public class ChargeService {
 	}
 
 	// 충전내역 전체 페이지
-	public int total(){
+	public int total(String id){
 		SqlSession ss = fac.openSession();
-		int a = ss.selectOne("charge.total");
+		int a = ss.selectOne("charge.total", id);
 		ss.close();
 		return a%10==0? a/10 : a/10+1;
 	}

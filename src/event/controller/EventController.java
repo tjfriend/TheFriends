@@ -42,12 +42,9 @@ public class EventController {
 		HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String id = (String)session.getAttribute("id");
-		System.out.println("컨트 id "+id);
 		if(id!=null){
 		List nick = ew.membernickname(id);
-		System.out.println(nick);
 		mav.addObject("nick",nick);
-		System.out.println("mav"+mav);
 		}
 		if(search.equals("")){
 		List lis = ep.eventlist(p);
@@ -70,10 +67,8 @@ public class EventController {
 	@RequestMapping("/make")
 	public ModelAndView eventMake(HttpSession session, String title, String content) {
 		String id = (String) session.getAttribute("id");
-		System.out.println("컨트 : " + id + "./" + title + "ll:" + content);
 		ModelAndView mav = new ModelAndView();
 		int wr = ew.Eventwrite(id, title, content);
-		System.out.println("컨 : " + wr);
 		mav.setViewName("redirect:/event/list");
 		return mav;
 	}

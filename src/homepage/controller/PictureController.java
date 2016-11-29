@@ -68,6 +68,9 @@ public class PictureController {
 	public ModelAndView view(@PathVariable(name="id")String id, @RequestParam(name="a", defaultValue="2")int a, 
 			@RequestParam(name="p", defaultValue="1") int p, HttpSession session){
 		ModelAndView mav = new ModelAndView("/homepage/homePicture/pictureBoard3.jsp");
+		if(a!=2){
+			mav.setViewName("/common.jsp");
+		}
 		String loginId = (String)session.getAttribute("id");
 		List<HashMap> friend = pic.find(id, loginId);
 		List list;
@@ -80,6 +83,22 @@ public class PictureController {
 		}
 		mav.addObject("list", list);
 		return mav;
+	}
+	
+	@RequestMapping("/pictureview/ajax/{id}")
+	@ResponseBody
+	public List ajaxView(@PathVariable(name="id")String id, HttpSession session, @RequestParam(name="p", defaultValue="1") int p){
+		String loginId = (String)session.getAttribute("id");
+		List<HashMap> friend = pic.find(id, loginId);
+		List list;
+		if(id.equals(loginId)){
+			list = pic.view(id, p);
+		} else if(friend.size()!=0){
+			list = pic.viewFriend(id, p);
+		} else {
+			list = pic.viewAll(id, p);
+		}
+		return list;
 	}
 	
 	// ¡¡æ∆ø‰

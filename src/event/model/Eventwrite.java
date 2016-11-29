@@ -96,9 +96,7 @@ public class Eventwrite {
 	// 관리자 찾기
 	public List membernickname(String id){
 		SqlSession sql = fac.openSession();
-		System.out.println("섭 : "+id);
 		List r = sql.selectList("event.member",id);
-		System.out.println("서비 "+r);
 		sql.close();
 		return r;
 	}

@@ -10,10 +10,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
-	align="center">Event1</h2>
-<c:forEach var="mem" items="${nick }">
-		<h4>123${mem.NICKNAME }</h4>
-	</c:forEach>
+	align="center">Event</h2>
 
 <div class="w3-row"
 	style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
@@ -54,19 +51,19 @@
 				</c:forEach>
 			</label>
 
-			
-				
+
+			<c:if test="${nick.get(0).NICKNAME eq '관리자' }">
 				<div align="right">
 					<input type="button" value="글작성" class="btn btn-default"
 						onclick="noticeWrite()" />
 				</div>
-				
-			
+			</c:if>
+
 		</div>
 	</div>
 	<div align="center">
 		<form action="/event/list" method="post">
-			<label>검색 :</label> <input type="search" name="search"
+			<label>검색&nbsp;</label> <input type="search" name="search"
 				style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px" />
 			<input type="submit" value="검색" class="btn btn-default" />
 		</form>

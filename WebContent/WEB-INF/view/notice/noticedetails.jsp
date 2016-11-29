@@ -10,18 +10,18 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
-	align="center">Event</h2>
+	align="center">Notice</h2>
 
 <div align="center">
 	<div class="w3-row"
 		style="padding-left: 30px; padding-right: 30px; padding-top: 40px; width: 70%">
 		<div align="right">
 			<input type="button" value="목록보기" class="btn btn-default"
-				onClick="self.location='/event/list';">
+				onClick="self.location='/notice/list';">
 			<c:choose>
-				<c:when test="${loginid == details.WRITER }">
+				<c:when test="${loginid == details.ID }">
 					<input type="button" value="수정" class="btn btn-default"
-						onclick="location.href='/event/eventupdate?num=${details.NUM}'" />
+						onclick="location.href='/notice/noticeupdate?num=${details.NUM}'" />
 					<input type="button" value="삭제" class="btn btn-default"
 						id="QnADelete${details.NUM }" onclick="QnADelete(this)">
 				</c:when>
@@ -42,9 +42,9 @@
 				<tr align="center">
 					<td>${details.NUM }</td>
 					<td>${details.TITLE }</td>
-					<td>${details.WRITER }</td>
+					<td>${details.ID }</td>
 					<%-- 	디자인고치기		<td width="5" align="right"><a href="/qna/qnaupdate?num=${details.NUM}">수정</a></td> --%>
-					<td>${details.DAY }</td>
+					<td>${details.TIME }</td>
 					<td>${details.INQUIRY }</td>
 				</tr>
 			</table>
@@ -68,7 +68,7 @@
 			<!--  	댓글 -->
 		 	<div>  
 				<table class="table">
-					<c:forEach var="ecmda" items="${eventcommentda }">
+					<c:forEach var="ecmda" items="${noticecommentda }">
 						<tr align="center">
 							<td width="15%">${ecmda.ID }</td>
 							<td width="50%">
@@ -96,13 +96,13 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<c:forEach var="p" begin="1" end="${eventcommentsi }">
+				<c:forEach var="p" begin="1" end="${noticecommentsi }">
 					<c:choose>
 						<c:when test="${current == p }">
 							<b>${u }</b>
 						</c:when>
 						<c:otherwise>
-							<a href="/event/details/${details.NUM }?p=${p }">${p }</a>
+							<a href="/notice/details/${details.NUM }?p=${p }">${p }</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -115,7 +115,7 @@
 					id = id.slice(id.indexOf('t')+1);
 					
 					var memo = $("#memo"+id).val();
-					location.href="/event/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo;
+					location.href="/notice/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo;
 				}
 				
 				function change(element) {
@@ -147,7 +147,7 @@
 				var num = id.substring(id.indexOf('e') + 5);
 				
 				if(confirm("이 게시글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/event/eventdelete?num="+num;
+					location.href="/notice/noticedelete?num="+num;
 				}else{
 					return;
 				}
@@ -160,7 +160,7 @@
 				var commentnum = id.substring(id.indexOf('t') + 7 );
 				
 				if(confirm("이 댓글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/event/commentdelete?num=${details.NUM}&commentnum="+commentnum;
+					location.href="/notice/commentdelete?num=${details.NUM}&commentnum="+commentnum;
 				}else{
 					return;
 				}
@@ -172,9 +172,9 @@
 			<!-- 로그인시 댓글등록창이 보이게 한다 -->
 			<div align="center">
 				<c:if test="${login != null }">
-					<form action="/event/eventcomment" method="post">
+					<form action="/notice/noticecomment" method="post">
 						<input type="hidden" name="num" value="${details.NUM }"> 
-						<input type="hidden" name="endpa" value="${eventcommentsi }"> 
+						<input type="hidden" name="endpa" value="${noticecommentsi }"> 
 						<input type="text" name="memo" style="width: 50%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px; resize: none;"/>
 						<input type="submit" value="등록" class="btn btn-default">
 					</form>
