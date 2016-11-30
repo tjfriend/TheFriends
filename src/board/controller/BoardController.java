@@ -1,16 +1,27 @@
 
 package board.controller;
 
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import board.model.*;
+import board.model.ContentService;
+import board.model.DeleteService;
+import board.model.freeboardPage;
+import board.model.freeboardwrite;
 
 @Controller
 @RequestMapping("/board")
@@ -95,7 +106,8 @@ public class BoardController {
 	}
 
 	@RequestMapping("/freeboarddetails")
-	public ModelAndView detailsboard(@RequestParam(defaultValue = "-1") int num, HttpSession session, HttpServletRequest req, HttpServletResponse resp) {
+	public ModelAndView detailsboard(@RequestParam(defaultValue = "-1") int num, HttpSession session, HttpServletRequest req, HttpServletResponse resp,
+										@RequestParam(defaultValue = "1") int p) {
 		String id = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		List list = cs.Content(num);
@@ -116,8 +128,24 @@ public class BoardController {
 			resp.addCookie(cc);
 		}
 		
+		HashMap map = new HashMap();
+		map.put("num", num);
+		List list2 = fb.Getcommentpage(p, num);
+		int sizecom = fb.commentsize(num);
+		
+		HashMap data = fb.freeboarddetails(num);
+		Date date = (Date) data.get("TIME");
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		String time = sdf.format(date);
+		data.put("TIME", time);
+		mav.addObject("loginid",id);
+		mav.addObject("details", data);
+		mav.addObject("freeboardcommentda", list2);
+		mav.addObject("freeboardcommentsi", sizecom);
+		
 		mav.addObject("freeboarddetailsdata", list);
 		mav.addObject("freeboarddetailsdata2", id);
+		
 		mav.setViewName("t:freeboard/freeboarddetails");
 		return mav; 
 		
@@ -159,6 +187,17 @@ public class BoardController {
 		mav.setViewName("redirect:/board/list");
 		return mav;
 
+	}
+	
+	// ´ñ±Û µî·Ï
+	@RequestMapping("/freeboardcomment")
+	public ModelAndView freeboardcomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p) {
+		String id = (String) session.getAttribute("id");
+		int r = fw.comment(num, id, memo);
+		ModelAndView mav = new ModelAndView();
+		int si = fb.commentsize(num);
+		mav.setViewName("redirect:/board/freeboarddetails?num=" + num + "&p="+si);
+		return mav;
 	}
 	
 
