@@ -37,17 +37,32 @@
 			</tbody>
 		</table>
 		<div align="center">
-			<label id="page"> <c:forEach var="i" begin="1"
-					end="${noticesize }">
-					<c:choose>
-						<c:when test="${current == i }">
-							<b>${u }</b>
-						</c:when>
-						<c:otherwise>
-							<a href="/notice/list?p=${i }">${i }</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
+			<label id="page"> <!-- 페이징 처리 --> <c:choose>
+					<c:when test="${noticebestsize >= 5 }">
+						<c:forEach var="i" begin="${noticesize-2}" end="${noticesize+2 }">
+							<c:choose>
+								<c:when test="${param.p == i }">
+									<a style="color: red;" href="/notice/list?p=${i }&search=${noticesearch }">${i }</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/notice/list?p=${i }&search=${noticesearch }">${i }</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="i" begin="1" end="${noticesize }">
+							<c:choose>
+								<c:when test="${param.p == i }">
+									<a style="color: red;" href="/notice/list?p=${i }&search=${noticesearch }">${i }</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/notice/list?p=${i }&search=${noticesearch }">${i }</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</label>
 			<c:if test="${nick.get(0).NICKNAME eq '관리자' }">
 				<div align="right">

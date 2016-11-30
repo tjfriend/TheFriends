@@ -42,11 +42,11 @@
 					<c:when test="${eventbestsize >= 5 }">
 						<c:forEach var="i" begin="${eventsize-2}" end="${eventsize+2 }">
 							<c:choose>
-								<c:when test="${current == i }">
-									<b>${u }</b>
+								<c:when test="${param.p == i }">
+									<a style="color: red;" href="/event/list?p=${i }&search=${eventsearch }">${i }</a>
 								</c:when>
 								<c:otherwise>
-									<a href="/event/list?p=${i }">${i }</a>
+								<a href="/event/list?p=${i }&search=${eventsearch }">${i }</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -54,18 +54,17 @@
 					<c:otherwise>
 						<c:forEach var="i" begin="1" end="${eventsize }">
 							<c:choose>
-								<c:when test="${current == i }">
-									<b>${u }</b>
+								<c:when test="${param.p == i }">
+									<a style="color: red;" href="/event/list?p=${i }&search=${eventsearch }">${i }</a>
 								</c:when>
 								<c:otherwise>
-									<a href="/event/list?p=${i }">${i }</a>
+									<a href="/event/list?p=${i }&search=${eventsearch }">${i }</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
 			</label>
-
 
 			<c:if test="${nick.get(0).NICKNAME eq '관리자' }">
 				<div align="right">

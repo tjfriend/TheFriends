@@ -105,7 +105,7 @@
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
 				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept"+i+"("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' id='refuce+'"+i+"/></tr>";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse"+i+"("+i+")'/></tr>";
 			}
 			$("#addBody").html(html);
 			html = "";
@@ -144,7 +144,7 @@
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
 				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept"+i+"("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' id='refuce+'"+i+"/></tr>";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse"+i+"("+i+")'/></tr>";
 			}
 			$("#addBody").html(html);
 		});
@@ -189,7 +189,7 @@
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
 				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept"+i+"("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' id='refuce+'"+i+"/></tr>";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse"+i+"("+i+")'/></tr>";
 			}
 			$("#addBody").html(html);
 		});
@@ -210,6 +210,26 @@
 		}).done(function(txt){
 			if(txt==true){
 				alert("수락되었습니다.");
+				location.href="/friends/${id }";
+			}
+		});
+	}
+	
+	function refuse0(txt){
+		var name = "";
+		for(var i=0; i<10; i++){
+			if(txt == i){
+				name = $("#"+i).html();
+				break;
+			}
+		}
+		$.ajax({
+			"method" : "get",
+			"url" : "/friends/refuse/"+name,
+			"async" : false
+		}).done(function(txt){
+			if(txt == true){
+				alert("거절되었습니다.");
 				location.href="/friends/${id }";
 			}
 		});
