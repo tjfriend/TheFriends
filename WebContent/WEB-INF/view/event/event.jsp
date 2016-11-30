@@ -13,7 +13,7 @@
 	align="center">Event</h2>
 
 <div class="w3-row"
-	 style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
+	style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive">
 		<table class="table">
 			<thead align="center">
@@ -38,16 +38,32 @@
 			</tbody>
 		</table>
 		<div align="center">
-			<label id="page"> <!-- 페이징 처리 --> <c:forEach var="i" begin="${eventsize-2}" end="${eventsize+2 }">
-					<c:choose>
-						<c:when test="${current == i }">
-							<b>${u }</b>
-						</c:when>
-						<c:otherwise>
-							<a href="/event/list?p=${i }">${i }</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
+			<label id="page"> <!-- 페이징 처리 --> <c:choose>
+					<c:when test="${eventbestsize >= 5 }">
+						<c:forEach var="i" begin="${eventsize-2}" end="${eventsize+2 }">
+							<c:choose>
+								<c:when test="${current == i }">
+									<b>${u }</b>
+								</c:when>
+								<c:otherwise>
+									<a href="/event/list?p=${i }">${i }</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="i" begin="1" end="${eventsize }">
+							<c:choose>
+								<c:when test="${current == i }">
+									<b>${u }</b>
+								</c:when>
+								<c:otherwise>
+									<a href="/event/list?p=${i }">${i }</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</label>
 
 

@@ -97,43 +97,45 @@
 
 	<fmt:parseNumber var="var3" value="${(qnasize-1)/5}" integerOnly="true" />
 	<div align="center">
-	<c:if test="${qnasize !=5 }">
-	
-	<input type="button" value="이전" onclick="javascript:backpage()">
-	</c:if>
+		<c:if test="${qnasize > 5 }">
+
+			<input type="button" value="이전" onclick="javascript:backpage()">
+		</c:if>
 		<c:forEach var="i" begin="${var3*5+1 }" end="${qnasize }">
 			<c:choose>
 				<c:when test="${i == qnasize }">
-					<a href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }&nbsp;</a>
+					<a
+						href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }&nbsp;</a>
 				</c:when>
 				<c:otherwise>
-					<a href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }&nbsp;</a>|
+					<a
+						href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }&nbsp;</a>|
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${qnabestsize != qnasize }">
-		<input type="button" value="다음" onclick="javascript:nextpage()" />
+			<input type="button" value="다음" onclick="javascript:nextpage()" />
 		</c:if>
 	</div>
 
-<c:if test="${qnabestsize == qnasize }">
-<fmt:parseNumber var="var3" value="${(qnasize-1)/5}" integerOnly="true" />
-<fmt:parseNumber var="qnasize" value="${(var3+1)*5}" integerOnly="true" />
-</c:if>
+
+
+	<c:if test="${qnabestsize == qnasize }">
+		<fmt:parseNumber var="var3" value="${(qnasize-1)/5}"
+			integerOnly="true" />
+		<fmt:parseNumber var="qnasize" value="${(var3+1)*5}"
+			integerOnly="true" />
+	</c:if>
 	<script>
 		function nextpage() {
-			paging = ${qnasize + 5};
-			p = ${qnasize + 1};
+			paging = ${qnasize + 5 };
+			p = ${qnasize + 1 };
 			location.href = "/qna/list?mode=${qnamode }&search=${qnasearch }&p="
 					+ p + "&paging=" + paging;
 		}
 		function backpage() {
-		
-		alert(${var3});
-         alert(${qnasize}); 
-         
-		paging  = ${qnasize-5};
-			p = paging-4;
+			paging = ${qnasize - 5 };
+			p = paging - 4;
 			location.href = "/qna/list?mode=${qnamode }&search=${qnasearch }&p="
 					+ p + "&paging=" + paging;
 		}

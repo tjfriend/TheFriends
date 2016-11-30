@@ -48,7 +48,6 @@ public class QnAcontroller {
 			, @RequestParam (defaultValue="") String search,@RequestParam(defaultValue ="5")int paging) {
 		ModelAndView mav = new ModelAndView();
 		
-			System.out.println("ÄÁ"+paging+"p´Â"+p);
 			List best = qp.qnabest();
 			
 			mav.addObject("qnabest",best);
