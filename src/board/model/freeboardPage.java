@@ -56,6 +56,36 @@ public class freeboardPage {
 		return li;
 	}
 		
+	// 댓글보기
+
+	public List Getcommentpage(int p, int num) {
+		int endpage = 10 * p;
+		int startpage = endpage - 9;
+		HashMap map = new HashMap();
+		map.put("start", startpage);
+		map.put("end", endpage);
+		map.put("freeboardnum", num);
+		SqlSession sql = fac.openSession();
+		List list = sql.selectList("freeboard.freeboardcommentlist", map);
+		sql.close();
+		return list;
+	}
+
+	public int commentsize(int num) { // 페이지 숫자
+		SqlSession sql = fac.openSession();
+		int size = sql.selectOne("freeboard.commentpagesize", num);
+		int psize = size % 10 == 0 ? size / 10 : size / 10 + 1;
+		sql.close();
+		return psize;
+	}
+	
+	public HashMap freeboarddetails(int num){
+		SqlSession sql = fac.openSession();
+		HashMap data = sql.selectOne("freeboard.freeboarddetails", num);
+		sql.close();
+		return data;
+		
+	}
 	
 	public int size(){ 	// 페이지 숫자
 		SqlSession sql = fac.openSession();

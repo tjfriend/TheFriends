@@ -111,5 +111,59 @@
 		select count(*) from freeboard where title like #{search } or
 		content like #{search }
 	</select>
+	
+		<!-- 댓글 xml -->
+
+	
+
+	<select id="freeboardcommentlist" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	<![CDATA[
+	select temp.* from	(
+		select rownum rnum, r.* from freeboardcomment r where r.freeboardNUM = #{freeboardnum}
+	) temp 
+   	where temp.rnum >=#{start} and temp.rnum <=#{end}  
+	]]>
+
+	</select>
+	
+		<select id="commentpagesize" resultType="java.lang.Integer">
+		select count(*) from
+		freeboardcomment where freeboardnum = #{num}
+	</select>
+
+	<select id="freeboardpagesize" resultType="java.lang.Integer">
+		select count(*) from
+		freeboardcomment where freeboardnum = #{num}
+	</select>
+	
+		<!-- 댓글 수정 -->
+
+	<update id="freeboardcommentupdate" parameterType="java.util.HashMap">
+		update
+		freeboardcomment
+		set memo = #{memo }, day=sysdate where freeboardnum =
+		#{commentnum}
+
+	</update>
+
+	<!-- 댓글 삭제 -->
+
+	<delete id="freeboardcommentdelete" parameterType="java.util.HashMap">
+		delete
+		freeboardcomment where
+		commentnum = #{commentnum }
+	</delete>
+	
+		<!-- 댓글등록 -->
+	<insert id="freeboardcomment" parameterType="java.util.HashMap">
+		insert into freeboardcomment
+		values
+		(#{num } , #{id }, #{memo },sysdate,FREEBOARD_COMMENT.NEXTVAL)
+	</insert>
+	
+	<select id="member" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from member where id = #{id }
+	</select>
 
 </mapper>
