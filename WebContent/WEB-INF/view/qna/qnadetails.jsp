@@ -71,7 +71,7 @@
 				<table class="table">
 					<c:forEach var="qnac" items="${qnacommentda }">
 						<tr align="center">
-							<td width="15%">${qnac.id }</td>
+							<td width="15%">${qnac.id }</td>                
 							<td width="50%">
 								<input type="text" id="changememo${qnac.commentnum }" class="btn btn-default"
 									disabled="disabled" style="width: 100%; border: 1px; resize: none;" value="${qnac.memo }"/>
@@ -80,7 +80,7 @@
 							</td>
 							<td width="15%">${qnac.day }</td>
 							<td width="20%">
-								<c:if test="${loginid == details.ID }">
+								<c:if test="${loginid == qnac.id }">
 									<input type="button" value="수정" id="change${qnac.commentnum }"
 										onclick="change(this)" class="btn btn-default"> 
 									<input type="button" value="완료" style="display: none;"
