@@ -55,4 +55,5 @@ public class RequestFriendsService {
 		}
 		return list;
 	}
+	
 }

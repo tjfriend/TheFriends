@@ -40,7 +40,7 @@
 	</form>
 	
 	<script>
-		document.getElementById("sel").addEventListener("change", function() {
+		document.getElementById("sel").addfreeboardListener("change", function() {
 			document.getElementById("ctg").submit();
 		});
 	</script>
@@ -70,16 +70,34 @@
 	</table>
 	
 	<div align="center">
-		<c:forEach var="i" begin="1" end="${freeboardsize }">
-			<c:choose>
-				<c:when test="${current == i }">
-					<b>${u }</b>
-				</c:when>
-				<c:otherwise>
-					<a href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }">${i }</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
+		<label id="page"> <!-- 페이징 처리 --> <c:choose>
+					<c:when test="${freeboardbestsize >= 5 }">
+						<c:forEach var="i" begin="${freeboardsize-2}" end="${freeboardsize+2 }">
+							<c:choose>
+								<c:when test="${param.p == i }">
+									<a style="color: red;" href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }&paging=${freeboardsize }">${i }</a>
+								</c:when>
+								<c:otherwise>
+								<a href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }&paging=${freeboardsize }">${i }</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="i" begin="1" end="${freeboardsize }">
+							<c:choose>
+								<c:when test="${param.p == i }">
+									<a style="color: red;" href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }&paging=${freeboardsize }">${i }</a>
+								</c:when>
+								<c:otherwise>
+									<a
+						href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }&paging=${freeboardsize }">${i }&nbsp;</a>|
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</label>
 	</div>
 
 	<div align="right">
