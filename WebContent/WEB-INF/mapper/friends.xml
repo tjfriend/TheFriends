@@ -41,7 +41,7 @@
 		select a.*, m.id from addfriends a, (select id from member where name=#{name}) m where a.id=#{id} and a.friends=m.id or a.id=m.id and a.friends=#{id}
 	</select>
 	<delete id="refuse" parameterType="java.util.HashMap">
-		delete from addfriends where id=#{id} and friends=(select id from member where name=#{name}) or id=(select id from member where name=#{name}) and friends=#{id}
+		delete from addfriends where id=(select id from member where name=#{name}) and friends=#{id}
 	</delete>
 	<insert id="acceptAdd" parameterType="java.util.HashMap">
 		insert into friends values(#{id}, (select id from member where name=#{name}), (select nickname from member where name=#{name}), 0)

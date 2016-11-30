@@ -20,6 +20,8 @@ public class FriendsController {
 	RequestFriendsService rfs;
 	@Autowired
 	AcceptService as;
+	@Autowired
+	RefuseService rs;
 	
 	@RequestMapping("/home/{id}")
 	@ResponseBody
@@ -53,5 +55,11 @@ public class FriendsController {
 	@ResponseBody
 	public boolean accept(@PathVariable(name="name")String name, HttpSession session){
 		return as.accept(name, session);
+	}
+	
+	@RequestMapping("/refuse/{name}")
+	@ResponseBody
+	public boolean refuse(HttpSession session, @PathVariable(name="name") String name){
+		return rs.refuse(session, name);
 	}
 }
