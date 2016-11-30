@@ -17,11 +17,7 @@
 
 <div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="w3-row">
-		<div align="left" class="w3-half">
-			　
-			<div id="audio"></div>
-		</div>
-		<div align="right" class="w3-half">
+		<div align="right">
 			<input type="button" value="음악올리기" class="btn btn-default" id="musicUp"/>
 		</div>
 	</div>
@@ -36,11 +32,15 @@
 			<c:forEach var="shop" items="${shopdata }">
 				<tr align="center">
 					<td align="center"><label>${shop.NUM }</label></td>
-					<td><label>${fn:split(shop.TITLE,'.')[0] }</label></td>
+					<td><label>${shop.TITLE }</label></td>
 					<td><label>${shop.MONEY }잣</label></td>
-					<td><input type="button" value="듣기" onclick="listen('${shop.TITLE}')" class="btn btn-default"/>
+					<td><input type="button" value="듣기" onclick="listen('${shop.TITLE}', '${shop.NUM }')" class="btn btn-default"/>
 					<input type="button" value="구매" id="buy${shop.TITLE }" onclick="javascript:openbuy('${shop.TITLE }', ${shop.MONEY })" class="btn btn-default"/>
 					<input type="button" value="선물" id="gift${shop.TITLE }" onclick="javascript:opengift('${shop.TITLE }', ${shop.MONEY })" class="btn btn-default"/></td>
+				</tr>
+				<tr align="center" style="display: none" id="audioTr${shop.NUM }">
+					<td id="audio${shop.NUM }" style="display: none" colspan="4"></td>
+				</tr>
 			</c:forEach>
 		</table>
 	</div>
@@ -136,8 +136,16 @@
 		window.open("/shop/write", "musicUp", "width=400px, height=500px");
 	})
 	
-	function listen(title) {
-		$("#audio").html("<audio controls='controls' autoplay='autoplay'><source src='/music/"+title+"'></audio>");
+	function listen(title, num) {
+		$("#audioTr"+num).show();
+		$("#audio"+num).show();
+		$("#audio"+num).html("<audio controls='contorls' autoplay='autoplay'><source src='/music/"+title+"'></audio>&nbsp;&nbsp;<i class='glyphicon glyphicon-remove' onclick='remove("+num+")'></i>");
+	}
+	
+	function remove(num){
+		$("#audioTr"+num).hide();
+		$("#audio"+num).hide();
+		$("#audio"+num).html("");
 	}
 	
 	function buy(){

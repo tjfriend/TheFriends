@@ -55,15 +55,23 @@ public class SettingService {
 	
 	public boolean musicDelete(String id, String music){
 		SqlSession ss = fac.openSession();
-		String[] ar = music.split(",");
+		String[] ar = music.split("...");
 		HashMap<String, String> map = new HashMap<>();
 		map.put("id", id);
 		int n = 0;
-		for(int i=0; i<ar.length; i++){
-			map.put("music", ar[i]);
+		if(ar.length>0){
+			for(int i=0; i<ar.length; i++){
+				map.put("music", ar[i]);
+				n += ss.delete("homepage.musicDelete", map);
+				ss.commit();
+			}
+		} else {
+			map.put("music", music.substring(0, music.lastIndexOf('.')-2));
 			n += ss.delete("homepage.musicDelete", map);
+			ss.commit();
 		}
-		if(n>=0){
+		ss.close();
+		if(n>0){
 			return true;
 		} else {
 			return false;
@@ -95,24 +103,26 @@ public class SettingService {
 	
 	public boolean initial(String id, String board, String picture, String visitors){
 		SqlSession ss = fac.openSession();
-		HashMap<String, String> map = new HashMap<>();
-		map.put("id", id);
+		int b = 0;
+		int p = 0;
+		int v = 0;
 		if(board!=null){
-			map.put("board", board);
-			ss.delete("homepage.initialB", map);
+			b = ss.delete("homepage.initialB", id);
 			ss.commit();
 		}
 		if(picture!=null){
-			map.put("picture", picture);
-			ss.delete("homepage.initialP", map);
+			p = ss.delete("homepage.initialP", id);
 			ss.commit();
 		}
 		if(visitors!=null){
-			map.put("visitors", board);
-			ss.delete("homepage.initialV", map);
+			v = ss.delete("homepage.initialV", id);
 			ss.commit();
 		}
 		ss.close();
-		return true;
+		if(b+p+v==0){
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

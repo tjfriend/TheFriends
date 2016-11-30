@@ -14,7 +14,7 @@
 						<img src="/profile/${uuid }" style="width: 100%" class="w3-circle">
 					</c:when>
 					<c:otherwise>
-						<img src="/image/nature1.jpg" style="width: 100%" class="w3-circle">
+						<img src="/image/profile.jpg" style="width: 100%" class="w3-circle">
 					</c:otherwise>
 				</c:choose>
 			</p>
@@ -30,9 +30,7 @@
 	<!-- Music -->
 	<div class="w3-card-2 w3-round">
 		<audio controls="controls" autoplay="autoplay" id="player" style="width: 100%"
-			onended="nextPlay()">
-			<source src="/music/alert.wav">
-		</audio>
+			onended="nextPlay()"></audio>
 	</div>
 	<br>
 
@@ -57,20 +55,6 @@
 </div>
 
 <script>
-	window.onload = function(){
-		$.ajax({
-			"method" : "get",
-			"url" : "/friends/home/${id}",
-			"async" : false
-		}).done(function(txt){
-			var html = "";
-			for(var i=0; i<txt.length; i++){
-				html += "<tr><td><label onclick='friends(this)'>"+txt[i].NAME+"</label></td><td>"+txt[i].NICKNAME+"</td></tr>";
-			}
-			$("#homeBody").html(html);
-		});
-	};
-	
 	function friends(element) {
 		var name = element.innerHTML;
 		$.ajax({

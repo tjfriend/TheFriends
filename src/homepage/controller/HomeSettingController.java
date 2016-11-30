@@ -36,7 +36,7 @@ public class HomeSettingController {
 	
 	@RequestMapping("/musicDelete/{id}")
 	@ResponseBody
-	public boolean musicDelete(@PathVariable(name="id")String id, @RequestParam(name="music")String music){
+	public boolean musicDelete(@PathVariable(name="id")String id, @RequestParam(name="music", required=false)String music){
 		return set.musicDelete(id, music);
 	}
 	

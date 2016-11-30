@@ -81,7 +81,7 @@ public class ShopController {
 	@ResponseBody
 	public boolean shopbuy(String title, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		if(sb.musicbuy(id, title)>0){
+		if(sb.musicbuy(id, title, session)>0){
 			return true;
 		} else {
 			return false;
@@ -112,7 +112,7 @@ public class ShopController {
 	@ResponseBody
 	public boolean shopgiftend(HttpSession session, String title, String money, String gtake) {
 		String id = (String) session.getAttribute("id");
-		return sg.friendgift(id, title, money, gtake);
+		return sg.friendgift(id, title, money, gtake, session);
 	}
 	
 //	@RequestMapping("/shopgiftend")

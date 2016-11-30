@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.*;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class Shopbuy {
 	@Autowired
 	SqlSessionFactory fac;
 
-	public int musicbuy(String id, String title) {
+	public int musicbuy(String id, String title, HttpSession session) {
 		HashMap<String, Object> map  = new HashMap<>();
 		map.put("id", id);
 		map.put("title", title);
@@ -36,6 +38,7 @@ public class Shopbuy {
 					sql.insert("shopbuy.musicbuy", map);
 					sql.commit();
 					sql.close();
+					session.setAttribute("point", mypoint-musicmoney);
 					return 1;
 				}else {
 					sql.rollback();

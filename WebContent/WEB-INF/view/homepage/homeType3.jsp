@@ -49,6 +49,8 @@ html, body, h1, h2, h3, h4, h5 {
 	</div>
 
 <script>
+	var music;
+	var i = 0;
 	window.onload = function(){
 		if(${profile!=null}){
 			if(${profile==true}){
@@ -58,6 +60,27 @@ html, body, h1, h2, h3, h4, h5 {
 			}
 			setTimeout(function(){location.href="/homepage/${id}"}, 1600);
 		}
+		
+		$.ajax({
+			"method" : "get",
+			"url" : "/homepage/music/${id}",
+			"async" : false
+		}).done(function(txt){
+			music = txt;
+			nextPlay();
+		});
+		
+		$.ajax({
+			"method" : "get",
+			"url" : "/friends/home/${id}",
+			"async" : false
+		}).done(function(txt){
+			var html = "";
+			for(var i=0; i<txt.length; i++){
+				html += "<tr><td><label onclick='friends(this)'>"+txt[i].NAME+"</label></td><td>"+txt[i].NICKNAME+"</td></tr>";
+			}
+			$("#homeBody").html(html);
+		});
 	};
 
 	// Accordion
@@ -83,17 +106,6 @@ html, body, h1, h2, h3, h4, h5 {
 	    }
 	}
 	
-	var music;
-	window.onload = function(){
-		$.ajax({
-			"method" : "get",
-			"url" : "/homepage/music/${id}",
-			"async" : false
-		}).done(function(txt){
-			music = txt;
-		});
-	};
-	var i = 0;
 	function nextPlay(){		// ajax로 db에서 해당 아이디로 저장된 음악들 가져와서 순차재생
 		if(music.length>0){
 			document.getElementById('player').src = "/music/"+music[i].TITLE; 

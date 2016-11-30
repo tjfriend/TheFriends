@@ -38,6 +38,8 @@ public class HomepageService {
 	
 	public List music(String id){
 		SqlSession ss = fac.openSession();
-		return ss.selectList("homepage.music", id);
+		List<HashMap> list = ss.selectList("homepage.music", id);
+		ss.close();
+		return list;
 	}
 }
