@@ -135,9 +135,21 @@
 	</div>
 </div>
 
+<div class="w3-modal" style="display: none" id="profileDiv" align="center">
+	<div class="w3-modal-content" style="width: 200px; height: 150px; border-radius: 10px" align="center">
+		<form action="/settings/profile" method="post" enctype="multipart/form-data">
+			<label style="width: 100px; margin-top: 30px"><font size="3">사진 선택</font></label><br/>
+			<input type="file" name="profile" style="width: 200px"/><br/>
+			<input type="submit" class="btn btn-default" value="변경"/>
+			<input type="button" class="btn btn-default" value="취소" onclick="$('#profileDiv').fadeOut(300)"/>
+		</form>
+	</div>
+</div>
+
 <script>
 	function picChoose(){
-		window.open("/picture/up/${id}", "picup", "width: 5px, height: 5px");
+// 		window.open("/picture/up/${id}", "picup", "width: 5px, height: 5px");
+		$("#profileDiv").fadeIn(300);
 	}
 
 	$("#musicAll").change(function(){

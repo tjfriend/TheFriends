@@ -36,8 +36,32 @@ h1 {
 		<tile:insertAttribute name="article"/>
 		<!-- End Page Content -->
 	</div>
+	
+	<div class="w3-modal" style="display: none" id="profileDiv">
+		<div class="w3-modal-content" style="width: 180px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="profile">
+			<input type="button" class="btn btn-success" value="변경되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+		</div>
+	</div>
+	
+	<div class="w3-modal" style="display: none" id="profileFailDiv">
+		<div class="w3-modal-content" style="width: 180px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="profileFail">
+			<input type="button" class="btn btn-danger" value="변경에 실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+		</div>
+	</div>
 
 <script>
+	window.onload = function(){
+		if(${profile!=null}){
+			if(${profile==true}){
+				$("#profileDiv").fadeIn(300).delay(1000).fadeOut(300);
+			} else {
+				$("#profileFailDiv").fadeIn(300).delay(1000).fadeOut(300);
+			}
+			setTimeout(function(){location.href="/homepage/${id}"}, 1600);
+			
+		}
+	};
+	
 	function nextPlay(){		// ajax로 db에서 해당 아이디로 저장된 음악들 가져와서 순차재생
 		document.getElementById('player').src = "/music/mozart.mp3"; 
 		var media = document.getElementById('player');

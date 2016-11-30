@@ -21,17 +21,8 @@
 
 <div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 20px" align="center">
 	<form action="/picture/upload/${id }" method="post" enctype="multipart/form-data">
-		<label style="width: 30%"><font size="3">공개설정 :</font></label><br/>
-		<input type="radio" name="open" value="all">&nbsp;<label>전체공개</label>&nbsp;
-		<input type="radio" name="open" value="friend">&nbsp;<label>친구공개</label>&nbsp;
-		<input type="radio" name="open" value="none">&nbsp;<label>비공개</label><br/>
-		<label for="title" style="width: 30%"><font size="3">TITLE</font></label>
-		<input type="text" id="title" name="title"
-				class="form-control" style="width: 25%" placeholder="Title" required="required"/><br/>
-		<label for="content" style="width: 30%"><font size="3">CONTENT</font></label><br/>
-		<textarea rows="3" cols="10" style="width: 50%; resize: none;" placeholder="CONTENT"  required="required" name="content"></textarea><br/><br/>
 		<label style="width: 30%"><font size="3">사진등록 :</font></label><br/>
-		<input type="file" name="picture"/><br/>
+		<input type="file" name="profile"/><br/>
 		<input type="submit" class="btn btn-default" value="올리기" />
 		<input type="button" class="btn btn-default" value="취소" onclick="javascript:window.close()"/>
 	</form>

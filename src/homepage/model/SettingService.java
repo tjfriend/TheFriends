@@ -1,17 +1,21 @@
 package homepage.model;
 
+import java.io.*;
 import java.util.*;
 
-import java.util.*;
+import javax.servlet.*;
 
 import org.apache.ibatis.session.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.web.multipart.*;
 
 @Component
 public class SettingService {
 	@Autowired
 	SqlSessionFactory fac;
+	@Autowired
+	ServletContext application;
 	
 	public boolean layout(String id, String homeType){
 		SqlSession ss = fac.openSession();
@@ -62,6 +66,29 @@ public class SettingService {
 		if(n>=0){
 			return true;
 		} else {
+			return false;
+		}
+	}
+	
+	public boolean profile(String id, MultipartFile file){
+		SqlSession ss = fac.openSession();
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		String uuid = UUID.randomUUID().toString().substring(0, 16);
+		map.put("uuid", uuid);
+		map.put("name", file.getOriginalFilename());
+		try{
+			ss.insert("homepage.profile", map);
+			ss.commit();
+			ss.close();
+			String dir = application.getRealPath("/profile");
+			File f = new File(dir, uuid);
+			file.transferTo(f);
+			return true;
+		} catch(Exception e){
+			ss.rollback();
+			ss.close();
+			e.printStackTrace();
 			return false;
 		}
 	}

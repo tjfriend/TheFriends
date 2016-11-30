@@ -35,4 +35,7 @@
 	<delete id="musicDelete" parameterType="java.util.HashMap">
 		delete from shopbuy where id=#{id} and title=#{music}
 	</delete>
+	<insert id="profile" parameterType="java.util.HashMap">
+		insert into profile values(#{id}, #{name}, #{uuid}, sysdate)
+	</insert>
 </mapper>
