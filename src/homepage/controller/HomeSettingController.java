@@ -50,4 +50,11 @@ public class HomeSettingController {
 		mav.addObject("profile", b);
 		return mav;
 	}
+	
+	@RequestMapping("/initial/{id}")
+	@ResponseBody
+	public boolean initial(@RequestParam(name="board", required=false)String board, @RequestParam(name="picture", required=false)String picture, 
+									@RequestParam(name="visitors", required=false)String visitors, @PathVariable(name="id")String id){
+		return set.initial(id, board, picture, visitors);
+	}
 }

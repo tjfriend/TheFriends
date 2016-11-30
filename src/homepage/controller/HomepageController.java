@@ -7,6 +7,7 @@ import javax.servlet.http.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
 
 import homepage.model.*;
 
@@ -34,10 +35,13 @@ public class HomepageController {
 	}
 	
 	@RequestMapping("/{id}")
-	public String homeType(@PathVariable(name="id")String id){
+	public ModelAndView homeType(@PathVariable(name="id")String id){
+		ModelAndView mav = new ModelAndView();
 		HashMap map = hs.goHome(id);
 		String page = "t:"+map.get("ADDRESS");
-		return page;
+		mav.setViewName(page);
+		mav.addObject("uuid", hs.uuid(id));
+		return mav;
 	}
 	
 	@RequestMapping("/home/{id}")
@@ -69,5 +73,11 @@ public class HomepageController {
 	public String setting(@PathVariable(name="id")String id){
 		String homeType = (String)(hs.goHome(id).get("ADDRESS"));
 		return "redirect:/settings/"+id;
+	}
+	
+	@RequestMapping("/music/{id}")
+	@ResponseBody
+	public List<HashMap> music(@PathVariable(name="id")String id){
+		return hs.music(id);
 	}
 }

@@ -9,7 +9,14 @@
 		<div class="w3-container">
 			<h4 class="w3-center">My Profile</h4>
 			<p class="w3-center">
-				<img src="/image/nature1.jpg" class="w3-circle" style="width: 100%" alt="Avatar">
+				<c:choose>
+					<c:when test="${uuid!=null }">
+						<img src="/profile/${uuid }" style="width: 100%" class="w3-circle">
+					</c:when>
+					<c:otherwise>
+						<img src="/image/nature1.jpg" style="width: 100%" class="w3-circle">
+					</c:otherwise>
+				</c:choose>
 			</p>
 			<hr>
 			<p>

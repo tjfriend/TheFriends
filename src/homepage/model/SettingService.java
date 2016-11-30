@@ -92,4 +92,27 @@ public class SettingService {
 			return false;
 		}
 	}
+	
+	public boolean initial(String id, String board, String picture, String visitors){
+		SqlSession ss = fac.openSession();
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		if(board!=null){
+			map.put("board", board);
+			ss.delete("homepage.initialB", map);
+			ss.commit();
+		}
+		if(picture!=null){
+			map.put("picture", picture);
+			ss.delete("homepage.initialP", map);
+			ss.commit();
+		}
+		if(visitors!=null){
+			map.put("visitors", board);
+			ss.delete("homepage.initialV", map);
+			ss.commit();
+		}
+		ss.close();
+		return true;
+	}
 }

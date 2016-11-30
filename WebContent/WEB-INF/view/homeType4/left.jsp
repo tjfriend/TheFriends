@@ -6,7 +6,14 @@
 <div class="w3-col">
 	<!-- About Card -->
 	<div class="w3-card-2 w3-margin w3-margin-top">
-		<img src="/image/nature1.jpg" style="width: 100%">
+		<c:choose>
+			<c:when test="${uuid!=null }">
+				<img src="/profile/${uuid }" style="width: 100%">
+			</c:when>
+			<c:otherwise>
+				<img src="/image/nature1.jpg" style="width: 100%">
+			</c:otherwise>
+		</c:choose>
 		<div class="w3-container w3-white" style="padding-top: 15px">
 			<h4>
 				<b>${id }</b>

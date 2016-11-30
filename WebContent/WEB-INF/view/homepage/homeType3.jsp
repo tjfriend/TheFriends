@@ -83,11 +83,29 @@ html, body, h1, h2, h3, h4, h5 {
 	    }
 	}
 	
+	var music;
+	window.onload = function(){
+		$.ajax({
+			"method" : "get",
+			"url" : "/homepage/music/${id}",
+			"async" : false
+		}).done(function(txt){
+			music = txt;
+		});
+	};
+	var i = 0;
 	function nextPlay(){		// ajax로 db에서 해당 아이디로 저장된 음악들 가져와서 순차재생
-		document.getElementById('player').src = "/music/mozart.mp3"; 
-		var media = document.getElementById('player');
-		media.currentTime = 0;
-		media.play();
+		if(music.length>0){
+			document.getElementById('player').src = "/music/"+music[i].TITLE; 
+			var media = document.getElementById('player');
+			media.currentTime = 0;
+			media.play();
+			if(i!=music.length-1){
+				i = i+1;
+			} else {
+				i = 0;
+			}
+		}
 	}
 </script>
 

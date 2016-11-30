@@ -38,4 +38,7 @@
 	<insert id="profile" parameterType="java.util.HashMap">
 		insert into profile values(#{id}, #{name}, #{uuid}, sysdate)
 	</insert>
+	<select id="profileView" resultType="java.util.HashMap">
+		select * from profile where id=#{id} order by pdate desc
+	</select>
 </mapper>

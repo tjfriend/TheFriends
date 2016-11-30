@@ -18,10 +18,10 @@
 		<div class="w3-rest" style="padding-left: 20px; padding-right: 20px">
 			<input type="button" class="btn btn-default" value="사진 선택" onclick="picChoose()"/>
 		</div>
-	</div>
+	</div><hr style="border-color: black"/>
 	<div class="w3-row">
 		<div class="w3-col" style="width: 250px">
-			<label>디자인</label>&nbsp;&nbsp;
+			<label>디자인</label><br/>
 			<select style="height: 25px; border: 1px solid #ccc; border-radius: 5px" id="layout">
 				<option>기본</option>
 				<option>사진</option>
@@ -148,7 +148,6 @@
 
 <script>
 	function picChoose(){
-// 		window.open("/picture/up/${id}", "picup", "width: 5px, height: 5px");
 		$("#profileDiv").fadeIn(300);
 	}
 
@@ -213,9 +212,22 @@
 	});
 	
 	$("#initialCo").click(function(){
+		var board = $("#board").prop("checked");
+		var picture = $("#picture").prop("checked");
+		var visitors = $("#visitors").prop("checked");
+		var url = "/settings/initial/${id}?mode=";
+		if(board){
+			url += "board";
+		}
+		if(picture){
+			url += "";
+		}
+		if(visitors){
+			url += "";
+		}
 		$.ajax({
 			"method" : "get",
-			"url" : "",
+			"url" : url,
 			"async" : false
 		}).done(function(txt){
 			alert(txt);
