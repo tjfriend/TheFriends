@@ -44,15 +44,20 @@ public class EventController {
 		if (search.equals("")) {
 			List lis = ep.eventlist(p);
 			int size = ep.size();
-
-			if (p - 2 < 1) {
-				size = 3;
-			} else if (p + 2 > size) {
-				size = size - 2;
-			} else {
-				size = p;
+			if (size >= 5) {
+				if (p - 2 < 1) {
+					size = 3;
+				} else if (p + 2 > size) {
+					size = size - 2;
+				} else {
+					size = p;
+				}
+			}else{
+				size = size;
 			}
-
+			int bestsize = ep.size();
+			mav.addObject("eventbestsize",bestsize);
+			System.out.println("ÄÁÆ®:"+bestsize);
 			mav.addObject("eventdata", lis);
 			mav.addObject("eventsize", size);
 			mav.setViewName("t:event/event");
