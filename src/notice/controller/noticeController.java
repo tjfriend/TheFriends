@@ -38,6 +38,19 @@ public class noticeController {
 		if(search.equals("")){
 		List lis = np.noticelist(p);
 		int size = np.size();
+		if (size >= 5) {
+			if (p - 2 < 1) {
+				size = 3;
+			} else if (p + 2 > size) {
+				size = size - 2;
+			} else {
+				size = p;
+			}
+		} else {
+			size = size;
+		}
+		int bestsize = np.size();
+		mav.addObject("noticebestsize", bestsize);
 		mav.addObject("noticedata", lis);
 		mav.addObject("noticesize", size);
 		mav.setViewName("t:notice/notice");
@@ -45,6 +58,21 @@ public class noticeController {
 		}else{
 			List lis = np.searchqna(search,p);
 			int size = np.searchqnasize(search);
+			System.out.println("컨트 : "+size);
+			if (size >= 5) {
+				if (p - 2 < 1) {
+					size = 3;
+				} else if (p + 2 > size) {
+					size = size - 2;
+				} else {
+					size = p;
+				}
+			} else {
+				size = size;
+			}
+			System.out.println("컨트 132 : "+size);
+			int bestsize = np.size();
+			mav.addObject("noticebestsize", bestsize);
 			mav.addObject("noticedata", lis);
 			mav.addObject("noticesize", size);
 			mav.addObject("noticesearch", search);
