@@ -13,6 +13,14 @@
 	<h3 class="w3-padding-32 w3-text-grey" align="center">Setting</h3>
 	<div class="w3-row">
 		<div class="w3-col" style="width: 250px">
+			<label>프로필</label>
+		</div>
+		<div class="w3-rest" style="padding-left: 20px; padding-right: 20px">
+			<input type="button" class="btn btn-default" value="사진 선택" onclick="picChoose()"/>
+		</div>
+	</div>
+	<div class="w3-row">
+		<div class="w3-col" style="width: 250px">
 			<label>디자인</label>&nbsp;&nbsp;
 			<select style="height: 25px; border: 1px solid #ccc; border-radius: 5px" id="layout">
 				<option>기본</option>
@@ -128,6 +136,10 @@
 </div>
 
 <script>
+	function picChoose(){
+		window.open("/picture/up/${id}", "picup", "width: 5px, height: 5px");
+	}
+
 	$("#musicAll").change(function(){
 		$(".musicCheck").prop("checked", $("#musicAll").prop("checked"));
 	});

@@ -24,7 +24,7 @@
 	<hr>
 
 	<!-- Labels / tags -->
-	<div class="w3-card-2 w3-margin" style="height: 150px">
+	<div class="w3-card-2 w3-margin" style="height: 160px">
 		<h3 align="center"><b>Friends</b></h3>
 		<table class="table" style="overflow-y: auto;">
 			<thead align="center">

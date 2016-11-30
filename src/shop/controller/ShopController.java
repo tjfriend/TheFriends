@@ -89,29 +89,44 @@ public class ShopController {
 	}
 	
 	@RequestMapping("/shopgift")
-	public ModelAndView shopgift(HttpSession session, String title, String money) {
+	@ResponseBody
+	public List shopgift(HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/shop/shopgift.jsp");
 		List<HashMap> list = sg.friend(id);
-		mav.addObject("list", list);
-		mav.addObject("title", title);
-		mav.addObject("money", money);
-		return mav;
+		return list;
 	}
 	
+//	@RequestMapping("/shopgift")
+//	public ModelAndView shopgift(HttpSession session, String title, String money) {
+//		String id = (String) session.getAttribute("id");
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("/shop/shopgift.jsp");
+//		List<HashMap> list = sg.friend(id);
+//		mav.addObject("list", list);
+//		mav.addObject("title", title);
+//		mav.addObject("money", money);
+//		return mav;
+//	}
+	
 	@RequestMapping("/shopgiftend")
-	public ModelAndView shopgiftend(HttpSession session, String title, String money, String gtake) {
+	@ResponseBody
+	public boolean shopgiftend(HttpSession session, String title, String money, String gtake) {
 		String id = (String) session.getAttribute("id");
-		ModelAndView mav = new ModelAndView();
-		List<HashMap> list = sg.friend(id);
-		mav.addObject("title", title);
-		mav.addObject("money", money);
-		mav.addObject("gtake", gtake);
-		int m = sg.friendgift(id, title, money, gtake);
-		mav.addObject("m", m);
-		mav.setViewName("/shop/shopgiftend.jsp");
-		return mav;
+		return sg.friendgift(id, title, money, gtake);
 	}
+	
+//	@RequestMapping("/shopgiftend")
+//	public ModelAndView shopgiftend(HttpSession session, String title, String money, String gtake) {
+//		String id = (String) session.getAttribute("id");
+//		ModelAndView mav = new ModelAndView();
+//		List<HashMap> list = sg.friend(id);
+//		mav.addObject("title", title);
+//		mav.addObject("money", money);
+//		mav.addObject("gtake", gtake);
+//		int m = sg.friendgift(id, title, money, gtake);
+//		mav.addObject("m", m);
+//		mav.setViewName("/shop/shopgiftend.jsp");
+//		return mav;
+//	}
 
 }

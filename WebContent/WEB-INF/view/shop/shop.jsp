@@ -38,9 +38,9 @@
 					<td align="center"><label>${shop.NUM }</label></td>
 					<td><label>${fn:split(shop.TITLE,'.')[0] }</label></td>
 					<td><label>${shop.MONEY }잣</label></td>
-					<td><input type="button" value="듣기" onclick="listen('${shop.TITLE}')"/>
-					<input type="button" value="구매" id="buy${shop.TITLE }" onclick="javascript:openbuy('${shop.TITLE }', ${shop.MONEY })" />
-					<input type="button" value="선물" id="buy${shop.TITLE }" onclick="javascript:opengift('${shop.TITLE }', ${shop.MONEY })"/></td>
+					<td><input type="button" value="듣기" onclick="listen('${shop.TITLE}')" class="btn btn-default"/>
+					<input type="button" value="구매" id="buy${shop.TITLE }" onclick="javascript:openbuy('${shop.TITLE }', ${shop.MONEY })" class="btn btn-default"/>
+					<input type="button" value="선물" id="gift${shop.TITLE }" onclick="javascript:opengift('${shop.TITLE }', ${shop.MONEY })" class="btn btn-default"/></td>
 			</c:forEach>
 		</table>
 	</div>
@@ -56,34 +56,76 @@
 </div>
 
 <div class="w3-modal" style="display: none" id="buyDiv">
-	<div class="w3-modal-content" style="width: 15%; height: 13%; border-radius: 10px; margin-top: 100px" align="center" id="buy">
+	<div class="w3-modal-content" style="width: 250px; height: 130px; border-radius: 10px; margin-top: 100px" align="center" id="buy">
+		<label><font color='blue' id="money"></font>잣으로 <font color='red' id="title"></font>를(을)<br/>구매하시겠습니까?</label><br/><br/>
+		<input type='button' class='btn btn-default' value='구매' style='width: 60px; height: 40px; border-radius: 10px' id="purchase"/>&nbsp;&nbsp;
+		<input type='button' class='btn btn-default' value='취소' style='width: 60px; height: 40px; border-radius: 10px' onclick="fadeOutDiv('buy')"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="giftDiv">
+	<div class="w3-modal-content" style="width: 250px; height: 170px; border-radius: 10px; margin-top: 100px" align="center" id="gift">
+		<label><font color='blue' id="gmoney"></font>잣으로 <font color='red' id="gtitle"></font>를(을)<br/>선물하시겠습니까?</label><br/><br/>
+		<div>
+			<select id="friend" style="width: 25%; height: 25px; border: 1px solid #ccc; border-radius: 5px"></select>
+		</div><br/>
+		<input type='button' class='btn btn-default' value='선물' style='width: 60px; height: 40px; border-radius: 10px' id="present"/>&nbsp;&nbsp;
+		<input type='button' class='btn btn-default' value='취소' style='width: 60px; height: 40px; border-radius: 10px' onclick="fadeOutDiv('gift')"/>
 	</div>
 </div>
 
 <div class="w3-modal" style="display: none" id="buyEndDiv">
-	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="buyEnd">
-		<label></label>
+	<div class="w3-modal-content" style="width: 250px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="buyEnd">
 		<input type="button" class="btn btn-success" value="구매하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
 	</div>
 </div>
 
 <div class="w3-modal" style="display: none" id="buyFailDiv">
-	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="buyFail">
-		<label></label>
+	<div class="w3-modal-content" style="width: 250px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="buyFail">
 		<input type="button" class="btn btn-danger" value="구매에 실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
 	</div>
 </div>
 
+<div class="w3-modal" style="display: none" id="giftEndDiv">
+	<div class="w3-modal-content" style="width: 250px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="giftEnd">
+		<input type="button" class="btn btn-success" value="선물하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="giftFailDiv">
+	<div class="w3-modal-content" style="width: 250px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="giftFail">
+		<input type="button" class="btn btn-danger" value="선물에 실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
 <script>
+	$("#present").click(gift);
+	$("#purchase").click(buy);
+	function giftDiv(title, money){
+		$.ajax({
+			"method" : "get",
+			"url" : "/shop/shopgift",
+			"async" : false
+		}).done(function(txt){
+			var html = "";
+			for(var i=0; i<txt.length; i++){
+				html += "<option>"+txt[i].FRIEND+"</option>";
+			}
+			$("#friend").html(html);
+		});
+		$("#giftDiv").fadeIn(300);
+		$("#gmoney").html(money);
+		$("#gtitle").html(title);
+	}
+	
 	function buyDiv(title, money){
 		$("#buyDiv").fadeIn(300);
-		var html = "<label><font color='blue'>"+money+"</font>잣으로 <font color='red'>"+title+"</font>를(을)<br/>구매하시겠습니까?</label><br/><br/>";
-		html += "<input type='button' class='btn btn-default' value='구입' style='width: 20%; height: 30%; border-radius: 10px' onclick='buy("+title+")'/>&nbsp;&nbsp;"
-		html += "<input type='button' class='btn btn-default' value='취소' style='width: 20%; heigth: 30%; border-radius: 10px' onclick='fadeOutDiv()'/>";
-		$("#buy").html(html);
+		$("#money").html(money);
+		$("#title").html(title);
 	}
-	function fadeOutDiv(){
-		$("#buyDiv").fadeOut(300);
+	
+	function fadeOutDiv(div){
+		$("#"+div+"Div").fadeOut(300);
 	}
 	
 	function endDiv(txt){
@@ -98,10 +140,8 @@
 		$("#audio").html("<audio controls='controls' autoplay='autoplay'><source src='/music/"+title+"'></audio>");
 	}
 	
-	LeftPosition = (screen.width - 400) / 2;
-	TopPosition = (screen.height - 300) / 2;
-	
-	function buy(title){
+	function buy(){
+		var title = $("#title").html();
 		$.ajax({
 			"method" : "get",
 			"url" : "/shop/shopbuy?title="+title,
@@ -109,10 +149,26 @@
 		}).done(function(txt){
 			if(txt==true){
 				endDiv("buyEnd");
-	// 			alert("구매성공");
 			} else {
 				endDiv("buyFail");
-	// 			alert("구매실패");
+			}
+		});
+	}
+
+	function gift(){
+		var title = $("#gtitle").html();
+		var money = $("#gmoney").html();
+		var gtake = $("#friend").val();
+		console.log("gift!!" +$(this));
+		$.ajax({
+			"method" : "get",
+			"url" : "/shop/shopgiftend?title="+title+"&money="+money+"&gtake="+gtake,
+			"async" : false
+		}).done(function(txt){
+			if(txt==true){
+				endDiv("giftEnd");
+			} else {
+				endDiv("giftFail");
 			}
 		});
 	}
@@ -121,12 +177,7 @@
 		buyDiv(title, money);
 	}
 	
-	LeftPosition = (screen.width - 400) / 2;
-	TopPosition = (screen.height - 300) / 2;
-	
 	function opengift(title, money) {
-		window.open("/shop/shopgift?title="+title+"&money="+money, "buy",
-				"width=400, height=150,left=" + LeftPosition
-						+ ",top=" + TopPosition);
+		giftDiv(title, money);
 	}
 </script>
