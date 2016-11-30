@@ -48,14 +48,14 @@ public class QnAcontroller {
 			, @RequestParam (defaultValue="") String search,@RequestParam(defaultValue ="5")int paging) {
 		ModelAndView mav = new ModelAndView();
 		
-			List best = qp.qnabest();
-			
-			mav.addObject("qnabest",best);
 			
 		if (mode.equals("")) {
 			if(search.equals("")){
 				List lis = qp.GetRnage(p);
 				int size = qp.size();
+				List best = qp.qnabest();
+				
+				mav.addObject("qnabest",best);
 				if(size>paging){
 				size = paging;
 				}
