@@ -77,20 +77,7 @@ public class HomeBoardController {
 			mav.addObject("homeboardsearch",search);
 		}
 		String homeType = (String) hs.goHome(id).get("ADDRESS");
-		switch (homeType) {
-		case "homeType1":
-			mav.setViewName("t:homepage1/homeBoard/board");
-			break;
-		case "homeType2":
-			mav.setViewName("t:homepage2/homeBoard/board");
-			break;
-		case "homeType3":
-			mav.setViewName("t:homepage3/homeBoard/board");
-			break;
-		case "homeType4":
-			mav.setViewName("t:homepage4/homeBoard/board");
-			break;
-		}
+		mav.setViewName("/homepage/homeBoard/board.jsp");
 		mav.addObject("loginid", loginid);
 
 		return mav;
