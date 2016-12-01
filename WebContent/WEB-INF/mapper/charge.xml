@@ -4,52 +4,66 @@
 <mapper namespace="charge">
 	<!-- 충전하기 + -->
 	<update id="chargeUp" parameterType="java.util.HashMap">
-		update member set point=point+#{point} where id=#{id} 
-	</update>	
+		update member set
+		point=point+#{point} where id=#{id}
+	</update>
 	<insert id="charge" parameterType="java.util.HashMap">
-		insert into charge values(charge_seq.nextval, #{id}, null, #{point}, sysdate)
+		insert into charge
+		values(charge_seq.nextval, #{id}, null, #{point}, sysdate)
 	</insert>
-	
+
 	<!-- 결제로 선물 -->
 	<insert id="chgift" parameterType="java.util.HashMap">
-		insert into charge values(charge_seq.nextval, #{id}, #{take}, #{point}, sysdate)
+		insert into charge
+		values(charge_seq.nextval, #{id}, #{take}, #{point}, sysdate)
 	</insert>
-	
+
 	<!-- 선물하기 -/+ -->
 	<update id="gift1" parameterType="java.util.HashMap">
-		update member set point=point-#{point} where id=#{id}
+		update member set
+		point=point-#{point} where id=#{id}
 	</update>
 	<update id="gift2" parameterType="java.util.HashMap">
-		update member set point=point+#{point} where id=#{takeid}
+		update member set
+		point=point+#{point} where id=#{takeid}
 	</update>
 	<insert id="gift3" parameterType="java.util.HashMap">
-		insert into charge values(charge_seq.nextval, #{takeid}, #{id}, #{point}, sysdate)
+		insert into charge
+		values(charge_seq.nextval, #{takeid}, #{id}, #{point}, sysdate)
 	</insert>
 	<insert id="gift4" parameterType="java.util.HashMap">
-		insert into chargeuse values(chargeuse_seq.nextval, #{id}, #{takeid}, #{point}, sysdate)
+		insert into chargeuse
+		values(chargeuse_seq.nextval, #{id}, #{takeid}, #{point}, sysdate)
 	</insert>
 
 	<!-- 사용내역 -->
 	<select id="chargeuse" resultType="java.util.HashMap">
-		select * from chargeuse where id=#{id} order by usedate desc
+		select * from chargeuse where
+		id=#{id} order by usedate desc
 	</select>
-	
+
 	<!-- 충전내역 -->
 	<select id="chargeAll" resultType="java.util.HashMap">
-		select * from charge where id=#{id} order by chargedate desc
+		select * from charge where
+		id=#{id} order by chargedate desc
 	</select>
-	
+
 	<!-- 충전내역 페이지 -->
 	<select id="page" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
-			select temp.* from (select rownum rnum, r.* from charge r where id = #{id} order by chargedate desc) temp 
-			where temp.rnum >= #{start} and temp.rnum <= #{end} 
+   	 select * from
+       (select rownum rnum, temp.* from	(
+		  select * from charge where id=#{id} order by num desc
+	  ) temp ) temp2
+   	where temp2.rnum >=#{start} and temp2.rnum <=#{end} 
+		
 		]]>
 	</select>
 
 	<!-- 충전내역 전체 페이지 -->
 	<select id="total" resultType="java.lang.Integer">
-		select count(*) from charge where id=#{id}
+		select count(*) from charge where
+		id=#{id}
 	</select>
 
 	<!-- 사용내역 페이지 -->
@@ -59,7 +73,7 @@
 			where temp.rnum >= #{start} and temp.rnum <= #{end} 
 		]]>
 	</select>
-	
+
 	<!-- 사용내역 전체 페이지 -->
 	<select id="total2" resultType="java.lang.Integer">
 		select count(*) from chargeuse

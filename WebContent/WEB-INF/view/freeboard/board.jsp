@@ -73,7 +73,7 @@
 					<td align="center"><label>${freeboard.NUM }</label></td>
 					<td align="center"><label>${freeboard.CATEGORY }</label></td>
 					<td><label><a
-							href="/board/freeboarddetails?num=${freeboard.NUM }">${freeboard.TITLE }</a></label></td>
+							href="/board/freeboarddetails/${freeboard.NUM }">${freeboard.TITLE }</a></label></td>
 					<td><label>${freeboard.ID }</label></td>
 					<td><label>${freeboard.TIME }</label></td>
 					<td><label>${freeboard.INQUIRY }</label></td>
@@ -116,11 +116,29 @@
 		</label>
 	</div>
 
+
 	<div align="right">
+	<c:choose>
+			<c:when test="${login == null }">
+				<input type="button" value="질문하기" onclick="javascript:openLogin()"
+					class="btn btn-default">
+				<script>
+					LeftPosition = (screen.width - 400) / 2;
+					TopPosition = (screen.height - 300) / 2;
+
+					function openLogin() {
+						alert("로그인이 필요한 서비스입니다 로그인을 해주세요.");
+					}
+				</script>
+			</c:when>
+			<c:otherwise>
 		<form action="/board/write" method="post">
 			<input type="submit" value="글작성" class="btn btn-default" />
 		</form>
+		</c:otherwise>
+		</c:choose>
 	</div>
+
 
 	<div align="center">
 		<form action="/board/list" method="post">

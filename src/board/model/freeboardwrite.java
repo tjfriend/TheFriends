@@ -65,4 +65,14 @@ public class freeboardwrite {
 			return -1;
 		}
 	}
+	
+	public int CommentAdjust(String memo,int commentnum){
+		HashMap map = new HashMap();
+			map.put("commentnum", commentnum);
+			map.put("memo", memo);
+		SqlSession sql = fac.openSession();
+		int li = sql.update("freeboard.freeboardcommentupdate",map);
+		sql.close();
+		return li;
+	}
 }

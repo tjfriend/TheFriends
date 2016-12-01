@@ -47,7 +47,7 @@ public class QnAcontroller {
 		ModelAndView mav = new ModelAndView();
 		List best = qp.qnabest();
 		mav.addObject("qnabest",best);
-
+			
 		if (mode.equals("")) {
 			if (search.equals("")) {
 				List lis = qp.GetRnage(p);
@@ -65,7 +65,6 @@ public class QnAcontroller {
 					size = size;
 				}
 				int bestsize = qp.size();
-				mav.addObject("qnabestsize", bestsize);
 				mav.addObject("qnabestsize", bestsize);
 				mav.addObject("qnadata", lis);
 				mav.addObject("qnasize", size);
@@ -241,7 +240,7 @@ public class QnAcontroller {
 		int r = qw.Adjust(num, content, category, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("qnaadjust", r);
-		mav.setViewName("redirect:/qna/list");
+		mav.setViewName("redirect:/qna/details"+num);
 		return mav;
 	}
 
@@ -264,7 +263,7 @@ public class QnAcontroller {
 		return mav;
 	}
 
-	// ´ñ±Û ¼öÁ¤
+	// ´ñ±Û ¼öÁ¤              
 	@RequestMapping("/commentupdate")
 	public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
 			@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,

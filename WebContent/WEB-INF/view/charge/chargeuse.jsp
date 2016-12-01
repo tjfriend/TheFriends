@@ -41,10 +41,33 @@
 		</div>
 	</div>
 </div>
+
 <div align="center">
-	<label id="page">
-		<c:forEach var="i" begin="1" end="${size }">
-			<a href="/charge/use?p=${i }">${i }</a>
-		</c:forEach>
+	<label id="page"> <c:choose>
+			<c:when test="${bestsize >= 5 }">
+				<c:forEach var="i" begin="${size-2}" end="${size+2 }">
+					<c:choose>
+						<c:when test="${param.p == i }">
+							<a style="color: red;" href="/charge/use?p=${i }">${i }</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/charge/use?p=${i }">${i }</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="i" begin="1" end="${size }">
+					<c:choose>
+						<c:when test="${param.p == i }">
+							<a style="color: red;" href="/charge/use?p=${i }">${i }</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/charge/use?p=${i }">${i }</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</label>
 </div>

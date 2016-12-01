@@ -133,6 +133,18 @@
 				});
 			}
 			
+			function nextpage() {
+				paging = ${homepagecommentsi + 5 };
+				p = ${homepagecommentsi + 1 };
+							
+				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
+			}
+			function backpage() {
+				paging = ${homepagecommentsi - 5 };
+				p = paging - 4;
+				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
+			}
+			
 			$("#adjust").click(function(){
 				window.open("/homeBoard/homeBoardupdate?num=${details.NUM}", "picup", "width= 500px, height= 500px, left= 300, top= 100, resizable=no");
 			});
