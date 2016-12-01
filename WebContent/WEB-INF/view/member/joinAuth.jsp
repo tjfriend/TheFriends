@@ -270,28 +270,10 @@
 		if(authPass.val()=="${ranKey}"){
 			$("#hidden").prop("value", "1");
 			endDiv("emailCom");
-// 			$("#scheckRst").prop("color", "green");
-// 			$("#checkRst").text("인증되었습니다.");
 			$("#emailSend").prop("hidden", "hidden");
 		} else {
 			endDiv("numChk");
-// 			$("#checkRst").prop("color", "red");
-// 			$("#checkRst").text("인증번호를 확인해주세요.");
 		}
-// 		$.ajax({
-// 			"method" : "get",
-// 			"url" : "/member/authCheck/"+id.val()+"/"+authPass.val(),
-// 			"async" : false
-// 		}).done(function(txt){
-// 			if(txt==true){
-// 				$("#checkRst").prop("color", "green");
-// 				$("#checkRst").text("인증되었습니다.");
-// 				$("#emailSend").prop("hidden", "hidden");
-// 			} else {
-// 				$("#checkRst").prop("color", "red");
-// 				$("#checkRst").text("인증번호를 확인해주세요.");
-// 			}
-// 		});
 	});
 	
 	$("#authCheck_s").click(function(){
@@ -300,28 +282,10 @@
 		if(authPass.val()=="${ranKey}"){
 			$("#hidden").prop("value", "1");
 			endDiv("emailCom");
-// 			$("#checkRst_s").prop("color", "green");
-// 			$("#checkRst_s").text("인증되었습니다.");
 			$("#emailSend_s").prop("hidden", "hidden");
 		} else {
 			endDiv("numChk");
-// 			$("#checkRst_s").prop("color", "red");
-// 			$("#checkRst_s").text("인증번호를 확인해주세요.");
 		}
-// 		$.ajax({
-// 			"method" : "get",
-// 			"url" : "/member/authCheck/"+id.val()+"/"+authPass.val(),
-// 			"async" : false
-// 		}).done(function(txt){
-// 			if(txt==true){
-// 				$("#checkRst_s").prop("color", "green");
-// 				$("#checkRst_s").text("인증되었습니다.");
-// 				$("#emailSend_s").prop("hidden", "hidden");
-// 			} else {
-// 				$("#checkRst_s").prop("color", "red");
-// 				$("#checkRst_s").text("인증번호를 확인해주세요.");
-// 			}
-// 		});
 	});
 	
 	$("#join_id").keyup(function(){

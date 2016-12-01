@@ -59,6 +59,7 @@ public class EventController {
 			mav.addObject("eventbestsize", bestsize);
 			mav.addObject("eventdata", lis);
 			mav.addObject("eventsize", size);
+			mav.addObject("setlist", p);
 			mav.setViewName("t:event/event");
 			return mav;
 		} else {
@@ -102,12 +103,13 @@ public class EventController {
 	// 상세보기
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
-			HttpServletRequest req, HttpServletResponse resp, HttpSession session,
+			HttpServletRequest req, HttpServletResponse resp, HttpSession session,  @RequestParam(defaultValue = "1") int pn,
 			@RequestParam(defaultValue = "5") int paging) {
 		String id = (String) session.getAttribute("id");
-
+		
 		Cookie[] ar = req.getCookies();
 		int n = 0;
+		
 		for (Cookie c : ar) {
 			if (c.getName().equals("qna#" + num)) {
 				n = 1;
@@ -140,7 +142,7 @@ public class EventController {
 			sizecom = paging;
 		}
 		mav.addObject("eventbestsizecom", bestsizecom);
-
+		mav.addObject("setlist", pn);
 		mav.addObject("p",p);
 		mav.addObject("loginid", id);
 		mav.addObject("details", data);
