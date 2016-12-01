@@ -53,6 +53,7 @@ public class noticeController {
 		mav.addObject("noticebestsize", bestsize);
 		mav.addObject("noticedata", lis);
 		mav.addObject("noticesize", size);
+		mav.addObject("setlist", p);
 		mav.setViewName("t:notice/notice");
 		return mav;
 		}else{
@@ -100,7 +101,7 @@ public class noticeController {
 
 	// 상세보기
 	@RequestMapping("/details/{num}")
-	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
+	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "1") int pn,
 			HttpServletRequest req, HttpServletResponse resp,HttpSession session,@RequestParam(defaultValue ="5")int paging) {
 		String id = (String) session.getAttribute("id");
 
@@ -139,7 +140,7 @@ public class noticeController {
 			sizecom = paging;
 			}
 		mav.addObject("noticebestsizecom",bestsizecom);
-		
+		mav.addObject("setlist", pn);
 		
 		mav.addObject("p",p);
 		mav.addObject("loginid",id);

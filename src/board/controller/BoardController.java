@@ -62,6 +62,7 @@ public class BoardController {
 				mav.addObject("freeboardbestsize", bestsize);
 				mav.addObject("freeboarddata", list);
 				mav.addObject("freeboardsize", size);
+				mav.addObject("freeboardsetlist", p);
 				mav.setViewName("t:freeboard/board");
 				return mav;
 			} else {
@@ -157,11 +158,11 @@ public class BoardController {
 
 	@RequestMapping("/freeboarddetails/{num}")
 	public ModelAndView detailsboard(@PathVariable(name="num") int num, HttpSession session, HttpServletRequest req, HttpServletResponse resp,
-			@RequestParam(defaultValue ="5")int paging	,@RequestParam(defaultValue = "1") int p) {
+			@RequestParam(defaultValue ="5")int paging	,@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "1") int pn) {
 		String id = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		List list = cs.Content(num);
-
+		mav.addObject("freeboardsetlist", pn);
 		Cookie[] ar = req.getCookies();
 		int n = 0;
 		for (Cookie c : ar) {
@@ -260,7 +261,6 @@ public class BoardController {
 		public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
 				@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,
 				@RequestParam(defaultValue = "1")int p,@RequestParam(defaultValue = "5")int paging) {
-			System.out.println("ÄÁÆ® : "+memo +"//"+commentnum);
 			int r = fw.CommentAdjust(memo, commentnum);
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("redirect:/board/freeboarddetails/" + num+"?p="+p+"&paging="+paging);

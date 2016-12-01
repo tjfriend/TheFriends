@@ -19,7 +19,7 @@
 		style="padding-left: 30px; padding-right: 30px; padding-top: 40px; width: 70%">
 		<div align="right">
 			<input type="button" value="목록보기" class="btn btn-default"
-				onclick="self.location='/board/list';">
+				onclick="self.location='/board/list?p=${freeboardsetlist}';">
 				<c:choose>
 					<c:when test="${freeboarddetailsdata2 == freeboarddetailsdata.ID }">
 						<input type="button" value="수정" class="btn btn-default"

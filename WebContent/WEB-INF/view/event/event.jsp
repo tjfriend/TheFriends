@@ -29,7 +29,7 @@
 				<c:forEach var="event" items="${eventdata }">
 					<tr>
 						<td><label>${event.NUM }</label></td>
-						<td><label><a href="/event/details/${event.NUM }">${event.TITLE }</a></label></td>
+						<td><label><a href="/event/details/${event.NUM }?pn=${setlist}">${event.TITLE }</a></label></td>
 						<td><label>${event.WRITER }</label></td>
 						<td><label>${event.DAY	 }</label></td>
 						<td><label>${event.INQUIRY }</label></td>
