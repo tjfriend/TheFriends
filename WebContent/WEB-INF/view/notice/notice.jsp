@@ -28,7 +28,7 @@
 				<c:forEach var="notice" items="${noticedata }">
 					<tr>
 						<td align="center"><label>${notice.NUM }</label></td>
-						<td><label><a href="/notice/details/${notice.NUM }">${notice.TITLE }</a></label></td>
+						<td><label><a href="/notice/details/${notice.NUM }?pn=${setlist}">${notice.TITLE }</a></label></td>
 						<td><label>${notice.ID }</label></td>
 						<td><label>${notice.TIME }</label></td>
 						<td><label>${notice.INQUIRY }</label></td>

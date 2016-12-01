@@ -168,7 +168,8 @@ public class QnAcontroller {
 
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
-			HttpSession session, HttpServletRequest req, HttpServletResponse resp,@RequestParam(defaultValue ="5")int paging) {
+			HttpSession session, HttpServletRequest req, HttpServletResponse resp,@RequestParam(defaultValue ="5")int paging
+			,@RequestParam(defaultValue = "1") int pn) {
 		String id = (String) session.getAttribute("id");
 
 		Cookie[] ar = req.getCookies();
@@ -206,6 +207,7 @@ public class QnAcontroller {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("pn",pn);
 		mav.addObject("p",p);
 		mav.addObject("loginid", id);
 		mav.addObject("details", data);
@@ -219,49 +221,50 @@ public class QnAcontroller {
 
 	@RequestMapping("/qnacomment")
 	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p
-			,@RequestParam(defaultValue ="5")int paging) {
+			,@RequestParam(defaultValue ="5")int paging,@RequestParam(defaultValue = "1") int pn) {
 		String id = (String) session.getAttribute("id");
 		int r = qw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = qp.commentsize(num);
-		mav.setViewName("redirect:/qna/details/" + num + "?p=" + si+"&paging="+paging);
+		mav.setViewName("redirect:/qna/details/" + num + "?p=" + si+"&paging="+paging+"&pn="+pn);
 		return mav;
 	}
 
 	@RequestMapping("/qnaupdate")
-	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num) {
+	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num,@RequestParam(defaultValue = "1") int pn) {
 		ModelAndView mav = new ModelAndView();
 		List list = qw.num(num);
 		mav.addObject("list", list);
+		mav.addObject("pn", pn);
 		mav.setViewName("t:qna/adjust");
 		return mav;
 	}
 
 	@RequestMapping("/qnaadjust")
-	public ModelAndView qnaAdjust(String category, int num, String title, String content, HttpSession session) {
+	public ModelAndView qnaAdjust(String category, int num, String title, String content, HttpSession session,@RequestParam(defaultValue = "1") int pn) {
 		int r = qw.Adjust(num, content, category, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("qnaadjust", r);
-		mav.setViewName("redirect:/qna/details"+num);
+		mav.setViewName("redirect:/qna/details/"+num+"?pn="+pn);
 		return mav;
 	}
 
 	@RequestMapping("/qnadelete")
-	public ModelAndView qnaDelete(int num) {
+	public ModelAndView qnaDelete(int num,@RequestParam(defaultValue = "1") int pn) {
 		int de = qd.QnaDelete(num);
 		int da = qd.QnaDeletecomment(num);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("num", num);
-		mav.setViewName("redirect:/qna/list");
+		mav.setViewName("redirect:/qna/list?p="+pn);
 		return mav;
 	}
 
 	@RequestMapping("/commentdelete")
-	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num) {
+	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num,@RequestParam(defaultValue = "1") int pn) {
 		int de = qd.CommentDelete(commentnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("commentnum", commentnum);
-		mav.setViewName("redirect:/qna/details/" + num);
+		mav.setViewName("redirect:/qna/details/"+ num+"?pn="+pn);
 		return mav;
 	}
 
@@ -269,10 +272,10 @@ public class QnAcontroller {
 	@RequestMapping("/commentupdate")
 	public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
 			@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,
-			@RequestParam(defaultValue = "1")int p,@RequestParam(defaultValue = "5")int paging) {
+			@RequestParam(defaultValue = "1")int p,@RequestParam(defaultValue = "5")int paging,@RequestParam(defaultValue = "1") int pn) {
 		int r = qw.CommentAdjust(memo, commentnum);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/qna/details/" + num+"?p="+p+"&paging="+paging);
+		mav.setViewName("redirect:/qna/details/" + num+"?p="+p+"&paging="+paging+"&pn="+pn);
 
 		return mav;
 

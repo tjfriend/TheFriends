@@ -11,7 +11,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
-	align="center">QnA</h2>
+	align="center">QnA // ${p }</h2>
 
 <div class="w3-row"
 	style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
@@ -84,7 +84,7 @@
 				<tr align="center">
 					<td><label>${qna.NUM }</label></td>
 					<td><label>${qna.CATEGORY}</label></td>
-					<td><label><a href="/qna/details/${qna.NUM}">${qna.TITLE}</a></label></td>
+					<td><label><a href="/qna/details/${qna.NUM}?pn=${p}">${qna.TITLE}</a></label></td>
 					<td><label>${qna.ID }</label></td>
 					<td><label>${qna.TIME }</label></td>
 					<td><label>${qna.INQUIRY }</label></td>

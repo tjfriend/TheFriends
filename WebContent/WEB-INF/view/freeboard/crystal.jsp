@@ -32,7 +32,7 @@
 			<option>남자들끼리만</option>
 			<option>여자들끼리만</option>
 		</select><br /><br /> 
-	
+		<input type="hidden" name="pn" value="${pn }">
 		<label for="title" style="width: 15%"><font size="4">TITLE</font></label>
 		<input type="text" id="title" name="title" value="${list.get(0).TITLE }"
 				class="form-control" style="width: 25%" placeholder="Title" required="required"/><br/>

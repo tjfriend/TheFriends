@@ -19,11 +19,11 @@
 		style="padding-left: 30px; padding-right: 30px; padding-top: 40px; width: 70%">
 		<div align="right">
 			<input type="button" value="목록보기" class="btn btn-default"
-				onClick="self.location='/qna/list?p=${p}';">
+				onClick="self.location='/qna/list?p=${pn}';">
 			<c:choose>
 				<c:when test="${loginid == details.ID }">
 					<input type="button" value="수정" class="btn btn-default"
-						onclick="location.href='/qna/qnaupdate?num=${details.NUM}'" />
+						onclick="location.href='/qna/qnaupdate?num=${details.NUM}&pn=${pn }'" />
 					<input type="button" value="삭제" class="btn btn-default"
 						id="QnADelete${details.NUM }" onclick="QnADelete(this)">
 				</c:when>
@@ -112,10 +112,10 @@
 				<c:forEach var="p" begin="${var3*5+1 }" end="${qnacommentsi }">
 					<c:choose>	
 								<c:when test="${p == qnacommentsi }">
-									<a href="/qna/details/${details.NUM }?p=${p }&paging=${qnacommentsi }">${p }</a>&nbsp;
+									<a href="/qna/details/${details.NUM }?p=${p }&paging=${qnacommentsi }&pn=${pn }">${p }</a>&nbsp;
 								</c:when>
 								<c:otherwise >
-									<a href="/qna/details/${details.NUM }?p=${p }&paging=${qnacommentsi }">${p }</a>&nbsp;|
+									<a href="/qna/details/${details.NUM }?p=${p }&paging=${qnacommentsi }&pn=${pn }">${p }</a>&nbsp;|
 								</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -135,12 +135,12 @@
 				paging = ${qnacommentsi + 5 };
 				p = ${qnacommentsi + 1 };
 							
-				location.href = "/qna/details/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/qna/details/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn }";
 			}
 			function backpage() {
 				paging = ${qnacommentsi - 5 };
 				p = paging - 4;
-				location.href = "/qna/details/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/qna/details/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn }";
 			}
 			
 			
@@ -152,7 +152,7 @@
 					var memo = $("#memo" + id).val();
 					
 					location.href = "/qna/commentupdate?num=${details.NUM}&commentnum="
-							+ id + "&memo=" + memo+"&p=${p}+&paging=${qnacommentsi}";
+							+ id + "&memo=" + memo+"&p=${p}&paging=${qnacommentsi}&pn=${pn }";
 				}
 
 				function change(element) {
@@ -182,7 +182,7 @@
 					var num = id.substring(id.indexOf('e') + 5);
 
 					if (confirm("이 게시글을 정말로 삭제하시겠습니까?") == true) {
-						location.href = "/qna/qnadelete?num=" + num;
+						location.href = "/qna/qnadelete?num=" + num+"&pn=${pn}";
 					} else {
 						return;
 					}
@@ -195,7 +195,7 @@
 
 					if (confirm("이 댓글을 정말로 삭제하시겠습니까?") == true) {
 						location.href = "/qna/commentdelete?num=${details.NUM}&commentnum="
-								+ commentnum;
+								+ commentnum+"&pn=${pn }";
 					} else {
 						return;
 					}
@@ -208,6 +208,7 @@
 				<c:if test="${login != null }">
 					<form action="/qna/qnacomment" method="post">
 						<input type="hidden" name="paging" value="${qnabestsizecom }">	
+						<input type="hidden" name="pn" value="${pn }">
 											<input type="hidden" name="num" value="${details.NUM }"> <input
 							type="hidden" name="endpa" value="${qnacommentsi }"> <input
 							type="text" name="memo"

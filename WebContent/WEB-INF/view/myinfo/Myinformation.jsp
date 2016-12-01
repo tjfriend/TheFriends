@@ -45,13 +45,12 @@
 	<div align="center">
 		<form action="/myinfo/Passchange" method="post" name="checkpass">
 			<label style="width: 30%"><font size="4">변경할 비밀번호</font></label> <input
-				type="text" class="form-control" style="width: 35%" name="pass" id="pass" />
+				type="text" class="form-control" style="width: 35%" name="pass" id="pass" required="required"/>
 				<br/>
 			<label style="width: 30%"><font size="4">변경할 비밀번호확인 </font></label> <input
 				type="text" class="form-control" style="width: 35%" name="passcheck" id="passcheck"/>
-			
-			<br /> <input type="button" value="확인" name="passbu" id="passbu" onclick="passbu" class="btn btn-default"
-				style="margin: 0 auto; height: 50px; width: 100px">
+			<br /> <input type="button" value="확인" name="passbu"  required="required" id="passbu" onclick="passbu" class="btn btn-default"
+				style="margin: 0 auto; height: 50px; width: 150px">
 		</form>
 	</div>
 </div>
@@ -74,7 +73,7 @@
 		<div class="w3-hide-large">
 			<label style="width: 30%"><font size="4">ID</font></label> <input
 				type="text" class="form-control" style="width: 35%"
-				value="${info.ID }" disabled="disabled" />
+				value="${info.ID }" disabled="disabled"  />
 
 		</div>
 		<div class="w3-hide-large">
@@ -94,18 +93,18 @@
 				${info.PHONE eq '비공개'?'checked':'' } value="phoneoff">
 				
 				<input type="text" id="phone" name="phone" class="form-control" value="${infomy.PHONE }"
-					style="width: 45%" placeholder="01012345678" />
+					style="width: 45%" placeholder="01012345678" required="required" />
 			</div>
 		
 		<div class="form-group" align="center">
 			<div class="w3-hide-large">
 				<label for="email" style="width: 30%"><font size="4">Email</font></label><font
 					size="2">비공개 : &nbsp;</font><input type="checkbox" name="checkbox" ${fn:split(info.EMAIL,'@')[0] eq '비공개'?'checked':'' }
-					value="Emailoff" id="Emailoff" ><br /> <input type="text" id="email"
+					value="Emailoff" id="Emailoff" ><br /> <input type="text" id="email" required="required"
 					name="email"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					placeholder="Email" value="${fn:split(infomy.EMAIL,'@')[0] }" /> <label>@</label>
-				<input type="text" value="${fn:split(infomy.EMAIL,'@')[1] }"
+				<input type="text" required="required" value="${fn:split(infomy.EMAIL,'@')[1] }"
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					id="email2" name="email2" placeholder="직접입력" /> <select
 					style="width: 25%; height: 33px; border: 1px solid #ccc; border-radius: 5px"
@@ -123,7 +122,7 @@
 			<div class="w3-hide-large">
 				<label for="birth" style="width: 30%"><font size="4">Birth
 						Day</font></label><font size="2">비공개 : &nbsp;</font><input type="checkbox" ${info.BIRTH eq infomy.BIRTH  ?'':'checked' }
-				id="Birthoff"	name="checkbox" value="Birthoff"> <input type="date"
+				id="Birthoff"	name="checkbox" value="Birthoff"> <input type="date" required="required"
 					id="birth" name="birth" class="form-control" style="width: 45%"
 					placeholder="yyyymmdd"
 					value="${fn:split(infomy.BIRTH,'-')[0]}-${fn:split(infomy.BIRTH,'-')[1]}-${fn:split(fn:split(infomy.BIRTH,'-')[2],' ')[0]}" />
@@ -135,15 +134,15 @@
 				<label for="address" style="width: 30%"><font size="4">Address</font></label><font
 					size="2">비공개 : &nbsp;</font><input type="checkbox" ${fn:split(info.ADD01,'@')[0] eq '비공개'?'checked':'' }
 				id="Addressoff"	name="checkbox" value="Addressoff"><br /> <input
-					type="text" id="post" name="post" 
+					type="text" id="post" name="post"  required="required"
 					style="width: 40%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Post Number" value="${info.POST }"/> <input
-					type="button" class="btn btn-default" style="width: 40%"
+					type="button"  class="btn btn-default" style="width: 40%"
 					onclick="searchPost()" value="우편번호 찾기" /><br /> <input
-					type="text" id="add01" name="add01" value="${infomy.ADD01}"
+					type="text" id="add01" name="add01" value="${infomy.ADD01}" required="required"
 					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					readonly="readonly" placeholder="Address" /> <input type="text"
-					id="add02" name="add02" value="${infomy.ADD02}"
+					id="add02" name="add02" value="${infomy.ADD02}" required="required"
 					style="width: 45%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px"
 					placeholder="Detailed Address" />
 			</div>

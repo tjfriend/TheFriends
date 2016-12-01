@@ -19,7 +19,7 @@
 		style="padding-left: 30px; padding-right: 30px; padding-top: 40px; width: 70%">
 		<div align="right">
 			<input type="button" value="목록보기" class="btn btn-default"
-				onClick="self.location='/event/list';">
+				onClick="self.location='/event/list?p=${pn}'">
 			<c:choose>
 				<c:when test="${loginid == details.WRITER }">
 					<input type="button" value="수정" class="btn btn-default"

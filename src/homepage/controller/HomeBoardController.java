@@ -102,7 +102,7 @@ public class HomeBoardController {
 	@RequestMapping("/details/{id}/{num}")
 	public ModelAndView details(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
 			HttpServletRequest req, HttpServletResponse resp, @PathVariable(name = "id") String id,HttpSession session
-			,@RequestParam(defaultValue = "5") int paging,@RequestParam(name="rnum")int rnum) {
+			,@RequestParam(defaultValue = "5") int paging,@RequestParam(defaultValue = "1")int rnum) {
 		String loginid = (String)session.getAttribute("id");
 		Cookie[] ar = req.getCookies();
 		int n = 0;
@@ -149,6 +149,7 @@ public class HomeBoardController {
 		mav.addObject("details", data);
 		mav.addObject("homepagecommentda", list);
 		mav.addObject("homepagecommentsi", sizecom);
+		
 		String homeType = (String) hs.goHome(id).get("ADDRESS");
 		switch (homeType) {
 		case "homeType1":
@@ -225,12 +226,13 @@ public class HomeBoardController {
 	// ´ñ±Û µî·Ï
 	@RequestMapping("/homeBoardcomment")
 	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p,
-			@RequestParam(name = "id") String id,@RequestParam(defaultValue ="5")int paging) {
+			@RequestParam(name = "id") String id,@RequestParam(defaultValue ="5")int paging,@RequestParam(defaultValue= "1")int rnum) {
 		String coid = (String) session.getAttribute("id");
 		int r = bw.comment(num, coid, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = bp.commentsize(num);
-		mav.setViewName("redirect:/homeBoard/details/" + id + "/" + num + "?p=" + si+"&paging="+paging);
+		mav.setViewName("redirect:/homeBoard/details/" + id + "/" + num + "?p=" + si+"&paging="+paging+"&rnum="+rnum
+				);
 		return mav;
 	}
 

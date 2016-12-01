@@ -73,7 +73,7 @@
 					<td align="center"><label>${freeboard.NUM }</label></td>
 					<td align="center"><label>${freeboard.CATEGORY }</label></td>
 					<td><label><a
-							href="/board/freeboarddetails/${freeboard.NUM }">${freeboard.TITLE }</a></label></td>
+							href="/board/freeboarddetails/${freeboard.NUM }?pn=${freeboardsetlist}">${freeboard.TITLE }</a></label></td>
 					<td><label>${freeboard.ID }</label></td>
 					<td><label>${freeboard.TIME }</label></td>
 					<td><label>${freeboard.INQUIRY }</label></td>
@@ -89,11 +89,11 @@
 						<c:choose>
 							<c:when test="${param.p == i }">
 								<a style="color: red;"
-									href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }&paging=${freeboardsize }">${i }</a>
+									href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }">${i }</a>
 							</c:when>
 							<c:otherwise>
 								<a
-									href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }&paging=${freeboardsize }">${i }</a>
+									href="/board/list?mode=${freeboardmode }&search=${freeboardsearch }&p=${i }">${i }</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>

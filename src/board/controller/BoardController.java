@@ -62,6 +62,7 @@ public class BoardController {
 				mav.addObject("freeboardbestsize", bestsize);
 				mav.addObject("freeboarddata", list);
 				mav.addObject("freeboardsize", size);
+				mav.addObject("freeboardsetlist", p);
 				mav.setViewName("t:freeboard/board");
 				return mav;
 			} else {
@@ -157,11 +158,11 @@ public class BoardController {
 
 	@RequestMapping("/freeboarddetails/{num}")
 	public ModelAndView detailsboard(@PathVariable(name="num") int num, HttpSession session, HttpServletRequest req, HttpServletResponse resp,
-			@RequestParam(defaultValue ="5")int paging	,@RequestParam(defaultValue = "1") int p) {
+			@RequestParam(defaultValue ="5")int paging	,@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "1") int pn) {
 		String id = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		List list = cs.Content(num);
-
+		mav.addObject("pn", pn);
 		Cookie[] ar = req.getCookies();
 		int n = 0;
 		for (Cookie c : ar) {
@@ -208,50 +209,51 @@ public class BoardController {
 	}
 
 	@RequestMapping("/freeboardupdate")
-	public ModelAndView writecrystal(@RequestParam(name = "num") int num) {
+	public ModelAndView writecrystal(@RequestParam(name = "num") int num, @RequestParam(defaultValue = "1") int pn) {
 		ModelAndView mav = new ModelAndView();
 		List<HashMap> list = cs.Content(num);
 		mav.setViewName("t:freeboard/crystal");
+		mav.addObject("pn", pn);
 		mav.addObject("list", list);
 		return mav;
 	}
 
 	@RequestMapping("/crystal")
-	public ModelAndView make2board(int num, String title, String content, HttpSession session, String category) {
+	public ModelAndView make2board(int num, String title, String content, HttpSession session, String category, @RequestParam(defaultValue = "1") int pn) {
 		int r = cs.crystal(num, content, category, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("make2sessionid", r); // 추가
-		mav.setViewName("redirect:/board/freeboarddetails/"+num);
+		mav.setViewName("redirect:/board/freeboarddetails/"+num+"?pn="+pn);
 		return mav;
 
 	}
 
 	@RequestMapping("/freeboarddelete")
-	public ModelAndView writedelete(@RequestParam(name = "num") int num) {
+	public ModelAndView writedelete(@RequestParam(name = "num") int num, @RequestParam(defaultValue = "1") int pn) {
 		ModelAndView mav = new ModelAndView();
 		int freeboard = ds.delete(num);
 		int freeboardcomment = ds.freeboardDeletecomment(num);
-		mav.setViewName("redirect:/board/list");
+		mav.setViewName("redirect:/board/list?p="+pn);
 		return mav;
 	}
 
 	@RequestMapping("/commentdelete")
-	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num) {
+	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num, @RequestParam(defaultValue = "1") int pn) {
 		int de = ds.CommentDelete(commentnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("commentnum", commentnum);
-		mav.setViewName("redirect:/board/freeboarddetails/" + num);
+		mav.setViewName("redirect:/board/freeboarddetails/" + num+"?pn="+pn);
 		return mav;
 	}
 	
 	// 댓글 등록
 	@RequestMapping("/freeboardcomment")
-	public ModelAndView freeboardcomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p,@RequestParam(defaultValue ="5")int paging) {
+	public ModelAndView freeboardcomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p,@RequestParam(defaultValue ="5")int paging, @RequestParam(defaultValue = "1") int pn) {
 		String id = (String) session.getAttribute("id");
 		int r = fw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = fb.commentsize(num);
-		mav.setViewName("redirect:/board/freeboarddetails/"+ num + "?p="+si+"&paging="+paging);
+		mav.setViewName("redirect:/board/freeboarddetails/"+ num + "?p="+si+"&paging="+paging+"&pn="+pn);
 		return mav;
 	}
 	
@@ -259,11 +261,10 @@ public class BoardController {
 		@RequestMapping("/commentupdate")
 		public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
 				@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,
-				@RequestParam(defaultValue = "1")int p,@RequestParam(defaultValue = "5")int paging) {
-			System.out.println("컨트 : "+memo +"//"+commentnum);
+				@RequestParam(defaultValue = "1")int p,@RequestParam(defaultValue = "5")int paging, @RequestParam(defaultValue = "1") int pn) {
 			int r = fw.CommentAdjust(memo, commentnum);
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("redirect:/board/freeboarddetails/" + num+"?p="+p+"&paging="+paging);
+			mav.setViewName("redirect:/board/freeboarddetails/" + num+"?p="+p+"&paging="+paging+"&pn="+pn);
 			return mav;
 		}
 
