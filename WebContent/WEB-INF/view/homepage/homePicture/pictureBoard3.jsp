@@ -141,7 +141,6 @@
 <div class="w3-modal" style="display: none" id="replyDiv">
 	<div class="w3-modal-content" style="width: 70%; height: 70%">
 		<header class="w3-container w3-teal"> 
-<!-- 			<span onclick="document.getElementById('replyDiv').style.display='none'" class="w3-closebtn">&times;</span> -->
 			<span onclick="$('#replyDiv').fadeOut(500)" class="w3-closebtn">&times;</span>
 			<h3 align="center">Reply</h3>
 		</header>

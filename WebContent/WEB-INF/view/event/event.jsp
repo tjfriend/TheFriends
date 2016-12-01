@@ -66,7 +66,6 @@
 				</c:choose>
 			</label>
 
-
 			<c:if test="${nick.get(0).NICKNAME eq '관리자' }">
 				<div align="right">
 					<input type="button" value="글작성" class="btn btn-default"

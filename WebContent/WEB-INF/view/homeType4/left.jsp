@@ -6,7 +6,14 @@
 <div class="w3-col">
 	<!-- About Card -->
 	<div class="w3-card-2 w3-margin w3-margin-top">
-		<img src="/image/nature1.jpg" style="width: 100%">
+		<c:choose>
+			<c:when test="${uuid!=null }">
+				<img src="/profile/${uuid }" style="width: 100%">
+			</c:when>
+			<c:otherwise>
+				<img src="/image/profile.jpg" style="width: 100%">
+			</c:otherwise>
+		</c:choose>
 		<div class="w3-container w3-white" style="padding-top: 15px">
 			<h4>
 				<b>${id }</b>
@@ -17,16 +24,14 @@
 
 	<!-- Posts -->
 	<div class="w3-card-2 w3-margin">
-		<audio controls="controls" autoplay="autoplay" id="player" onended="nextPlay()" style="width: 100%">
-			<source src="/music/alert.wav">
-		</audio>
+		<audio controls="controls" autoplay="autoplay" id="player" onended="nextPlay()" style="width: 100%"></audio>
 	</div>
 	<hr>
 
 	<!-- Labels / tags -->
-	<div class="w3-card-2 w3-margin" style="height: 150px">
-		<h3 align="center"><b>Friends</b></h3>
-		<table class="table" style="overflow-y: auto;">
+	<h3 align="center"><b>Friends</b></h3>
+	<div class="w3-card-2 w3-margin" style="height: 170px">
+		<table class="table" style="overflow-y: auto; height: 170px">
 			<thead align="center">
 				<tr>
 					<td><label>이름</label></td>
@@ -40,20 +45,6 @@
 </div>
 
 <script>
-	window.onload = function(){
-		$.ajax({
-			"method" : "get",
-			"url" : "/friends/home/${id}",
-			"async" : false
-		}).done(function(txt){
-			var html = "";
-			for(var i=0; i<txt.length; i++){
-				html += "<tr><td><label onclick='friends(this)'>"+txt[i].NAME+"</label></td><td>"+txt[i].NICKNAME+"</td></tr>";
-			}
-			$("#homeBody").html(html);
-		});
-	};
-	
 	function friends(element) {
 		var name = element.innerHTML;
 		$.ajax({

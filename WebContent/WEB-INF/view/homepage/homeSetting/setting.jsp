@@ -13,7 +13,15 @@
 	<h3 class="w3-padding-32 w3-text-grey" align="center">Setting</h3>
 	<div class="w3-row">
 		<div class="w3-col" style="width: 250px">
-			<label>디자인</label>&nbsp;&nbsp;
+			<label>프로필</label>
+		</div>
+		<div class="w3-rest" style="padding-left: 20px; padding-right: 20px">
+			<input type="button" class="btn btn-default" value="사진 선택" onclick="picChoose()"/>
+		</div>
+	</div><hr style="border-color: black"/>
+	<div class="w3-row">
+		<div class="w3-col" style="width: 250px">
+			<label>디자인</label><br/>
 			<select style="height: 25px; border: 1px solid #ccc; border-radius: 5px" id="layout">
 				<option>기본</option>
 				<option>사진</option>
@@ -127,7 +135,22 @@
 	</div>
 </div>
 
+<div class="w3-modal" style="display: none" id="profileDiv" align="center">
+	<div class="w3-modal-content" style="width: 200px; height: 150px; border-radius: 10px" align="center">
+		<form action="/settings/profile" method="post" enctype="multipart/form-data">
+			<label style="width: 100px; margin-top: 30px"><font size="3">사진 선택</font></label><br/>
+			<input type="file" name="profile" style="width: 200px"/><br/>
+			<input type="submit" class="btn btn-default" value="변경"/>
+			<input type="button" class="btn btn-default" value="취소" onclick="$('#profileDiv').fadeOut(300)"/>
+		</form>
+	</div>
+</div>
+
 <script>
+	function picChoose(){
+		$("#profileDiv").fadeIn(300);
+	}
+
 	$("#musicAll").change(function(){
 		$(".musicCheck").prop("checked", $("#musicAll").prop("checked"));
 	});
@@ -189,9 +212,22 @@
 	});
 	
 	$("#initialCo").click(function(){
+		var board = $("#board").prop("checked");
+		var picture = $("#picture").prop("checked");
+		var visitors = $("#visitors").prop("checked");
+		var url = "/settings/initial/${id}?mode=";
+		if(board){
+			url += "board";
+		}
+		if(picture){
+			url += "";
+		}
+		if(visitors){
+			url += "";
+		}
 		$.ajax({
 			"method" : "get",
-			"url" : "",
+			"url" : url,
 			"async" : false
 		}).done(function(txt){
 			alert(txt);

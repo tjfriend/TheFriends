@@ -76,7 +76,23 @@
 	</div>
 </div>
 
+<div class="w3-modal" style="display: none" id="acceptDiv">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="accept">
+		<input type="button" class="btn btn-success" value="수락하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="rejectDiv">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="reject">
+		<input type="button" class="btn btn-danger" value="거절하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
 <script>
+	function endDiv(txt){
+		$("#"+txt+"Div").fadeIn(300).delay(1000).fadeOut(300);
+	}
+	
 	window.onload = function(){
 		$.ajax({
 			"method" : "get",
@@ -104,8 +120,8 @@
 			for(var i=0; i<txt.length; i++){
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
-				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept"+i+"("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' id='refuce+'"+i+"/></tr>";
+				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept("+i+")'/>&nbsp;&nbsp;";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></tr>";
 			}
 			$("#addBody").html(html);
 			html = "";
@@ -143,8 +159,8 @@
 			for(var i=0; i<txt.length; i++){
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
-				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept"+i+"("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' id='refuce+'"+i+"/></tr>";
+				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept("+i+")'/>&nbsp;&nbsp;";
+				html += "<input type='button' class='btn btn-danger' value='Reject' onclick='refuse("+i+")'/></tr>";
 			}
 			$("#addBody").html(html);
 		});
@@ -188,14 +204,14 @@
 			for(var i=0; i<txt.length; i++){
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
-				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept"+i+"("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' id='refuce+'"+i+"/></tr>";
+				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept("+i+")'/>&nbsp;&nbsp;";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></tr>";
 			}
 			$("#addBody").html(html);
 		});
 	});
 	
-	function accept0(txt){
+	function accept(txt){
 		var name = "";
 		for(var i=0; i<10; i++){
 			if(txt==i){
@@ -209,8 +225,30 @@
 			"async" : false
 		}).done(function(txt){
 			if(txt==true){
-				alert("수락되었습니다.");
-				location.href="/friends/${id }";
+// 				alert("수락되었습니다.");
+				endDiv("accept");
+				setTimeout(function(){location.href="/friends/${id}"}, 1600);
+			}
+		});
+	}
+	
+	function refuse(txt){
+		var name = "";
+		for(var i=0; i<10; i++){
+			if(txt == i){
+				name = $("#"+i).html();
+				break;
+			}
+		}
+		$.ajax({
+			"method" : "get",
+			"url" : "/friends/refuse/"+name,
+			"async" : false
+		}).done(function(txt){
+			if(txt == true){
+// 				alert("거절되었습니다.");
+				endDiv("reject");
+				setTimeout(function(){location.href="/friends/${id}"}, 1600);
 			}
 		});
 	}

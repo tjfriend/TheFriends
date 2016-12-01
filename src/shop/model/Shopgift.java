@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.*;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ public class Shopgift {
 		return ss.selectList("friends.friendSearch", id);
 	}
 
-	public int friendgift(String id, String title, String money, String gtake) {
+	public boolean friendgift(String id, String title, String money, String gtake, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<>();
 		 map.put("id", gtake);
 		 map.put("title", title);
@@ -39,22 +41,23 @@ public class Shopgift {
 					sql.insert("shopbuy.musicbuy", map);
 					sql.commit();
 					sql.close();
-					return 1;
+					session.setAttribute("point", mypoint-musicmoney);
+					return true;
 				} else {
 					sql.rollback();
 					sql.close();
-					return -1;
+					return false;
 				}
 			} else {
 				sql.rollback();
 				sql.close();
-				return -1;
+				return false;
 			}
 		} catch (Exception e) {
 			System.out.println(e);
 			sql.rollback();
 			sql.close();
-			return -1;
+			return false;
 
 		}
 	}

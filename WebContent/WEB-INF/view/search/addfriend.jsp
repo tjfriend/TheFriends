@@ -37,13 +37,13 @@
 </div>
 
 <div class="w3-modal" style="display: none" id="finishDiv">
-	<div class="w3-modal-content" style="width: 15%; height: 30%; border-radius: 10px; margin-top: 30px" align="center" id="finish">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 30px" align="center" id="finish">
 		<input type="button" class="btn btn-success" value="친구신청이 완료되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
 	</div>
 </div>
 
 <div class="w3-modal" style="display: none" id="failDiv">
-	<div class="w3-modal-content" style="width: 15%; height: 30%; border-radius: 10px; margin-top: 30px" align="center" id="fail">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 30px" align="center" id="fail">
 		<input type="button" class="btn btn-danger" value="친구신청에 실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
 	</div>
 </div>
