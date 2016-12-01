@@ -102,7 +102,7 @@ public class HomeBoardController {
 	@RequestMapping("/details/{id}/{num}")
 	public ModelAndView details(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
 			HttpServletRequest req, HttpServletResponse resp, @PathVariable(name = "id") String id,HttpSession session
-			,@RequestParam(defaultValue = "5") int paging) {
+			,@RequestParam(defaultValue = "5") int paging,@RequestParam(name="rnum")int rnum) {
 		String loginid = (String)session.getAttribute("id");
 		Cookie[] ar = req.getCookies();
 		int n = 0;
@@ -142,7 +142,7 @@ public class HomeBoardController {
 		mav.addObject("homepagebestsizecom", bestsizecom);
 		
 		
-		
+		mav.addObject("rnum",rnum);
 		mav.addObject("p",p);
 		mav.addObject("id", id);
 		mav.addObject("loginid",loginid);

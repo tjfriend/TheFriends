@@ -41,7 +41,7 @@
 					<td width="7%"><label>Count</label></td>
 				</tr>
 				<tr align="center">
-					<td>${details.NUM }</td>
+					<td>${rnum }</td>
 					<td>${details.TITLE }</td>
 					<td>${details.ID }</td>
 					<%-- 	디자인고치기		<td width="5" align="right"><a href="/qna/qnaupdate?num=${details.NUM}">수정</a></td> --%>

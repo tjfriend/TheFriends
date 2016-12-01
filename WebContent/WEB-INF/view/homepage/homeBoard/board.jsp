@@ -27,8 +27,8 @@
 						<c:if test="${homebo.ID == id }">
 					<tr>
 						<td><label>${homebo.RNUM }</label></td>
-						<td><label><a href="/homeBoard/details/${id }/${homebo.NUM }">${homebo.TITLE }</a></label></td>
-						<td><label><a href="/homeBoard/details/${id }/${homebo.NUM }">${homebo.CONTENT }</a></label></td>
+						<td><label><a href="/homeBoard/details/${id }/${homebo.NUM }?rnum=${homebo.RNUM }">${homebo.TITLE }</a></label></td>
+						<td><label><a href="/homeBoard/details/${id }/${homebo.NUM }?rnum=${homebo.RNUM }">${homebo.CONTENT }</a></label></td>
 						<td><label>${homebo.DAY }</label></td>
 						<td><label>${homebo.INQUIRY }</label></td>
 					</tr>
