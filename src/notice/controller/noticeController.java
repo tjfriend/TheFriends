@@ -200,7 +200,7 @@ public class noticeController {
 		int r = nw.Adjust(num, content, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticeadjust", r);
-		mav.setViewName("redirect:/notice/list");
+		mav.setViewName("redirect:/notice/details/"+num);
 		return mav;
 	}
 	

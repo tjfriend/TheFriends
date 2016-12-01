@@ -51,12 +51,31 @@ public class ChargeController {
 		ModelAndView ma = new ModelAndView("t:charge/chargeAll");
 		List li = charge.page(p, (String)id.getAttribute("id"));
 		int size = charge.total((String)id.getAttribute("id"));
+		
+		if (size >= 5) {
+			if (p - 2 < 1) {
+				size = 3;
+			} else if (p + 2 > size) {
+				size = size - 2;
+			} else {
+				size = p;
+			}
+		} else {
+			size = size;
+		}
+		int bestsize = charge.total((String)id.getAttribute("id"));
+		ma.addObject("bestsize", bestsize);
+		
+		
+		
+		
 		if(li.size()!=0){
 			ma.addObject("size",size);
 			ma.addObject("li",li);
 		}else{
 			ma.addObject("null","null");
 		}
+		
 		return ma;
 	}
 	

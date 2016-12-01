@@ -21,11 +21,10 @@
 
 
 	<c:if test="${nick.get(0).NICKNAME eq '관리자' }">
-		<span style="float: right;">
-				<input type="button" value="음악올리기" class="btn btn-default"
-					id="musicUp"/>
+		<span style="float: right;"> <input type="button" value="음악올리기"
+			class="btn btn-default" id="musicUp" />
 		</span>
-			
+
 	</c:if>
 </div>
 <div class="table-responsive">
@@ -43,13 +42,36 @@
 				<td><label>${shop.MONEY }잣</label></td>
 				<td><input type="button" value="듣기"
 					onclick="listen('${shop.TITLE}', '${shop.NUM }')"
-					class="btn btn-default" /> <input type="button" value="구매"
-					id="buy${shop.TITLE }"
-					onclick="javascript:openbuy('${shop.TITLE }', ${shop.MONEY })"
-					class="btn btn-default" /> <input type="button" value="선물"
-					id="gift${shop.TITLE }"
-					onclick="javascript:opengift('${shop.TITLE }', ${shop.MONEY })"
-					class="btn btn-default" /></td>
+					class="btn btn-default" /> <c:choose>
+						<c:when test="${login == null }">
+							<input type="button" value="구매"
+								onclick="javascript:openLogin()" class="btn btn-default">
+								<input type="button" value="선물"
+								onclick="javascript:openLogin()" class="btn btn-default">
+							<script>
+					LeftPosition = (screen.width - 400) / 2;
+					TopPosition = (screen.height - 300) / 2;
+
+					function openLogin() {
+						alert("로그인이 필요한 서비스입니다 로그인을 해주세요.");
+					}
+							</script>
+						</c:when>
+
+						<c:otherwise>
+							<input type="button" value="구매" id="buy${shop.TITLE }"
+								onclick="javascript:openbuy('${shop.TITLE }', ${shop.MONEY })"
+								class="btn btn-default" />
+							<input type="button" value="선물" id="gift${shop.TITLE }"
+								onclick="javascript:opengift('${shop.TITLE }', ${shop.MONEY })"
+								class="btn btn-default" />
+
+						</c:otherwise>
+					</c:choose></td>
+
+
+
+
 			</tr>
 			<tr align="center" style="display: none" id="audioTr${shop.NUM }">
 				<td id="audio${shop.NUM }" style="display: none" colspan="4"></td>

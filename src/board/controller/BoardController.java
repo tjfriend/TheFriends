@@ -155,9 +155,9 @@ public class BoardController {
 
 	}
 
-	@RequestMapping("/freeboarddetails")
-	public ModelAndView detailsboard(@RequestParam(defaultValue = "-1") int num, HttpSession session, HttpServletRequest req, HttpServletResponse resp,
-										@RequestParam(defaultValue = "1") int p) {
+	@RequestMapping("/freeboarddetails/{num}")
+	public ModelAndView detailsboard(@PathVariable(name="num") int num, HttpSession session, HttpServletRequest req, HttpServletResponse resp,
+			@RequestParam(defaultValue ="5")int paging	,@RequestParam(defaultValue = "1") int p) {
 		String id = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		List list = cs.Content(num);
@@ -181,17 +181,25 @@ public class BoardController {
 		map.put("num", num);
 		List list2 = fb.Getcommentpage(p, num);
 		int sizecom = fb.commentsize(num);
-		
 		HashMap data = fb.freeboarddetails(num);
 		Date date = (Date) data.get("TIME");
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
 		String time = sdf.format(date);
 		data.put("TIME", time);
-		mav.addObject("loginid",id);
+		
+		int bestsizecom =  fb.commentsize(num);
+		
+		if(sizecom>paging){
+			sizecom = paging;
+			}
+		
+		mav.addObject("freeboardbestsizecom",bestsizecom);
+		mav.addObject("p",p);
+		mav.addObject("loginid",id);	
 		mav.addObject("details", data);
 		mav.addObject("freeboardcommentda", list2);
 		mav.addObject("freeboardcommentsi", sizecom);
-		mav.addObject("freeboarddetailsdata", list);
+		mav.addObject("freeboarddetailsdata", list.get(0));
 		mav.addObject("freeboarddetailsdata2", id);
 		
 		mav.setViewName("t:freeboard/freeboarddetails");
@@ -213,7 +221,7 @@ public class BoardController {
 		int r = cs.crystal(num, content, category, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("make2sessionid", r); // 추가
-		mav.setViewName("redirect:/board/list");
+		mav.setViewName("redirect:/board/freeboarddetails/"+num);
 		return mav;
 
 	}
@@ -221,30 +229,42 @@ public class BoardController {
 	@RequestMapping("/freeboarddelete")
 	public ModelAndView writedelete(@RequestParam(name = "num") int num) {
 		ModelAndView mav = new ModelAndView();
-		List<HashMap> list = cs.Content(num);
-		mav.setViewName("t:freeboard/delete");
-		mav.addObject("list", list);
-		return mav;
-	}
-
-	@RequestMapping("/delete")
-	public ModelAndView deleteboard(int num) {
-		int r = ds.delete(num);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("deletesessionid", r); // 추가
+		int freeboard = ds.delete(num);
+		int freeboardcomment = ds.freeboardDeletecomment(num);
 		mav.setViewName("redirect:/board/list");
 		return mav;
-
 	}
+
+	@RequestMapping("/commentdelete")
+	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num) {
+		int de = ds.CommentDelete(commentnum);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("commentnum", commentnum);
+		mav.setViewName("redirect:/board/freeboarddetails/" + num);
+		return mav;
+	}
+	
 	// 댓글 등록
 	@RequestMapping("/freeboardcomment")
-	public ModelAndView freeboardcomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p) {
+	public ModelAndView freeboardcomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p,@RequestParam(defaultValue ="5")int paging) {
 		String id = (String) session.getAttribute("id");
 		int r = fw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = fb.commentsize(num);
-		mav.setViewName("redirect:/board/freeboarddetails?num=" + num + "&p="+si);
+		mav.setViewName("redirect:/board/freeboarddetails/"+ num + "?p="+si+"&paging="+paging);
 		return mav;
 	}
+	
+	// 댓글 수정              
+		@RequestMapping("/commentupdate")
+		public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
+				@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,
+				@RequestParam(defaultValue = "1")int p,@RequestParam(defaultValue = "5")int paging) {
+			System.out.println("컨트 : "+memo +"//"+commentnum);
+			int r = fw.CommentAdjust(memo, commentnum);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/board/freeboarddetails/" + num+"?p="+p+"&paging="+paging);
+			return mav;
+		}
 
 }

@@ -12,7 +12,8 @@
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">충전내역</h2>
 
-<div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
+<div class="w3-row"
+	style="padding-left: 30px; padding-right: 30px; padding-top: 40px">
 	<div class="table-responsive">
 		<table class="table">
 			<thead align="center">
@@ -35,14 +36,38 @@
 			</c:if>
 		</table>
 		<div align="right">
-			<input type="button" value="목록으로" class="btn btn-default" onclick="javascript:location.href='/charge'"/>
+			<input type="button" value="목록으로" class="btn btn-default"
+				onclick="javascript:location.href='/charge'" />
 		</div>
 	</div>
 </div>
+
 <div align="center">
-	<label id="page">
-		<c:forEach var="i" begin="1" end="${size }">
-			<a href="/charge/chargeAll?p=${i }">${i }</a>
-		</c:forEach>
+	<label id="page"> <c:choose>
+			<c:when test="${bestsize >= 5 }">
+				<c:forEach var="i" begin="${size-2}" end="${size+2 }">
+					<c:choose>
+						<c:when test="${param.p == i }">
+							<a style="color: red;" href="/charge/chargeAll?p=${i }">${i }</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/charge/chargeAll?p=${i }">${i }</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="i" begin="1" end="${size }">
+					<c:choose>
+						<c:when test="${param.p == i }">
+							<a style="color: red;" href="/charge/chargeAll?p=${i }">${i }</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/charge/chargeAll?p=${i }">${i }</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</label>
 </div>

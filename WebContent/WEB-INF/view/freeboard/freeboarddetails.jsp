@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -18,16 +20,14 @@
 		<div align="right">
 			<input type="button" value="목록보기" class="btn btn-default"
 				onclick="self.location='/board/list';">
-			<c:forEach var="fbd" items="${freeboarddetailsdata }">
 				<c:choose>
-					<c:when test="${freeboarddetailsdata2 == fbd.ID }">
+					<c:when test="${freeboarddetailsdata2 == freeboarddetailsdata.ID }">
 						<input type="button" value="수정" class="btn btn-default"
-							onclick="location.href='/board/freeboardupdate?num=${fbd.NUM}'" />
+							onclick="location.href='/board/freeboardupdate?num=${freeboarddetailsdata.NUM}'" />
 						<input type="button" value="삭제" class="btn btn-default"
-							onclick="location.href='/board/freeboarddelete?num=${fbd.NUM}'" />
+						id="boardDelete${details.NUM }" onclick="boardDelete(this)">
 					</c:when>
 				</c:choose>
-			</c:forEach>
 		</div>
 		<div class="table-responsive" align="center">
 			<table class="table">
@@ -39,17 +39,23 @@
 					<td width="15%"><label>Day</label></td>
 					<td width="7%"><label>Count</label></td>
 				</tr>
-				<c:forEach var="fbd" items="${freeboarddetailsdata }">
+				
 					<tr align="center">
-						<td>${fbd.NUM }</td>
-						<td>${fbd.CATEGORY }</td>
-						<td>${fbd.TITLE }</td>
-						<td>${fbd.ID }</td>
-						<td>${fbd.TIME }</td>
-						<td>${fbd.INQUIRY }</td>
+						<td>${freeboarddetailsdata.NUM }</td>
+						<td>${freeboarddetailsdata.CATEGORY }</td>
+						<td>${freeboarddetailsdata.TITLE }</td>
+						<td>${freeboarddetailsdata.ID }</td>
+						<td>${freeboarddetailsdata.TIME }</td>
+						<td>${freeboarddetailsdata.INQUIRY }</td>
 					</tr>
-				</c:forEach>
 			</table>
+			<div align="center">
+				<table class="table">
+					<tr>
+						<td style="padding: 20px">${details.CONTENT }</td>
+				</table>
+				<hr />
+			</div>
 		</div>
 		<!--  	댓글 -->
 		<div>
@@ -84,27 +90,53 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<c:forEach var="p" begin="1" end="${freeboardcommentsi }">
+			
+			<fmt:parseNumber var="var3" value="${(freeboardcommentsi-1)/5}"
+					integerOnly="true" />
+					<c:if test="${freeboardcommentsi > 5 }">
+					<input type="button" value="이전" onclick="javascript:backpage()">
+				</c:if>
+			<c:forEach var="p" begin="${var3*5+1 }" end="${freeboardcommentsi }">
 				<c:choose>
-					<c:when test="${current == p }">
-						<b>${u }</b>
+					<c:when test="${p == freeboardcommentsi }">
+						<a href="/board/freeboarddetails/${details.NUM }?p=${p }&paging=${freeboardcommentsi }">${p }</a>&nbsp;
 					</c:when>
 					<c:otherwise>
-						<a href="/freeboard/details/${details.NUM }?p=${p }">${p }</a>
+						<a href="/board/freeboarddetails/${details.NUM }?p=${p }&paging=${freeboardcommentsi }">${p }</a>&nbsp;|
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
+				<c:if test="${freeboardbestsizecom != freeboardcommentsi }">
+					<input type="button" value="다음" onclick="javascript:nextpage()" />
+				</c:if>
 		</div>
 		<br />
+		<c:if test="${freeboardbestsizecom == freeboardcommentsi }">
+				<fmt:parseNumber var="freeboardcommentsi" value="${(var3+1)*5}"
+					integerOnly="true" />
+			</c:if>
 
 		<script>
+		
+		function nextpage() {
+			paging = ${freeboardcommentsi + 5 };
+			p = ${freeboardcommentsi + 1 };
+						
+			location.href = "/board/freeboarddetails/${details.NUM }?p="+ p + "&paging=" + paging;
+		}
+		function backpage() {
+			paging = ${freeboardcommentsi - 5 };
+			p = paging - 4;
+			location.href = "/board/freeboarddetails/${details.NUM }?p="+ p + "&paging=" + paging;
+		}
+		
 			function memoupdate(element) {
 				var id = element.id;
 				id = id.slice(id.indexOf('t') + 1);
 
 				var memo = $("#memo" + id).val();
-				location.href = "/notice/commentupdate?num=${details.NUM}&commentnum="
-						+ id + "&memo=" + memo;
+				location.href = "/board/commentupdate?num=${details.NUM}&commentnum="
+						+ id + "&memo=" + memo+"&p=${p}+&paging=${freeboardcommentsi}";
 			}
 
 			function change(element) {
@@ -129,12 +161,12 @@
 				$("#memo" + num).hide();
 			}
 
-			function QnADelete(element) {
+			function boardDelete(element) {
 				var id = element.id;
 				var num = id.substring(id.indexOf('e') + 5);
 
 				if (confirm("이 게시글을 정말로 삭제하시겠습니까?") == true) {
-					location.href = "/notice/noticedelete?num=" + num;
+					location.href = "/board/freeboarddelete?num=" + num;
 				} else {
 					return;
 				}
@@ -159,23 +191,15 @@
 		<div align="center">
 			<c:if test="${login != null }">
 				<form action="/board/freeboardcomment" method="post">
+							<input type="hidden" name="paging" value="${freeboardbestsizecom }">	
 					<input type="hidden" name="num" value="${details.NUM }"> <input
-						type="hidden" name="endpa" value="${freeboardcommentsi }"> <input
-						type="text" name="memo"
+						type="hidden" name="endpa" value="${freeboardcommentsi }">
+					<input type="text" name="memo"
 						style="width: 50%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px; resize: none;" />
 					<input type="submit" value="등록" class="btn btn-default">
 				</form>
 			</c:if>
 
-			<div align="center">
-				<table class="table">
-					<c:forEach var="fbd" items="${freeboarddetailsdata }">
-						<tr>
-							<td style="padding: 20px">${fbd.CONTENT }</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
 		</div>
 	</div>
 </div>

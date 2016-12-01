@@ -200,7 +200,7 @@ public class EventController {
 		int r = ew.Adjust(num, content, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventadjust", r);
-		mav.setViewName("redirect:/event/list");
+		mav.setViewName("redirect:/event/details/"+num);
 		return mav;
 	}
 

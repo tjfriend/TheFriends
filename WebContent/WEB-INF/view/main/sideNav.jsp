@@ -56,7 +56,7 @@
 				${point } 잣
 			</div>
 			<br />
-			<button type="button" class="btn btn-default"onclick="loginMenu(this)" value="myinfo">My Info</button>
+			<button type="button" class="btn btn-default"onclick="javascript:Passcertification()" value="myinfo">My Info</button>
 			&nbsp;
 			<button type="button" class="btn btn-default" onclick="loginMenu(this)" value="myhome">My Home</button>
 			<br />
@@ -99,5 +99,15 @@
 	
 	function goMain(){
 		location.href = "/";
+	}
+	
+	LeftPosition = (screen.width - 900) / 2;
+	TopPosition = (screen.height - 700) / 2;
+
+	function Passcertification() {
+		window.open("/myinfo/Passcertification", "",
+				"width=800, height=600,left=" + LeftPosition
+						+ ",top=" + TopPosition);
+
 	}
 </script>

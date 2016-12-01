@@ -122,7 +122,18 @@
 					integerOnly="true" />
 			</c:if>
 			<script>
-			 	 
+			
+			function nextpage() {
+				paging = ${homepagecommentsi + 5 };
+				p = ${homepagecommentsi + 1 };
+							
+				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
+			}
+			function backpage() {
+				paging = ${homepagecommentsi - 5 };
+				p = paging - 4;
+				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
+			}
 			
 			
 			
