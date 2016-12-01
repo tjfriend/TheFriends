@@ -20,22 +20,12 @@ body, html {height: 100%}
 <body>
 
 <div class="bgimg w3-display-container">
-<!--   <div class="w3-display-middle w3-jumbo"> -->
-<!--   	<div class="w3-row"> -->
-<!--   		<div class="w3-col" style="width: 80px"> -->
-<!-- 	    	<img src='/image/logo.ico'/> -->
-<!-- 	    </div> -->
-<!-- 	    <div class="w3-rest"> -->
-<!-- 	    	<h3>The Friends</h3> -->
-<!-- 	    </div> -->
-<!--     </div> -->
-<!--   </div> -->
   <div class="w3-display-topleft w3-padding-jumbo w3-xlarge">
-    <p><button onclick="goMain()" class="w3-btn w3-hover-light-grey" style="width: 100px">Main</button></p>
-    <p><button onclick="goJoin()" class="w3-btn w3-hover-light-grey" style="width: 100px">Join</button></p>
+    <p><button onclick="goMain()" style="width: 100px; border-radius: 15px; background-color: white" class="btn btn-default">Main</button></p>
+    <p><button onclick="goJoin()" style="width: 100px; border-radius: 15px; background-color: white" class="btn btn-default">Join</button></p>
   </div>
   <div class="w3-display-bottomright w3-padding-jumbo">
-    <h3><font style="color: red">Powered by &copy;<font style="color: blue">The Friends</font>Corp. copyright since 13 Nov. 2016</font></h3>
+    <h3><b><font style="color: yellow">Copyrighted by <font style="color: blue">&copy;The Friends</font> Corp.</font> <font style="color: black">copyright since 13 Nov. 2016</font></b></h3>
   </div>
 </div>
 
