@@ -65,3 +65,15 @@
 		</div>
 	</div>
 </div>
+
+<div class="w3-modal" style="display: none" id="addDiv">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="add">
+		<input type="button" class="btn btn-success" value="등록되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="addFailDiv">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="addFail">
+		<input type="button" class="btn btn-success" value="등록에 실패하였습니다.." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
