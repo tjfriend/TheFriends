@@ -19,11 +19,11 @@
 		style="padding-left: 30px; padding-right: 30px; padding-top: 40px; width: 70%">
 		<div align="right">
 			<input type="button" value="목록보기" class="btn btn-default"
-				onclick="self.location='/board/list?p=${freeboardsetlist}';">
+				onclick="self.location='/board/list?p=${pn}';">
 				<c:choose>
 					<c:when test="${freeboarddetailsdata2 == freeboarddetailsdata.ID }">
 						<input type="button" value="수정" class="btn btn-default"
-							onclick="location.href='/board/freeboardupdate?num=${freeboarddetailsdata.NUM}'" />
+							onclick="location.href='/board/freeboardupdate?num=${freeboarddetailsdata.NUM}&pn=${pn }'" />
 						<input type="button" value="삭제" class="btn btn-default"
 						id="boardDelete${details.NUM }" onclick="boardDelete(this)">
 					</c:when>
@@ -99,10 +99,10 @@
 			<c:forEach var="p" begin="${var3*5+1 }" end="${freeboardcommentsi }">
 				<c:choose>
 					<c:when test="${p == freeboardcommentsi }">
-						<a href="/board/freeboarddetails/${details.NUM }?p=${p }&paging=${freeboardcommentsi }">${p }</a>&nbsp;
+						<a href="/board/freeboarddetails/${details.NUM }?p=${p }&paging=${freeboardcommentsi }&pn=${pn }">${p }</a>&nbsp;
 					</c:when>
 					<c:otherwise>
-						<a href="/board/freeboarddetails/${details.NUM }?p=${p }&paging=${freeboardcommentsi }">${p }</a>&nbsp;|
+						<a href="/board/freeboarddetails/${details.NUM }?p=${p }&paging=${freeboardcommentsi }&pn=${pn }">${p }</a>&nbsp;|
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -122,12 +122,12 @@
 			paging = ${freeboardcommentsi + 5 };
 			p = ${freeboardcommentsi + 1 };
 						
-			location.href = "/board/freeboarddetails/${details.NUM }?p="+ p + "&paging=" + paging;
+			location.href = "/board/freeboarddetails/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn }";
 		}
 		function backpage() {
 			paging = ${freeboardcommentsi - 5 };
 			p = paging - 4;
-			location.href = "/board/freeboarddetails/${details.NUM }?p="+ p + "&paging=" + paging;
+			location.href = "/board/freeboarddetails/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn }";
 		}
 		
 			function memoupdate(element) {
@@ -136,7 +136,7 @@
 
 				var memo = $("#memo" + id).val();
 				location.href = "/board/commentupdate?num=${details.NUM}&commentnum="
-						+ id + "&memo=" + memo+"&p=${p}+&paging=${freeboardcommentsi}";
+						+ id + "&memo=" + memo+"&p=${p}&paging=${freeboardcommentsi}&pn=${pn }";
 			}
 
 			function change(element) {
@@ -166,7 +166,7 @@
 				var num = id.substring(id.indexOf('e') + 5);
 
 				if (confirm("이 게시글을 정말로 삭제하시겠습니까?") == true) {
-					location.href = "/board/freeboarddelete?num=" + num;
+					location.href = "/board/freeboarddelete?num=" + num+"&pn=${pn }";
 				} else {
 					return;
 				}
@@ -179,7 +179,7 @@
 
 				if (confirm("이 댓글을 정말로 삭제하시겠습니까?") == true) {
 					location.href = "/board/commentdelete?num=${details.NUM}&commentnum="
-							+ commentnum;
+							+ commentnum+"&pn=${pn }";
 				} else {
 					return;
 				}
@@ -191,7 +191,8 @@
 		<div align="center">
 			<c:if test="${login != null }">
 				<form action="/board/freeboardcomment" method="post">
-							<input type="hidden" name="paging" value="${freeboardbestsizecom }">	
+							<input type="hidden" name="paging" value="${freeboardbestsizecom }">
+							<input type="hidden" name="pn" value="${pn }">	
 					<input type="hidden" name="num" value="${details.NUM }"> <input
 						type="hidden" name="endpa" value="${freeboardcommentsi }">
 					<input type="text" name="memo"

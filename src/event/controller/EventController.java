@@ -142,7 +142,7 @@ public class EventController {
 			sizecom = paging;
 		}
 		mav.addObject("eventbestsizecom", bestsizecom);
-		mav.addObject("setlist", pn);
+		mav.addObject("pn", pn);
 		mav.addObject("p",p);
 		mav.addObject("loginid", id);
 		mav.addObject("details", data);
