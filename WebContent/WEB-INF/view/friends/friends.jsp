@@ -120,8 +120,8 @@
 			for(var i=0; i<txt.length; i++){
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
-				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></tr>";
+				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='acce("+i+")'/>&nbsp;&nbsp;";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></td></tr>";
 			}
 			$("#addBody").html(html);
 			html = "";
@@ -159,8 +159,8 @@
 			for(var i=0; i<txt.length; i++){
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
-				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Reject' onclick='refuse("+i+")'/></tr>";
+				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='acce("+i+")'/>&nbsp;&nbsp;";
+				html += "<input type='button' class='btn btn-danger' value='Reject' onclick='refuse("+i+")'/></td></tr>";
 			}
 			$("#addBody").html(html);
 		});
@@ -204,14 +204,14 @@
 			for(var i=0; i<txt.length; i++){
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
-				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></tr>";
+				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='acce("+i+")'/>&nbsp;&nbsp;";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></td></tr>";
 			}
 			$("#addBody").html(html);
 		});
 	});
 	
-	function accept(txt){
+	function acce(txt){
 		var name = "";
 		for(var i=0; i<10; i++){
 			if(txt==i){

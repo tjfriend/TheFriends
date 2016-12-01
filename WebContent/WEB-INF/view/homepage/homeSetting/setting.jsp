@@ -146,7 +146,35 @@
 	</div>
 </div>
 
+<div class="w3-modal" style="display: none" id="delDiv">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="del">
+		<input type="button" class="btn btn-success" value="삭제되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="delFailDiv">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="delFail">
+		<input type="button" class="btn btn-danger" value="삭제에 실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="initDiv">
+	<div class="w3-modal-content" style="width: 250px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="init">
+		<input type="button" class="btn btn-success" value="해당 항목이 초기화되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="initFailDiv">
+	<div class="w3-modal-content" style="width: 250px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="initFail">
+		<input type="button" class="btn btn-danger" value="초기화에 실패하였습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
 <script>
+	function endDiv(txt){
+		$("#"+txt+"Div").fadeIn(300).delay(1000).fadeOut(300);
+	}
+
 	function picChoose(){
 		$("#profileDiv").fadeIn(300);
 	}
@@ -191,51 +219,62 @@
 		var music = "";
 		for(var i=0; i<${list.size()}; i++){
 			if($("#"+i).prop("checked")){
-				music += $("#music"+i).html()+",";
+				music += $("#music"+i).html()+"#";
 			}
 		}
+		console.log(${list.size()});
 		$.ajax({
 			"method" : "get",
 			"url" : "/settings/musicDelete/${id}?music="+music,
 			"async" : false
 		}).done(function(txt){
 			if(txt==true){
-				alert("삭제완료");
+				endDiv("del");
 			} else {
-				alert("삭제실패");
+				endDiv("delFail");
 			}
-			location.reload();
+			setTimeout(function(){location.href="/homepage/${id}"}, 1600);
 		});
 		$("#deleteCo").hide();
 		$("#deleteCa").hide();
 		$("#delete").show();
+		$(".musicCheck").hide();
+		$(".musicCheck").prop("checked", false);
 	});
 	
 	$("#initialCo").click(function(){
 		var board = $("#board").prop("checked");
 		var picture = $("#picture").prop("checked");
 		var visitors = $("#visitors").prop("checked");
-		var url = "/settings/initial/${id}?mode=";
+		var url = "/settings/initial/${id}?";
+		var ar = [];
 		if(board){
-			url += "board";
+			ar.push("board=board");
 		}
 		if(picture){
-			url += "";
+			ar.push("picture=picture");
 		}
 		if(visitors){
-			url += "";
+			ar.push("visitors=visitors");
 		}
+		url += ar.join("&");
 		$.ajax({
 			"method" : "get",
 			"url" : url,
 			"async" : false
 		}).done(function(txt){
-			alert(txt);
+			if(txt==true){
+				endDiv("init");
+			} else {
+				endDiv("initFail");
+			}
+			setTimeout(function(){location.href="/homepage/${id}"}, 1600);
 		});
 		$("#initialCo").hide();
 		$("#initialCa").hide();
 		$("#initial").show();
 		$(".initialCheck").prop("checked", false);
+		$(".initialCheck").hide();
 	});
 
 	$("#layout").change(function(){

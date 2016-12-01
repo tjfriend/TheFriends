@@ -45,6 +45,8 @@ public class QnAcontroller {
 	public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "") String mode,
 			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "5") int paging) {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("p",p);
+		
 		List best = qp.qnabest();
 		mav.addObject("qnabest",best);
 			

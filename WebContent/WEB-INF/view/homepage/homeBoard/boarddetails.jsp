@@ -18,7 +18,7 @@
 		style="padding-left: 30px; padding-right: 30px; padding-top: 40px; width: 70%">
 		<div align="right">
 			<input type="button" value="목록보기" class="btn btn-default"
-				onClick="self.location='/homeBoard/${id}';">
+				onClick="goBoard()">
 			<c:choose>
 				<c:when test="${loginid == details.ID }">
 					<input type="button" value="수정" class="btn btn-default" id="adjust" 
@@ -41,7 +41,7 @@
 					<td width="7%"><label>Count</label></td>
 				</tr>
 				<tr align="center">
-					<td>${details.NUM }</td>
+					<td>${rnum }</td>
 					<td>${details.TITLE }</td>
 					<td>${details.ID }</td>
 					<%-- 	디자인고치기		<td width="5" align="right"><a href="/qna/qnaupdate?num=${details.NUM}">수정</a></td> --%>
@@ -121,7 +121,17 @@
 				<fmt:parseNumber var="homepagecommentsi " value="${(var3+1)*5}"
 					integerOnly="true" />
 			</c:if>
+			
 			<script>
+			function goBoard(){
+				$.ajax({
+					"method" : "get",
+					"url" : "/homepage/board/${id}",
+					"async" : false
+				}).done(function(txt){
+					$("#homeMain").html(txt);
+				});
+			}
 			
 			function nextpage() {
 				paging = ${homepagecommentsi + 5 };
@@ -134,8 +144,6 @@
 				p = paging - 4;
 				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
 			}
-			
-			
 			
 			$("#adjust").click(function(){
 				window.open("/homeBoard/homeBoardupdate?num=${details.NUM}", "picup", "width= 500px, height= 500px, left= 300, top= 100, resizable=no");

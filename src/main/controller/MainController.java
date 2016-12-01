@@ -24,8 +24,25 @@ public class MainController {
 	@Autowired
 	NaviService navi;
 
+//	@RequestMapping("/")
+//	public ModelAndView index(@CookieValue(name = "remember", required = false) String cooId) {
+//		ModelAndView mav = new ModelAndView("t:index");
+//		if (cooId != null) {
+//			mav.addObject("remember", cooId);
+//		}
+//		return mav;
+//	}
 	@RequestMapping("/")
 	public ModelAndView index(@CookieValue(name = "remember", required = false) String cooId) {
+		ModelAndView mav = new ModelAndView("/main/index.jsp");
+		if (cooId != null) {
+			mav.addObject("remember", cooId);
+		}
+		return mav;
+	}
+	
+	@RequestMapping("/index")
+	public ModelAndView index2(@CookieValue(name = "remember", required = false) String cooId) {
 		ModelAndView mav = new ModelAndView("t:index");
 		if (cooId != null) {
 			mav.addObject("remember", cooId);

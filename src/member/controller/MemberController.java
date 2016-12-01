@@ -53,7 +53,7 @@ public class MemberController {
 	
 	@RequestMapping("logout")
 	public ModelAndView logout(HttpSession session, @CookieValue(name="remember", required=false) String cooId){
-		ModelAndView mav = new ModelAndView("t:index");
+		ModelAndView mav = new ModelAndView("/main/index.jsp");
 		session.removeAttribute("login");
 		session.removeAttribute("id");
 		session.removeAttribute("point");
