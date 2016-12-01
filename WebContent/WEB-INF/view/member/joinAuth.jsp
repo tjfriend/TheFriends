@@ -189,7 +189,7 @@
 				<input type="text" id="recommender_s" name="recommender_s"
 					class="form-control" style="width: 35%; padding-left: 10px"
 					placeholder="recommender" />
-				<p>추천인 입력시 500 잣 증정
+				<p>추천인 입력시 500 밤 증정
 				<p>
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
@@ -197,7 +197,7 @@
 				<input type="text" id="recommender" name="recommender"
 					class="form-control" style="width: 20%; padding-left: 10px"
 					placeholder="recommender" />
-				<p>추천인 입력시 500 잣 증정
+				<p>추천인 입력시 500 밤 증정
 				<p>
 			</div>
 		</div>

@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
@@ -26,34 +26,38 @@ public class Myinfocontroller {
 	}
 
 	@RequestMapping("/PassConfirm")
-	public ModelAndView PassConfirm(HttpSession session, String pass) {
+	@ResponseBody
+	public boolean PassConfirm(HttpSession session, String pass) {
+		String id = (String) session.getAttribute("id");
+		List list = cf.PassConfirm(id, pass);
+		List lis = cf.Myinfo(id);
+		if (list.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	@RequestMapping("/passConfirm2")
+	public ModelAndView passConfirm2(HttpSession session, String pass){
 		String id = (String) session.getAttribute("id");
 		ModelAndView mav = new ModelAndView();
 		List list = cf.PassConfirm(id, pass);
 		List lis = cf.Myinfo(id);
-		if (list.isEmpty()) {
-			mav.setViewName("/myinfo/Passcertification.jsp");
-			mav.addObject("passch",1);
-			System.out.println("if");
-			
-		} else {
-			mav.setViewName("/myinfo/Myinformation.jsp");
-			mav.addObject("info", list.get(0));
-			mav.addObject("infomy",lis.get(0));
-			System.out.println("else");
-			
-		}
+		mav.setViewName("/myinfo/Myinformation.jsp");
+		mav.addObject("info", list.get(0));
+		mav.addObject("infomy",lis.get(0));
 		return mav;
 	}
 
 	@RequestMapping("/myinfodelete")
-	public ModelAndView myinfodelete(HttpSession session) {
+	public String myinfodelete(HttpSession session) {
 		String id = (String) session.getAttribute("id");
-
-		ModelAndView mav = new ModelAndView();
 		int de = cf.Myinfodelete(id);
-		mav.setViewName("t:index");
-		return mav;
+		session.removeAttribute("login");
+		session.removeAttribute("id");
+		session.removeAttribute("point");
+		return "/common.jsp";
 	}
 
 	@RequestMapping("/Passchange")

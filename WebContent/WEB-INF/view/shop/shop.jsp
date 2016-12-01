@@ -39,7 +39,7 @@
 			<tr align="center">
 				<td align="center"><label>${shop.NUM }</label></td>
 				<td><label>${shop.TITLE }</label></td>
-				<td><label>${shop.MONEY }잣</label></td>
+				<td><label>${shop.MONEY }밤</label></td>
 				<td><input type="button" value="듣기"
 					onclick="listen('${shop.TITLE}', '${shop.NUM }')"
 					class="btn btn-default" /> <c:choose>
@@ -122,7 +122,7 @@
 	<div class="w3-modal-content"
 		style="width: 250px; height: 130px; border-radius: 10px; margin-top: 100px"
 		align="center" id="buy">
-		<label><font color='blue' id="money"></font>잣으로 <font
+		<label><font color='blue' id="money"></font>밤으로 <font
 			color='red' id="title"></font>를(을)<br />구매하시겠습니까?</label><br /> <br /> <input
 			type='button' class='btn btn-default' value='구매'
 			style='width: 60px; height: 40px; border-radius: 10px' id="purchase" />&nbsp;&nbsp;
@@ -136,7 +136,7 @@
 	<div class="w3-modal-content"
 		style="width: 250px; height: 170px; border-radius: 10px; margin-top: 100px"
 		align="center" id="gift">
-		<label><font color='blue' id="gmoney"></font>잣으로 <font
+		<label><font color='blue' id="gmoney"></font>밤으로 <font
 			color='red' id="gtitle"></font>를(을)<br />선물하시겠습니까?</label><br /> <br />
 		<div>
 			<select id="friend"
