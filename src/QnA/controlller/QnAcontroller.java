@@ -205,6 +205,7 @@ public class QnAcontroller {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("p",p);
 		mav.addObject("loginid", id);
 		mav.addObject("details", data);
 		mav.addObject("qnacommentda", list);

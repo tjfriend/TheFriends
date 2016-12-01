@@ -150,9 +150,9 @@
 					var id = element.id;
 					id = id.slice(id.indexOf('t') + 1);
 					var memo = $("#memo" + id).val();
-					p = ${param.p};
+					
 					location.href = "/qna/commentupdate?num=${details.NUM}&commentnum="
-							+ id + "&memo=" + memo+"&p="+p+"&paging=${qnacommentsi}";
+							+ id + "&memo=" + memo+"&p=${p}+&paging=${qnacommentsi}";
 				}
 
 				function change(element) {

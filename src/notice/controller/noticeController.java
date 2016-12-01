@@ -141,6 +141,7 @@ public class noticeController {
 		mav.addObject("noticebestsizecom",bestsizecom);
 		
 		
+		mav.addObject("p",p);
 		mav.addObject("loginid",id);
 		mav.addObject("details", data);
 		mav.addObject("noticecommentda", list);

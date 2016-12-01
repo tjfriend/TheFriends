@@ -140,9 +140,8 @@
 				function memoupdate(element){
 					var id = element.id;
 					id = id.slice(id.indexOf('t')+1);
-					p = ${param.p};
 					var memo = $("#memo"+id).val();
-					location.href="/notice/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&p="+p+"&paging=${noticecommentsi}";
+					location.href="/notice/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&p=${p}&paging=${noticecommentsi}";
 				}
 				
 				function change(element) {
