@@ -120,7 +120,7 @@
 	<div align="right">
 	<c:choose>
 			<c:when test="${login == null }">
-				<input type="button" value="질문하기" onclick="javascript:openLogin()"
+				<input type="button" value="글작성" onclick="javascript:openLogin()"
 					class="btn btn-default">
 				<script>
 					LeftPosition = (screen.width - 400) / 2;

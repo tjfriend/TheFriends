@@ -9,7 +9,7 @@
 	</c:when>
 	<c:otherwise>
 		<p>선물에 실패하였습니다.</p> 
-		<p>보유잣이 부족하거나 친구가 같은 음악이 있습니다.</p> <br/>
+		<p>보유밤이 부족하거나 친구가 같은 음악이 있습니다.</p> <br/>
 		<input type="button" value="닫기" onclick="self.close()" />
 		
 	</c:otherwise>

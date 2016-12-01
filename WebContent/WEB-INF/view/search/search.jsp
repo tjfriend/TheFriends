@@ -23,7 +23,14 @@
 		</select>&nbsp;
 		<input type="text" name="con" id="con"
 					style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px">&nbsp;
-		<input type="button" value="검색하기" id="search" style="height: 33px" class="btn btn-default"/>
+		<c:choose>
+			<c:when test="${sessionScope.login!=null }">
+				<input type="button" value="검색하기" id="search" style="height: 33px" class="btn btn-default"/>
+			</c:when>
+			<c:otherwise>
+				<input type="button" value="검색하기" style="height: 33px" class="btn btn-default" disabled="disabled"/>
+			</c:otherwise>
+		</c:choose>
 	</div><br/>
 	<div>
 		<span id="span"></span>

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,57 +9,38 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<style>
-hre {
-	display: block;
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-	margin-left: 0px;
-	margin-right: 0px;
-	border-style: inset;
-	border-width: 1px;
-}
-</style>
 
+<div align="center" style="margin-top: 50px">
+	<table>
+		<tr>
+			<td><input type="button" value="회원정보수정" id="ChangeInfoButton" class="btn btn-default"
+				onclick="ChangeInfoButton"></td>
+			<td><input type="button" value="비밀번호변경" id="ChangePassButton" class="btn btn-default"
+				onclick="ChangePassButton"></td>
+			<td><input type="button" value="회원탈퇴" id="SecessionButton" class="btn btn-default"
+				onclick="SecessionButton"></td>
+		</tr>
+	</table>
+</div>
 
-<table>
-	<tr>
-		<td><input type="button" value="회원정보수정" id="ChangeInfoButton"
-			onclick="ChangeInfoButton"></td>
-		<td><input type="button" value="비밀번호변경" id="ChangePassButton"
-			onclick="ChangePassButton"></td>
-		<td><input type="button" value="회원탈퇴" id="SecessionButton"
-			onclick="SecessionButton"></td>
-	</tr>
-</table>
-
-<div id="Secessiondiv">
-	<hre></hre>
+<div id="Secessiondiv" align="center" style="width: 100%">
 	<br /> 회원탈퇴를 신청하기 전에 아래 사항을 꼭 확인해주세요. <br /> <br /> ●탈퇴 신청시 즉시 탈퇴
-	처리됩니다.<br /> ●사용하고 계신 아이디와 닉네임은 탈퇴 후 재사용할 수 있습니다.<br /> ●탈퇴 후 0일이 지나면
-	회원정보 및 서비스와 관련된 포인트가 모두 삭제됩니다.<br /> ●재가입에 0일의 시간이 걸리는 만큼, 닉네임변경을 목적으로
-	하는 경우 신중히 판단해주세요.<br /> ●탈퇴 전 작성된 게시물이나 댓글 등은 탈퇴 후에도 유지됩니다.<br /> <font
-		color="red">●게시물 삭제 등을 원하는 경우 반드시 삭제 처리 후 탈퇴를 신청해주세요.</font><br /> <br />
+	처리됩니다.<br /> ●사용하고 계신 아이디와 닉네임은 탈퇴 후 재사용할 수 있습니다.<br /> ●탈퇴 후 즉시
+	회원정보 및 서비스와 관련된 포인트가 모두 삭제됩니다.<br /> 
+	<font color="red">●탈퇴 전 작성된 게시물이나 댓글 등은 탈퇴 후 즉시 삭제됩니다.</font><br /> <br />
 	아래 확인 버튼을 누르면 탈퇴가 진행됩니다.<br /> <br /> <br />
 
-
-	<div style="float: left; margin-left: 225px">
+	<div class="w3-row" style="width: 100%">
 		<form action="/myinfo/myinfodelete" method="post">
 			<input type="submit" name="Check" value="확인"
-				style="height: 50px; width: 150px">
-
+				style="height: 50px; width: 100px" class="btn btn-default">
+			<input type="button" name="Cancell" value="취소"
+				style="height: 50px; width: 100px" id="Cancell" onclick="Cancell" class="btn btn-default">
 		</form>
 	</div>
-	<div style="float: left; margin-left: 20px;">
-		<input type="button" name="Cancell" value="취소"
-			style="height: 50px; width: 150px" id="Cancell" onclick="Cancell">
-
-	</div>
-
 </div>
 
 <div id="ChangePass">
-	<hre></hre>
 	<br />
 	<div align="center">
 		<form action="/myinfo/Passchange" method="post" name="checkpass">
@@ -70,34 +50,25 @@ hre {
 			<label style="width: 30%"><font size="4">변경할 비밀번호확인 </font></label> <input
 				type="text" class="form-control" style="width: 35%" name="passcheck" id="passcheck"/>
 			
-			<br /> <input type="button" value="확인" name="passbu" id="passbu" onclick="passbu"
-				style="margin: 0 auto; height: 50px; width: 150px">
+			<br /> <input type="button" value="확인" name="passbu" id="passbu" onclick="passbu" class="btn btn-default"
+				style="margin: 0 auto; height: 50px; width: 100px">
 		</form>
 	</div>
 </div>
 <script>
-	
 	$("#passbu").click(function() {
 		var pass = $('#pass').val();
 		var passcheck = $('#passcheck').val();
-		
 		if(pass == passcheck){
 			 alert("비밀번호가 성공적으로 변경되었습니다.");
 			 location.href="/myinfo/Passchange?pass="+ pass;
 		}else{
 			 alert("비밀번호를 다시 확인해주세요.");
 		}
-
 	});
-		 
-
 </script>
 
-
-
-
 <div id="ChangeInfodiv" align="center">
-	<hre></hre>
 	<br />
 	<form action="/myinfo/changeoff" method="post">
 		<div class="w3-hide-large">
@@ -188,13 +159,10 @@ hre {
 </div>
 
 <script>
-
-
 	$(document).ready(function() {
 		$("#ChangePass").hide();
 		$("#Secessiondiv").hide();
 		$("#ChangeInfodiv").show();
-
 	});
 	$("#ChangeInfoButton").click(function() {
 		$("#ChangeInfodiv").show();
@@ -216,7 +184,6 @@ hre {
 		$("#ChangeInfodiv").hide();
 		$("#ChangePass").show();
 	});
-
 	$("#selMail").change(function() {
 		var sel = $("#selMail").prop("value");
 		var email = $("#email2");
@@ -228,7 +195,6 @@ hre {
 			email.prop("readonly", "readonly");
 		}
 	});
-
 	$("#selMail_s").change(function() {
 		var sel = $("#selMail_s").prop("value");
 		var email = $("#email2_s");

@@ -11,7 +11,7 @@
 body,h1,h2,h5 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
 .bgimg {
-	background-image: url('/image/mainImage.png');
+	background-image: url('/image/2.png');
     min-height: 100%;
     background-position: center;
     background-size: cover;
