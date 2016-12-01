@@ -156,7 +156,7 @@ public class HomeBoardController {
 		
 		
 		
-		
+		mav.addObject("p",p);
 		mav.addObject("id", id);
 		mav.addObject("loginid",loginid);
 		mav.addObject("details", data);

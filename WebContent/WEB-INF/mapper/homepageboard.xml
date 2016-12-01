@@ -5,7 +5,7 @@
 	<select id="pageNum" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
 	<![CDATA[
-	select * from
+	 select * from
        (select rownum rnum, temp.* from	(
 		  select * from homebord  where id = #{id} order by num desc
 	  ) temp ) temp2

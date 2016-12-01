@@ -130,23 +130,14 @@
 				window.open("/homeBoard/homeBoardupdate?num=${details.NUM}", "picup", "width= 500px, height= 500px, left= 300, top= 100, resizable=no");
 			});
 					
-			function nextpage() {
-				paging = ${homepagecommentsi + 5 };
-				p = ${homepagecommentsi + 1 };
-							
-				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
-			}
-			function backpage() {
-				paging = ${homepagecommentsi - 5 };
-				p = paging - 4;
-				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
-			}
+			
 				function memoupdate(element){
 					var id = element.id;
 					id = id.slice(id.indexOf('t')+1);
-					p = ${param.p};
+					var p = 1;
+					
 					var memo = $("#memo"+id).val();
-					location.href="/homeBoard/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&id=${id}&p="+p+"&paging=${homepagecommentsi}";
+					location.href="/homeBoard/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&id=${id}&p=${p}&paging=${homepagecommentsi}";
 				}
 				
 				function change(element) {

@@ -7,7 +7,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <div class="w3-container" style="max-height: 700px" align="center">
 	<h3 class="w3-padding-32 w3-text-grey" align="center">HomeBoard</h3>
