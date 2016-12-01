@@ -51,4 +51,13 @@
 	<delete id="del">
 		delete from visitors where num=#{num}
 	</delete>
+	<delete id="initialB">
+		delete from homebord where id=#{id}
+	</delete>
+	<delete id="initialP">
+		delete from pictureboard where id=#{id}
+	</delete>
+	<delete id="initialV">
+		delete from visitors where id=#{id}
+	</delete>
 </mapper>

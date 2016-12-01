@@ -55,7 +55,7 @@ public class SettingService {
 	
 	public boolean musicDelete(String id, String music){
 		SqlSession ss = fac.openSession();
-		String[] ar = music.split("...");
+		String[] ar = music.split("#");
 		HashMap<String, String> map = new HashMap<>();
 		map.put("id", id);
 		int n = 0;
