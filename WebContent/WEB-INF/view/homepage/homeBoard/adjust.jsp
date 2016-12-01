@@ -23,7 +23,7 @@ body, h1, h2, h3, h4, h5 {
 	align="center">
 	<form action="/homeBoard/homeBoardadjust" method="post"
 		enctype="multipart/form-data">
-		
+		<input type="hidden" name="pn" value="${pn }">
 		<input type="hidden"  name="num" value="${list.get(0).NUM }"/>
 		<label for="title" style="width: 30%"><font size="3">TITLE</font></label>
 		<input type="text" id="title" name="title" class="form-control" value="${list.get(0).TITLE }"

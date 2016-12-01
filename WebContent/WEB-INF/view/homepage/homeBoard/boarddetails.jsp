@@ -105,10 +105,10 @@
 				<c:forEach var="p" begin="${var3*5+1 }" end="${homepagecommentsi }">
 					<c:choose>
 						<c:when test="${p == homepagecommentsi }">
-								<a  href="/homeBoard/details/${id}/${details.NUM }?p=${p }&paging=${homepagecommentsi }">${p }</a>&nbsp;
+								<a  href="/homeBoard/details/${id}/${details.NUM }?p=${p }&paging=${homepagecommentsi }&pn=${pn}">${p }</a>&nbsp;
 						</c:when>
 						<c:otherwise>
-							<a href="/homeBoard/details/${id}/${details.NUM }?p=${p }&paging=${homepagecommentsi }">${p }</a>&nbsp;|
+							<a href="/homeBoard/details/${id}/${details.NUM }?p=${p }&paging=${homepagecommentsi }&pn=${pn}">${p }</a>&nbsp;|
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -125,10 +125,9 @@
 			<script>
 			//"url" : "/homepage/board/${id}",
 			function goBoard(){
-				
 				$.ajax({
 					"method" : "get",
-					"url" : "/homepage/board/${id}",
+					"url" : "/homeBoard/${id}?p=${pn}",
 					"async" : false
 				}).done(function(txt){
 					$("#homeMain").html(txt);
@@ -140,16 +139,16 @@
 				paging = ${homepagecommentsi + 5 };
 				p = ${homepagecommentsi + 1 };
 							
-				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn}";
 			}
 			function backpage() {
 				paging = ${homepagecommentsi - 5 };
 				p = paging - 4;
-				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn}";
 			}
 			
 			$("#adjust").click(function(){
-				window.open("/homeBoard/homeBoardupdate?num=${details.NUM}", "picup", "width= 500px, height= 500px, left= 300, top= 100, resizable=no");
+				window.open("/homeBoard/homeBoardupdate?num=${details.NUM}&pn=${pn}", "picup", "width= 500px, height= 500px, left= 300, top= 100, resizable=no");
 			});
 					
 			
@@ -159,7 +158,7 @@
 					var p = 1;
 					
 					var memo = $("#memo"+id).val();
-					location.href="/homeBoard/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&id=${id}&p=${p}&paging=${homepagecommentsi}";
+					location.href="/homeBoard/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&id=${id}&p=${p}&paging=${homepagecommentsi}&pn=${pn}";
 				}
 				
 				function change(element) {
@@ -191,7 +190,7 @@
 				var num = id.substring(id.indexOf('e') + 7);
 				
 				if(confirm("이 게시글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/homeBoard/homeBoarddelete?num="+num+"&id=${id}";
+					location.href="/homeBoard/homeBoarddelete?num="+num+"&id=${id}&pn=${pn}";
 				}else{
 					return;
 				}
@@ -204,7 +203,7 @@
 				var commentnum = id.substring(id.indexOf('t') + 7 );
 				
 				if(confirm("이 댓글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/homeBoard/commentdelete?num=${details.NUM}&commentnum="+commentnum+"&id=${id}";
+					location.href="/homeBoard/commentdelete?num=${details.NUM}&commentnum="+commentnum+"&id=${id}&pn=${pn}";
 				}else{
 					return;
 				}
@@ -217,6 +216,7 @@
 			<div align="center">
 				<c:if test="${login != null }">
 					<form action="/homeBoard/homeBoardcomment" method="post">
+						<input type="hidden" name="pn" value="${pn }">
 						<input type="hidden" name="rnum" value="${rnum }">
 						<input type="hidden" name="num" value="${details.NUM }"> 
 						<input type="hidden" name="id" value="${loginid }">

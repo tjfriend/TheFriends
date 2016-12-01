@@ -38,10 +38,33 @@ public class Confirm {
 	// 아이디 삭제
 	public int Myinfodelete(String id) {
 		SqlSession sql = fac.openSession();
-		int de = sql.delete("myinfo.memberdelete", id);
-		int de1 = sql.delete("myinfo.myinfodelete", id);
+		int de = sql.delete("myinfo.addfriendsdelete", id);
+		int de1 = sql.delete("myinfo.chargedelete", id);
+		int de2= sql.delete("myinfo.chargeusedelete", id);
+		int de3= sql.delete("myinfo.emailauthdelete", id);
+		int de4= sql.delete("myinfo.eventdelete", id);
+		int de5= sql.delete("myinfo.eventcommentdelete", id);
+		int de6= sql.delete("myinfo.freeboarddelete", id);
+		int de7= sql.delete("myinfo.freeboardcommentdelete", id);
+		int de8= sql.delete("myinfo.friendsdelete", id);
+		int de9= sql.delete("myinfo.homeboardcommentdelete", id);
+		int de10 = sql.delete("myinfo.homeborddelete", id);
+		int de11 = sql.delete("myinfo.homepagedelete", id);
+		int de12 = sql.delete("myinfo.memaddressdelete", id);
+		int de13 = sql.delete("myinfo.memberdelete", id);
+		int de14 = sql.delete("myinfo.myinfodelete", id);
+		int de15 = sql.delete("myinfo.noticedelete", id);
+		int de16 = sql.delete("myinfo.noticecommentdelete", id);
+		int de17 = sql.delete("myinfo.pictureboarddelete", id);
+		int de18 = sql.delete("myinfo.picturereplydelete", id);
+		int de19 = sql.delete("myinfo.profiledelete", id);
+		int de20 = sql.delete("myinfo.qnadelete", id);
+		int de21 = sql.delete("myinfo.qnacommentdelete", id);
+		int de22 = sql.delete("myinfo.shopbuydelete", id);
+		int de23 = sql.delete("myinfo.visitorsdelete", id);
+		
 		sql.close();
-		return de + de1;
+		return de+de1+de2+de3+de4+de5+de6+de7+de8+de9+de10+de11+de12+de13+de14+de15+de16+de17+de18+de19+de20+de21+de22+de23;
 	}
 
 	// 비밀번호 변경

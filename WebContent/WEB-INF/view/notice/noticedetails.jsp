@@ -19,11 +19,11 @@
 		style="padding-left: 30px; padding-right: 30px; padding-top: 40px; width: 70%">
 		<div align="right">
 			<input type="button" value="목록보기" class="btn btn-default"
-				onClick="self.location='/notice/list?p=${setlist}';">
+				onClick="self.location='/notice/list?p=${pn}';">
 			<c:choose>
 				<c:when test="${loginid == details.ID }">
 					<input type="button" value="수정" class="btn btn-default"
-						onclick="location.href='/notice/noticeupdate?num=${details.NUM}'" />
+						onclick="location.href='/notice/noticeupdate?num=${details.NUM}&pn=${pn }'" />
 					<input type="button" value="삭제" class="btn btn-default"
 						id="QnADelete${details.NUM }" onclick="QnADelete(this)">
 				</c:when>
@@ -107,10 +107,10 @@
 				<c:forEach var="p" begin="${var3*5+1 }" end="${noticecommentsi }">
 					<c:choose>
 						<c:when test="${p == noticecommentsi }">
-							<a href="/notice/details/${details.NUM }?p=${p }&paging=${noticecommentsi }">${p }</a>&nbsp;
+							<a href="/notice/details/${details.NUM }?p=${p }&paging=${noticecommentsi }&pn=${pn }">${p }</a>&nbsp;
 						</c:when>
 						<c:otherwise>
-							<a href="/notice/details/${details.NUM }?p=${p }&paging=${noticecommentsi }">${p }</a>&nbsp;|
+							<a href="/notice/details/${details.NUM }?p=${p }&paging=${noticecommentsi }&pn=${pn }">${p }</a>&nbsp;|
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -129,19 +129,19 @@
 				paging = ${noticecommentsi + 5 };
 				p = ${noticecommentsi + 1 };
 							
-				location.href = "/notice/details/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/notice/details/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn }";
 			}
 			function backpage() {
 				paging = ${noticecommentsi - 5 };
 				p = paging - 4;
-				location.href = "/notice/details/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/notice/details/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn }";
 			}
 				
 				function memoupdate(element){
 					var id = element.id;
 					id = id.slice(id.indexOf('t')+1);
 					var memo = $("#memo"+id).val();
-					location.href="/notice/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&p=${p}&paging=${noticecommentsi}";
+					location.href="/notice/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&p=${p}&paging=${noticecommentsi}&pn=${pn }";
 				}
 				
 				function change(element) {
@@ -173,7 +173,7 @@
 				var num = id.substring(id.indexOf('e') + 5);
 				
 				if(confirm("이 게시글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/notice/noticedelete?num="+num;
+					location.href="/notice/noticedelete?num="+num+"&pn=${pn }";
 				}else{
 					return;
 				}
@@ -186,7 +186,7 @@
 				var commentnum = id.substring(id.indexOf('t') + 7 );
 				
 				if(confirm("이 댓글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/notice/commentdelete?num=${details.NUM}&commentnum="+commentnum;
+					location.href="/notice/commentdelete?num=${details.NUM}&commentnum="+commentnum+"&pn=${pn }";
 				}else{
 					return;
 				}
@@ -200,6 +200,7 @@
 				<c:if test="${login != null }">
 					<form action="/notice/noticecomment" method="post">
 					<input type="hidden" name="paging" value="${noticebestsizecom }">	
+						<input type="hidden" name="pn" value="${pn }">
 						<input type="hidden" name="num" value="${details.NUM }"> 
 						<input type="hidden" name="endpa" value="${noticecommentsi }"> 
 						<input type="text" name="memo" style="width: 50%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px; resize: none;"/>

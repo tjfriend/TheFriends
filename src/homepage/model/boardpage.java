@@ -17,13 +17,17 @@ public class boardpage {
 	SqlSessionFactory fac;
 
 	public List homeboardlist(int p,String id) {
-		int endpage = 10 * p;
+		SqlSession sql = fac.openSession();
+		int size = sql.selectOne("homeboard.pagesize",id);
+		p=p-1;
+		int check = p*10;
+		
+		int endpage = size-check;
 		int startpage = endpage - 9;
 		HashMap map = new HashMap();
 		map.put("start", startpage);
 		map.put("end", endpage);
 		map.put("id", id);
-		SqlSession sql = fac.openSession();
 		List<HashMap> li = sql.selectList("homeboard.pageNum", map);
 		sql.close();
 		for (int i = 0; i < li.size(); i++) {
