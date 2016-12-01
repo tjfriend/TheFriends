@@ -42,10 +42,10 @@
 						<c:forEach var="i" begin="${homeboardsize-2}" end="${homeboardsize+2 }">
 							<c:choose>
 								<c:when test="${param.p == i }">
-									<a style="color: red;" href="/homeBoard/${id }?p=${i }&search=${homeboardsearch }">${i }</a>
+									<a style="color: red;" onclick="gopage(${i})">${i }</a>
 								</c:when>
 								<c:otherwise>
-									<a href="/homeBoard/${id }?p=${i }&search=${homeboardsearch }">${i }</a>
+									<a onclick="gopage(${i})">${i }</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -54,10 +54,10 @@
 						<c:forEach var="i" begin="1" end="${homeboardsize }">
 							<c:choose>
 								<c:when test="${param.p == i }">
-									<a style="color: red;" href="/homeBoard/${id }?p=${i }&search=${homeboardsearch }">${i }</a>
+									<a style="color: red;" onclick="gopage(${i})">${i }</a>
 								</c:when>
 								<c:otherwise>
-									<a href="/homeBoard/${id }?p=${i }&search=${homeboardsearch }">${i }</a>
+									<a onclick="gopage(${i})">${i }</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -72,17 +72,41 @@
 			</div>
 		</div>
 		<div align="center">
-			<form action="/homeBoard/${id}" method="post">
-				<label>검색&nbsp;</label> <input type="search" name="search"
+				<label>검색&nbsp;</label> <input type="search" name="search" id="search"
 					style="width: 15%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px" />
-				<input type="submit" value="검색" class="btn btn-default" />
-			</form>
+				<input type="button"  value="검색" class="btn btn-default"  id="searchbt" />
 		</div>
 	</div>
 </div>
 
 
 <script>
+							function gopage(element){
+								$.ajax({
+									"method" : "get",
+									"url" : "/homeBoard/${id}?p="+element+"&search=${homeboardsearch}",
+									"async" : false
+								}).done(function(txt){
+									$("#homeMain").html(txt);
+								});
+							}
+							
+							
+					
+
+					$("#searchbt").click(function() {
+								var search = $('#search').val();
+								
+								$.ajax({
+									"method" : "get",
+									"url" : "/homeBoard/${id}?search="+search+"&p=1",
+									"async" : false
+								}).done(function(txt) {
+									$("#homeMain").html(txt);
+								});
+							});
+							
+
 $("#noticeWrite").click(function(){
 	window.open("/homeBoard/homeboardWrite/${id}", "picup", "width= 500px, height= 500px, left= 300, top= 100, resizable=no");
 });

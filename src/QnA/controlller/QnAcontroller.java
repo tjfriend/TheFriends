@@ -168,7 +168,8 @@ public class QnAcontroller {
 
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
-			HttpSession session, HttpServletRequest req, HttpServletResponse resp,@RequestParam(defaultValue ="5")int paging) {
+			HttpSession session, HttpServletRequest req, HttpServletResponse resp,@RequestParam(defaultValue ="5")int paging
+			,@RequestParam int pn) {
 		String id = (String) session.getAttribute("id");
 
 		Cookie[] ar = req.getCookies();
@@ -206,6 +207,7 @@ public class QnAcontroller {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("pn",pn);
 		mav.addObject("p",p);
 		mav.addObject("loginid", id);
 		mav.addObject("details", data);

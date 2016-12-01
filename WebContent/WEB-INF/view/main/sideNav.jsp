@@ -73,13 +73,13 @@
 <a href="javascript:void(0)" onclick="w3_close()"
 	class="w3-padding w3-hide-large">CLOSE</a>
 <a href="/" onclick="w3_close()" class="w3-padding">Home</a>
-<a href="/notice/list" onclick="w3_close()" class="w3-padding">Notice</a>
-<a href="/event/list" onclick="w3_close()" class="w3-padding">Event</a>
+<a href="/notice/list?p=1" onclick="w3_close()" class="w3-padding">Notice</a>
+<a href="/event/list?p=1" onclick="w3_close()" class="w3-padding">Event</a>
 <a href="/search" onclick="w3_close()" class="w3-padding">Search</a>
 <a href="/navigation" onclick="w3_close()" class="w3-padding">Navigation</a>
-<a href="/board/list" onclick="w3_close()" class="w3-padding">Free Board</a>
-<a href="/shop/list" onclick="w3_close()" class="w3-padding">Shop</a>
-<a href="/qna/list" onclick="w3_close()" class="w3-padding">QnA</a>
+<a href="/board/list?p=1" onclick="w3_close()" class="w3-padding">Free Board</a>
+<a href="/shop/list?p=1" onclick="w3_close()" class="w3-padding">Shop</a>
+<a href="/qna/list?p=1" onclick="w3_close()" class="w3-padding">QnA</a>
 
 <script>
 	function loginMenu(element){

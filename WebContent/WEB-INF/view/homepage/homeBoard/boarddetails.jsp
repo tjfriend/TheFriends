@@ -105,7 +105,7 @@
 				<c:forEach var="p" begin="${var3*5+1 }" end="${homepagecommentsi }">
 					<c:choose>
 						<c:when test="${p == homepagecommentsi }">
-								<a href="/homeBoard/details/${id}/${details.NUM }?p=${p }&paging=${homepagecommentsi }">${p }</a>&nbsp;
+								<a  href="/homeBoard/details/${id}/${details.NUM }?p=${p }&paging=${homepagecommentsi }">${p }</a>&nbsp;
 						</c:when>
 						<c:otherwise>
 							<a href="/homeBoard/details/${id}/${details.NUM }?p=${p }&paging=${homepagecommentsi }">${p }</a>&nbsp;|
@@ -123,7 +123,9 @@
 			</c:if>
 			
 			<script>
+			//"url" : "/homepage/board/${id}",
 			function goBoard(){
+				
 				$.ajax({
 					"method" : "get",
 					"url" : "/homepage/board/${id}",
@@ -132,6 +134,7 @@
 					$("#homeMain").html(txt);
 				});
 			}
+			
 			
 			function nextpage() {
 				paging = ${homepagecommentsi + 5 };
@@ -214,6 +217,7 @@
 			<div align="center">
 				<c:if test="${login != null }">
 					<form action="/homeBoard/homeBoardcomment" method="post">
+						<input type="hidden" name="rnum" value="${rnum }">
 						<input type="hidden" name="num" value="${details.NUM }"> 
 						<input type="hidden" name="id" value="${loginid }">
 						<input type="hidden" name="endpa" value="${noticecommentsi }"> 
