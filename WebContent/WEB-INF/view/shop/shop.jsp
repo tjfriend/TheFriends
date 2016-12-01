@@ -21,9 +21,11 @@
 			　
 			<div id="audio"></div>
 		</div>
+		<c:if test="${nick.get(0).NICKNAME eq '관리자' }">
 		<div align="right" class="w3-half">
 			<input type="button" value="음악올리기" class="btn btn-default" id="musicUp"/>
 		</div>
+		</c:if>
 	</div>
 	<div class="table-responsive">
 		<table class="table">
@@ -44,7 +46,34 @@
 			</c:forEach>
 		</table>
 	</div>
-	
+		<div align="center">
+			<label id="page"> <!-- 페이징 처리 --> <c:choose>
+					<c:when test="${shopbestsize >= 5 }">
+						<c:forEach var="i" begin="${shopsize-2}" end="${shopsize+2 }">
+							<c:choose>
+								<c:when test="${param.p == i }">
+									<a style="color: red;" href="/shop/list?p=${i }&search=${shopsearch }">${i }</a>
+								</c:when>
+								<c:otherwise>
+								<a href="/shop/list?p=${i }&search=${shopsearch }">${i }</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="i" begin="1" end="${shopsize }">
+							<c:choose>
+								<c:when test="${param.p == i }">
+									<a style="color: red;" href="/shop/list?p=${i }&search=${shopsearch }">${i }</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/shop/list?p=${i }&search=${shopsearch }">${i }</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</label>
 	<div align="center">
 		<form action="/shop/list" method="post">
 			<label>검색&nbsp;</label>

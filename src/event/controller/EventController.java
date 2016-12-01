@@ -102,7 +102,8 @@ public class EventController {
 	// 상세보기
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
-			HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
+			HttpServletRequest req, HttpServletResponse resp, HttpSession session,
+			@RequestParam(defaultValue = "5") int paging) {
 		String id = (String) session.getAttribute("id");
 
 		Cookie[] ar = req.getCookies();
@@ -133,6 +134,13 @@ public class EventController {
 		String day = sdf.format(date);
 		data.put("DAY", day);
 		ModelAndView mav = new ModelAndView();
+		int bestsizecom = ep.commentsize(num);
+
+		if (sizecom > paging) {
+			sizecom = paging;
+		}
+		mav.addObject("eventbestsizecom", bestsizecom);
+
 		mav.addObject("loginid", id);
 		mav.addObject("details", data);
 		mav.addObject("eventcommentda", list);
@@ -145,10 +153,11 @@ public class EventController {
 	// 댓글 수정
 	@RequestMapping("/commentupdate")
 	public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
-			@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num) {
+			@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,
+			@RequestParam(defaultValue="1")int p,@RequestParam(defaultValue = "5")int paging) {
 		int r = ew.CommentAdjust(memo, commentnum);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/event/details/" + num);
+		mav.setViewName("redirect:/event/details/"+ num+"?p="+p+"&paging="+paging);
 
 		return mav;
 
@@ -187,7 +196,6 @@ public class EventController {
 
 	@RequestMapping("/eventadjust")
 	public ModelAndView qnaAdjust(int num, String title, String content, HttpSession session) {
-		System.out.println("컨트 : " + num + "//" + title + "//" + content);
 		int r = ew.Adjust(num, content, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventadjust", r);
@@ -197,12 +205,13 @@ public class EventController {
 
 	// 댓글 등록
 	@RequestMapping("/eventcomment")
-	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p) {
+	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p,
+			@RequestParam(defaultValue ="5")int paging) {
 		String id = (String) session.getAttribute("id");
 		int r = ew.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = ep.commentsize(num);
-		mav.setViewName("redirect:/event/details/" + num + "?p=" + si);
+		mav.setViewName("redirect:/event/details/" + num + "?p="+si+"&paging="+paging);
 		return mav;
 	}
 }

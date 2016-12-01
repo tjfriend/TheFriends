@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -96,26 +98,49 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<c:forEach var="p" begin="1" end="${eventcommentsi }">
+				<fmt:parseNumber var="var3" value="${(eventcommentsi-1)/5}"
+					integerOnly="true" />
+				<c:if test="${eventcommentsi > 5 }">
+					<input type="button" value="이전" onclick="javascript:backpage()">
+				</c:if>
+				<c:forEach var="p" begin="${var3*5+1 }" end="${eventcommentsi }">
 					<c:choose>
-						<c:when test="${current == p }">
-							<b>${u }</b>
+						<c:when test="${p == eventcommentsi }">
+							<a href="/event/details/${details.NUM }?p=${p }&paging=${eventcommentsi }">${p }</a>&nbsp;
 						</c:when>
 						<c:otherwise>
-							<a href="/event/details/${details.NUM }?p=${p }">${p }</a>
+							<a href="/event/details/${details.NUM }?p=${p }&paging=${eventcommentsi }">${p }</a>&nbsp;|
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
+				<c:if test="${eventbestsizecom != eventcommentsi }">
+					<input type="button" value="다음" onclick="javascript:nextpage()" />
+				</c:if>
 			</div>
 			<br/>
-		
+		<c:if test="${eventbestsizecom == eventcommentsi }">
+				<fmt:parseNumber var="eventcommentsi" value="${(var3+1)*5}"
+					integerOnly="true" />
+			</c:if>
 			<script>
+			function nextpage() {
+				paging = ${eventcommentsi + 5 };
+				p = ${eventcommentsi + 1 };
+							
+				location.href = "/event/details/${details.NUM }?p="+ p + "&paging=" + paging;
+			}
+			function backpage() {
+				paging = ${eventcommentsi - 5 };
+				p = paging - 4;
+				location.href = "/event/details/${details.NUM }?p="+ p + "&paging=" + paging;
+			}
+			
 				function memoupdate(element){
 					var id = element.id;
 					id = id.slice(id.indexOf('t')+1);
-					
+					p = ${param.p};
 					var memo = $("#memo"+id).val();
-					location.href="/event/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo;
+					location.href="/event/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&p="+p+"&paging=${eventcommentsi}";
 				}
 				
 				function change(element) {
@@ -173,6 +198,7 @@
 			<div align="center">
 				<c:if test="${login != null }">
 					<form action="/event/eventcomment" method="post">
+						<input type="hidden" name="paging" value="${eventbestsizecom }">	
 						<input type="hidden" name="num" value="${details.NUM }"> 
 						<input type="hidden" name="endpa" value="${eventcommentsi }"> 
 						<input type="text" name="memo" style="width: 50%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px; resize: none;"/>

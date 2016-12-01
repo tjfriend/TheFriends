@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="homeboard">
+
+	<select id="pageNum" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	<![CDATA[
+	select * from
+       (select rownum rnum, temp.* from	(
+		  select * from homebord  where id = #{id} order by num desc
+	  ) temp ) temp2
+   	where temp2.rnum >=#{start} and temp2.rnum <=#{end}  	
+	]]>
+	</select>
+
+	<insert id="write" parameterType="java.util.HashMap">
+		insert into homebord values
+		(HOMEBOARD_ESQ.nextval, #{title }, #{content },sysdate,0,#{id } )
+	</insert>
+
+	<select id="pagesize" resultType="java.lang.Integer">
+		select count(*) from homebord where id= #{id }
+	</select>
+	
+	<!-- 검색 -->
+	<select id="homebordsearch" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	<![CDATA[
+	select * from
+       (select rownum rnum, temp.* from	(
+		  select * from homebord where  (title like #{search } or content like #{search }) and id = #{id }  order by num desc
+	  ) temp ) temp2
+   	where temp2.rnum >=#{start } and temp2.rnum <=#{end }	
+	]]>
+	</select>
+
+	<select id="searchhomebordsize" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from homebord where (title like #{search } or
+		content like #{search }) and id = #{id}
+	</select>
+	
+	<!-- 조회수증가 -->
+	<update id="upinqu" parameterType="java.util.HashMap">
+		update homebord set inquiry =
+		inquiry+1 where num = #{num }
+	</update>
+
+	<!-- 상세보기 -->
+	<select id="homeborddetails" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+
+		select * from homebord where num = #{num }
+	</select>
+	<!-- 댓글 xml -->
+
+
+
+	<select id="homebordcommentlist" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	<![CDATA[
+	select temp.* from	(
+		select rownum rnum, r.* from HOMEBOARDCOMMENT r where r.HOMEBOARDNUM = #{homenum } 
+	) temp 
+   	where temp.rnum >=#{start} and temp.rnum <=#{end}  
+	]]>
+
+	</select>
+
+	<select id="commentpagesize" resultType="java.lang.Integer">
+		select count(*) from
+		homeboardcomment where homeboardnum = #{num}
+	</select>
+
+
+
+	<!-- 댓글 수정 -->
+
+	<update id="homebordcommentupdate" parameterType="java.util.HashMap">
+		update
+		homeboardcomment
+		set memo = #{memo }, day=sysdate where commentnum =
+		#{commentnum}
+
+	</update>
+
+	<!-- 댓글 삭제 -->
+
+	<delete id="homebordcommentdelete" parameterType="java.util.HashMap">
+		delete
+		homeboardcomment where
+		commentnum = #{commentnum }
+	</delete>
+
+	<!-- 게시글 삭제 -->
+
+	<delete id="homeborddelete" parameterType="java.util.HashMap">
+		delete homebord where num =
+		#{num }
+	</delete>
+
+	<delete id="homeborddeletecomment" parameterType="java.util.HashMap">
+		delete homeboardcomment where homeboardnum = #{num}
+	</delete>
+
+	<!-- 게시글 수정 -->
+	<update id="homebordadjust" parameterType="java.util.HashMap">
+		update homebord set title =
+		#{title} , content =#{content} where num=#{num }
+	</update>
+
+	<!-- 댓글등록 -->
+	<insert id="homebordcomment" parameterType="java.util.HashMap">
+		insert into homeboardcomment
+		values
+		(#{num } , #{id }, #{memo },sysdate,HOMEBOARD_COMMENT.NEXTVAL)
+	</insert>
+
+
+</mapper>

@@ -58,7 +58,6 @@ public class noticeController {
 		}else{
 			List lis = np.searchqna(search,p);
 			int size = np.searchqnasize(search);
-			System.out.println("컨트 : "+size);
 			if (size >= 5) {
 				if (p - 2 < 1) {
 					size = 3;
@@ -70,8 +69,7 @@ public class noticeController {
 			} else {
 				size = size;
 			}
-			System.out.println("컨트 132 : "+size);
-			int bestsize = np.size();
+			int bestsize = np.searchqnasize(search);
 			mav.addObject("noticebestsize", bestsize);
 			mav.addObject("noticedata", lis);
 			mav.addObject("noticesize", size);
@@ -103,13 +101,13 @@ public class noticeController {
 	// 상세보기
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
-			HttpServletRequest req, HttpServletResponse resp,HttpSession session) {
+			HttpServletRequest req, HttpServletResponse resp,HttpSession session,@RequestParam(defaultValue ="5")int paging) {
 		String id = (String) session.getAttribute("id");
 
 		Cookie[] ar = req.getCookies();
 		int n = 0;
 		for (Cookie c : ar) {
-			if (c.getName().equals("qna#" + num)) {
+			if (c.getName().equals("notice#" + num)) {
 				n = 1;
 				break;
 			}
@@ -117,8 +115,8 @@ public class noticeController {
 		if (n == 0) {
 			int upinq = nw.upinquiry(num);
 
-			Cookie cc = new Cookie("qna#" + num, "qna#" + num);
-			cc.setMaxAge(60);
+			Cookie cc = new Cookie("notice#" + num, "notice#" + num);
+			cc.setMaxAge(60*30);
 			cc.setPath("/");
 			resp.addCookie(cc);
 		}
@@ -134,6 +132,15 @@ public class noticeController {
 		String time = sdf.format(date);
 		data.put("TIME", time);
 		ModelAndView mav = new ModelAndView();
+		
+		int bestsizecom = np.commentsize(num);
+		
+		if(sizecom>paging){
+			sizecom = paging;
+			}
+		mav.addObject("noticebestsizecom",bestsizecom);
+		
+		
 		mav.addObject("loginid",id);
 		mav.addObject("details", data);
 		mav.addObject("noticecommentda", list);
@@ -146,10 +153,11 @@ public class noticeController {
 	// 댓글 수정
 	@RequestMapping("/commentupdate")
 	public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
-			@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num) {
+			@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,
+			@RequestParam(defaultValue="1")int p,@RequestParam(defaultValue = "5")int paging) {
 		int r = nw.CommentAdjust(memo, commentnum);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/notice/details/" + num);
+		mav.setViewName("redirect:/notice/details/"+ num+"?p="+p+"&paging="+paging);
 
 		return mav;
 
@@ -188,7 +196,6 @@ public class noticeController {
 	
 	@RequestMapping("/noticeadjust")
 	public ModelAndView qnaAdjust(int num, String title, String content, HttpSession session) {
-		System.out.println("컨트 : "+num+"//"+title+"//"+content);
 		int r = nw.Adjust(num, content, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticeadjust", r);
@@ -198,12 +205,13 @@ public class noticeController {
 	
 	// 댓글 등록
 	@RequestMapping("/noticecomment")
-	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p) {
+	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p
+			,@RequestParam(defaultValue ="5")int paging) {
 		String id = (String) session.getAttribute("id");
 		int r = nw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = np.commentsize(num);
-		mav.setViewName("redirect:/notice/details/" + num + "?p="+si);
+		mav.setViewName("redirect:/notice/details/" + num + "?p="+si+"&paging="+paging);
 		return mav;
 	}
 }

@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -95,51 +94,44 @@
 	</table>
 
 
-	<fmt:parseNumber var="var3" value="${(qnasize-1)/5}" integerOnly="true" />
-	<div align="center">
-		<c:if test="${qnasize > 5 }">
 
-			<input type="button" value="이전" onclick="javascript:backpage()">
-		</c:if>
-		<c:forEach var="i" begin="${var3*5+1 }" end="${qnasize }">
-			<c:choose>
-				<c:when test="${i == qnasize }">
-					<a
-						href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }&nbsp;</a>
+	<div align="center">
+		<label id="page"> <!-- 페이징 처리 --> <c:choose>
+				<c:when test="${qnabestsize >= 5 }">
+					<c:forEach var="i" begin="${qnasize-2}" end="${qnasize+2 }">
+						<c:choose>
+							<c:when test="${param.p == i }">
+								<a style="color: red;"
+									href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }</a>
+							</c:when>
+							<c:otherwise>
+								<a
+									href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<a
-						href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }&nbsp;</a>|
+					<c:forEach var="i" begin="1" end="${qnasize }">
+						<c:choose>
+							<c:when test="${param.p == i }">
+								<a style="color: red;"
+									href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }</a>
+							</c:when>
+							<c:otherwise>
+								<a
+									href="/qna/list?mode=${qnamode }&search=${qnasearch }&p=${i }&paging=${qnasize }">${i }&nbsp;</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</c:otherwise>
 			</c:choose>
-		</c:forEach>
-		<c:if test="${qnabestsize != qnasize }">
-			<input type="button" value="다음" onclick="javascript:nextpage()" />
-		</c:if>
+		</label>
 	</div>
 
 
 
-	<c:if test="${qnabestsize == qnasize }">
-		<fmt:parseNumber var="var3" value="${(qnasize-1)/5}"
-			integerOnly="true" />
-		<fmt:parseNumber var="qnasize" value="${(var3+1)*5}"
-			integerOnly="true" />
-	</c:if>
-	<script>
-		function nextpage() {
-			paging = ${qnasize + 5 };
-			p = ${qnasize + 1 };
-			location.href = "/qna/list?mode=${qnamode }&search=${qnasearch }&p="
-					+ p + "&paging=" + paging;
-		}
-		function backpage() {
-			paging = ${qnasize - 5 };
-			p = paging - 4;
-			location.href = "/qna/list?mode=${qnamode }&search=${qnasearch }&p="
-					+ p + "&paging=" + paging;
-		}
-	</script>
+
 
 	<div align="right">
 		<c:choose>

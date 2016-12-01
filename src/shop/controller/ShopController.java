@@ -19,46 +19,78 @@ public class ShopController {
 
 	@Autowired
 	ShopPage sp;
-	
+
 	@Autowired
 	ShopWrite sw;
-	
+
 	@Autowired
 	Shopbuy sb;
-	
+
 	@Autowired
 	Shopgift sg;
 
-//	@RequestMapping("/list")
-//	public ModelAndView shopList(@RequestParam(defaultValue = "1") int p) {
-//		List list = sp.GetRnage(p);
-//		int size = sp.size();
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("shopdata", list);
-//		mav.addObject("shopsize", size);
-//		mav.setViewName("t:shop/shop");
-//		
-//		return mav;
-//	}
+	// @RequestMapping("/list")
+	// public ModelAndView shopList(@RequestParam(defaultValue = "1") int p) {
+	// List list = sp.GetRnage(p);
+	// int size = sp.size();
+	// ModelAndView mav = new ModelAndView();
+	// mav.addObject("shopdata", list);
+	// mav.addObject("shopsize", size);
+	// mav.setViewName("t:shop/shop");
+	//
+	// return mav;
+	// }
 	@RequestMapping("/list")
-	public ModelAndView shopList(@RequestParam(defaultValue = "1") int p, @RequestParam (defaultValue="") String search) {
+	public ModelAndView shopList(@RequestParam(defaultValue = "1") int p,
+			@RequestParam(defaultValue = "") String search,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-			if(search.equals("")){
-				List list = sp.GetRnage(p);  
-				int size = sp.size();
-				mav.addObject("shopdata", list);
-				mav.addObject("shopsize", size);
-				mav.setViewName("t:shop/shop");
-				return mav;
-			}else{
-				List list = sp.searchshop(search,p);
-				int size = sp.searchsizeshop(search);
-				mav.addObject("shopdata", list);
-				mav.addObject("shopsize", size);
-				mav.addObject("shopsearch", search);
-				mav.setViewName("t:shop/shop");
-				return mav;
+		String id = (String)session.getAttribute("id");
+		if(id!=null){
+			List nick = sp.membernickname(id);
+			mav.addObject("nick",nick);
 			}
+		if (search.equals("")) {
+			List list = sp.GetRnage(p);
+			int size = sp.size();
+			if (size >= 5) {
+				if (p - 2 < 1) {
+					size = 3;
+				} else if (p + 2 > size) {
+					size = size - 2;
+				} else {
+					size = p;
+				}
+			} else {
+				size = size;
+			}
+			int bestsize = sp.size();
+			mav.addObject("shopbestsize", bestsize);
+			mav.addObject("shopdata", list);
+			mav.addObject("shopsize", size);
+			mav.setViewName("t:shop/shop");
+			return mav;
+		} else {
+			List list = sp.searchshop(search, p);
+			int size = sp.searchsizeshop(search);
+			if (size >= 5) {
+				if (p - 2 < 1) {
+					size = 3;
+				} else if (p + 2 > size) {
+					size = size - 2;
+				} else {
+					size = p;
+				}
+			} else {
+				size = size;
+			}
+			int bestsize = sp.searchsizeshop(search);
+			mav.addObject("shopbestsize", bestsize);
+			mav.addObject("shopdata", list);
+			mav.addObject("shopsize", size);
+			mav.addObject("shopsearch", search);
+			mav.setViewName("t:shop/shop");
+			return mav;
+		}
 	}
 
 	@RequestMapping("/write")
@@ -67,27 +99,27 @@ public class ShopController {
 		mav.setViewName("/shop/shopwrite.jsp");
 		return mav;
 	}
-	
+
 	@RequestMapping("/upload")
 	public ModelAndView shopupload(String title, int money) {
 		int r = sw.write(title, money);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/shop/list");
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping("/shopbuy")
 	@ResponseBody
 	public boolean shopbuy(String title, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		if(sb.musicbuy(id, title)>0){
+		if (sb.musicbuy(id, title) > 0) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	@RequestMapping("/shopgift")
 	public ModelAndView shopgift(HttpSession session, String title, String money) {
 		String id = (String) session.getAttribute("id");
@@ -99,7 +131,7 @@ public class ShopController {
 		mav.addObject("money", money);
 		return mav;
 	}
-	
+
 	@RequestMapping("/shopgiftend")
 	public ModelAndView shopgiftend(HttpSession session, String title, String money, String gtake) {
 		String id = (String) session.getAttribute("id");

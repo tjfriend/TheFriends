@@ -67,7 +67,7 @@ public class BoardController {
 				} else {
 					size = size;
 				}
-				int bestsize = fb.size();
+				int bestsize = fb.searchfreeboardsize(search);
 				mav.addObject("freeboardbestsize", bestsize);
 				mav.addObject("freeboarddata", list);
 				mav.addObject("freeboardsize", size);
@@ -91,7 +91,7 @@ public class BoardController {
 				} else {
 					size = size;
 				}
-				int bestsize = fb.size();
+				int bestsize = fb.casize(mode);
 				mav.addObject("freeboardbestsize", bestsize);
 				mav.addObject("freeboarddata", list);
 				mav.addObject("freeboardsize", size);
@@ -112,7 +112,7 @@ public class BoardController {
 				} else {
 					size = size;
 				}
-				int bestsize = fb.size();
+				int bestsize = fb.searchfreeboardsizemode(search, mode);
 				mav.addObject("freeboardbestsize", bestsize);
 				mav.addObject("freeboarddata", list);
 				mav.addObject("freeboardsize", size);

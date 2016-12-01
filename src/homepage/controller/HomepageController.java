@@ -49,7 +49,8 @@ public class HomepageController {
 	@RequestMapping("/board/{id}")
 	public String board(@PathVariable(name="id")String id){
 		String homeType = (String)(hs.goHome(id).get("ADDRESS"));
-		return "/homepage/homeBoard/board.jsp";
+		// return "/homepage/homeBoard/board.jsp";
+		return "redirect:/homeBoard/"+id;
 	}
 	
 	@RequestMapping("/picture/{id}")

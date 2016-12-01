@@ -12,20 +12,19 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
-	align="center">Notice</h2>
-
+	align="center">HomeBoard</h2>
 <div align="center">
 	<div class="w3-row"
 		style="padding-left: 30px; padding-right: 30px; padding-top: 40px; width: 70%">
 		<div align="right">
 			<input type="button" value="목록보기" class="btn btn-default"
-				onClick="self.location='/notice/list';">
+				onClick="self.location='/homeBoard/${id}';">
 			<c:choose>
 				<c:when test="${loginid == details.ID }">
-					<input type="button" value="수정" class="btn btn-default"
-						onclick="location.href='/notice/noticeupdate?num=${details.NUM}'" />
+					<input type="button" value="수정" class="btn btn-default" id="adjust" 
+						onclick="adjust()" >
 					<input type="button" value="삭제" class="btn btn-default"
-						id="QnADelete${details.NUM }" onclick="QnADelete(this)">
+						id="HomeDelete${details.NUM }" onclick="HomeDelete(this)">
 				</c:when>
 				<c:otherwise>
 				</c:otherwise>
@@ -67,10 +66,10 @@
 					</tr>
 				</table>
 			</div>
-			<!--  	댓글 -->
+	<!--  	댓글 -->
 		 	<div>  
 				<table class="table">
-					<c:forEach var="ecmda" items="${noticecommentda }">
+					<c:forEach var="ecmda" items="${homepagecommentda }">
 						<tr align="center">
 							<td width="15%">${ecmda.ID }</td>
 							<td width="50%">
@@ -98,51 +97,56 @@
 						</tr>
 					</c:forEach>
 				</table>
-					<fmt:parseNumber var="var3" value="${(noticecommentsi-1)/5}"
+				<fmt:parseNumber var="var3" value="${(homepagecommentsi-1)/5}"
 					integerOnly="true" />
-				
-				<c:if test="${noticecommentsi > 5 }">
+					<c:if test="${homepagecommentsi > 5 }">
 					<input type="button" value="이전" onclick="javascript:backpage()">
 				</c:if>
-				<c:forEach var="p" begin="${var3*5+1 }" end="${noticecommentsi }">
+				<c:forEach var="p" begin="${var3*5+1 }" end="${homepagecommentsi }">
 					<c:choose>
-						<c:when test="${p == noticecommentsi }">
-							<a href="/notice/details/${details.NUM }?p=${p }&paging=${noticecommentsi }">${p }</a>&nbsp;
+						<c:when test="${p == homepagecommentsi }">
+								<a href="/homeBoard/details/${id}/${details.NUM }?p=${p }&paging=${homepagecommentsi }">${p }</a>&nbsp;
 						</c:when>
 						<c:otherwise>
-							<a href="/notice/details/${details.NUM }?p=${p }&paging=${noticecommentsi }">${p }</a>&nbsp;|
+							<a href="/homeBoard/details/${id}/${details.NUM }?p=${p }&paging=${homepagecommentsi }">${p }</a>&nbsp;|
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-				<c:if test="${noticebestsizecom != noticecommentsi }">
+				<c:if test="${homepagebestsizecom != homepagecommentsi }">
 					<input type="button" value="다음" onclick="javascript:nextpage()" />
 				</c:if>
 			</div>
 			<br/>
-		<c:if test="${noticebestsizecom == noticecommentsi }">
-				<fmt:parseNumber var="noticecommentsi" value="${(var3+1)*5}"
+		<c:if test="${homepagebestsizecom == homepagecommentsi }">
+				<fmt:parseNumber var="homepagecommentsi " value="${(var3+1)*5}"
 					integerOnly="true" />
 			</c:if>
 			<script>
+			 	 
 			
+			
+			
+			$("#adjust").click(function(){
+				window.open("/homeBoard/homeBoardupdate?num=${details.NUM}", "picup", "width= 500px, height= 500px, left= 300, top= 100, resizable=no");
+			});
+					
 			function nextpage() {
-				paging = ${noticecommentsi + 5 };
-				p = ${noticecommentsi + 1 };
+				paging = ${homepagecommentsi + 5 };
+				p = ${homepagecommentsi + 1 };
 							
-				location.href = "/notice/details/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
 			}
 			function backpage() {
-				paging = ${noticecommentsi - 5 };
+				paging = ${homepagecommentsi - 5 };
 				p = paging - 4;
-				location.href = "/notice/details/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/homeBoard/details/${id}/${details.NUM }?p="+ p + "&paging=" + paging;
 			}
-				
 				function memoupdate(element){
 					var id = element.id;
 					id = id.slice(id.indexOf('t')+1);
 					p = ${param.p};
 					var memo = $("#memo"+id).val();
-					location.href="/notice/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&p="+p+"&paging=${noticecommentsi}";
+					location.href="/homeBoard/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&id=${id}&p="+p+"&paging=${homepagecommentsi}";
 				}
 				
 				function change(element) {
@@ -169,12 +173,12 @@
 				
 
 				
-			function QnADelete(element) {
+			function HomeDelete(element) {
 				var id = element.id;
-				var num = id.substring(id.indexOf('e') + 5);
+				var num = id.substring(id.indexOf('e') + 7);
 				
 				if(confirm("이 게시글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/notice/noticedelete?num="+num;
+					location.href="/homeBoard/homeBoarddelete?num="+num+"&id=${id}";
 				}else{
 					return;
 				}
@@ -187,7 +191,7 @@
 				var commentnum = id.substring(id.indexOf('t') + 7 );
 				
 				if(confirm("이 댓글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/notice/commentdelete?num=${details.NUM}&commentnum="+commentnum;
+					location.href="/homeBoard/commentdelete?num=${details.NUM}&commentnum="+commentnum+"&id=${id}";
 				}else{
 					return;
 				}
@@ -199,9 +203,9 @@
 			<!-- 로그인시 댓글등록창이 보이게 한다 -->
 			<div align="center">
 				<c:if test="${login != null }">
-					<form action="/notice/noticecomment" method="post">
-					<input type="hidden" name="paging" value="${noticebestsizecom }">	
+					<form action="/homeBoard/homeBoardcomment" method="post">
 						<input type="hidden" name="num" value="${details.NUM }"> 
+						<input type="hidden" name="id" value="${loginid }">
 						<input type="hidden" name="endpa" value="${noticecommentsi }"> 
 						<input type="text" name="memo" style="width: 50%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px; resize: none;"/>
 						<input type="submit" value="등록" class="btn btn-default">

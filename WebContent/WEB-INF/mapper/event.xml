@@ -117,7 +117,7 @@
 	<insert id="eventcomment" parameterType="java.util.HashMap">
 		insert into eventcomment
 		values
-		(#{num } , #{id }, #{memo },sysdate,QNA_COMMENT.NEXTVAL)
+		(#{num } , #{id }, #{memo },sysdate,EVENT_COMMENT.NEXTVAL)
 	</insert>
 
 	<select id="member" parameterType="java.util.HashMap"

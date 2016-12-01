@@ -120,7 +120,7 @@
 	<insert id="noticecomment" parameterType="java.util.HashMap">
 		insert into noticecomment
 		values
-		(#{num } , #{id }, #{memo },sysdate,QNA_COMMENT.NEXTVAL)
+		(#{num } , #{id }, #{memo },sysdate,NOTICE_COMMENT.NEXTVAL)
 	</insert>
 	
 	<select id="member" parameterType="java.util.HashMap" resultType="java.util.HashMap">
