@@ -121,7 +121,7 @@
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
 				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></tr>";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></td></tr>";
 			}
 			$("#addBody").html(html);
 			html = "";
@@ -160,7 +160,7 @@
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
 				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Reject' onclick='refuse("+i+")'/></tr>";
+				html += "<input type='button' class='btn btn-danger' value='Reject' onclick='refuse("+i+")'/></td></tr>";
 			}
 			$("#addBody").html(html);
 		});
@@ -205,7 +205,7 @@
 				html += "<tr><td>"+txt[i].RNUM+"</td><td id='"+i+"'>"+txt[i].NAME+"</td><td>"+txt[i].BIRTH+"</td>";
 				html += "<td>"+txt[i].NICKNAME+"</td><td>"+txt[i].VISIT+"</td><td>"+txt[i].ADDDATE+"</td>";
 				html += "<td><input type='button' class='btn btn-info' value='Accept' onclick='accept("+i+")'/>&nbsp;&nbsp;";
-				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></tr>";
+				html += "<input type='button' class='btn btn-danger' value='Refuse' onclick='refuse("+i+")'/></td></tr>";
 			}
 			$("#addBody").html(html);
 		});
