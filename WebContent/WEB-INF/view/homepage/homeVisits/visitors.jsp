@@ -39,15 +39,11 @@
 			"url" : "/visitors/${id}/"+$("#memo").val()+"/"+$("#mode").prop("checked")
 		}).done(function(txt){
 			if(txt==true){
-// 				location.reload();
-				$.ajax({
-					"url" : "/visitors/${id}"
-				}).done(function(){
-					alert("댓글 등록 완료");
-				});
+				$("#addDiv").fadeIn(300).delay(1000).fadeOut(300);
+				setTimeout(function(){location.href="/homepage/${id}"}, 1600);
 			} else {
-				alert("댓글 등록 실패");
-				location.href="/visitors/${id}";
+				$("#addFailDiv").fadeIn(300).delay(1000).fadeOut(300);
+				setTimeout(function(){location.href="/homepage/${id}"}, 1600);
 			}
 		});
 	});

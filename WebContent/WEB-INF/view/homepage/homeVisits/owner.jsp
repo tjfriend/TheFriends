@@ -13,7 +13,7 @@
 	<h3 class="w3-padding-32 w3-text-grey" align="center">Visitors</h3>
 	<div class="w3-row" style="padding-left: 30px; padding-right: 30px">
 		<div align="right">
-			<select style="width: 12%; height: 25px; padding:0px; border: 1px solid #ccc; border-radius: 5px" class="w3-select">
+			<select style="width: 12%; height: 25px; padding:0px; border: 1px solid #ccc; border-radius: 5px" class="w3-select" id="private">
 				<option>전체공개</option>
 				<option>비공개</option>
 			</select>
@@ -32,13 +32,13 @@
 					<c:forEach var="t" items="${list }">
 						<tr>
 							<td><label>${t.WRITER }</label></td>
-							<td><label>${t.MEMO }</label></td>
+							<td><label><input type="text" id="memo${t.NUM }" readonly="readonly" value="${t.MEMO }" style="text-align: center; border: 0"/></label></td>
 							<td><label>${t.DAY }</label></td>
 							<td>
-								<input type="button" class="btn btn-default" value="수정" id="modify"/>
-								<input type="button" class="btn btn-default" value="삭제" id="delete"/>
-								<input type="button" class="btn btn-default" value="완료" id="commit" style="display: none;"/>
-								<input type="button" class="btn btn-default" value="취소" id="cancel" style="display: none;"/>
+								<input type="button" class="btn btn-default" value="수정" id="modify${t.NUM }" onclick="modify('${t.NUM}')"/>
+								<input type="button" class="btn btn-default" value="삭제" id="delete${t.NUM }" onclick="del('${t.NUM}')"/>
+								<input type="button" class="btn btn-default" value="완료" id="commit${t.NUM }" style="display: none;" onclick="commit('${t.NUM}')"/>
+								<input type="button" class="btn btn-default" value="취소" id="cancel${t.NUM }" style="display: none;" onclick="cancel(${t.NUM})"/>
 							</td>
 						</tr>
 					</c:forEach>
@@ -62,3 +62,101 @@
 		</div>
 	</div>
 </div>
+
+<div class="w3-modal" style="display: none" id="modifyDiv">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="modify">
+		<input type="button" class="btn btn-success" value="수정되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<div class="w3-modal" style="display: none" id="delDiv">
+	<div class="w3-modal-content" style="width: 150px; height: 50px; border-radius: 10px; margin-top: 100px" align="center" id="del">
+		<input type="button" class="btn btn-success" value="삭제되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
+<script>
+	$("#private").change(function(){
+		var private = $("#private").val();
+		var url = "/visits/priv/${id}/"+private;
+		$.ajax({
+			"method" : "get",
+			"url" : url,
+			"async" : false
+		}).done(function(txt){
+			var html = "";
+			for(var i=0; i<txt.length; i++){
+				html += "<tr><td><label>"+txt[i].WRITER+"</label></td>";
+				html += "<td><label><input type='text' id='memo"+txt[i].NUM+"' readonly='readonly' value='"+txt[i].MEMO+"' style='text-align: center; border: 0'/></label></td>";
+				html += "<td><label>"+txt[i].DAY+"</label></td>";
+				html += "<td>";
+				html += "<input type='button' class='btn btn-default' value='수정' id='modify"+txt[i].NUM+"' onclick='modify("+txt[i].NUM+")'/> ";
+				html += "<input type='button' class='btn btn-default' value='삭제' id='delete"+txt[i].NUM+"' onclick='del("+txt[i].NUM+")'/>";
+				html += "<input type='button' class='btn btn-default' value='완료' id='commit"+txt[i].NUM+"' onclick='commit("+txt[i].NUM+")' style='display: none'/>";
+				html += "<input type='button' class='btn btn-default' value='취소' id='cancel"+txt[i].NUM+"' onclick='cancel("+txt[i].NUM+")' style='display: none'/>";
+				html += "</td></tr>";
+			}
+			$("#tbody").html(html);
+		});
+	});
+	
+	var txt = "";
+	var m = 0;
+	var d = 0;
+	function modify(num){
+		txt = $("#memo"+num).val();
+		$("#memo"+num).prop("readonly", null);
+		$("#modify"+num).hide();
+		$("#delete"+num).hide();
+		$("#commit"+num).show();
+		$("#cancel"+num).show();
+		m = 1;
+	}
+	
+	function del(num){
+		$("#modify"+num).hide();
+		$("#delete"+num).hide();
+		$("#commit"+num).show();
+		$("#cancel"+num).show();
+		d = 1;
+	}
+	
+	function commit(num){
+		if(m>0){
+			txt = $("#memo"+num).val();
+			$.ajax({
+				"method" : "get",
+				"url" : "/visits/modify/"+num+"/"+txt,
+				"async" : false
+			}).done(function(txt){
+				$("#memo"+num).prop("readonly", "readonly");
+				$("#modifyDiv").fadeIn(300).delay(1000).fadeOut(300);
+				setTimeout(function(){location.href="/homepage/${id}"}, 1600);
+				m = 0;
+			});
+		} else if(d>0){
+			$.ajax({
+				"method" : "get",
+				"url" : "/visits/del/"+num,
+				"async" : false
+			}).done(function(txt){
+				$("#delDiv").fadeIn(300).delay(1000).fadeOut(300);
+				setTimeout(function(){location.href="/homepage/${id}"}, 1600);
+				d = 0;
+			});
+		}
+		$("#modify"+num).show();
+		$("#delete"+num).show();
+		$("#commit"+num).hide();
+		$("#cancel"+num).hide();
+	}
+	
+	function cancel(num){
+		$("#modify"+num).show();
+		$("#delete"+num).show();
+		$("#commit"+num).hide();
+		$("#cancel"+num).hide();
+		$("#memo"+num).prop("readonly", "readonly");
+		$("#memo"+num).val(txt);
+	}
+</script>
