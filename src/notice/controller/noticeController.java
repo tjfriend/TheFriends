@@ -140,7 +140,7 @@ public class noticeController {
 			sizecom = paging;
 			}
 		mav.addObject("noticebestsizecom",bestsizecom);
-		mav.addObject("setlist", pn);
+		mav.addObject("pn", pn);
 		
 		mav.addObject("p",p);
 		mav.addObject("loginid",id);
@@ -156,10 +156,10 @@ public class noticeController {
 	@RequestMapping("/commentupdate")
 	public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
 			@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,
-			@RequestParam(defaultValue="1")int p,@RequestParam(defaultValue = "5")int paging) {
+			@RequestParam(defaultValue="1")int p,@RequestParam(defaultValue = "5")int paging , @RequestParam(defaultValue = "1") int pn) {
 		int r = nw.CommentAdjust(memo, commentnum);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/notice/details/"+ num+"?p="+p+"&paging="+paging);
+		mav.setViewName("redirect:/notice/details/"+ num+"?p="+p+"&paging="+paging+"&pn="+pn);
 
 		return mav;
 
@@ -167,53 +167,57 @@ public class noticeController {
 
 	// 댓글 삭제
 	@RequestMapping("/commentdelete")
-	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num) {
+	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num, @RequestParam(defaultValue = "1") int pn) {
 		int de = nd.CommentDelete(commentnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("commentnum", commentnum);
-		mav.setViewName("redirect:/notice/details/" + num);
+		mav.setViewName("redirect:/notice/details/" + num+"?pn="+pn);
 		return mav;
 	}
 
 	// 게시글 삭제
 	@RequestMapping("/noticedelete")
-	public ModelAndView qnaDelete(int num) {
+	public ModelAndView qnaDelete(int num, @RequestParam(defaultValue = "1") int pn) {
 		int de = nd.noticeDelete(num);
 		int da = nd.noticeDeletecomment(num);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("num", num);
-		mav.setViewName("redirect:/notice/list");
+		mav.setViewName("redirect:/notice/list?pn="+pn);
 		return mav;
 	}
 	
 	// 게시글 수정
 	@RequestMapping("/noticeupdate")
-	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num) {
+	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num, @RequestParam(defaultValue = "1") int pn) {
 		ModelAndView mav = new ModelAndView();
 		List list = nw.num(num);
 		mav.addObject("list", list);
+		mav.addObject("pn", pn);
 		mav.setViewName("t:notice/adjust");
 		return mav;
 	}
 	
 	@RequestMapping("/noticeadjust")
-	public ModelAndView qnaAdjust(int num, String title, String content, HttpSession session) {
+	public ModelAndView qnaAdjust(int num, String title, String content, HttpSession session, @RequestParam(defaultValue = "1") int pn) {
 		int r = nw.Adjust(num, content, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticeadjust", r);
-		mav.setViewName("redirect:/notice/details/"+num);
+		mav.setViewName("redirect:/notice/details/"+num+"?pn="+pn);
 		return mav;
 	}
 	
 	// 댓글 등록
 	@RequestMapping("/noticecomment")
 	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p
-			,@RequestParam(defaultValue ="5")int paging) {
+			,@RequestParam(defaultValue ="5")int paging, @RequestParam(defaultValue = "1") int pn) {
+		if(paging == 0){
+			paging =5;
+		}
 		String id = (String) session.getAttribute("id");
 		int r = nw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = np.commentsize(num);
-		mav.setViewName("redirect:/notice/details/" + num + "?p="+si+"&paging="+paging);
+		mav.setViewName("redirect:/notice/details/" + num + "?p="+si+"&paging="+paging+"&pn="+pn);
 		return mav;
 	}
 }

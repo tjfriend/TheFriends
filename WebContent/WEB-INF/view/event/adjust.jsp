@@ -14,6 +14,7 @@
 
 <div class="w3-row" style="padding-left: 30px; padding-right: 30px; padding-top: 40px" align="center">
 	<form action="/event/eventadjust" method="post">
+	<input type="hidden" name="pn" value="${pn }">
 		<input type="hidden"  name="num" value="${list.get(0).NUM }"/>
 <%-- 		${list.get(0).CATEGORY } --%>
 		<label for="title" style="width: 15%"><font size="4">TITLE</font></label>

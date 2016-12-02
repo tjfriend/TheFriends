@@ -79,7 +79,7 @@ public class HomeBoardController {
 		String homeType = (String) hs.goHome(id).get("ADDRESS");
 		mav.setViewName("/homepage/homeBoard/board.jsp");
 		mav.addObject("loginid", loginid);
-
+		mav.addObject("pn", p);
 		return mav;
 	}
 
@@ -102,7 +102,7 @@ public class HomeBoardController {
 	@RequestMapping("/details/{id}/{num}")
 	public ModelAndView details(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
 			HttpServletRequest req, HttpServletResponse resp, @PathVariable(name = "id") String id,HttpSession session
-			,@RequestParam(defaultValue = "5") int paging,@RequestParam(defaultValue = "1")int rnum) {
+			,@RequestParam(defaultValue = "5") int paging,@RequestParam(defaultValue = "1")int rnum,@RequestParam(defaultValue = "1") int pn) {
 		String loginid = (String)session.getAttribute("id");
 		Cookie[] ar = req.getCookies();
 		int n = 0;
@@ -141,7 +141,7 @@ public class HomeBoardController {
 		}
 		mav.addObject("homepagebestsizecom", bestsizecom);
 		
-		
+		mav.addObject("pn", pn);
 		mav.addObject("rnum",rnum);
 		mav.addObject("p",p);
 		mav.addObject("id", id);
@@ -173,10 +173,11 @@ public class HomeBoardController {
 	@RequestMapping("/commentupdate")
 	public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
 			@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,
-			@RequestParam(name = "id") String id,@RequestParam(defaultValue="1")int p,@RequestParam(defaultValue = "5")int paging) {
+			@RequestParam(name = "id") String id,@RequestParam(defaultValue="1")int p,@RequestParam(defaultValue = "5")int paging
+			,@RequestParam(defaultValue = "1") int pn) {
 		int r = bw.CommentAdjust(memo, commentnum);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/homeBoard/details/" + id + "/" + num+"?p="+p+"&paging="+paging);
+		mav.setViewName("redirect:/homeBoard/details/" + id + "/" + num+"?p="+p+"&paging="+paging+"&pn="+pn);
 
 		return mav;
 
@@ -185,40 +186,42 @@ public class HomeBoardController {
 	// 댓글 삭제
 	@RequestMapping("/commentdelete")
 	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num,
-			@RequestParam(name = "id") String id) {
+			@RequestParam(name = "id") String id,@RequestParam(defaultValue = "1") int pn) {
 		int de = bd.CommentDelete(commentnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("commentnum", commentnum);
-		mav.setViewName("redirect:/homeBoard/details/" + id + "/" + num);
+		mav.setViewName("redirect:/homeBoard/details/" + id + "/" + num+"?pn="+pn);
 		return mav;
 	}
 
 	// 게시글 삭제
 	@RequestMapping("/homeBoarddelete")
-	public ModelAndView qnaDelete(int num, @RequestParam(name = "id") String id) {
+	public ModelAndView qnaDelete(int num, @RequestParam(name = "id") String id,@RequestParam(defaultValue = "1") int pn) {
 		int de = bd.homeboardDelete(num);
 		int da = bd.homeboardDeletecomment(num);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("num", num);
-		mav.setViewName("redirect:/homeBoard/" + id);
+		mav.setViewName("redirect:/homeBoard/" + id+"?pn="+pn);
 		return mav;
 	}
 
 	// 게시글 수정
 	@RequestMapping("/homeBoardupdate")
-	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num) {
+	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num,@RequestParam(defaultValue = "1") int pn) {
 		ModelAndView mav = new ModelAndView();
 		List list = bw.num(num);
 		mav.addObject("list", list);
+		mav.addObject("pn", pn);
 		mav.setViewName("/homepage/homeBoard/adjust.jsp");
 		return mav;
 	}
 
 	@RequestMapping("/homeBoardadjust")
-	public ModelAndView qnaAdjust(int num, String title, String content, HttpSession session) {
+	public ModelAndView qnaAdjust(int num, String title, String content, HttpSession session,@RequestParam(defaultValue = "1") int pn) {
 		int r = bw.Adjust(num, content, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("homeboardadjust", r);
+		mav.addObject("pn", pn);
 		mav.setViewName("/common.jsp");
 		return mav;
 	}
@@ -226,12 +229,13 @@ public class HomeBoardController {
 	// 댓글 등록
 	@RequestMapping("/homeBoardcomment")
 	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p,
-			@RequestParam(name = "id") String id,@RequestParam(defaultValue ="5")int paging,@RequestParam(defaultValue= "1")int rnum) {
+			@RequestParam(name = "id") String id,@RequestParam(defaultValue ="5")int paging,@RequestParam(defaultValue= "1")int rnum
+			,@RequestParam(defaultValue = "1") int pn) {
 		String coid = (String) session.getAttribute("id");
 		int r = bw.comment(num, coid, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = bp.commentsize(num);
-		mav.setViewName("redirect:/homeBoard/details/" + id + "/" + num + "?p=" + si+"&paging="+paging+"&rnum="+rnum
+		mav.setViewName("redirect:/homeBoard/details/" + id + "/" + num + "?p=" + si+"&paging="+paging+"&rnum="+rnum+"&pn="+pn
 				);
 		return mav;
 	}

@@ -23,7 +23,7 @@
 			<c:choose>
 				<c:when test="${loginid == details.WRITER }">
 					<input type="button" value="수정" class="btn btn-default"
-						onclick="location.href='/event/eventupdate?num=${details.NUM}'" />
+						onclick="location.href='/event/eventupdate?num=${details.NUM}&pn=${pn }'" />
 					<input type="button" value="삭제" class="btn btn-default"
 						id="QnADelete${details.NUM }" onclick="QnADelete(this)">
 				</c:when>
@@ -106,10 +106,10 @@
 				<c:forEach var="p" begin="${var3*5+1 }" end="${eventcommentsi }">
 					<c:choose>
 						<c:when test="${p == eventcommentsi }">
-							<a href="/event/details/${details.NUM }?p=${p }&paging=${eventcommentsi }">${p }</a>&nbsp;
+							<a href="/event/details/${details.NUM }?p=${p }&paging=${eventcommentsi }&pn=${pn }">${p }</a>&nbsp;
 						</c:when>
 						<c:otherwise>
-							<a href="/event/details/${details.NUM }?p=${p }&paging=${eventcommentsi }">${p }</a>&nbsp;|
+							<a href="/event/details/${details.NUM }?p=${p }&paging=${eventcommentsi }&pn=${pn }">${p }</a>&nbsp;|
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -127,12 +127,12 @@
 				paging = ${eventcommentsi + 5 };
 				p = ${eventcommentsi + 1 };
 							
-				location.href = "/event/details/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/event/details/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn }";
 			}
 			function backpage() {
 				paging = ${eventcommentsi - 5 };
 				p = paging - 4;
-				location.href = "/event/details/${details.NUM }?p="+ p + "&paging=" + paging;
+				location.href = "/event/details/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn }";
 			}
 			
 				function memoupdate(element){
@@ -140,7 +140,7 @@
 					id = id.slice(id.indexOf('t')+1);
 					
 					var memo = $("#memo"+id).val();
-					location.href="/event/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&p=${p}&paging=${eventcommentsi}";
+					location.href="/event/commentupdate?num=${details.NUM}&commentnum="+id+"&memo="+memo+"&p=${p}&paging=${eventcommentsi}&pn=${pn }";
 				}
 				
 				function change(element) {
@@ -172,7 +172,7 @@
 				var num = id.substring(id.indexOf('e') + 5);
 				
 				if(confirm("이 게시글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/event/eventdelete?num="+num;
+					location.href="/event/eventdelete?num="+num+"&pn=${pn }";
 				}else{
 					return;
 				}
@@ -185,7 +185,7 @@
 				var commentnum = id.substring(id.indexOf('t') + 7 );
 				
 				if(confirm("이 댓글을 정말로 삭제하시겠습니까?") == true ){
-					location.href="/event/commentdelete?num=${details.NUM}&commentnum="+commentnum;
+					location.href="/event/commentdelete?num=${details.NUM}&commentnum="+commentnum+"&pn=${pn }";
 				}else{
 					return;
 				}
@@ -198,6 +198,7 @@
 			<div align="center">
 				<c:if test="${login != null }">
 					<form action="/event/eventcomment" method="post">
+					<input type="hidden" name="pn" value="${pn }">
 						<input type="hidden" name="paging" value="${eventbestsizecom }">	
 						<input type="hidden" name="num" value="${details.NUM }"> 
 						<input type="hidden" name="endpa" value="${eventcommentsi }"> 

@@ -16,18 +16,6 @@
 	</select>
 
 
-	<!-- 회원 탈퇴 -->
-	<delete id="myinfodelete" parameterType="java.util.HashMap">
-		delete myinfo where
-		id =
-		#{id }
-	</delete>
-
-	<delete id="memberdelete" parameterType="java.util.HashMap">
-		delete member where
-		id =
-		#{id }
-	</delete>
 
 	<!-- 비밀번호 변경 -->
 	<update id="passupdate" parameterType="java.util.HashMap">
@@ -54,6 +42,106 @@
 		where id = #{id }
 	</update>
 
+	<!-- 회원 탈퇴 -->
+	<delete id="addfriendsdelete" parameterType="java.util.HashMap">
+		delete addfriends where id = #{id }
+	</delete>
+	
+	<delete id="chargedelete" parameterType="java.util.HashMap">
+		delete charge where id = #{id }
+	</delete>
+	
+	<delete id="chargeusedelete" parameterType="java.util.HashMap">
+		delete chargeuse where id = #{id } or takeid = #{id }
+	</delete>
+	
+	<delete id="emailauthdelete" parameterType="java.util.HashMap">
+		delete emailauth where id = #{id }
+	</delete>
+	
+	<delete id="eventdelete" parameterType="java.util.HashMap">
+		delete event where writer = #{id }
+	</delete>
+	
+	<delete id="eventcommentdelete" parameterType="java.util.HashMap">
+		delete eventcomment where id = #{id }
+	</delete>
+	
+	<delete id="freeboarddelete" parameterType="java.util.HashMap">
+		delete freeboard where id = #{id }
+	</delete>
+	
+	<delete id="freeboardcommentdelete" parameterType="java.util.HashMap">
+		delete freeboardcomment where id = #{id }
+	</delete>
+	
+	<delete id="friendsdelete" parameterType="java.util.HashMap">
+		delete friends where id = #{id } or friend = #{id }
+	</delete>
+	
+	<delete id="homeboardcommentdelete" parameterType="java.util.HashMap">
+		delete homeboardcomment where id = #{id }
+	</delete>
+	
+	<delete id="homeborddelete" parameterType="java.util.HashMap">
+		delete homebord where id = #{id }
+	</delete>
+	
+	<delete id="homepagedelete" parameterType="java.util.HashMap">
+		delete homepage where id = #{id }
+	</delete>
+	
+	<delete id="memaddressdelete" parameterType="java.util.HashMap">
+		delete memaddress where id = #{id }
+	</delete>
+	
+	<delete id="memberdelete" parameterType="java.util.HashMap">
+		delete member where id = #{id }
+	</delete>
+	
+	<delete id="myinfodelete" parameterType="java.util.HashMap">
+		delete myinfo where id =#{id }
+	</delete>
+	
+	<delete id="noticedelete" parameterType="java.util.HashMap">
+		delete notice where id =#{id }
+	</delete>
+	
+	<delete id="noticecommentdelete" parameterType="java.util.HashMap">
+		delete noticecomment where id =#{id }
+	</delete>
+	
+	<delete id="pictureboarddelete" parameterType="java.util.HashMap">
+		delete pictureboard where id =#{id }
+	</delete>
+	
+	<delete id="picturereplydelete" parameterType="java.util.HashMap">
+		delete picturereply where writer =#{id }
+	</delete>
+	
+	<delete id="profiledelete" parameterType="java.util.HashMap">
+		delete profile where id =#{id }
+	</delete>
+	
+	<delete id="qnadelete" parameterType="java.util.HashMap">
+		delete qna where id =#{id }
+	</delete>
+	
+	<delete id="qnacommentdelete" parameterType="java.util.HashMap">
+		delete qnacomment where id =#{id }
+	</delete>
+	
+	<delete id="shopbuydelete" parameterType="java.util.HashMap">
+		delete shopbuy where id =#{id }
+	</delete>
+	
+	<delete id="visitorsdelete" parameterType="java.util.HashMap">
+		delete visitors where id =#{id } or writer = #{id}
+	</delete>
+	
+	
+	
+	
 
 
 </mapper>

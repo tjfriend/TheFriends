@@ -222,6 +222,9 @@ public class QnAcontroller {
 	@RequestMapping("/qnacomment")
 	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p
 			,@RequestParam(defaultValue ="5")int paging,@RequestParam(defaultValue = "1") int pn) {
+		if(paging == 0){
+			paging =5;
+		}
 		String id = (String) session.getAttribute("id");
 		int r = qw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
