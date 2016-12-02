@@ -365,7 +365,7 @@
 // 						$("#result").html(
 // 							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
 // 						);
-						window.setTimeoutl(goIndex, 1600);
+						window.setTimeout(function(){location.href="/index"}, 1600);
 					} else {
 						endDiv("joinFail");
 // 						$("#result").prop("class", "alert alert-danger");
@@ -419,7 +419,7 @@
 // 						$("#result_s").html(
 // 							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
 // 						);
-						window.setTimeout(goIndex, 1600);
+						window.setTimeout(function(){location.href="/index"}, 1600);
 					} else {
 						endDiv("joinFail");
 // 						$("#result_s").prop("class", "alert alert-danger");
@@ -534,6 +534,6 @@
 	}
 	
 	function goIndex(){
-		location.href="/";
+		location.href="/index";
 	}
 </script>
