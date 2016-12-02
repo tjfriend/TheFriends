@@ -24,7 +24,7 @@ public class EmailAuthService {
 			String text = "<h3>이메일 인증 메일</h3>";
 			text += "이메일 인증을 하려면 아래 링크를 연결해주세요.<br/>";
 			text += "<input type='text' value="+ranKey+" readonly='readonly'/><br/>";
-			text += "<i><a href='http://127.0.0.1/joinAuth/"+id+"/"+email+"/"+email2+"/"+name+"/"+birth+"/"+phone+"/"+nickname+"/"+ranKey+"'>인증하러가기</a></i>";
+			text += "<i><a href='http://59.13.208.135/joinAuth/"+id+"/"+email+"/"+email2+"/"+name+"/"+birth+"/"+phone+"/"+nickname+"/"+ranKey+"'>인증하러가기</a></i>";
 			message.setText(text, "utf-8", "html");
 			jms.send(message);
 			
