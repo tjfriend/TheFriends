@@ -219,9 +219,10 @@
 		var music = "";
 		for(var i=0; i<${list.size()}; i++){
 			if($("#"+i).prop("checked")){
-				music += $("#music"+i).html()+"#";
+				music += $("#music"+i).html()+"^_=";
 			}
 		}
+		console.log(music);
 		console.log(${list.size()});
 		$.ajax({
 			"method" : "get",
