@@ -45,10 +45,10 @@
 	<div align="center">
 		<form action="/myinfo/Passchange" method="post" name="checkpass">
 			<label style="width: 30%"><font size="4">변경할 비밀번호</font></label> <input
-				type="text" class="form-control" style="width: 35%" name="pass" id="pass" required="required"/>
+				type="password" class="form-control" style="width: 35%" name="pass" id="pass" required="required"/>
 				<br/>
 			<label style="width: 30%"><font size="4">변경할 비밀번호확인 </font></label> <input
-				type="text" class="form-control" style="width: 35%" name="passcheck" id="passcheck"/>
+				type="password" class="form-control" style="width: 35%" name="passcheck" id="passcheck"/>
 			<br /> <input type="button" value="확인" name="passbu"  required="required" id="passbu" onclick="passbu" class="btn btn-default"
 				style="margin: 0 auto; height: 50px; width: 150px">
 		</form>
@@ -60,7 +60,7 @@
 		var passcheck = $('#passcheck').val();
 		if(pass == passcheck){
 			 alert("비밀번호가 성공적으로 변경되었습니다.");
-			 location.href="/myinfo/Passchange?pass="+ pass;
+			 window.close();
 		}else{
 			 alert("비밀번호를 다시 확인해주세요.");
 		}

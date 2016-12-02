@@ -41,13 +41,29 @@ public class HomepageController {
 		String page = "t:"+map.get("ADDRESS");
 		mav.setViewName(page);
 		mav.addObject("uuid", hs.uuid(id));
+		if(((String)map.get("ADDRESS")).equals("homeType2")){
+			List<HashMap> list = pic.view(id, 1);
+			mav.addObject("list", list);
+			if(list.size()==0){
+				mav.addObject("list", "0");
+			}
+		}
 		return mav;
 	}
 	
 	@RequestMapping("/home/{id}")
-	public String home(@PathVariable(name="id")String id){
+	public ModelAndView home(@PathVariable(name="id")String id){
+		ModelAndView mav = new ModelAndView();
 		String homeType = (String)(hs.goHome(id).get("ADDRESS"));
-		return "/"+homeType+"/article.jsp";
+		mav.setViewName("/"+homeType+"/article.jsp");
+		if(homeType.equals("homeType2")){
+			List<HashMap> list = pic.view(id, 1);
+			mav.addObject("list", list);
+			if(list.size()==0){
+				mav.addObject("list", "0");
+			}
+		}
+		return mav;
 	}
 
 	@RequestMapping("/board/{id}")
