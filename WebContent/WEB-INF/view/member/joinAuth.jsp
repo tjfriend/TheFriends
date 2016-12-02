@@ -331,6 +331,7 @@
 	});
 
 	$("#submit").click(function(){
+		console.log("11111");
 		var id = $("#join_id");
 		var password = $("#join_password");
 		var name = $("#name");
@@ -352,6 +353,7 @@
 		if(id.val()!="" && password.val()!="" && name.val()!="" && birthday.val()!="" && phone.val()!="" && add01.val()!="" && post.val()!="" &&
 				add02.val()!="" && email.val()!="" && email2.val()!="" && nickname.val()!=""){
 			if($("#hidden").val()=="1"){
+				console.log("aaaa");
 				$.ajax({
 					"method" : "get",
 					"url" : url,
@@ -363,7 +365,7 @@
 // 						$("#result").html(
 // 							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
 // 						);
-						window.setInterval(goIndex, 1000);
+						window.setTimeoutl(goIndex, 1600);
 					} else {
 						endDiv("joinFail");
 // 						$("#result").prop("class", "alert alert-danger");
@@ -394,6 +396,7 @@
 		var add02 = $("#add02_s");
 		var email = $("#email_s");
 		var email2 = $("#email2_s");
+		var post = $("#post_s");
 		var nickname = $("#nickname");
 		var reco = $("#recommender_s");
 		var authPass = $("#authPass_s");
@@ -416,7 +419,7 @@
 // 						$("#result_s").html(
 // 							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
 // 						);
-						window.setInterval(goIndex, 1000);
+						window.setTimeout(goIndex, 1600);
 					} else {
 						endDiv("joinFail");
 // 						$("#result_s").prop("class", "alert alert-danger");

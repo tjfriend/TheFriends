@@ -145,7 +145,7 @@ public class ShopController {
 	@ResponseBody
 	public boolean shopgiftend(HttpSession session, String title, String money, String gtake) {
 		String id = (String) session.getAttribute("id");
-		return sg.friendgift(id, title, money, gtake, session);
+		return sg.friendgift(title, money, gtake, session);
 	}
 	
 //	@RequestMapping("/shopgiftend")

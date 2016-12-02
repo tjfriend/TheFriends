@@ -21,7 +21,8 @@ public class Shopgift {
 		return ss.selectList("friends.friendSearch", id);
 	}
 
-	public boolean friendgift(String id, String title, String money, String gtake, HttpSession session) {
+	public boolean friendgift(String title, String money, String gtake, HttpSession session) {
+		String id = (String)session.getAttribute("id");
 		HashMap<String, Object> map = new HashMap<>();
 		 map.put("id", gtake);
 		 map.put("title", title);
@@ -29,7 +30,7 @@ public class Shopgift {
 		try {
 			List list = sql.selectList("shopbuy.musiccheck", map);
 			List<HashMap> list2 = sql.selectList("shopbuy.musicmoney", map);
-			List<HashMap> list3 = sql.selectList("shopbuy.mypoint", map);
+			List<HashMap> list3 = sql.selectList("shopbuy.mypoint", id);
 			int musicmoney = ((BigDecimal) list2.get(0).get("MONEY")).intValue();
 			int mypoint = ((BigDecimal) list3.get(0).get("POINT")).intValue();
 			if (list.size() == 0) {

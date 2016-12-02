@@ -11,7 +11,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
-	align="center">QnA // ${p }</h2>
+	align="center">QnA</h2>
 
 <div class="w3-row"
 	style="padding-left: 30px; padding-right: 30px; padding-top: 40px">

@@ -16,7 +16,7 @@
 		select * from shop where title = #{title }
 	</select>
 	
-	<select id="mypoint" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	<select id="mypoint" resultType="java.util.HashMap">
 		select * from member where id = #{id }
 	</select>
 	

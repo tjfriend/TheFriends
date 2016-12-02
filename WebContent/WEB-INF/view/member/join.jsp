@@ -382,11 +382,12 @@
 					"async" : false
 				}).done(function(txt){
 					if(txt==true){
-						$("#result").prop("class", "alert alert-success");
-						$("#result").html(
-							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-						);
-						window.setInterval(geIndex, 1000);
+// 						$("#result").prop("class", "alert alert-success");
+// 						$("#result").html(
+// 							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+// 						);
+						endDiv("finish");
+						window.setTimeout(geIndex, 1600);
 					} else {
 						$("#result").prop("class", "alert alert-danger");
 						$("#result").html(
@@ -433,11 +434,12 @@
 					"async" : false
 				}).done(function(txt){
 					if(txt==true){
-						$("#result_s").prop("class", "alert alert-success");
-						$("#result_s").html(
-							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-						);
-						window.setInterval(geIndex, 1000);
+// 						$("#result_s").prop("class", "alert alert-success");
+// 						$("#result_s").html(
+// 							"<strong>Success!</strong> Enjoy The Friends!<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+// 						);
+						endDiv("finish");
+						window.setTimeout(geIndex, 1600);
 					} else {
 						$("#result_s").prop("class", "alert alert-danger");
 						$("#result_s").html(
@@ -527,6 +529,6 @@
 	}
 	
 	function geIndex(){
-		location.href="/";
+		location.href="/index";
 	}
 </script>

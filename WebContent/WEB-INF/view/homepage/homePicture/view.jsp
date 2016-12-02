@@ -43,7 +43,17 @@
 	</tbody>
 </table>
 
+<div class="w3-modal" style="display: none" id="finishDiv">
+	<div class="w3-modal-content" style="width: 15%; height: 5%; border-radius: 10px; margin-top: 100px" align="center" id="finish">
+		<input type="button" class="btn btn-success" value="삭제되었습니다." style="width: 100%; height: 100%; border-radius: 10px"/>
+	</div>
+</div>
+
 <script>
+	function endDiv(txt){
+		$("#"+txt+"Div").fadeIn(500).delay(1000).fadeOut(500);
+	}
+
 	var txt;
 	function modify(element){
 		var id = element.id;
@@ -68,8 +78,8 @@
 			"url" : "/picture/delete?replynum="+id,
 			"async" : false
 		}).done(function(txt){
-			alert("삭제완료");
-			$("#replyDiv").hide();
+			endDiv("finish");
+			window.setTimeout(function(){$("#replyDiv").hide()}, 1600);
 		});
 	}
 	

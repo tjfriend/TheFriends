@@ -68,7 +68,7 @@
 	}
 </style>
 
-<div class="w3-container" align="center">
+<div class="w3-container" align="center" style="margin-bottom: 50px">
 	<h3 class="w3-padding-32 w3-text-grey" align="center">Picture</h3>
 	<div align="right">
 		<c:if test="${sessionScope.id == id }">
