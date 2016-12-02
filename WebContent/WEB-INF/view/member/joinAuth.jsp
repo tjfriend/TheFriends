@@ -208,7 +208,7 @@
 				<font id="joinrst_s"></font>
 			</div>
 			<div class="w3-hide-small w3-hide-medium">
-				<input type="button" id="submit" value="Join"
+				<input type="button" id="submitM" value="Join"
 					style="width: 15%; background-color: #4CAF50; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer;" /><br />
 				<font id="joinrst"></font>
 			</div>
@@ -330,7 +330,7 @@
 		});
 	});
 
-	$("#submit").click(function(){
+	$("#submitM").click(function(){
 		console.log("11111");
 		var id = $("#join_id");
 		var password = $("#join_password");
