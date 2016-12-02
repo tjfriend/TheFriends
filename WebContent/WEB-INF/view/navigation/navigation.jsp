@@ -19,9 +19,9 @@
 	<label>출발지(내주소)</label>&nbsp;&nbsp;
 	<input type="text" id="myhome" value="${my }" size="50px" readonly="readonly"/>&nbsp;&nbsp;
 	<label>도착지(친구주소)</label>&nbsp;&nbsp;
-	<input type="text" name="friend" id="friend" list="rst" size="50px" />&nbsp;&nbsp;
+	<input type="text" name="friend" id="friend" list="dataRst" size="50px" />&nbsp;&nbsp;
 	<input type="button" class="btn btn-default" value="찾기" id="find" disabled="disabled"/>
-	<datalist id="rst"></datalist>
+	<datalist id="dataRst"></datalist>
 </div>
 <div align="center">
 	<div id="map"
@@ -33,16 +33,19 @@
 	var address;
 	$("#friend").on("input", function() {
 		$.ajax({
-			"url" : "/navi/find?friend=" + $("#friend").val()
+			"method" : "get",
+			"url" : "/navi/find?friend=" + $("#friend").val(),
+			"async" : true
 		}).done(function(txt){
-			$("#rst").html(txt);
+			console.log(txt);
+			$("#dataRst").html(txt);
 // 			$("#friend").on('input', function() {
 // 				var con = $(this).val();
 // 			})
 		});
 		
 		var old = $(this).val();
-    	$("#rst").find("option").each(function() {
+    	$("#dataRst").find("option").each(function() {
     		if($(this).val() == old) {
     			var temp = $(this).val();
     			name = temp.slice(0, temp.indexOf(":"));

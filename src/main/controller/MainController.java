@@ -100,11 +100,11 @@ public class MainController {
 	}
 
 	@RequestMapping("/navigation")
-	public ModelAndView navigation(HttpSession id, HttpSession session) {
+	public ModelAndView navigation(HttpSession session) {
 		ModelAndView mav = new ModelAndView("t:navigation/navigation");
-		if(id.getAttribute("id")!=null){
-			String my = navi.navi((String)id.getAttribute("id"));
-			HashMap map = navi.mydis((String)id.getAttribute("id"));
+		if(session.getAttribute("id")!=null){
+			String my = navi.navi((String)session.getAttribute("id"));
+			HashMap map = navi.mydis((String)session.getAttribute("id"));
 			session.setAttribute("x", map.get("X"));
 			session.setAttribute("y", map.get("Y"));
 			mav.addObject("my",my);

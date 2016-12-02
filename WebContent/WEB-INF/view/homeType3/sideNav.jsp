@@ -37,8 +37,8 @@
 	<!-- Friends -->
 	<div class="w3-card-2 w3-round w3-white w3-hide-small">
 		<h3 align="center"><b>Friends</b></h3>
-		<div class="w3-row w3-container" style="height: 220px">
-			<div class="w3-content" style="height: 220px; overflow-y: auto;">
+		<div class="w3-row w3-container" style="height: 190px">
+			<div class="w3-content" style="height: 190px; overflow-y: auto;">
 				<table class="table">
 					<thead align="center">
 						<tr>

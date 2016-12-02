@@ -11,7 +11,7 @@
 body,h1,h2,h5 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
 .bgimg {
-	background-image: url('/image/2.png');
+	background-image: url('/image/mainImage.png');
     min-height: 100%;
     background-position: center;
     background-size: cover;
@@ -23,9 +23,6 @@ body, html {height: 100%}
   <div class="w3-display-topleft w3-padding-jumbo w3-xlarge">
     <p><button onclick="goMain()" style="width: 100px; border-radius: 15px; background-color: white" class="btn btn-default">Main</button></p>
     <p><button onclick="goJoin()" style="width: 100px; border-radius: 15px; background-color: white" class="btn btn-default">Join</button></p>
-  </div>
-  <div class="w3-display-bottomright w3-padding-jumbo">
-    <h3><b><font style="color: yellow">Copyrighted by <font style="color: blue">&copy;The Friends</font> Corp.</font> <font style="color: black">copyright since 13 Nov. 2016</font></b></h3>
   </div>
 </div>
 

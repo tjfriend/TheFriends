@@ -216,6 +216,7 @@
 			<div align="center">
 				<c:if test="${login != null }">
 					<form action="/homeBoard/homeBoardcomment" method="post">
+						<input type="hidden" name="owner" value=${id }/>
 						<input type="hidden" name="pn" value="${pn }">
 						<input type="hidden" name="rnum" value="${rnum }">
 						<input type="hidden" name="num" value="${details.NUM }"> 

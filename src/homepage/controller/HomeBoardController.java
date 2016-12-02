@@ -230,12 +230,12 @@ public class HomeBoardController {
 	@RequestMapping("/homeBoardcomment")
 	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p,
 			@RequestParam(name = "id") String id,@RequestParam(defaultValue ="5")int paging,@RequestParam(defaultValue= "1")int rnum
-			,@RequestParam(defaultValue = "1") int pn) {
+			,@RequestParam(defaultValue = "1") int pn, @RequestParam(name="owner")String owner) {
 		String coid = (String) session.getAttribute("id");
 		int r = bw.comment(num, coid, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = bp.commentsize(num);
-		mav.setViewName("redirect:/homeBoard/details/" + id + "/" + num + "?p=" + si+"&paging="+paging+"&rnum="+rnum+"&pn="+pn
+		mav.setViewName("redirect:/homeBoard/details/" + owner + "/" + num + "?p=" + si+"&paging="+paging+"&rnum="+rnum+"&pn="+pn
 				);
 		return mav;
 	}

@@ -55,8 +55,8 @@
 	
 	<div class="w3-section">
 		<h3 align="center"><b>Friends</b></h3>
-		<div class="w3-row w3-container" style="height: 150px">
-			<div class="w3-content" style="height: 150px; overflow-y: auto;">
+		<div class="w3-row w3-container" style="height: 200px">
+			<div class="w3-content" style="height: 200px; overflow-y: auto;">
 				<table class="table">
 					<thead align="center">
 						<tr>

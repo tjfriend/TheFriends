@@ -23,14 +23,14 @@
 		<div class="w3-col" style="width: 250px">
 			<label>디자인</label><br/>
 			<select style="height: 25px; border: 1px solid #ccc; border-radius: 5px" id="layout">
-				<option>기본</option>
-				<option>사진</option>
-				<option>SNS</option>
-				<option>블로그</option>
+				<option>Type1</option>
+				<option>Type2</option>
+				<option>Type3</option>
+				<option>Type4</option>
 			</select>
 		</div>
 		<div class="w3-rest" style="padding-left: 20px; padding-right: 20px">
-			<img src="/image/default.png" style="border-radius: 25px; width: 100%" id="layoutImg"/><br/><br/>
+			<img src="/image/homeType1.png" style="border-radius: 25px; width: 100%" id="layoutImg"/><br/><br/>
 			<input type="button" value="적용" id="commit" class="btn btn-default"/>
 		</div>
 	</div><hr style="border-color: black"/>
@@ -280,17 +280,17 @@
 	$("#layout").change(function(){
 		var layout = $("#layout").prop("value");
 		switch(layout){
-		case "기본":
-			$("#layoutImg").prop("src", "/image/default.png");
+		case "Type1":
+			$("#layoutImg").prop("src", "/image/homeType1.png");
 			break;
-		case "사진":
-			$("#layoutImg").prop("src", "/image/picture.png");
+		case "Type2":
+			$("#layoutImg").prop("src", "/image/homeType2.png");
 			break;
-		case "SNS":
-			$("#layoutImg").prop("src", "/image/sns.png");
+		case "Type3":
+			$("#layoutImg").prop("src", "/image/homeType3.png");
 			break;
-		case "블로그":
-			$("#layoutImg").prop("src", "/image/blog.png");
+		case "Type4":
+			$("#layoutImg").prop("src", "/image/homeType4.png");
 			break;
 		}
 	});
