@@ -36,6 +36,8 @@ public class AcceptService {
 				return false;
 			}
 		} else {
+			ss.rollback();
+			ss.close();
 			return false;
 		}
 	}

@@ -91,6 +91,7 @@ public class PictureService {
 		for(int i=0; i<list.size(); i++){
 			list.get(i).put("ran", Math.random());
 		}
+		ss.close();
 		return list;
 	}
 	
@@ -105,6 +106,7 @@ public class PictureService {
 		for(int i=0; i<list.size(); i++){
 			list.get(i).put("ran", Math.random());
 		}
+		ss.close();
 		return list;
 	}
 	
@@ -112,6 +114,7 @@ public class PictureService {
 	public int total(String id){
 		SqlSession ss = fac.openSession();
 		int a = ss.selectOne("picture.total", id);
+		ss.close();
 		return a%10==0 ? a/10 : a/10+1;
 	}
 	
@@ -160,6 +163,7 @@ public class PictureService {
 		SqlSession ss = fac.openSession();
 		HashMap map = ss.selectOne("picture.goodCount",num);
 		int  a = ((BigDecimal)map.get("GOOD")).intValue();
+		ss.close();
 		return a;
 	}
 }

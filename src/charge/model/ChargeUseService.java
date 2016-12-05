@@ -36,6 +36,8 @@ public class ChargeUseService {
 				return 0;
 			}
 		}else{
+			ss.rollback();
+			ss.close();
 			return 0;
 		}
 	}

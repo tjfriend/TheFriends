@@ -16,6 +16,7 @@ public class ChargeFriendsService {
 	public List chargeFriend(String id){
 		SqlSession ss = fac.openSession();
 		List<HashMap> list = ss.selectList("member.chargeFriends", id);
+		ss.close();
 		return list;
 	}
 }

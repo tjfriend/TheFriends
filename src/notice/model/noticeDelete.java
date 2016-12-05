@@ -15,6 +15,7 @@ public class noticeDelete {
 	public int CommentDelete(int commentnum) {
 		SqlSession sql = fac.openSession();
 		int de = sql.delete("notice.noticecommentdelete", commentnum);
+		sql.commit();
 		sql.close();
 		return de;
 	}
@@ -23,6 +24,7 @@ public class noticeDelete {
 	public int noticeDelete(int num) {
 		SqlSession sql = fac.openSession();
 		int de = sql.delete("notice.noticedelete", num);
+		sql.commit();
 		sql.close();
 		return de;
 	}
@@ -30,6 +32,7 @@ public class noticeDelete {
 	public int noticeDeletecomment(int num) {
 		SqlSession sql = fac.openSession();
 		int de = sql.delete("notice.noticedeletecomment", num);
+		sql.commit();
 		sql.close();
 		return de;
 	}

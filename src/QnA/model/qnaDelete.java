@@ -15,20 +15,23 @@ public class qnaDelete {
 	
 	public int QnaDelete(int num){
 		SqlSession sql = fac.openSession();
-			int de = sql.delete("qna.qnadelete",num);
+		int de = sql.delete("qna.qnadelete",num);
+		sql.commit();
 		sql.close();
 		return de;
 	}
 	public int QnaDeletecomment(int num){
 		SqlSession sql = fac.openSession();
-			int de = sql.delete("qna.qnadeletecomment",num);
+		int de = sql.delete("qna.qnadeletecomment",num);
+		sql.commit();
 		sql.close();
 		return de;
 	}
 	
 	public int CommentDelete(int commentnum){
 		SqlSession sql = fac.openSession();
-			int de = sql.delete("qna.commentdelete",commentnum);
+		int de = sql.delete("qna.commentdelete",commentnum);
+		sql.commit();
 		sql.close();
 		return de;
 	}

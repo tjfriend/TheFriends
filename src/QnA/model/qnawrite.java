@@ -25,14 +25,16 @@ public class qnawrite {
 		map.put("id", id);
 		map.put("category", category);
 
+		SqlSession sql = fac.openSession();
 		try {
-			SqlSession sql = fac.openSession();
 			int rst = sql.insert("qna.question", map);
-
+			sql.commit();
 			sql.close();
 			return rst;
 		} catch (Exception e) {
-
+			e.printStackTrace();
+			sql.rollback();
+			sql.close();
 			return -1;
 		}
 	}
@@ -42,14 +44,16 @@ public class qnawrite {
 		map.put("num", num);
 		map.put("id", id);
 		map.put("memo", memo);
+		SqlSession sql = fac.openSession();
 		try {
-			SqlSession sql = fac.openSession();
 			int rst = sql.insert("qna.qnacomment", map);
+			sql.commit();
 			sql.close();
 			return rst;
-
 		} catch (Exception e) {
 			e.printStackTrace();
+			sql.rollback();
+			sql.close();
 			return -1;
 		}
 	}
@@ -80,6 +84,7 @@ public class qnawrite {
 			map.put("category", category);
 		SqlSession sql = fac.openSession();
 		int li = sql.update("qna.qnaadjust",map);
+		sql.commit();
 		sql.close();
 		return li;
 	}
@@ -92,6 +97,7 @@ public class qnawrite {
 			map.put("memo", memo);
 		SqlSession sql = fac.openSession();
 		int li = sql.update("qna.qnacommentupdate",map);
+		sql.commit();
 		sql.close();
 		return li;
 	}
@@ -102,11 +108,9 @@ public class qnawrite {
 			map.put("num", num);
 		SqlSession sql = fac.openSession();
 		int up = sql.update("qna.upinqu",map);
+		sql.commit();
 		sql.close();
 		return up;
 				
 	}
-	
-
-
 }

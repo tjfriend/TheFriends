@@ -20,6 +20,7 @@ public class boardpage {
 		SqlSession sql = fac.openSession();
 		int size = sql.selectOne("homeboard.pagesize",id);
 		p=p-1;
+		sql.close();
 		int check = p*10;
 		
 		int endpage = size-check;

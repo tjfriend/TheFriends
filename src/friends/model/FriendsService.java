@@ -16,7 +16,9 @@ public class FriendsService {
 	
 	public List homeFriends(String id){
 		SqlSession ss = fac.openSession();
-		return ss.selectList("friends.homeFriends", id);
+		List list = ss.selectList("friends.homeFriends", id);
+		ss.close();
+		return list;
 	}
 	
 	public List friends(String id, int p){
@@ -85,6 +87,7 @@ public class FriendsService {
 		SqlSession sql = fac.openSession();
 		int size = sql.selectOne("member.friendsSize", id);
 		int psize = size % 10 == 0? size/10 : size/10+1;
+		sql.close();
 		return psize;
 	}
 }

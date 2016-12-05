@@ -15,13 +15,16 @@ public class RequestFriendsService {
 	public List<HashMap> requestFriends(String id){
 		SqlSession ss = fac.openSession();
 		HashMap map = new HashMap();
-		return ss.selectList("friends.request", id);
+		List<HashMap> list = ss.selectList("friends.request", id);
+		ss.close();
+		return list;
 	}
 	
 	public int size(String id){ 	// 페이지 숫자
 		SqlSession sql = fac.openSession();
 		int size = sql.selectOne("friends.friendsSize", id);
 		int psize = size % 10 == 0? size/10 : size/10+1;
+		sql.close();
 		return psize;
 	}
 	

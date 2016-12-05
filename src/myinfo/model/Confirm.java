@@ -62,7 +62,7 @@ public class Confirm {
 		int de21 = sql.delete("myinfo.qnacommentdelete", id);
 		int de22 = sql.delete("myinfo.shopbuydelete", id);
 		int de23 = sql.delete("myinfo.visitorsdelete", id);
-		
+		sql.commit();
 		sql.close();
 		return de+de1+de2+de3+de4+de5+de6+de7+de8+de9+de10+de11+de12+de13+de14+de15+de16+de17+de18+de19+de20+de21+de22+de23;
 	}
@@ -74,6 +74,8 @@ public class Confirm {
 		map.put("id", id);
 		map.put("pass", pass);
 		int up = sql.update("myinfo.passupdate", map);
+		sql.commit();
+		sql.close();
 		return up;
 
 	}
@@ -101,11 +103,13 @@ public class Confirm {
 		SqlSession sql = fac.openSession();
 		if(checkbox.contains("Birthoff")){
 			int upda = sql.update("myinfo.changemembercheckboxbirth", map);
+			sql.commit();
 			sql.close();
 			return upda;
 		}else{
 			map.put("birth", birth);
 			int upda = sql.update("myinfo.changemember", map);
+			sql.commit();
 			sql.close();
 			return upda;
 		}
@@ -125,7 +129,7 @@ public class Confirm {
 		map.put("phone", phone);
 		SqlSession sql = fac.openSession();
 		int upmy = sql.update("myinfo.changemyinfo", map);
-		
+		sql.commit();
 		sql.close();
 		return upmy;
 	}

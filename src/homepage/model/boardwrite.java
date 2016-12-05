@@ -23,9 +23,17 @@ public class boardwrite {
 		map.put("title", title);
 		map.put("content", content);
 		map.put("id", id);
-		int w = sql.insert("homeboard.write", map);
-		sql.close();
-		return w;
+		try{
+			int w = sql.insert("homeboard.write", map);
+			sql.commit();
+			sql.close();
+			return 1;
+		} catch (Exception e){
+			e.printStackTrace();
+			sql.rollback();
+			sql.commit();
+			return -1;
+		}
 	}
 
 	// 조회수 증가
@@ -84,14 +92,17 @@ public class boardwrite {
 		map.put("num", num);
 		map.put("id", coid);
 		map.put("memo", memo);
+		SqlSession sql = fac.openSession();
 		try {
-			SqlSession sql = fac.openSession();
 			int rst = sql.insert("homeboard.homebordcomment", map);
+			sql.commit();
 			sql.close();
 			return rst;
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			sql.rollback();
+			sql.close();
 			return -1;
 		}
 	}

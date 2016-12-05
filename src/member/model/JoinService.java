@@ -99,6 +99,7 @@ public class JoinService {
 	public List idcheck(String id){
 		SqlSession ss = fac.openSession();
 		List<HashMap> list = ss.selectList("member.idcheck", id);
+		ss.close();
 		return list;
 	}
 }

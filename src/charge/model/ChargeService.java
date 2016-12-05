@@ -25,6 +25,8 @@ public class ChargeService {
 			try{
 				int b = ss.insert("charge.charge", map);
 				if(b==0){
+					ss.rollback();
+					ss.close();
 					return 0;
 				}
 				List<HashMap> list = ss.selectList("member.idcheck", id);

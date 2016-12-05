@@ -17,13 +17,16 @@ public class ShopWrite {
 		HashMap map = new HashMap();
 		map.put("title", title);
 		map.put("money", money);
+		SqlSession sql = fac.openSession();
 		try {
-			SqlSession sql = fac.openSession();
 			int rst = sql.insert("Shop.shopwrite", map);
+			sql.commit();
 			sql.close();
 			return rst;
 		} catch (Exception e) {
-			
+			e.printStackTrace();
+			sql.rollback();
+			sql.close();
 			return -1;
 		}
 	}

@@ -47,6 +47,7 @@ public class PictureRepleService {
 			li.get(i).put("DAY", day);
 			li.set(i, li.get(i));
 		}
+		ss.close();
 		return li;
 	}
 	
@@ -54,6 +55,7 @@ public class PictureRepleService {
 	public int total(int num){
 		SqlSession ss = fac.openSession();
 		int a = ss.selectOne("picture.total2",num);
+		ss.close();
 		return a%10==0 ? a/10 : a/10+1;
 	}
 	

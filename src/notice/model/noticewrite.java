@@ -21,9 +21,17 @@ public class noticewrite {
 		map.put("id", id);
 		map.put("title", title);
 		map.put("content", content);
-		int w = sql.insert("notice.write", map);
-		sql.close();
-		return w;
+		try{
+			int w = sql.insert("notice.write", map);
+			sql.commit();
+			sql.close();
+			return w;
+		} catch(Exception e){
+			e.printStackTrace();
+			sql.rollback();
+			sql.close();
+			return -1;
+		}
 
 	}
 
@@ -33,6 +41,7 @@ public class noticewrite {
 		map.put("num", num);
 		SqlSession sql = fac.openSession();
 		int up = sql.update("notice.upinqu", map);
+		sql.commit();
 		sql.close();
 		return up;
 
@@ -45,6 +54,7 @@ public class noticewrite {
 		map.put("memo", memo);
 		SqlSession sql = fac.openSession();
 		int li = sql.update("notice.noticecommentupdate", map);
+		sql.commit();
 		sql.close();
 		return li;
 	}
@@ -82,14 +92,17 @@ public class noticewrite {
 		map.put("num", num);
 		map.put("id", id);
 		map.put("memo", memo);
+		SqlSession sql = fac.openSession();
 		try {
-			SqlSession sql = fac.openSession();
 			int rst = sql.insert("notice.noticecomment", map);
+			sql.commit();
 			sql.close();
 			return rst;
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			sql.rollback();
+			sql.close();
 			return -1;
 		}
 	}

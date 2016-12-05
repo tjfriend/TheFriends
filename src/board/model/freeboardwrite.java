@@ -54,14 +54,17 @@ public class freeboardwrite {
 		map.put("num", num);
 		map.put("id", id);
 		map.put("memo", memo);
+		SqlSession sql = fac.openSession();
 		try {
-			SqlSession sql = fac.openSession();
 			int rst = sql.insert("freeboard.freeboardcomment", map);
+			sql.commit();
 			sql.close();
 			return rst;
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			sql.rollback();
+			sql.close();
 			return -1;
 		}
 	}
@@ -72,6 +75,7 @@ public class freeboardwrite {
 			map.put("memo", memo);
 		SqlSession sql = fac.openSession();
 		int li = sql.update("freeboard.freeboardcommentupdate",map);
+		sql.commit();
 		sql.close();
 		return li;
 	}
