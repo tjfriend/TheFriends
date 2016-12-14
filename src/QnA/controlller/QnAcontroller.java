@@ -34,6 +34,9 @@ public class QnAcontroller {
 	@Autowired
 	qnaDelete qd;
 
+	@Autowired
+	QnACommnets qc;
+
 	@RequestMapping("/test")
 	public ModelAndView test() {
 		ModelAndView mav = new ModelAndView("t:qna/test");
@@ -45,11 +48,11 @@ public class QnAcontroller {
 	public ModelAndView QnAList(@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "") String mode,
 			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "5") int paging) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("p",p);
-		
+		mav.addObject("p", p);
+
 		List best = qp.qnabest();
-		mav.addObject("qnabest",best);
-			
+		mav.addObject("qnabest", best);
+
 		if (mode.equals("")) {
 			if (search.equals("")) {
 				List lis = qp.GetRnage(p);
@@ -168,10 +171,9 @@ public class QnAcontroller {
 
 	@RequestMapping("/details/{num}")
 	public ModelAndView detailsqna(@PathVariable(name = "num") int num, @RequestParam(defaultValue = "1") int p,
-			HttpSession session, HttpServletRequest req, HttpServletResponse resp,@RequestParam(defaultValue ="5")int paging
-			,@RequestParam(defaultValue = "1") int pn) {
+			HttpSession session, HttpServletRequest req, HttpServletResponse resp,
+			@RequestParam(defaultValue = "5") int paging, @RequestParam(defaultValue = "1") int pn) {
 		String id = (String) session.getAttribute("id");
-
 		Cookie[] ar = req.getCookies();
 		int n = 0;
 		for (Cookie c : ar) {
@@ -184,7 +186,7 @@ public class QnAcontroller {
 			int upinq = qw.upinquiry(num);
 
 			Cookie cc = new Cookie("qna#" + num, "qna#" + num);
-			cc.setMaxAge(60*30);
+			cc.setMaxAge(60 * 30);
 			cc.setPath("/");
 			resp.addCookie(cc);
 		}
@@ -197,44 +199,43 @@ public class QnAcontroller {
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
 		String day = sdf.format(date);
 		data.put("TIME", day);
-		
+
 		int bestsizecom = qp.commentsize(num);
-		
-		if(sizecom>paging){
+
+		if (sizecom > paging) {
 			sizecom = paging;
-			}
-		
-		
+		}
+
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("pn",pn);
-		mav.addObject("p",p);
+
+		mav.addObject("pn", pn);
+		mav.addObject("p", p);
 		mav.addObject("loginid", id);
 		mav.addObject("details", data);
 		mav.addObject("qnacommentda", list);
 		mav.addObject("qnacommentsi", sizecom);
-		mav.addObject("qnabestsizecom",bestsizecom);
+		mav.addObject("qnabestsizecom", bestsizecom);
 		mav.setViewName("t:qna/qnadetails");
 
 		return mav;
 	}
 
 	@RequestMapping("/qnacomment")
-	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p
-			,@RequestParam(defaultValue ="5")int paging,@RequestParam(defaultValue = "1") int pn) {
-		if(paging == 0){
-			paging =5;
+	public ModelAndView qnacomment(int num, HttpSession session, String memo, @RequestParam(defaultValue = "1") int p,
+			@RequestParam(defaultValue = "5") int paging, @RequestParam(defaultValue = "1") int pn) {
+		if (paging == 0) {
+			paging = 5;
 		}
 		String id = (String) session.getAttribute("id");
 		int r = qw.comment(num, id, memo);
 		ModelAndView mav = new ModelAndView();
 		int si = qp.commentsize(num);
-		mav.setViewName("redirect:/qna/details/" + num + "?p=" + si+"&paging="+paging+"&pn="+pn);
+		mav.setViewName("redirect:/qna/details/" + num + "?p=" + si + "&paging=" + paging + "&pn=" + pn);
 		return mav;
 	}
 
 	@RequestMapping("/qnaupdate")
-	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num,@RequestParam(defaultValue = "1") int pn) {
+	public ModelAndView QnaUpdate(@RequestParam(name = "num") int num, @RequestParam(defaultValue = "1") int pn) {
 		ModelAndView mav = new ModelAndView();
 		List list = qw.num(num);
 		mav.addObject("list", list);
@@ -244,44 +245,88 @@ public class QnAcontroller {
 	}
 
 	@RequestMapping("/qnaadjust")
-	public ModelAndView qnaAdjust(String category, int num, String title, String content, HttpSession session,@RequestParam(defaultValue = "1") int pn) {
+	public ModelAndView qnaAdjust(String category, int num, String title, String content, HttpSession session,
+			@RequestParam(defaultValue = "1") int pn) {
 		int r = qw.Adjust(num, content, category, title);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("qnaadjust", r);
-		mav.setViewName("redirect:/qna/details/"+num+"?pn="+pn);
+		mav.setViewName("redirect:/qna/details/" + num + "?pn=" + pn);
 		return mav;
 	}
 
 	@RequestMapping("/qnadelete")
-	public ModelAndView qnaDelete(int num,@RequestParam(defaultValue = "1") int pn) {
+	public ModelAndView qnaDelete(int num, @RequestParam(defaultValue = "1") int pn) {
 		int de = qd.QnaDelete(num);
 		int da = qd.QnaDeletecomment(num);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("num", num);
-		mav.setViewName("redirect:/qna/list?p="+pn);
+		mav.setViewName("redirect:/qna/list?p=" + pn);
 		return mav;
 	}
 
 	@RequestMapping("/commentdelete")
-	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num,@RequestParam(defaultValue = "1") int pn) {
+	public ModelAndView CommentDelete(int commentnum, @RequestParam(defaultValue = "-1") int num,
+			@RequestParam(defaultValue = "1") int pn) {
 		int de = qd.CommentDelete(commentnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("commentnum", commentnum);
-		mav.setViewName("redirect:/qna/details/"+ num+"?pn="+pn);
+		mav.setViewName("redirect:/qna/details/" + num + "?pn=" + pn);
 		return mav;
 	}
 
-	// ´ñ±Û ¼öÁ¤              
+	// ´ñ±Û ¼öÁ¤
 	@RequestMapping("/commentupdate")
 	public ModelAndView commentupdate(@RequestParam(name = "memo") String memo,
 			@RequestParam(name = "commentnum") int commentnum, @RequestParam(name = "num") int num,
-			@RequestParam(defaultValue = "1")int p,@RequestParam(defaultValue = "5")int paging,@RequestParam(defaultValue = "1") int pn) {
+			@RequestParam(defaultValue = "1") int p, @RequestParam(defaultValue = "5") int paging,
+			@RequestParam(defaultValue = "1") int pn) {
 		int r = qw.CommentAdjust(memo, commentnum);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/qna/details/" + num+"?p="+p+"&paging="+paging+"&pn="+pn);
+		mav.setViewName("redirect:/qna/details/" + num + "?p=" + p + "&paging=" + paging + "&pn=" + pn);
 
 		return mav;
 
 	}
 
+	// ´ë ´ñ±Û
+	@RequestMapping("/writecomments")
+	public ModelAndView writecommnets(@RequestParam(name = "memo") String memo,
+			@RequestParam(name = "commentnum") int commentnum, @RequestParam(defaultValue = "1") int p,
+			@RequestParam(defaultValue = "5") int paging, @RequestParam(defaultValue = "1") int pn, HttpSession session,
+			@RequestParam(name = "num") int num) {
+		String id = (String) session.getAttribute("id");
+		int re = qc.writecomments(id, memo, commentnum,num);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/qna/details/" + num + "?p=" + p + "&paging=" + paging + "&pn=" + pn);
+
+		return mav;
+	}
+	
+	@RequestMapping("/showcomments")
+	public ModelAndView showcomments(
+			@RequestParam(name = "commentnum") int commentnum, @RequestParam(defaultValue = "1") int p,
+			@RequestParam(defaultValue = "5") int paging, @RequestParam(defaultValue = "1") int pn, HttpSession session,
+			@RequestParam(name = "num") int num){
+		String id = (String)session.getAttribute("id");
+		List list = qc.showcommnets(commentnum);
+		ModelAndView mav = new ModelAndView("/qna/qnacomments.jsp");
+			
+		mav.addObject("loginid", id);
+		mav.addObject("pn", pn);
+		mav.addObject("comments", list);
+		mav.addObject("commentnum", commentnum);
+//		mav.setViewName("t:/qna/qnacomments/" + num + "?p=" + p + "&paging=" + paging + "&pn=" + pn);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/commentsdelete")
+	public ModelAndView commentsdelete(int commentnum, @RequestParam(defaultValue = "-1") int num,
+			@RequestParam(defaultValue = "1") int pn){
+			System.out.println(commentnum +"..");
+		int r = qc.deletecomments(commentnum);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/qna/details/" + num + "?pn=" + pn);
+		return mav;
+	}
 }

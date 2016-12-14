@@ -170,6 +170,19 @@
    	]]>
 	</select>
 
+<!-- 	대댓글!! -->
 
-
+	<insert id="qnacomments" parameterType="java.util.HashMap">
+		insert into qnacommnets values (#{num } , #{id }, #{memo },sysdate,QNA_COMMENTS.NEXTVAL,#{qnanum})
+	</insert>
+	
+	
+	<select id="showcomments" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	select * from qnacommnets where qnacommnetnum = #{num }
+	</select>
+	
+	<delete id="commentsdelete" parameterType="java.lang.Integer">
+		delete QNACOMMNETS where COMMNETSNUM = #{commentnum }
+	</delete>
+	
 </mapper>

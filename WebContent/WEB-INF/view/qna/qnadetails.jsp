@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -10,10 +9,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
 <h2 class="w3-padding-64 w3-text-grey" style="margin-top: 50px"
 	align="center">QnA</h2>
-
 <div align="center">
 	<div class="w3-row"
 		style="padding-left: 30px; padding-right: 30px; padding-top: 40px; width: 70%">
@@ -69,7 +66,6 @@
 					</tr>
 				</table>
 			</div>
-
 			<!--  	댓글 -->
 			<div>
 				<table class="table">
@@ -84,10 +80,13 @@
 								id="memo${qnac.commentnum }" class="btn btn-default"
 								style="width: 100%; resize: none; display: none;" name="memo"
 								value="${qnac.memo }" /></td>
-							<td width="15%">${qnac.day }</td>
+							<td width="15%">${qnac.day }
+								<a id="comments${qnac.commentnum }" onclick="comments(this)">덧글보기</a>
+								<a id="hidecomments${qnac.commentnum }" onclick="hidecomments(this)" style="display: none;" >덧글접기</a>
+							</td>
 							<td width="20%"><c:if test="${loginid == qnac.id }">
 									<input type="button" value="수정" id="change${qnac.commentnum }"
-										onclick="change(this)" class="btn btn-default">
+										onclick="change(this)" class="btn btn-default" >
 									<input type="button" value="완료" style="display: none;"
 										id="changecubmit${qnac.commentnum }" class="btn btn-default"
 										onclick="memoupdate(this)">
@@ -100,6 +99,30 @@
 										id="deletesumit${qnac.commentnum }" class="btn btn-default"
 										onclick="deletesumit(this)">
 								</c:if></td>
+					
+						</tr>
+						<tr id="writecomments${qnac.commentnum }" style="display: none;">		
+							<td>
+							</td>
+								<c:if test="${login != null }">
+							<td width="50%">				
+									<input type="text" name="commentsmemo${qnac.commentnum }"  id="commentsmemo${qnac.commentnum }"
+									 style="width: 100%; height: 33px; border: 1px solid #ccc; 
+									 border-radius: 5px; padding-left: 10px; resize: none;" />
+									
+							</td>
+							<td>
+										<input type="button" value="등록" id="writecomments${qnac.commentnum }"
+										 onclick="writecomments(this)" class="btn btn-default">
+							</td>
+								</c:if>
+							<td></td><td></td>
+						</tr>	
+						
+						<tr style="display: none;" id="lookcommenats${qnac.commentnum }">	                     
+							<td colspan="4">
+								<div id="lookcomments${qnac.commentnum }" ></div>
+							</td>			
 						</tr>
 					</c:forEach>
 				</table>
@@ -124,13 +147,11 @@
 				</c:if>
 			</div>
 			<br />
-
 			<c:if test="${qnabestsizecom == qnacommentsi }">
 				<fmt:parseNumber var="qnacommentsi" value="${(var3+1)*5}"
 					integerOnly="true" />
 			</c:if>
 			<script>
-			
 			function nextpage() {
 				paging = ${qnacommentsi + 5 };
 				p = ${qnacommentsi + 1 };
@@ -142,10 +163,6 @@
 				p = paging - 4;
 				location.href = "/qna/details/${details.NUM }?p="+ p + "&paging=" + paging+"&pn=${pn }";
 			}
-			
-			
-			
-			
 				function memoupdate(element) {
 					var id = element.id;
 					id = id.slice(id.indexOf('t') + 1);
@@ -154,7 +171,50 @@
 					location.href = "/qna/commentupdate?num=${details.NUM}&commentnum="
 							+ id + "&memo=" + memo+"&p=${p}&paging=${qnacommentsi}&pn=${pn }";
 				}
+				
+				function writecomments(element) {
+					var id = element.id;
+					id = id.slice(id.indexOf('s') + 1);
+					var memo = $("#commentsmemo" + id).val();
+					
+ 					location.href = "/qna/writecomments?num=${details.NUM}&commentnum="
+ 							+ id + "&memo=" + memo+"&p=${p}&paging=${qnacommentsi}&pn=${pn }";
+				}
 
+
+				function comments(element) {
+					var id = element.id;
+					var num = id.substring(id.indexOf('s')+1);
+					
+					$("#comments" + num).hide();
+					$("#hidecomments" +num).show();
+					$("#writecomments" +num).show(); 
+					$("#lookcommenats" +  num).show();
+					$("#lookcomments"+ num).show();
+					
+					
+					$.ajax({
+						"method" : "get",
+						"url" : "/qna/showcomments?num=${details.NUM}&commentnum="+num+"&p=${p}&paging=${qnacommentsi}&pn=${pn }",                       
+						"async" : false 
+					}).done(function(txt){
+						$("#lookcomments"+ num).html(txt);
+					}).fail(function(txt){
+					});
+					
+				}
+				
+				function hidecomments(element) {
+					var id = element.id;
+					var num = id.substring(id.indexOf('s')+1);
+					$("#comments" + num).show();
+					$("#hidecomments" +num).hide();
+					$("#writecomments" +num).hide();
+					$("#lookcomments"+ num).hide();
+					$("#lookcommenats" +  num).hide();
+				}
+				
+				
 				function change(element) {
 					var id = element.id;
 					var num = id.substring(id.indexOf('e') + 1);
@@ -176,19 +236,16 @@
 					$("#changecubmit" + num).hide();
 					$("#memo" + num).hide();
 				}
-
 				function QnADelete(element) {
 					var id = element.id;
 					var num = id.substring(id.indexOf('e') + 5);
-
+					
 					if (confirm("이 게시글을 정말로 삭제하시겠습니까?") == true) {
 						location.href = "/qna/qnadelete?num=" + num+"&pn=${pn}";
 					} else {
 						return;
 					}
-
 				}
-
 				function deletesumit(element) {
 					var id = element.id;
 					var commentnum = id.substring(id.indexOf('t') + 7);
@@ -199,17 +256,20 @@
 					} else {
 						return;
 					}
-
 				}
+				
+				
+				
+				
+				
 			</script>
-
 			<!-- 로그인시 댓글등록창이 보이게 한다 -->
 			<div align="center">
 				<c:if test="${login != null }">
 					<form action="/qna/qnacomment" method="post">
 						<input type="hidden" name="paging" value="${qnabestsizecom }">	
 						<input type="hidden" name="pn" value="${pn }">
-											<input type="hidden" name="num" value="${details.NUM }"> <input
+						<input type="hidden" name="num" value="${details.NUM }"> <input
 							type="hidden" name="endpa" value="${qnacommentsi }"> <input
 							type="text" name="memo"
 							style="width: 50%; height: 33px; border: 1px solid #ccc; border-radius: 5px; padding-left: 10px; resize: none;" />
